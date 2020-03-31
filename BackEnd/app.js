@@ -1,6 +1,5 @@
 var express = require('express');
 var	bodyParser = require('body-parser');
-var	mongoose = require('mongoose');
 var	OAuth2Server = require('oauth2-server');
 var	Request = OAuth2Server.Request;
 var	Response = OAuth2Server.Response;
@@ -10,6 +9,7 @@ var { buildSchema } = require('graphql');
 var path = require('path'); 
 var UserModel = require('./mongo/model/user');
 var model = require('./model.js');
+var db = require('./db.js');
 
 var app = express();
 
@@ -21,19 +21,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
 
-var mongoUri = 'mongodb://localhost/ZaraHealth';
+//Conexion con la bbdd
+db.connect();
 
-mongoose.connect(mongoUri, {
-	useCreateIndex: true,
-	useNewUrlParser: true,
-	useUnifiedTopology: true
-}, function(err, res) {
-
-	if (err) {
-		return console.error('Error connecting to "%s":', mongoUri, err);
-	}
-	console.log('Connected successfully to "%s"', mongoUri);
+//Uso de oauth
+app.oauth = new OAuth2Server({
+    model: model,
+    accessTokenLifetime: 60 * 60,
+    allowBearerTokensInQueryString: true
 });
+
+app.all('/oauth/token', obtainToken);
+
+console.log('Running a GraphQL API server at http://localhost:3000/graphql');
 
 //model.loadExampleData();
 
@@ -52,7 +52,7 @@ var schema = buildSchema(`
     }
 `);
 
-var retrieveUser = function({ username }) {
+var retrieveUser = function ({ username }) {
     return UserModel.findOne({ username: username },
         function(err, user) {
             if (err) return console.error(err);});  
@@ -77,17 +77,6 @@ app.use('/graphql', authenticateRequest, graphqlHTTP({
     rootValue: root,
     graphiql: true,
 }));
-
-
-app.oauth = new OAuth2Server({
-	model: model,
-	accessTokenLifetime: 60 * 60,
-	allowBearerTokensInQueryString: true
-});
-
-app.all('/oauth/token', obtainToken);
-
-console.log('Running a GraphQL API server at http://localhost:3000/graphql');
 
 function obtainToken(req, res) {
 
