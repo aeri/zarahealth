@@ -1,11 +1,15 @@
-var createError = require('http-errors');
 var express = require('express');
+var	bodyParser = require('body-parser');
+var	mongoose = require('mongoose');
+var	OAuth2Server = require('oauth2-server');
+var	Request = OAuth2Server.Request;
+var	Response = OAuth2Server.Response;
+var createError = require('http-errors');
 var graphqlHTTP = require('express-graphql');
 var { buildSchema } = require('graphql');
 var path = require('path'); 
-const mongoose = require('mongoose');
-
-//var usersRouter = require('./routes/users');
+var UserModel = require('./mongo/model/user');
+var model = require('./model.js');
 
 var app = express();
 
@@ -13,28 +17,25 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// Defined a database connection string
+app.use(bodyParser.urlencoded({ extended: true }));
 
-const dbURI = 'mongodb://localhost/ZaraHealth';
+app.use(bodyParser.json());
 
-// Opened a Mongoose connection at application startup
+var mongoUri = 'mongodb://localhost/ZaraHealth';
 
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(mongoUri, {
+	useCreateIndex: true,
+	useNewUrlParser: true,
+	useUnifiedTopology: true
+}, function(err, res) {
 
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-    // we're connected!
-    console.log("We are connected");
+	if (err) {
+		return console.error('Error connecting to "%s":', mongoUri, err);
+	}
+	console.log('Connected successfully to "%s"', mongoUri);
 });
 
-const userSchema = new mongoose.Schema({
-    username: String,
-    name: String,
-    email: String
-});
-
-var UserModel = mongoose.model('User', userSchema);
+//model.loadExampleData();
 
 // GraphQL schema
 var schema = buildSchema(`
@@ -42,7 +43,7 @@ var schema = buildSchema(`
          retrieveUser(username: String!): User  
     },
     type Mutation {
-        createUser(username: String!, name: String!, email: String!): User
+        createUser(username: String!, name: String!, email: String!, password: String!): User
     },
     type User {
         username: String!,
@@ -57,8 +58,8 @@ var retrieveUser = function({ username }) {
             if (err) return console.error(err);});  
 }
 
-var createUser = function({ username, name, email }) {
-    var user = new UserModel({ username: username, name: name, email: email });
+var createUser = function({ username, name, email, password }) {
+    var user = new UserModel({ username: username, name: name, email: email, password: password });
     user.save(function (err, user) {
         if (err) return console.error(err);
     });
@@ -70,15 +71,53 @@ var root = {
     createUser: createUser
 };
 
-var app = express();
-app.use('/graphql', graphqlHTTP({
+
+app.use('/graphql', authenticateRequest, graphqlHTTP({
     schema: schema,
     rootValue: root,
     graphiql: true,
 }));
 
-app.listen(4000);
-console.log('Running a GraphQL API server at http://localhost:4000/graphql');
+
+app.oauth = new OAuth2Server({
+	model: model,
+	accessTokenLifetime: 60 * 60,
+	allowBearerTokensInQueryString: true
+});
+
+app.all('/oauth/token', obtainToken);
+
+console.log('Running a GraphQL API server at http://localhost:3000/graphql');
+
+function obtainToken(req, res) {
+
+	var request = new Request(req);
+	var response = new Response(res);
+
+	return app.oauth.token(request, response)
+		.then(function(token) {
+
+			res.json(token);
+		}).catch(function(err) {
+
+			res.status(err.code || 500).json(err);
+		});
+}
+
+function authenticateRequest(req, res, next) {
+
+	var request = new Request(req);
+	var response = new Response(res);
+
+	return app.oauth.authenticate(request, response)
+		.then(function(token) {
+
+			next();
+		}).catch(function(err) {
+
+			res.status(err.code || 500).json(err);
+		});
+}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
