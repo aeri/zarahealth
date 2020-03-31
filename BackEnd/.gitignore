@@ -39,6 +39,9 @@ jspm_packages/
 # Database
 BBDD/
 
+#Visual Studio
+.vs/
+
 # Typescript v1 declaration files
 typings/
 
