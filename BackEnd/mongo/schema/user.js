@@ -1,6 +1,14 @@
 module.exports = {
-	username: String,
+    username: {
+        type: String,
+        required: true,
+        unique: true
+    },
     name: String,
-    email: String,
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
     password: String
 };

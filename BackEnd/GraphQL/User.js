@@ -12,17 +12,24 @@ var retrieveUser = function ({ username }, context) {
         });
 }
 
-var createUser = function ({ username, name, email, password }) {
+var createUser = function ({ username, name, email, password }, context) {
+    var usernamePetition = context.response.locals.user;
+
     //Encriptamos la contraseña
     const hash = new SHA3(512);
     hash.update(password);
     password = hash.digest('hex');
 
     var user = new UserModel({ username: username, name: name, email: email, password: password });
-    user.save(function (err, user) {
-        if (err) return console.error(err);
+
+
+    return new Promise((resolve, reject) => {
+        user.save().then((user) => {
+            resolve(user);
+        }).catch((err) => {
+            reject(err);
+        });
     });
-    return user;
 }
 
 module.exports = {
