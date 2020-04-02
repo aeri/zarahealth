@@ -5,11 +5,10 @@ var	Request = OAuth2Server.Request;
 var	Response = OAuth2Server.Response;
 var createError = require('http-errors');
 var graphqlHTTP = require('express-graphql');
-var { buildSchema } = require('graphql');
-var path = require('path'); 
-var UserModel = require('./mongo/model/user');
+var path = require('path');
 var model = require('./model.js');
 var db = require('./db.js');
+
 
 var app = express();
 
@@ -37,46 +36,17 @@ console.log('Running a GraphQL API server at http://localhost:3000/graphql');
 
 //model.loadExampleData();
 
-// GraphQL schema
-var schema = buildSchema(`
-    type Query {
-         retrieveUser(username: String!): User  
-    },
-    type Mutation {
-        createUser(username: String!, name: String!, email: String!, password: String!): User
-    },
-    type User {
-        username: String!,
-        name: String!,
-        email: String!
-    }
-`);
+//Configuracion de GraphQL
+var root = require('./GraphQL/Root.js');
+var schema = require('./GraphQL/Schema.js');
 
-var retrieveUser = function ({ username }) {
-    return UserModel.findOne({ username: username },
-        function(err, user) {
-            if (err) return console.error(err);});  
-}
-
-var createUser = function({ username, name, email, password }) {
-    var user = new UserModel({ username: username, name: name, email: email, password: password });
-    user.save(function (err, user) {
-        if (err) return console.error(err);
-    });
-    return user;
-}
-
-var root = {
-    retrieveUser: retrieveUser,
-    createUser: createUser
-};
-
-
-app.use('/graphql', authenticateRequest, graphqlHTTP({
+//Uso de graphql
+app.use('/graphql', authenticateRequest, graphqlHTTP((request, response) => ({
     schema: schema,
     rootValue: root,
     graphiql: true,
-}));
+    context: { request: request, response: response }
+})));
 
 function obtainToken(req, res) {
 
@@ -99,9 +69,9 @@ function authenticateRequest(req, res, next) {
 	var response = new Response(res);
 
 	return app.oauth.authenticate(request, response)
-		.then(function(token) {
-
-			next();
+        .then(function (token) {
+            response.locals.user = token.user.username;
+            next();
 		}).catch(function(err) {
 
 			res.status(err.code || 500).json(err);

@@ -1,3 +1,6 @@
+// Standard FIPS 202 SHA-3 implementation
+const { SHA3 } = require('sha3');
+
 /**
  * Configuration.
  */
@@ -113,7 +116,11 @@ var saveToken = function(token, client, user, callback) {
  * Method used only by password grant type.
  */
 
-var getUser = function(username, password, callback) {
+var getUser = function (username, password, callback) {
+    //Encriptamos la contraseña
+    const hash = new SHA3(512);
+    hash.update(password);
+    password = hash.digest('hex');
 
 	userModel.findOne({
 		username: username,
