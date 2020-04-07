@@ -107,8 +107,13 @@ var saveToken = function(token, client, user, callback) {
 			token = token.toObject();
 			delete token._id;
             delete token.__v;
-            if (!user) logger.info(`A client has logged in.`);
-            if (!client) logger.info(`The user ${user.username} has logged in.`);
+
+            if (user.username == '') {
+                logger.info(`A client has logged in.`);
+            }
+            else {
+                logger.info(`The user ${user.username} has logged in.`);
+            }
             
 		}
 
