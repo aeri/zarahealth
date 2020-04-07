@@ -7,7 +7,8 @@ const { SHA3 } = require('sha3');
 
 var clientModel = require('./mongo/model/client'),
 	tokenModel = require('./mongo/model/token'),
-	userModel = require('./mongo/model/user');
+    userModel = require('./mongo/model/user');
+var logger = require('./logger.js');
 
 /**
  * Add example client and user to the database (for debug).
@@ -41,7 +42,7 @@ var loadExampleData = function() {
 		if (err) {
 			return console.error(err);
 		}
-		console.log('Created client', client);
+        logger.info(`Created client ${client}`);
 	});
 
 	client2.save(function(err, client) {
@@ -49,7 +50,7 @@ var loadExampleData = function() {
 		if (err) {
 			return console.error(err);
 		}
-		console.log('Created client', client);
+        logger.info(`Created client ${client}`);
 	});
 };
 
@@ -64,9 +65,9 @@ var getAccessToken = function(token, callback) {
 		accessToken: token
 	}).lean().exec((function(callback, err, token) {
 
-		if (!token) {
-			console.error('Token not found');
-		}
+        if (!token) {
+            logger.error('Client not found');
+        }
 
 		callback(err, token);
 	}).bind(null, callback));
@@ -80,7 +81,7 @@ var getClient = function(clientId, clientSecret, callback) {
 	}).lean().exec((function(callback, err, client) {
 
 		if (!client) {
-			console.error('Client not found');
+            logger.error('Client not found');
 		}
 
 		callback(err, client);
@@ -101,11 +102,14 @@ var saveToken = function(token, client, user, callback) {
 	tokenInstance.save((function(callback, err, token) {
 
 		if (!token) {
-			console.error('Token not saved');
+			logger.error('Token not saved');
 		} else {
 			token = token.toObject();
 			delete token._id;
-			delete token.__v;
+            delete token.__v;
+            if (!user) logger.info(`A client has logged in.`);
+            if (!client) logger.info(`The user ${user.username} has logged in.`);
+            
 		}
 
 		callback(err, token);
@@ -127,8 +131,8 @@ var getUser = function (username, password, callback) {
 		password: password
 	}).lean().exec((function(callback, err, user) {
 
-		if (!user) {
-			console.error('User not found');
+        if (!user) {
+            logger.error(`User ${username} not found`);
 		}
 
 		callback(err, user);

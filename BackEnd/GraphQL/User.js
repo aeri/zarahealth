@@ -9,7 +9,7 @@ const { SHA3 } = require('sha3');
 var retrieveUser = function ({ username }, context) {
     var usernamePetition = context.response.locals.user;
 
-    return UserModel.findOne({ username: username }).orFail(() => new GraphQLError(`User ${username} not found`), logger.error(`Username ${username} not found`));
+    return UserModel.findOne({ username: username }).orFail(() => new GraphQLError(`User ${username} not found`), logger.error(`User ${username} not found`));
 }
 
 var createUser = function ({ username, name, email, password }, context) {

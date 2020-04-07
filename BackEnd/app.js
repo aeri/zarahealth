@@ -33,7 +33,7 @@ app.oauth = new OAuth2Server({
 
 app.all('/oauth/token', obtainToken);
 
-console.log('Running a GraphQL API server at http://localhost:3000/graphql');
+logger.info('Running a GraphQL API server at http://localhost:3000/graphql');
 
 //model.loadExampleData();
 
@@ -50,14 +50,13 @@ app.use('/graphql', authenticateRequest, graphqlHTTP((request, response) => ({
 })));
 
 function obtainToken(req, res) {
-
 	var request = new Request(req);
 	var response = new Response(res);
 
 	return app.oauth.token(request, response)
-		.then(function(token) {
-
+		.then(function(token) {   
 			res.json(token);
+
 		}).catch(function(err) {   
             res.status(err.code || 500).json(err);
             logger.debug(err);
