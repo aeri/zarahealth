@@ -6,10 +6,7 @@ const { SHA3 } = require('sha3');
 var retrieveUser = function ({ username }, context) {
     var usernamePetition = context.response.locals.user;
 
-    return UserModel.findOne({ username: username },
-        function (err, user) {
-            if (err) return console.error(err);
-        });
+    return UserModel.findOne({ username: username }).orFail(() => Error('Not found'));
 }
 
 var createUser = function ({ username, name, email, password }, context) {
