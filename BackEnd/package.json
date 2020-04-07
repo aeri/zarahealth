@@ -18,7 +18,7 @@
     "node-oauth2-server-mongo-example": "^1.2.1",
     "nodemon": "^2.0.2",
     "oauth2-server": "^3.0.1",
-    "pug": "2.0.0-beta11",
+    "pug": "^2.0.4",
     "sha3": "^2.1.2"
   }
 }
