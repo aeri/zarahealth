@@ -38,6 +38,7 @@ jspm_packages/
 
 # Database
 BBDD/
+BASE/
 
 #Visual Studio
 .vs/
