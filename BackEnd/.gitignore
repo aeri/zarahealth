@@ -66,6 +66,3 @@ typings/
 
 # next.js build output
 .next
-
-# Dependencias
-*.json
