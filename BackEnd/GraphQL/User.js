@@ -1,4 +1,5 @@
 var UserModel = require('../mongo/model/user');
+var logger = require('../logger.js');
 
 // Standard FIPS 202 SHA-3 implementation
 const { SHA3 } = require('sha3');
@@ -6,7 +7,7 @@ const { SHA3 } = require('sha3');
 var retrieveUser = function ({ username }, context) {
     var usernamePetition = context.response.locals.user;
 
-    return UserModel.findOne({ username: username }).orFail(() => Error('Not found'));
+    return UserModel.findOne({ username: username }).orFail(() => Error(`Username ${username} not found`), logger.error(`Username ${username} not found`) );
 }
 
 var createUser = function ({ username, name, email, password }, context) {
@@ -24,6 +25,7 @@ var createUser = function ({ username, name, email, password }, context) {
         user.save().then((user) => {
             resolve(user);
         }).catch((err) => {
+            logger.error(err);
             reject(err);
         });
     });

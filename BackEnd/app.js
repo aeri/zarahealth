@@ -8,6 +8,7 @@ var graphqlHTTP = require('express-graphql');
 var path = require('path');
 var model = require('./model.js');
 var db = require('./db.js');
+var logger = require('./logger.js');
 
 
 var app = express();
@@ -57,9 +58,9 @@ function obtainToken(req, res) {
 		.then(function(token) {
 
 			res.json(token);
-		}).catch(function(err) {
-
-			res.status(err.code || 500).json(err);
+		}).catch(function(err) {   
+            res.status(err.code || 500).json(err);
+            logger.debug(err);
 		});
 }
 
@@ -73,8 +74,8 @@ function authenticateRequest(req, res, next) {
             response.locals.user = token.user.username;
             next();
 		}).catch(function(err) {
-
-			res.status(err.code || 500).json(err);
+            res.status(err.code || 500).json(err);
+            logger.debug(`${err}\n Token: ${request.headers.authorization}`);
 		});
 }
 
@@ -84,7 +85,8 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
+    logger.error(err);
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

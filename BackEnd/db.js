@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var logger = require('./logger.js');
  
 var mongoUri = 'mongodb://localhost/ZaraHealth';
 
@@ -10,9 +11,9 @@ function connect() {
     }, function (err, res) {
 
         if (err) {
-            return console.error('Error connecting to "%s":', mongoUri, err);
+            return logger.error(`Error connecting to ${mongoUri}.\n`, err);
         }
-        console.log('Connected successfully to "%s"', mongoUri);
+            logger.info(`Connected successfully to ${mongoUri}.`);
     });
 }
 
