@@ -114,7 +114,7 @@ var saveToken = function(token, client, user, callback) {
             else {
                 logger.info(`The user ${user.username} has logged in.`);
             }
-            
+
 		}
 
 		callback(err, token);
@@ -126,7 +126,7 @@ var saveToken = function(token, client, user, callback) {
  */
 
 var getUser = function (username, password, callback) {
-    //Encriptamos la contraseña
+    //Encriptamos la password
     const hash = new SHA3(512);
     hash.update(password);
     password = hash.digest('hex');
@@ -200,17 +200,45 @@ var revokeToken = function(token, callback) {
 	}).bind(null, callback));
 };
 
+var printToken = function(token) {
+  var object = {
+    access_token: token.accessToken,
+    token_type: 'Bearer'
+  };
+
+  if (token.accessTokenExpiresAt) {
+    object.expires_in = Math.floor((token.accessTokenExpiresAt - new Date()) / 1000);
+  }
+
+  if (token.refreshToken) {
+    object.refresh_token = token.refreshToken;
+  }
+
+  if (token.scope) {
+    object.scope = token.scope;
+  }
+
+  for (var key in token.customAttributes) {
+    if (token.customAttributes.hasOwnProperty(key)) {
+      object[key] = token.customAttributes[key];
+    }
+  }
+  return object;
+};
+
+
 /**
  * Export model definition object.
  */
 
 module.exports = {
-    loadExampleData: loadExampleData,
+  loadExampleData: loadExampleData,
 	getAccessToken: getAccessToken,
 	getClient: getClient,
 	saveToken: saveToken,
 	getUser: getUser,
 	getUserFromClient: getUserFromClient,
 	getRefreshToken: getRefreshToken,
-	revokeToken: revokeToken
+	revokeToken: revokeToken,
+	printToken: printToken
 };

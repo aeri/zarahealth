@@ -54,10 +54,10 @@ function obtainToken(req, res) {
 	var response = new Response(res);
 
 	return app.oauth.token(request, response)
-		.then(function(token) {   
-			res.json(token);
+		.then(function(token) {
+			res.json(model.printToken(token));
 
-		}).catch(function(err) {   
+		}).catch(function(err) {
             res.status(err.code || 500).json(err);
             logger.debug(err);
 		});

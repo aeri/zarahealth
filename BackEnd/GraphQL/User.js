@@ -9,13 +9,18 @@ const { SHA3 } = require('sha3');
 var retrieveUser = function ({ username }, context) {
     var usernamePetition = context.response.locals.user;
 
-    return UserModel.findOne({ username: username }).orFail(() => new GraphQLError(`User ${username} not found`), logger.error(`User ${username} not found`));
+    return UserModel.findOne({ username: username }).orFail(() => new GraphQLError(`User ${username} not found`,null, null, null, null, {
+        extensions: {
+            code: "NOT_FOUND",
+        }
+    }), );
+    // TODO: logger.error(`User ${username} not found`));
 }
 
 var createUser = function ({ username, name, email, password }, context) {
     var usernamePetition = context.response.locals.user;
 
-    //Encriptamos la contraseña
+    //Encriptamos la contraseï¿½a
     const hash = new SHA3(512);
     hash.update(password);
     password = hash.digest('hex');
@@ -29,7 +34,11 @@ var createUser = function ({ username, name, email, password }, context) {
         }).catch((err) => {
 
             logger.error(err);
-            reject(new GraphQLError(`User ${username} already exists`));
+            reject(new GraphQLError(`User ${username} or Email ${email} already exists`,null, null, null, null, {
+                extensions: {
+                    code: "DUPLICATED",
+                }
+            }));
         });
     });
 }
