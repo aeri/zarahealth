@@ -1,4 +1,4 @@
-var UserModel = require('../mongo/model/user');
+var UserModel = require('../mongo/model/user.js');
 var logger = require('../logger.js');
 
 var {GraphQLError } = require('graphql');
@@ -13,8 +13,7 @@ var retrieveUser = function ({ username }, context) {
         extensions: {
             code: "NOT_FOUND",
         }
-    }), );
-    // TODO: logger.error(`User ${username} not found`));
+    }));
 }
 
 var createUser = function ({ username, name, email, password }, context) {
@@ -25,7 +24,7 @@ var createUser = function ({ username, name, email, password }, context) {
     hash.update(password);
     password = hash.digest('hex');
 
-    var user = new UserModel({ username: username, name: name, email: email, password: password });
+    var user = new UserModel({ username: username, name: name, email: email, password: password, social: 'None' });
 
 
     return new Promise((resolve, reject) => {

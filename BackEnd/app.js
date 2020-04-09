@@ -9,7 +9,7 @@ var path = require('path');
 var model = require('./model.js');
 var db = require('./db.js');
 var logger = require('./logger.js');
-
+var google = require('./Google/Google.js');
 
 var app = express();
 
@@ -32,6 +32,7 @@ app.oauth = new OAuth2Server({
 });
 
 app.all('/oauth/token', obtainToken);
+app.all('/oauth/google/token', google.authGoogle, obtainToken);
 
 logger.info('Running a GraphQL API server at http://localhost:3000/graphql');
 
@@ -51,7 +52,7 @@ app.use('/graphql', authenticateRequest, graphqlHTTP((request, response) => ({
 
 function obtainToken(req, res) {
 	var request = new Request(req);
-	var response = new Response(res);
+    var response = new Response(res);
 
 	return app.oauth.token(request, response)
 		.then(function(token) {
@@ -96,3 +97,5 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
+
+

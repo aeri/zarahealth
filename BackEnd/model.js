@@ -232,7 +232,7 @@ var printToken = function(token) {
  */
 
 module.exports = {
-  loadExampleData: loadExampleData,
+    loadExampleData: loadExampleData,
 	getAccessToken: getAccessToken,
 	getClient: getClient,
 	saveToken: saveToken,

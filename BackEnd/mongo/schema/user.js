@@ -10,5 +10,9 @@ module.exports = {
         required: true,
         unique: true
     },
-    password: String
+    password: String,
+    social: {
+        type: String,
+        required: true
+    }
 };
