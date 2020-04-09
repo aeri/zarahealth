@@ -1,5 +1,6 @@
 const passport = require('passport');
 const { Strategy: GoogleTokenStrategy } = require('passport-google-token');
+var secret = require('../Secret.js');
 
 // GOOGLE STRATEGY
 const GoogleTokenStrategyCallback = (accessToken, refreshToken, profile, done) => done(null, {
@@ -9,8 +10,8 @@ const GoogleTokenStrategyCallback = (accessToken, refreshToken, profile, done) =
 });
 
 passport.use(new GoogleTokenStrategy({
-    clientID: 'Place_Your_Key',
-    clientSecret: 'Place_Your_Key',
+    clientID: secret.clientID,
+    clientSecret: secret.clientSecret
 }, GoogleTokenStrategyCallback));
 
 // promisified authenticate functions

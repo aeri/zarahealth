@@ -3,12 +3,12 @@ var UserModel = require('../mongo/model/user.js');
 var aesjs = require('aes-js');
 var logger = require('../logger.js');
 const https = require('https');
+var secret = require('../Secret.js');
 
 // Standard FIPS 202 SHA-3 implementation
 const { SHA3 } = require('sha3');
 
-// An example 128-bit key
-var key = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+var key = secret.key;
 
 var authGoogle = async function (req, res, next) {
     req.body = {
