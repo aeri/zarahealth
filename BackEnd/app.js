@@ -51,9 +51,9 @@ app.use('/graphql', authenticateRequest, graphqlHTTP((request, response) => ({
 })));
 
 function obtainToken(req, res) {
-	var request = new Request(req);
-    var response = new Response(res);
-
+  var request = new Request(req);
+  var response = new Response(res);
+  
 	return app.oauth.token(request, response)
 		.then(function(token) {
 			res.json(model.printToken(token));
@@ -97,5 +97,3 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
-
-

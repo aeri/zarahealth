@@ -11,10 +11,6 @@ const { SHA3 } = require('sha3');
 var key = secret.key;
 
 var authGoogle = async function (req, res, next) {
-    req.body = {
-        ...req.body,
-        access_token: req.query.accessToken,
-    };
 
     try {
         // data contains the accessToken, refreshToken and profile from passport
@@ -32,7 +28,7 @@ var authGoogle = async function (req, res, next) {
             var password = aesjs.utils.hex.fromBytes(encryptedBytes);
             var prepasswd = password;
 
-            //Encriptamos la contrase�a
+            // Hashing the password
             const hash = new SHA3(512);
             hash.update(password);
             password = hash.digest('hex');
@@ -40,7 +36,6 @@ var authGoogle = async function (req, res, next) {
             const userExists = await UserModel.exists({ username: data.profile._json.id });
 
             req.body = { grant_type: 'password', username: data.profile._json.id, password: prepasswd };
-            req.method = 'POST';
 
             if (userExists) {
                 next();
@@ -57,7 +52,7 @@ var authGoogle = async function (req, res, next) {
                         return res.json('DATABASE_ERROR');
                     });
                 });
-            }    
+            }
 
         }
 
