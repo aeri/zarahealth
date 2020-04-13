@@ -3,7 +3,8 @@ var userFunctions = require('./User.js');
 
 var root = {
     retrieveUser: userFunctions.retrieveUser,
-    createUser: userFunctions.createUser
+    createUser: userFunctions.createUser,
+    updateCsvDownloadEnabled: userFunctions.updateCsvDownloadEnabled
 };
 
 module.exports = root;

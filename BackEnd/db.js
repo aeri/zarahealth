@@ -9,6 +9,7 @@ function connect() {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }, function (err, res) {
+            mongoose.set('useFindAndModify', false);
 
         if (err) {
             return logger.error(`Error connecting to ${mongoUri}.\n`, err);

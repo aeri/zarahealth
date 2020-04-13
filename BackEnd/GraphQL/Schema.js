@@ -10,8 +10,8 @@ var schema = buildSchema(`
          ): User
     },
     type Mutation {
-      "A mutation to register an User"
-      createUser(
+        "A mutation to register an User"
+        createUser(
         "Unique User identifier"
         username: String!,
         "User's full name"
@@ -20,7 +20,14 @@ var schema = buildSchema(`
         email: String!,
         "User password"
         password: String!
-      ): User
+        ): User
+
+        "A mutation to update the attribute csvDownloadEnabled of the User"
+        updateCsvDownloadEnabled(
+            "Attribute csvDownloadEnabled"
+            csvDownloadEnabled: Boolean!,
+        ): User
+        
     },
     "A type that describes the user."
     type User {
@@ -30,6 +37,10 @@ var schema = buildSchema(`
         name: String!,
         "The user's e-mail"
         email: String!
+        "The attribute that says if the user is or not an admin"
+        isAdmin: Boolean!
+        "The attribute that says if the user wants to view de csv or not"
+        csvDownloadEnabled: Boolean!
     }
 `);
 

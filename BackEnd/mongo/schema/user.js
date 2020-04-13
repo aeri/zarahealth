@@ -10,13 +10,22 @@ module.exports = {
         required: true,
         unique: true
     },
-    password: String,
+    password: {
+        type: String,
+        required: true
+    },
     social: {
         type: String,
         required: true
     },
     isAdmin: {
         type: Boolean,
-        required: true
+        required: true,
+        default: false
     },
+    csvDownloadEnabled: {
+        type: Boolean,
+        required: true,
+        default: false
+    }
 };
