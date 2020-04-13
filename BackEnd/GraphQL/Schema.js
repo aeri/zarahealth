@@ -6,7 +6,7 @@ var schema = buildSchema(`
          "A query to retrieve an existing User"
          retrieveUser(
            "Unique User identifier to be retrieved"
-           username: String!
+           username: String
          ): User
     },
     type Mutation {

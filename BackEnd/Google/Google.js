@@ -1,4 +1,4 @@
-﻿const { authenticateGoogle } = require('./passport.js');
+const { authenticateGoogle } = require('./passport.js');
 var UserModel = require('../mongo/model/user.js');
 var aesjs = require('aes-js');
 var logger = require('../logger.js');
@@ -41,7 +41,9 @@ var authGoogle = async function (req, res, next) {
                 next();
             }
             else {
-                var user = new UserModel({ username: data.profile._json.id, name: data.profile.displayName, email: text, password: password, social: 'Google' });
+                var user = new UserModel({ username: data.profile._json.id,
+                  name: data.profile.displayName, email: text,
+                  password: password, social: 'Google', isAdmin: false });
 
                 new Promise((resolve, reject) => {
                     user.save().then((user) => {

@@ -14,5 +14,9 @@ module.exports = {
     social: {
         type: String,
         required: true
-    }
+    },
+    isAdmin: {
+        type: Boolean,
+        required: true
+    },
 };
