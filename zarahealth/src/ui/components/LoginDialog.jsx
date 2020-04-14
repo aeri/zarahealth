@@ -9,7 +9,6 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
-import Slide from '@material-ui/core/Slide';
 import { makeStyles } from "@material-ui/core/styles";
 
 import { GoogleLogin } from "react-google-login";
@@ -34,9 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+
 
 function LoginDialog(props) {
   const [isLoginActive, setLoginActive] = React.useState(true);
@@ -49,7 +46,6 @@ function LoginDialog(props) {
     <Dialog
       open={props.open}
       onClose={props.handleClose}
-      TransitionComponent={Transition}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >

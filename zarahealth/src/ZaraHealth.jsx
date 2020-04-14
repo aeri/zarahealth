@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 
 import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
@@ -33,34 +33,31 @@ function ZaraHealth() {
   const alert = useSelector((state) => state.alertReducer);
 
   return (
-    <MuiThemeProvider theme={zaraHealthTheme}>
-      <ZaraHealthAppBar handleDrawerToggle={handleDrawerToggle} />
-      <div className={classes.root}>
-        <ZaraHealthDrawer
-          mobileOpen={mobileOpen}
-          handleDrawerToggle={handleDrawerToggle}
-        />
-        {alert.type && (
-          <AlertDialog
-            type={alert.type}
-            message={alert.message}
+    <Router history={history}>
+      <MuiThemeProvider theme={zaraHealthTheme}>
+        <ZaraHealthAppBar handleDrawerToggle={handleDrawerToggle} />
+        <div className={classes.root}>
+          <ZaraHealthDrawer
+            mobileOpen={mobileOpen}
+            handleDrawerToggle={handleDrawerToggle}
           />
-        )}
+          {alert.type && (
+            <AlertDialog type={alert.type} message={alert.message} />
+          )}
 
-        <main>
-          <Box m={1}>
-            <Router history={history}>
+          <main>
+            <Box m={1}>
               <Switch>
                 <Route exact path="/" component={DashboardView} />
                 <Route path="/feed" component={FeedView} />
                 <Route path="/settings" component={SettingsView} />
                 <Redirect from="*" to="/" />
               </Switch>
-            </Router>
-          </Box>
-        </main>
-      </div>
-    </MuiThemeProvider>
+            </Box>
+          </main>
+        </div>
+      </MuiThemeProvider>
+    </Router>
   );
 }
 

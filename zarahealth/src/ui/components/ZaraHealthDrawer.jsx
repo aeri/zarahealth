@@ -14,11 +14,14 @@ import LocalFloristIcon from "@material-ui/icons/LocalFlorist";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import OpacityIcon from "@material-ui/icons/Opacity";
 import CloudIcon from "@material-ui/icons/Cloud";
+import SettingsIcon from "@material-ui/icons/Settings";
 import RssFeedIcon from "@material-ui/icons/RssFeed";
 import tapOrClick from "react-tap-or-click";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import userService from "../../core/services/userService";
 import LoginDialog from "./LoginDialog";
+import history from "../../core/misc/history";
+import { useLocation } from "react-router-dom";
 
 const drawerWidth = 280;
 
@@ -53,6 +56,10 @@ const useStyles = makeStyles((theme) => ({
 function ZaraHealthDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
+
+  const location = useLocation();
+  
+
 
   const [open, setOpen] = React.useState(false);
 
@@ -110,13 +117,23 @@ function ZaraHealthDrawer(props) {
           )}
           <Divider />
           <List>
-            <ListItem button key="Dashboard">
+            <ListItem
+              button
+              key="Dashboard"
+              onClick={() => history.replace("/")}
+              selected={location.pathname === "/"}
+            >
               <ListItemIcon>
                 <DashboardIcon />
               </ListItemIcon>
               <ListItemText primary="Dashboard" />
             </ListItem>
-            <ListItem button key="Feed">
+            <ListItem
+              button
+              key="Feed"
+              onClick={() => history.replace("/feed")}
+              selected={location.pathname === "/feed"}
+            >
               <ListItemIcon>
                 <RssFeedIcon />
               </ListItemIcon>
@@ -143,6 +160,20 @@ function ZaraHealthDrawer(props) {
               </ListItemIcon>
               <ListItemText primary="Aire" />
             </ListItem>
+          </List>
+          <Divider />
+          <List>
+          <ListItem
+              button
+              key="Ajustes"
+              onClick={() => history.replace("/settings")}
+              selected={location.pathname === "/settings"}
+            >
+              <ListItemIcon>
+                <SettingsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Ajustes" />
+            </ListItem>            
           </List>
         </div>
         <div className="bottom-nav">
