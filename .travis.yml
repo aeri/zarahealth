@@ -8,7 +8,6 @@ deploy:
   api_key: 
     secure: $heroku_api_key
   on:
-    tags: true
     all_branches: true
 before_script:
   - cd BackEnd
