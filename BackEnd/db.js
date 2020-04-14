@@ -6,6 +6,7 @@ var fs = require('fs');
 
 var ca = [fs.readFileSync('./ssl/rootCA.pem')];
 
+//var mongoUri = 'mongodb://localhost/ZaraHealth';
 var mongoUri = secret.mongoUri;
 
 function connect() {
