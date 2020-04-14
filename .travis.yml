@@ -5,8 +5,8 @@ script: 'true'
 deploy:
   app: zgz
   provider: heroku
-  api_key: $heroku_api_key
-    secure: 
+  api_key: 
+    secure: $heroku_api_key
   on:
     tags: true
     all_branches: true
