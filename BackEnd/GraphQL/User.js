@@ -27,7 +27,7 @@ var retrieveUser = function ({ username }, context) {
         if (!user) {
             return new GraphQLError(`User ${username} not found`, null, null, null, null, {
                 extensions: {
-                    code: "NOT_FOUND"
+                    code: "INTERNAL_ERROR"
                 }
             });
         }
@@ -47,7 +47,7 @@ var retrieveUser = function ({ username }, context) {
                     }));
             }
             else {
-                return new GraphQLError(`You don´t have permissions to do this query.`, null, null, null, null, {
+                return new GraphQLError(`You do not have permissions to do this query.`, null, null, null, null, {
                     extensions: {
                         code: "UNAUTHORIZED"
                     }
