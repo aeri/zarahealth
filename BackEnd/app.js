@@ -36,8 +36,6 @@ app.all('/oauth/google/token', google.authGoogle, obtainToken);
 
 logger.info('Running a GraphQL API server at http://localhost:3000/graphql');
 
-//model.loadExampleData();
-
 //Configuracion de GraphQL
 var root = require('./GraphQL/Root.js');
 var schema = require('./GraphQL/Schema.js');
