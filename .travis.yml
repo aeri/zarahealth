@@ -9,7 +9,6 @@ deploy:
     secure: $heroku_api_key
   on:
     all_branches: true
-before_script:
-  - cd BackEnd
 before_install:
-  - openssl aes-256-cbc -K $encrypted_7f5be34d66f0_key -iv $encrypted_7f5be34d66f0_iv -in BackEnd/Secret.js.enc -out BackEnd/Secret.js -d
+  - cd BackEnd
+  - openssl aes-256-cbc -K $encrypted_7f5be34d66f0_key -iv $encrypted_7f5be34d66f0_iv -in Secret.js.enc -out Secret.js -d
