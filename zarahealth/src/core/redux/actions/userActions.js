@@ -1,8 +1,9 @@
 import userConstants from "../../constants/userConstants";
 import userService from "../../services/userService";
 import alertActions from "./alertActions";
+import history from "../../misc/history";
 
-export const userActions = {
+const userActions = {
     login,
     logout,
     register
@@ -62,3 +63,5 @@ function register(user) {
     function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
     function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
 }
+
+export default userActions

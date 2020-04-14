@@ -1,19 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
 
 import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
+import { Box } from "@material-ui/core";
 
-import { Provider } from "react-redux";
-import store from "./core/redux/store";
+import history from "./core/misc/history";
+import { useSelector } from "react-redux";
 
 import ZaraHealthAppBar from "./ui/components/ZaraHealthAppBar.jsx";
 import ZaraHealthDrawer from "./ui/components/ZaraHealthDrawer.jsx";
+import AlertDialog from "./ui/components/AlertDialog";
 import zaraHealthTheme from "./ui/common/ZaraHealthTheme.js";
-
-import { Box } from "@material-ui/core";
+import DashboardView from "./ui/views/DashboardView";
+import FeedView from "./ui/views/FeedView";
+import SettingsView from "./ui/views/SettingsView";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    display: "flex",
   },
 }));
 
@@ -26,21 +30,37 @@ function ZaraHealth() {
     setMobileOpen(!mobileOpen);
   };
 
+  const alert = useSelector((state) => state.alertReducer);
+
   return (
-    <Provider store={store}>
-      <MuiThemeProvider theme={zaraHealthTheme}>
-        <div className={classes.root}>
-          <ZaraHealthAppBar handleDrawerToggle={handleDrawerToggle} />
-          <ZaraHealthDrawer
-            mobileOpen={mobileOpen}
-            handleDrawerToggle={handleDrawerToggle}
+    <MuiThemeProvider theme={zaraHealthTheme}>
+      <ZaraHealthAppBar handleDrawerToggle={handleDrawerToggle} />
+      <div className={classes.root}>
+        <ZaraHealthDrawer
+          mobileOpen={mobileOpen}
+          handleDrawerToggle={handleDrawerToggle}
+        />
+        {alert.type && (
+          <AlertDialog
+            type={alert.type}
+            message={alert.message}
           />
-          <main>
-            <Box m={1}></Box>
-          </main>
-        </div>
-      </MuiThemeProvider>
-    </Provider>
+        )}
+
+        <main>
+          <Box m={1}>
+            <Router history={history}>
+              <Switch>
+                <Route exact path="/" component={DashboardView} />
+                <Route path="/feed" component={FeedView} />
+                <Route path="/settings" component={SettingsView} />
+                <Redirect from="*" to="/" />
+              </Switch>
+            </Router>
+          </Box>
+        </main>
+      </div>
+    </MuiThemeProvider>
   );
 }
 
