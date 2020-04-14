@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "12.16.1"
+script: 'true'
+deploy:
+  app: zgz
+  provider: heroku
+  api_key: $heroku_api_key
+    secure: 
+  on:
+    tags: true
+    all_branches: true
+before_script:
+  - cd BackEnd
+before_install:
+  - openssl aes-256-cbc -K $encrypted_7f5be34d66f0_key -iv $encrypted_7f5be34d66f0_iv -in Secret.js.enc -out Secret.js -d
