@@ -4,16 +4,12 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
-
-import { useDispatch } from "react-redux";
-import alertActions from "../../core/redux/actions/alertActions";
 import { DialogActions } from "@material-ui/core";
 
 function AlertDialog(props) {
-  const dispatch = useDispatch();
 
   function handleClose() {
-    dispatch(alertActions.clear());
+    
   }
 
   return (

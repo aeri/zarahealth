@@ -3,14 +3,9 @@ import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import ZaraHealth from "./ZaraHealth.jsx";
 
-import { Provider } from "react-redux";
-import store from "./core/redux/store";
-
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ZaraHealth />
-    </Provider>
+    <ZaraHealth />
   </React.StrictMode>,
   document.getElementById("root")
 );

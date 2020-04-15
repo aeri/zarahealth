@@ -5,11 +5,9 @@ import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 
 import history from "./core/misc/history";
-import { useSelector } from "react-redux";
 
 import ZaraHealthAppBar from "./ui/components/ZaraHealthAppBar.jsx";
 import ZaraHealthDrawer from "./ui/components/ZaraHealthDrawer.jsx";
-import AlertDialog from "./ui/components/AlertDialog";
 import zaraHealthTheme from "./ui/common/ZaraHealthTheme.js";
 import DashboardView from "./ui/views/DashboardView";
 import FeedView from "./ui/views/FeedView";
@@ -30,7 +28,6 @@ function ZaraHealth() {
     setMobileOpen(!mobileOpen);
   };
 
-  const alert = useSelector((state) => state.alertReducer);
 
   return (
     <Router history={history}>
@@ -41,10 +38,6 @@ function ZaraHealth() {
             mobileOpen={mobileOpen}
             handleDrawerToggle={handleDrawerToggle}
           />
-          {alert.type && (
-            <AlertDialog type={alert.type} message={alert.message} />
-          )}
-
           <main>
             <Box m={1}>
               <Switch>
