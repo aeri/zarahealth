@@ -10,6 +10,7 @@ var model = require('./model.js');
 var db = require('./db.js');
 var logger = require('./logger.js');
 var google = require('./Google/Google.js');
+var cors = require('cors')
 
 var app = express();
 
@@ -20,6 +21,9 @@ app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
+
+//Allow cors
+app.use(cors())
 
 //Conexion con la bbdd
 db.connect();
