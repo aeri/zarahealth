@@ -1,0 +1,114 @@
+var req = require("request");
+const mongoose = require('mongoose');
+const { MongoMemoryServer } = require('mongodb-memory-server');
+const app = require('../../app.js');
+var clientModel = require('../../mongo/model/client'),
+    tokenModel = require('../../mongo/model/token'),
+    userModel = require('../../mongo/model/user');
+var querystring = require('querystring');
+var db = require('../../db.js');
+
+var base_url = "http://localhost:3000/"
+
+function loadExampleData() {
+
+    var client1 = new clientModel({
+        id: 'application',	// TODO: Needed by refresh_token grant, because there is a bug at line 103 in https://github.com/oauthjs/node-oauth2-server/blob/v3.0.1/lib/grant-types/refresh-token-grant-type.js (used client.id instead of client.clientId)
+        clientId: 'application',
+        clientSecret: 'secret',
+        grants: [
+            'password',
+            'refresh_token'
+        ],
+        redirectUris: []
+    });
+
+    var client2 = new clientModel({
+        clientId: 'confidentialApplication',
+        clientSecret: 'topSecret',
+        grants: [
+            'password',
+            'client_credentials'
+        ],
+        redirectUris: []
+    });
+
+
+    client1.save(function (err, client) {
+
+        if (err) {
+            return console.error(err);
+        }
+        console.log('Created client', client);
+    });
+
+    client2.save(function (err, client) {
+
+        if (err) {
+            return console.error(err);
+        }
+        console.log('Created client', client);
+    });
+};
+
+// May require additional time for downloading MongoDB binaries
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000;
+
+let mongoServer;
+const opts = { useUnifiedTopology: true, useNewUrlParser: true }; // remove this option if you use mongoose 5 and above
+
+beforeAll(async () => {
+    mongoServer = new MongoMemoryServer();
+    const mongoUri = await mongoServer.getUri();
+    await mongoose.connect(mongoUri, opts, (err) => {
+        if (err) console.error(err);
+    });
+    app.listen(3000);
+    await loadExampleData();
+});
+
+afterAll(async () => {
+    await mongoose.disconnect();
+    await mongoServer.stop();
+});
+
+function sleep(ms) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
+} 
+
+describe("User", function () {
+    var User = require('../../GraphQL/User.js');
+    var user;
+
+    it("should be able to retrieve a User", async function () { 
+        spyOn(db, "connect");
+        //ARREGLAR
+        sleep(500);
+
+        var form = {
+            grant_type: 'client_credentials'
+        };
+
+        var formData = querystring.stringify(form);
+        var contentLength = formData.length;
+        
+        req.post({
+            headers: {
+                'Authorization': 'Basic Y29uZmlkZW50aWFsQXBwbGljYXRpb246dG9wU2VjcmV0',
+                'Content-Length': contentLength,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            uri: 'http://localhost:3000/oauth/token',
+            body: formData,
+            method: 'POST'
+        }, function (err, res, body) {
+                console.log(res);
+                expect(res.statusCode).toBe(200);
+        });
+        
+
+    });
+
+});
