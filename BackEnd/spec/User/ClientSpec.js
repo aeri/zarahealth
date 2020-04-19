@@ -102,7 +102,7 @@ describe("Client", function () {
                 var objectValue = JSON.parse(res.body);
                 client_token = objectValue.access_token;
 
-                expect(res.statusCode).toBe(200);
+                expect(res.statusCode).toBe(500);
                 done();
         });
 
