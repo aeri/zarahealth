@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon app.js",
+    "test": "jasmine"
   },
   "dependencies": {
     "aes-js": "^3.1.2",

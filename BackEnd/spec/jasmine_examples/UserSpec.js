@@ -1,12 +1,10 @@
 var req = require("request");
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
-const app = require('../../app.js');
 var clientModel = require('../../mongo/model/client'),
     tokenModel = require('../../mongo/model/token'),
     userModel = require('../../mongo/model/user');
 var querystring = require('querystring');
-var db = require('../../db.js');
 
 var base_url = "http://localhost:3000/"
 
@@ -54,17 +52,21 @@ function loadExampleData() {
 // May require additional time for downloading MongoDB binaries
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000;
 
-let mongoServer;
-const opts = { useUnifiedTopology: true, useNewUrlParser: true }; // remove this option if you use mongoose 5 and above
+const opts = { useCreateIndex: true, useUnifiedTopology: true, useNewUrlParser: true }; // remove this option if you use mongoose 5 and above
 
 beforeAll(async () => {
     mongoServer = new MongoMemoryServer();
     const mongoUri = await mongoServer.getUri();
-    await mongoose.connect(mongoUri, opts, (err) => {
-        if (err) console.error(err);
+    await mongoose.connect(mongoUri, opts, (err, res) => {
+        if (err) {
+            console.error(err);
+        }
     });
-    app.listen(3000);
-    await loadExampleData();
+    
+    await loadExampleData(); 
+   
+    var server = require('../../app.js');
+    
 });
 
 afterAll(async () => {
@@ -72,21 +74,11 @@ afterAll(async () => {
     await mongoServer.stop();
 });
 
-function sleep(ms) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, ms);
-    });
-} 
-
 describe("User", function () {
     var User = require('../../GraphQL/User.js');
     var user;
 
-    it("should be able to retrieve a User", async function () { 
-        spyOn(db, "connect");
-        //ARREGLAR
-        sleep(500);
-
+    it("should be able to retrieve a User", async function () {     
         var form = {
             grant_type: 'client_credentials'
         };
@@ -104,9 +96,10 @@ describe("User", function () {
             body: formData,
             method: 'POST'
         }, function (err, res, body) {
+                console.log(err);
                 console.log(res);
                 expect(res.statusCode).toBe(200);
-        });
+        }, 5000);
         
 
     });
