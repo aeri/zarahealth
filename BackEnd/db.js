@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+var mongoose = require('mongoose');
 var logger = require('./logger.js');
 var secret = require('./Secret.js');
 
@@ -7,8 +7,8 @@ var fs = require('fs');
 var ca = [fs.readFileSync('./ssl/rootCA.pem')];
 
 //var mongoUri = 'mongodb://localhost/ZaraHealth';
-var mongoUri = secret.mongoUri;
 
+var mongoUri = secret.mongoUri;
 function connect() {
     mongoose.connect(mongoUri, {
         useCreateIndex: true,
@@ -21,7 +21,6 @@ function connect() {
         sslCA: ca
     }, function (err, res) {
             mongoose.set('useFindAndModify', false);
-
         if (err) {
             return logger.error(`Error connecting to ${mongoUri}.\n`, err);
         }

@@ -3,12 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon app.js",
+    "test": "jasmine"
   },
   "dependencies": {
     "aes-js": "^3.1.2",
     "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "^4.16.4",
     "express-graphql": "^0.9.0",
@@ -24,5 +26,11 @@
     "pug": "^2.0.4",
     "sha3": "^2.1.2",
     "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "graphql-request": "^1.8.2",
+    "jasmine": "^3.5.0",
+    "mongodb-memory-server": "^6.5.2",
+    "request": "^2.88.2"
   }
 }

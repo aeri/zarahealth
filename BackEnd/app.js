@@ -10,7 +10,7 @@ var model = require('./model.js');
 var db = require('./db.js');
 var logger = require('./logger.js');
 var google = require('./Google/Google.js');
-
+var cors = require('cors')
 var app = express();
 
 // view engine setup
@@ -20,6 +20,9 @@ app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
+
+//Allow cors
+app.use(cors());
 
 //Conexion con la bbdd
 db.connect();
@@ -31,12 +34,9 @@ app.oauth = new OAuth2Server({
     allowBearerTokensInQueryString: true
 });
 
-app.all('/oauth/token', obtainToken);
+app.post('/oauth/token', obtainToken);
 app.all('/oauth/google/token', google.authGoogle, obtainToken);
-
-logger.info('Running a GraphQL API server at http://localhost:3000/graphql');
-
-//model.loadExampleData();
+app.delete('/oauth/token', cancelToken);
 
 //Configuracion de GraphQL
 var root = require('./GraphQL/Root.js');
@@ -79,6 +79,21 @@ function authenticateRequest(req, res, next) {
 		});
 }
 
+function cancelToken(req, res) {
+    var request = new Request(req);
+    var response = new Response(res);
+
+    return app.oauth.authenticate(request, response)
+        .then(function (token) {
+            model.revokeToken(token, function (err, deleteSuccess) {
+                if (deleteSuccess) { res.send("TOKEN_REVOKED"); }
+                else {res.status(500).send("INTERNAL_ERROR"); } });
+        }).catch(function (err) {
+            res.status(err.code || 500).json(err);
+            logger.debug(`${err}\n Token: ${request.headers.authorization}`);
+        });
+}
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -94,6 +109,12 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+//Set Port
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    logger.info(`Running a GraphQL API server at port ${PORT}`);
 });
 
 module.exports = app;

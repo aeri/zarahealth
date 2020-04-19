@@ -51,7 +51,7 @@ var authGoogle = async function (req, res, next) {
                     }).catch((err) => {
                         logger.error(err);
                         res.status(500);
-                        return res.json('DATABASE_ERROR');
+                        return res.send('DATABASE_ERROR');
                     });
                 });
             }
@@ -63,10 +63,10 @@ var authGoogle = async function (req, res, next) {
             switch (info.code) {
                 case 'ETIMEDOUT':
                     res.status(500);
-                    return res.json('TIMEOUT'); //TODO
+                    return res.send('TIMEOUT'); //TODO
                 default:
                     res.status(400);
-                    return res.json('INVALID_TOKEN'); //TODO
+                    return res.send('INVALID_TOKEN'); //TODO
             }
         }
         return (Error('server error'));
