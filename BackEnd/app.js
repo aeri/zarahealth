@@ -86,7 +86,8 @@ function cancelToken(req, res) {
     return app.oauth.authenticate(request, response)
         .then(function (token) {
             model.revokeToken(token, function (err, deleteSuccess) {
-                if (deleteSuccess) { res.json("TOKEN_DELETED"); } else {res.json("INTERNAL_ERROR"); } });
+                if (deleteSuccess) { res.send("TOKEN_REVOKED"); }
+                else {res.status(500).send("INTERNAL_ERROR"); } });
         }).catch(function (err) {
             res.status(err.code || 500).json(err);
             logger.debug(`${err}\n Token: ${request.headers.authorization}`);

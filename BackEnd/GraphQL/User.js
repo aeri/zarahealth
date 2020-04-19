@@ -97,7 +97,7 @@ var updateCsvDownloadEnabled = function ({ csvDownloadEnabled }, context) {
             logger.error(err);
             reject(new GraphQLError(`User ${username} or Email ${email} already exists`, null, null, null, null, {
                 extensions: {
-                    code: "UPDATE_FAIL",
+                    code: "UPDATE_FAILED",
                 }
             }));
         });

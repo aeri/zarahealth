@@ -5,8 +5,7 @@ var clientModel = require('../../mongo/model/client'),
     tokenModel = require('../../mongo/model/token'),
     userModel = require('../../mongo/model/user');
 var querystring = require('querystring');
-
-var base_url = "http://localhost:3000/"
+var db = require('../../db.js');
 
 function loadExampleData() {
 
@@ -62,11 +61,13 @@ beforeAll(async () => {
             console.error(err);
         }
     });
-    
-    await loadExampleData(); 
-   
+
+    await loadExampleData();
+
+    spyOn(db, "connect");
+
     var server = require('../../app.js');
-    
+
 });
 
 afterAll(async () => {
@@ -78,14 +79,14 @@ describe("User", function () {
     var User = require('../../GraphQL/User.js');
     var user;
 
-    it("should be able to retrieve a User", async function () {     
+    it("should be able to retrieve a Token", function(done) {
         var form = {
             grant_type: 'client_credentials'
         };
 
         var formData = querystring.stringify(form);
         var contentLength = formData.length;
-        
+
         req.post({
             headers: {
                 'Authorization': 'Basic Y29uZmlkZW50aWFsQXBwbGljYXRpb246dG9wU2VjcmV0',
@@ -96,11 +97,9 @@ describe("User", function () {
             body: formData,
             method: 'POST'
         }, function (err, res, body) {
-                console.log(err);
-                console.log(res);
                 expect(res.statusCode).toBe(200);
-        }, 5000);
-        
+                done();
+        });
 
     });
 
