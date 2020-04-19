@@ -1,7 +1,8 @@
 language: node_js
 node_js:
 - 12.16.1
-script: 'true'
+script:
+  - npm test
 deploy:
   app: zgz
   provider: heroku
@@ -13,4 +14,6 @@ deploy:
 before_install:
   - cd BackEnd
   - openssl aes-256-cbc -K $encrypted_7f5be34d66f0_key -iv $encrypted_7f5be34d66f0_iv -in Secret.js.enc -out Secret.js -d
+install:
+  - npm install
 

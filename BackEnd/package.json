@@ -28,6 +28,7 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "graphql-request": "^1.8.2",
     "jasmine": "^3.5.0",
     "mongodb-memory-server": "^6.5.2",
     "request": "^2.88.2"
