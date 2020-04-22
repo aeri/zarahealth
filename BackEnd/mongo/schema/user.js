@@ -1,3 +1,5 @@
+var image = require('./image.js');
+
 module.exports = {
     username: {
         type: String,
@@ -27,5 +29,9 @@ module.exports = {
         type: Boolean,
         required: true,
         default: false
+    },
+    image: {
+        type: image,
+        required: false
     }
 };

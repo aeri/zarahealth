@@ -1,4 +1,5 @@
 var UserModel = require('../mongo/model/user.js');
+var ImageModel = require('../mongo/model/image.js');
 var logger = require('../logger.js');
 
 const { GraphQLError } = require('graphql')
@@ -95,7 +96,7 @@ var updateCsvDownloadEnabled = function ({ csvDownloadEnabled }, context) {
         })
         .catch((err) => {
             logger.error(err);
-            reject(new GraphQLError(`User ${username} or Email ${email} already exists`, null, null, null, null, {
+            reject(new GraphQLError(`Can not update this field.`, null, null, null, null, {
                 extensions: {
                     code: "UPDATE_FAILED",
                 }
@@ -106,8 +107,47 @@ var updateCsvDownloadEnabled = function ({ csvDownloadEnabled }, context) {
 
 }
 
+var uploadUserImage = async function (image,context) {
+    var usernamePetition = context.response.locals.user;
+
+    //User authentication
+    authentication(usernamePetition);
+
+    const { filename, mimetype, encoding, createReadStream } = await image.image.file;
+    const stream = createReadStream();
+
+    const chunks = []
+    const result = await new Promise((resolve, reject) => {
+        stream.on('data', chunk => chunks.push(chunk))
+        stream.on('error', reject)
+        stream.on('end', () => resolve(Buffer.concat(chunks)))
+    })
+
+    var imageSave = new ImageModel({ data: result, filename: filename, mimetype: mimetype });
+
+    new Promise((resolve, reject) => {
+        UserModel.findOneAndUpdate({ username: usernamePetition }, { $set: { image: imageSave } }, { new: true })
+            .then((doc) => {
+                resolve(doc);       
+            })
+            .catch((err) => {
+                logger.error(err);
+                reject(new GraphQLError(`Can not update this field.`, null, null, null, null, {
+                    extensions: {
+                        code: "UPDATE_FAILED",
+                    }
+                }));
+            });
+    });
+
+    return { filename, mimetype, encoding };
+
+
+}
+
 module.exports = {
     retrieveUser: retrieveUser,
     createUser: createUser,
+    uploadUserImage: uploadUserImage,
     updateCsvDownloadEnabled: updateCsvDownloadEnabled
 };

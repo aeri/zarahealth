@@ -4,6 +4,7 @@ var userFunctions = require('./User.js');
 var root = {
     retrieveUser: userFunctions.retrieveUser,
     createUser: userFunctions.createUser,
+    uploadUserImage: userFunctions.uploadUserImage,
     updateCsvDownloadEnabled: userFunctions.updateCsvDownloadEnabled
 };
 

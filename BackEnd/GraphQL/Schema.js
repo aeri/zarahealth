@@ -22,6 +22,11 @@ var schema = buildSchema(`
         password: String!
         ): User
 
+        "A mutation to upload an Image"
+        uploadUserImage(
+        image: Upload
+        ): Image
+
         "A mutation to update the attribute csvDownloadEnabled of the User"
         updateCsvDownloadEnabled(
             "Attribute csvDownloadEnabled"
@@ -36,12 +41,26 @@ var schema = buildSchema(`
         "The user's full name"
         name: String!,
         "The user's e-mail"
-        email: String!
+        email: String!,
         "The attribute that says if the user is or not an admin"
-        isAdmin: Boolean!
+        isAdmin: Boolean!,
         "The attribute that says if the user wants to view de csv or not"
-        csvDownloadEnabled: Boolean!
+        csvDownloadEnabled: Boolean!,
+        image: Image!
     }
+    "A type that describes the image."
+    type Image {
+        "The image's base 64 data"
+        data: String
+        "The image's filename"
+        filename: String,
+        "The image's mimetype"
+        mimetype: String,
+        "The image's encoding"
+        encoding: String
+    }
+
+    scalar Upload
 `);
 
 module.exports = schema;

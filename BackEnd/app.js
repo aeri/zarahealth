@@ -12,6 +12,7 @@ var logger = require('./logger.js');
 var google = require('./Google/Google.js');
 var cors = require('cors')
 var app = express();
+const { graphqlUploadExpress } = require('graphql-upload')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,7 +44,7 @@ var root = require('./GraphQL/Root.js');
 var schema = require('./GraphQL/Schema.js');
 
 //Uso de graphql
-app.use('/graphql', authenticateRequest, graphqlHTTP((request, response) => ({
+app.use('/graphql', authenticateRequest, graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 1 }), graphqlHTTP((request, response) => ({
     schema: schema,
     rootValue: root,
     graphiql: true,
