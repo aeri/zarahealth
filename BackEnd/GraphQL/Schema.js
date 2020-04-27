@@ -12,6 +12,10 @@ var schema = buildSchema(`
            "Unique Water identifier to be retrieved"
            idWaterStation: Int
          ): WaterStation
+        retrievePollenStation(
+           "Unique Water identifier to be retrieved"
+           idPollenStation: String
+         ): PollenStation
     },
     type Mutation {
         "A mutation to register an User"
@@ -67,6 +71,11 @@ var schema = buildSchema(`
         id: Int!,
         title: String!,
         address: String!      
+    }
+    type PollenStation {
+        id: String!,
+        title: String!,
+        description: String!
     }
 
     scalar Upload
