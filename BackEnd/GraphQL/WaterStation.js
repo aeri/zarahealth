@@ -14,8 +14,7 @@ var retrieveWaterStation = function ({ idWaterStation }, context) {
     });
 
 }
-    
+
 module.exports = {
     retrieveWaterStation: retrieveWaterStation
 };
-

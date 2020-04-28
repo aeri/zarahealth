@@ -12,6 +12,7 @@ var schema = buildSchema(`
            "Unique Water identifier to be retrieved"
            idWaterStation: Int
          ): WaterStation
+         retrieveAirStation: AirStation
     },
     type Mutation {
         "A mutation to register an User"
@@ -36,7 +37,7 @@ var schema = buildSchema(`
             "Attribute csvDownloadEnabled"
             csvDownloadEnabled: Boolean!,
         ): User
-        
+
     },
     "A type that describes the user."
     type User {
@@ -66,7 +67,12 @@ var schema = buildSchema(`
     type WaterStation {
         id: Int!,
         title: String!,
-        address: String!      
+        address: String!
+    }
+    type AirStation {
+        id: Int!,
+        title: String!,
+        address: String!
     }
 
     scalar Upload
