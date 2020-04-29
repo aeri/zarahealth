@@ -2,7 +2,7 @@
 var userFunctions = require('./User.js');
 var waterStationFunctions = require('./WaterStation.js');
 var pollenStationFunctions = require('./PollenStation');
-var testAir = require('./AirStation.js');
+var airStationFunctions = require('./AirStation.js');
 
 var root = {
     retrieveUser: userFunctions.retrieveUser,
@@ -11,7 +11,8 @@ var root = {
     updateCsvDownloadEnabled: userFunctions.updateCsvDownloadEnabled,
     retrieveWaterStation: waterStationFunctions.retrieveWaterStation,
     retrievePollenStation: pollenStationFunctions.retrievePollenStation,
-    retrieveAirStation: testAir.retrieveAirStation
+    retrieveAllAirStations: airStationFunctions.retrieveAllAirStations,
+    retrieveAirStation: airStationFunctions.retrieveAirStation
 };
 
 module.exports = root;

@@ -12,7 +12,12 @@ var schema = buildSchema(`
            "Unique Water identifier to be retrieved"
            idWaterStation: Int
          ): WaterStation
-         retrieveAirStation: AirStation
+         retrieveAirStation(
+           idAirStation: Int!
+           since: String!,
+           until: String!,
+         ): AirStation
+         retrieveAllAirStations: [AirStation]
          retrievePollenStation(
            "Unique Water identifier to be retrieved"
            idPollenStation: String
@@ -68,6 +73,10 @@ var schema = buildSchema(`
         "The image's encoding"
         encoding: String
     }
+    type Point{
+      x: Float!,
+      y: Float!
+    }
     type WaterStation {
         id: Int!,
         title: String!,
@@ -76,7 +85,21 @@ var schema = buildSchema(`
     type AirStation {
         id: Int!,
         title: String!,
-        address: String!
+        address: String!,
+        zona: String,
+        trafico: String,
+        distancia_obstaculos: String,
+        distancia_via: String,
+        lastUpdated: String,
+        description: String,
+        geometry: Point,
+        records: [AirRecord]
+    }
+    type AirRecord {
+        contaminant: String!,
+        station: Int!,
+        date: String!,
+        value: Float!
     }
     type PollenStation {
         id: String!,
