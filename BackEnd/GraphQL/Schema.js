@@ -12,11 +12,16 @@ var schema = buildSchema(`
            "Unique Water identifier to be retrieved"
            idWaterStation: Int
          ): WaterStation
+         "A query to retrieve the AirStation specified along with the measurements recorded for the specified time interval (until - since)"
          retrieveAirStation(
+           "Unique air station identifier to be retrieved"
            idAirStation: Int!
+           "Beginning of the period of time to be observed"
            since: String!,
+           "End of the period of time to be observed"
            until: String!,
          ): AirStation
+         "A query to retrieve all AirStations in the network along with all the daily measurements recorded"
          retrieveAllAirStations: [AirStation]
          retrievePollenStation(
            "Unique Water identifier to be retrieved"
@@ -73,8 +78,11 @@ var schema = buildSchema(`
         "The image's encoding"
         encoding: String
     }
+    "A type that describes cartesian coordinate system."
     type Point{
+      "Latitude"
       x: Float!,
+      "Longitude"
       y: Float!
     }
     type WaterStation {
@@ -82,24 +90,29 @@ var schema = buildSchema(`
         title: String!,
         address: String!
     }
+    "A type that describes the components of an air station"
     type AirStation {
-        id: Int!,
-        title: String!,
-        address: String!,
-        zona: String,
-        trafico: String,
-        distancia_obstaculos: String,
-        distancia_via: String,
-        lastUpdated: String,
-        description: String,
-        geometry: Point,
-        records: [AirRecord]
+      "Unique air station identifier"
+      id: Int!,
+      "Name of the air station"
+      title: String!,
+      "Address of the air station"
+      address: String!,
+      "Location of the air station"
+      geometry: Point,
+      "Records of the air station"
+      records: [AirRecord]
     }
+    "A type that describes the components of an air record"
     type AirRecord {
-        contaminant: String!,
-        station: Int!,
-        date: String!,
-        value: Float!
+      "Chemical substance measured in the environment"
+      contaminant: String!,
+      "Identifier of the station where the measurement was taken"
+      station: Int!,
+      "Date and time of measurement (ISO 8601)"
+      date: String!,
+      "Value of measurement in micrograms per cubic meter (µg/m3)"
+      value: Float!
     }
     type PollenStation {
         id: String!,

@@ -1,63 +1,3 @@
-var realStations = {
-  "stations": [{
-      "id": 12,
-      "title": "Actur",
-      "real": 40,
-      "red": "Nacional"
-
-    },
-    {
-      "id": 1,
-      "title": "El Picarral",
-      "real": 26,
-      "red": "EUROAIRNET"
-
-    },
-    {
-      "id": 2,
-      "title": "Roger de Flor",
-      "real": 29,
-      "red": "EUROAIRNET"
-
-    },
-    {
-      "id": 8,
-      "title": "Renovales",
-      "real": 36,
-      "red": "EUROAIRNET"
-
-    },
-    {
-      "id": 11,
-      "title": "Avda de Soria",
-      "real": 39,
-      "red": "Nacional"
-
-    },
-    {
-      "id": 10,
-      "title": "Centro",
-      "real": 38,
-      "red": "Nacional"
-
-    },
-    {
-      "id": 7,
-      "title": "Jaime Ferrán",
-      "real": 32,
-      "red": "Nacional"
-
-    },
-    {
-      "id": 9,
-      "title": "Las Fuentes",
-      "real": 37,
-      "red": "Nacional"
-
-    }
-
-  ]
-}
 
 var gas = {
   "http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno": "NOx",
@@ -67,39 +7,6 @@ var gas = {
   "http://es.dbpedia.org/resource/Ozono": "O3",
   "http://es.dbpedia.org/resource/PM10": "PM10",
   "http://es.dbpedia.org/resource/Sulfuro_de_hidr%C3%B3geno": "SH2",
-}
-
-var IdToReal = function(id) {
-
-  var arrFound = realStations.stations.filter(function(item) {
-    return item.id == id;
-  });
-
-  return (arrFound[0].real);
-
-}
-
-var RealToId = function(real) {
-
-  var arrFound = realStations.stations.filter(function(item) {
-    return item.real == real;
-  });
-
-  return (arrFound[0].id);
-
-}
-
-
-var listStations = function() {
-
-  var array = [];
-
-  for (var item in realStations.stations) {
-    array.push(realStations.stations[item].id);
-  }
-
-  return array;
-
 }
 
 
@@ -144,7 +51,7 @@ var searchGas = async function(pollutant) {
 }
 
 
-var retSta = async function() {
+var retrieveStations = async function() {
 
   const SparqlClient = require('sparql-http-client')
   const ParsingClient = require('sparql-http-client/ParsingClient')
@@ -164,11 +71,12 @@ var retSta = async function() {
 	  esairq:trafico ?trafico;
 	  esairq:zona ?zona;
 	  loc:address ?address
-	    optional {
-	        ?uri geo:geometry ?coordenadas.
-	            ?coordenadas geo:lat ?latitud;
-	            geo:long ?longitud.
-	    }
+
+    optional {
+        ?uri geo:geometry ?coordenadas.
+            ?coordenadas geo:lat ?latitud;
+            geo:long ?longitud.
+    }
 	}
 		`
 
@@ -181,8 +89,8 @@ var retSta = async function() {
 
   // Mapping the result to a new cleaned JSON
   var data = bindings.map(result => ({
-    id: result.uri.value,
-    label: result.label.value,
+    id: getStation(result.uri.value),
+    title: result.label.value,
     address: result.address.value,
     point: {
 			x: result.latitud.value,
@@ -197,40 +105,20 @@ var retSta = async function() {
 }
 
 
-
-
-
 var convertGas = function(id) {
   return (gas[id]);
 }
 
-var retrieveStations = function() {
-
-  const fetch = require('node-fetch');
-  const stationsUri = 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion.json'
-
-  return fetch(stationsUri)
-    .then(res => res.json())
-    .then(json => {
-      return (json)
-    });
-
-}
-
-
 
 var getStation = function(uri) {
 
-  real = uri.substring(uri.lastIndexOf('/') + 1);
-  return RealToId(real);
+  return Number(uri.substring(uri.lastIndexOf('/') + 1));
+
 
 }
 
 module.exports = {
-  IdToReal: IdToReal,
-  listStations: listStations,
   convertGas: convertGas,
-  retrieveStations: retrieveStations,
   getStation: getStation,
-	retSta: retSta
+	retrieveStations: retrieveStations
 };

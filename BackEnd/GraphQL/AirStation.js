@@ -2,8 +2,9 @@ const SparqlClient = require('sparql-http-client')
 const AirAux = require('./AirAux.js');
 const ParsingClient = require('sparql-http-client/ParsingClient')
 var _ = require('underscore');
-const transformation = require('transform-coordinates')
-const transform = transformation('EPSG:23030', 'EPSG:4326')
+const {
+  GraphQLError
+} = require('graphql')
 
 const endpointUrl = 'http://datos.zaragoza.es/sparql'
 
@@ -81,22 +82,11 @@ var retrieveAllAirStations = async function(context) {
   // For each station in data retrieved
   keys.forEach(function(key) {
     // Fetch the object about the "key" station
-    var arina = _.where(stationsData.result, {
+    var arina = _.where(stationsData, {
       id: Number(key)
     });
-    // Inject in stationsData the pollution records about this station
     arina[0].records = output[key];
-
-    // Converting UTM zone 30N coordinates to GPS standard
-    var gps = transform.forward({
-      x: arina[0].geometry.coordinates[0],
-      y: arina[0].geometry.coordinates[1]
-    })
-
-    arina[0].geometry = {
-      "x": gps.y,
-      "y": gps.x
-    };
+    arina[0].geometry = arina[0].point;
 
     // Adding the processed station to the list
     o.push(arina[0]);
@@ -113,30 +103,25 @@ var retrieveAirStation = async function({
   until
 }, context) {
 
-  console.log(await AirAux.retSta());
-
-
   var output = await execute(since, until);
+
+  if (!output[idAirStation]) {
+    throw new GraphQLError(`The AirStation ${idAirStation} not found`, null, null, null, null, {
+      extensions: {
+        code: "NOT_FOUND",
+      }
+    })
+  }
 
   var stationsData = await AirAux.retrieveStations();
 
   // Fetch the object about the "idAirStation" station
-  var arina = _.where(stationsData.result, {
-    id: Number(idAirStation)
+  var arina = _.where(stationsData, {
+    id: idAirStation
   });
   // Inject in stationsData the pollution records about this station
   arina[0].records = output[idAirStation];
-
-  // Converting UTM30 coordinates to GPS standard
-  var gps = transform.forward({
-    x: arina[0].geometry.coordinates[0],
-    y: arina[0].geometry.coordinates[1]
-  })
-
-  arina[0].geometry = {
-    "x": gps.y,
-    "y": gps.x
-  };
+  arina[0].geometry = arina[0].point;
 
   return (arina[0]);
 
