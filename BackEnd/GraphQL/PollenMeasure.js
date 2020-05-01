@@ -1,4 +1,7 @@
 const fetch = require('node-fetch');
+const {
+    GraphQLError
+} = require('graphql')
 
 var retrievePollenMeasure = function ({ startDate, endDate, idPollenMeasure }, context) {
     const url = `https://www.zaragoza.es/sede/servicio/informacion-polen/${idPollenMeasure}.json`;
@@ -6,20 +9,39 @@ var retrievePollenMeasure = function ({ startDate, endDate, idPollenMeasure }, c
     return fetch(url)
         .then(res => res.json())
         .then(json => {
-            if (startDate && endDate) {
-                const startDateISO = new Date(startDate);
-                const endDateISO = new Date(endDate);
+            if (!Date.parse(startDate) || !Date.parse(endDate)) {
 
-                for (var i = 0; i < json.observation.length; i++) {
-                    const creationDate = new Date(json.observation[i].publicationDate);
+                throw new GraphQLError(`The dates provided are not valid`, null, null, null, null, {
+                    extensions: {
+                        code: "BAD_REQUEST",
+                    }
+                })
+            }
 
-                    if (!(creationDate >= startDateISO && creationDate <= endDateISO)) {
-                        delete json.observation[i]
+            if (json.id) {
+                if (startDate && endDate) {
+                    const startDateISO = new Date(startDate);
+                    const endDateISO = new Date(endDate);
+
+                    for (var i = 0; i < json.observation.length; i++) {
+                        const creationDate = new Date(json.observation[i].publicationDate);
+
+                        if (!(creationDate >= startDateISO && creationDate <= endDateISO)) {
+                            delete json.observation[i]
+                        }
                     }
                 }
-            }  
 
-            return (json);
+                return (json);
+            }
+            else {
+                throw new GraphQLError(`The PollenMeasure ${idPollenMeasure} could not found`, null, null, null, null, {
+                    extensions: {
+                        code: "NOT_FOUND",
+                    }
+                })
+            }
+            
     });
 
 }
