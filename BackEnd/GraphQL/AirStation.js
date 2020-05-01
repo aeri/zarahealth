@@ -5,6 +5,9 @@ var _ = require('underscore');
 const {
   GraphQLError
 } = require('graphql')
+const NodeCache = require("node-cache");
+const myCache = new NodeCache();
+var schedule = require('node-schedule');
 
 const endpointUrl = 'http://datos.zaragoza.es/sparql'
 
@@ -56,6 +59,10 @@ async function execute(since, until) {
 
 }
 
+var j = schedule.scheduleJob('*/1 * * * *', function(){
+  console.log('Today is recognized by Rebecca Black!');
+});
+
 
 
 var retrieveAllAirStations = async function(context) {
@@ -63,17 +70,27 @@ var retrieveAllAirStations = async function(context) {
   // To retrieve the actual status from today until tomorrow
   const today = new Date()
   const tomorrow = new Date(today)
+  const yesterday = new Date(today)
   tomorrow.setDate(today.getDate() + 1)
+  yesterday.setDate(today.getDate() - 1)
 
   // Reset the today and tomorrow days
-  today.setUTCHours(0, 0, 0, 0);
+  yesterday.setUTCHours(22, 0, 0, 0);
   tomorrow.setUTCHours(0, 0, 0, 0);
 
   // Retrieve the results
-  var output = await execute(today.toISOString(), tomorrow.toISOString());
+  var output = await execute(yesterday.toISOString(), tomorrow.toISOString());
 
-  // Retrieving information about the air stations
-  var stationsData = await AirAux.retrieveStations();
+  var stationsData = myCache.get("airstations");
+
+  if (stationsData == undefined) {
+
+    // Retrieving information about the air stations
+    var stationsData = await AirAux.retrieveStations();
+
+    myCache.set("airstations", stationsData, 864000);
+
+  }
 
   var keys = Object.keys(output)
 
@@ -91,6 +108,7 @@ var retrieveAllAirStations = async function(context) {
     // Adding the processed station to the list
     o.push(arina[0]);
   })
+
   return o;
 
 }
@@ -103,9 +121,35 @@ var retrieveAirStation = async function({
   until
 }, context) {
 
+  if (!Date.parse(since) || !Date.parse(until)) {
+
+    throw new GraphQLError(`The dates provided are not valid`, null, null, null, null, {
+      extensions: {
+        code: "BAD_REQUEST",
+      }
+    })
+
+  }
+
   var output = await execute(since, until);
 
-  if (!output[idAirStation]) {
+  var stationsData = myCache.get("airstations");
+
+  if (stationsData == undefined) {
+
+    // Retrieving information about the air stations
+    var stationsData = await AirAux.retrieveStations();
+
+    myCache.set("airstations", stationsData, 864000);
+
+  }
+
+  // Fetch the object about the "idAirStation" station
+  var arina = _.where(stationsData, {
+    id: idAirStation
+  });
+
+  if (arina === undefined || arina.length == 0) {
     throw new GraphQLError(`The AirStation ${idAirStation} not found`, null, null, null, null, {
       extensions: {
         code: "NOT_FOUND",
@@ -113,12 +157,6 @@ var retrieveAirStation = async function({
     })
   }
 
-  var stationsData = await AirAux.retrieveStations();
-
-  // Fetch the object about the "idAirStation" station
-  var arina = _.where(stationsData, {
-    id: idAirStation
-  });
   // Inject in stationsData the pollution records about this station
   arina[0].records = output[idAirStation];
   arina[0].geometry = arina[0].point;

@@ -23,6 +23,8 @@ var schema = buildSchema(`
          ): AirStation
          "A query to retrieve all AirStations in the network along with all the daily measurements recorded"
          retrieveAllAirStations: [AirStation]
+         "A query to reatrieve information about the actual weather in Zaragoza"
+         retrieveWeather: Weather
          retrievePollenStation(
            "Unique Water identifier to be retrieved"
            idPollenStation: String
@@ -118,6 +120,18 @@ var schema = buildSchema(`
         id: String!,
         title: String!,
         description: String!
+    }
+    type Weather{
+      "Current temperature in degrees Celsius"
+      temp: Int!,
+      "Current humidity level in %"
+      humidity: Int,
+      "Current pressure level in hPa"
+      pressure: Int,
+      "Weather condition within the group"
+      description: String,
+      "Weather condition code (https://openweathermap.org/weather-conditions)"
+      weathercode: Int!
     }
 
     scalar Upload

@@ -1,4 +1,3 @@
-
 var gas = {
   "http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno": "NOx",
   "http://es.dbpedia.org/resource/Di%C3%B3xido_de_azufre": "SO2",
@@ -6,6 +5,7 @@ var gas = {
   "http://es.dbpedia.org/resource/Mon%C3%B3xido_de_carbono": "CO",
   "http://es.dbpedia.org/resource/Ozono": "O3",
   "http://es.dbpedia.org/resource/PM10": "PM10",
+  "http://es.dbpedia.org/resource/PM-2.5": "PM2.5",
   "http://es.dbpedia.org/resource/Sulfuro_de_hidr%C3%B3geno": "SH2",
 }
 
@@ -93,9 +93,9 @@ var retrieveStations = async function() {
     title: result.label.value,
     address: result.address.value,
     point: {
-			x: result.latitud.value,
-			y: result.longitud.value
-		}
+      x: result.latitud.value,
+      y: result.longitud.value
+    }
   }))
 
 
@@ -120,5 +120,5 @@ var getStation = function(uri) {
 module.exports = {
   convertGas: convertGas,
   getStation: getStation,
-	retrieveStations: retrieveStations
+  retrieveStations: retrieveStations
 };
