@@ -59,13 +59,13 @@ async function execute(since, until) {
 
 }
 
-var j = schedule.scheduleJob('*/20 * * * *', function(){
+var j = schedule.scheduleJob('*/20 * * * *', function() {
 
-  recallStation().then(function (station) {
+  recallStation().then(function(station) {
 
-  if (station != undefined && station.length > 0) {
-    myCache.set("airport", station, 18000);
-  }
+    if (station != undefined && station.length > 0) {
+      myCache.set("airport", station, 18000);
+    }
 
   });
 });

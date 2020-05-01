@@ -41,7 +41,7 @@ var retrievePollenMeasure = function ({ startDate, endDate, idPollenMeasure }, c
                     }
                 })
             }
-            
+
     });
 
 }
@@ -54,9 +54,8 @@ var retrieveAllPollenMeasures = function (context) {
             return json.result;
         });
 }
-    
+
 module.exports = {
     retrievePollenMeasure: retrievePollenMeasure,
     retrieveAllPollenMeasures: retrieveAllPollenMeasures
 };
-
