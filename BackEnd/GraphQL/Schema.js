@@ -19,14 +19,14 @@ var schema = buildSchema(`
          ): WaterStation
          "A query to retrieve all WaterStations in the network along with all the daily measurements recorded"
          retrieveAllWaterStations: [WaterStation]
-         "A query to retrieve the AirStation specified along with the measurements recorded for the specified time interval (until - since)"
+         "A query to retrieve the AirStation specified along with the measurements recorded for the specified time interval (endDate - startDate)"
          retrieveAirStation(
            "Unique air station identifier to be retrieved"
            idAirStation: Int!
            "Beginning of the period of time to be observed"
-           since: String!,
+           startDate: String!,
            "End of the period of time to be observed"
-           until: String!,
+           endDate: String!,
          ): AirStation
          "A query to retrieve all AirStations in the network along with all the daily measurements recorded"
          retrieveAllAirStations: [AirStation]
@@ -169,7 +169,7 @@ var schema = buildSchema(`
     }
     type Weather{
       "Current temperature in degrees Celsius"
-      temp: Int!,
+      temp: Float!,
       "Current humidity level in %"
       humidity: Int,
       "Current pressure level in hPa"

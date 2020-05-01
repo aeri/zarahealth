@@ -13,12 +13,12 @@ var retrieveWaterStation = function ({ startDate, endDate, idWaterStation }, con
 
                 for (var i = 0; i < json.results.length; i++) {
                     const creationDate = new Date(json.results[i].creationDate);
-                    
+
                     if (!(creationDate >= startDateISO && creationDate <= endDateISO)) {
                         delete json.results[i]
                     }
                 }
-            }         
+            }
 
             if (json.geometry) {
                 json.geometry.x = json.geometry.coordinates[0];
@@ -41,8 +41,8 @@ var retrieveAllWaterStations = function (context) {
                 }
                 json.result[i].results = [json.result[i].lastResult];
             }
-            
-            
+
+
             return json.result;
     });
 }
