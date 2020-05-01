@@ -8,10 +8,17 @@ var schema = buildSchema(`
            "Unique User identifier to be retrieved"
            username: String
          ): User
+         "A query to retrieve the WaterStation specified along with the measurements recorded for the specified time interval (startDate - endDate)"
          retrieveWaterStation(
+           "Beginning of the period of time to be observed"
+           startDate: String,
+           "End of the period of time to be observed"
+           endDate: String,
            "Unique Water identifier to be retrieved"
-           idWaterStation: Int
+           idWaterStation: Int!
          ): WaterStation
+         "A query to retrieve all WaterStations in the network along with all the daily measurements recorded"
+         retrieveAllWaterStations: [WaterStation]
          "A query to retrieve the AirStation specified along with the measurements recorded for the specified time interval (until - since)"
          retrieveAirStation(
            "Unique air station identifier to be retrieved"
@@ -25,10 +32,17 @@ var schema = buildSchema(`
          retrieveAllAirStations: [AirStation]
          "A query to reatrieve information about the actual weather in Zaragoza"
          retrieveWeather: Weather
-         retrievePollenStation(
+         "A query to retrieve the PollenMeasure specified along with the measurements recorded for the specified time interval (startDate - endDate)"
+         retrievePollenMeasure(
+           "Beginning of the period of time to be observed"
+           startDate: String,
+           "End of the period of time to be observed"
+           endDate: String,
            "Unique Water identifier to be retrieved"
-           idPollenStation: String
-         ): PollenStation
+           idPollenMeasure: String!,
+         ): PollenMeasure
+         "A query to retrieve all PollenMeasures in the network along with all the daily measurements recorded"
+        retrieveAllPollenMeasures: [PollenMeasure]
     },
     type Mutation {
         "A mutation to register an User"
@@ -88,9 +102,24 @@ var schema = buildSchema(`
       y: Float!
     }
     type WaterStation {
+        "Unique water station identifier"
         id: Int!,
+        "Name of the water station"
         title: String!,
-        address: String!
+        "Address of the water station"
+        address: String!,
+        "Location of the water station"
+        geometry: Point,
+        "Results of the water station"
+        results: [WaterRecord]!
+    }
+    type WaterRecord {
+        "Id of the bulletin"
+        id: String!,
+        "Date and time of measurement (ISO 8601)"
+        creationDate: String!,
+        "Result of the measure"
+        result: String
     }
     "A type that describes the components of an air station"
     type AirStation {
@@ -116,10 +145,27 @@ var schema = buildSchema(`
       "Value of measurement in micrograms per cubic meter (µg/m3)"
       value: Float!
     }
-    type PollenStation {
+    type PollenMeasure {
+        "Pollen substance measured in the environment"
         id: String!,
+        "Name of the pollen measure"
         title: String!,
-        description: String!
+        "Description of the pollen measure"
+        description: String,
+        "Reign of the pollen measure"
+        reino: String,
+        "Family of the pollen measure"
+        familia: String,
+        "Image of the pollen measure"
+        image: String!,
+        "Observations for the pollen measure"
+        observation: [PollenRecord]!
+    }
+    type PollenRecord {
+        "Date and time of measurement (ISO 8601)"
+        publicationDate: String!,
+        "The value for the pollen measure"
+        value: String!,
     }
     type Weather{
       "Current temperature in degrees Celsius"

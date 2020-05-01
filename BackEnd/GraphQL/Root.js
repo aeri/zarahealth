@@ -1,7 +1,7 @@
 //Funcion de usuario de GraphQL
 var userFunctions = require('./User.js');
 var waterStationFunctions = require('./WaterStation.js');
-var pollenStationFunctions = require('./PollenStation');
+var pollenMeasureFunctions = require('./PollenMeasure');
 var airStationFunctions = require('./AirStation.js');
 var weatherFunctions = require('./Weather.js');
 
@@ -11,7 +11,9 @@ var root = {
     uploadUserImage: userFunctions.uploadUserImage,
     updateCsvDownloadEnabled: userFunctions.updateCsvDownloadEnabled,
     retrieveWaterStation: waterStationFunctions.retrieveWaterStation,
-    retrievePollenStation: pollenStationFunctions.retrievePollenStation,
+    retrieveAllWaterStations: waterStationFunctions.retrieveAllWaterStations,
+    retrievePollenMeasure: pollenMeasureFunctions.retrievePollenMeasure,
+    retrieveAllPollenMeasures: pollenMeasureFunctions.retrieveAllPollenMeasures,
     retrieveAllAirStations: airStationFunctions.retrieveAllAirStations,
     retrieveAirStation: airStationFunctions.retrieveAirStation,
     retrieveWeather: weatherFunctions.retrieveWeather
