@@ -59,13 +59,37 @@ async function execute(since, until) {
 
 }
 
-var j = schedule.scheduleJob('*/1 * * * *', function(){
-  console.log('Today is recognized by Rebecca Black!');
+var j = schedule.scheduleJob('*/20 * * * *', function(){
+
+  recallStation().then(function (station) {
+
+  if (station != undefined && station.length > 0) {
+    myCache.set("airport", station, 18000);
+  }
+
+  });
 });
 
-
-
 var retrieveAllAirStations = async function(context) {
+
+  var stationsData = myCache.get("airport");
+
+  if (stationsData == undefined) {
+
+    // Retrieving information about the air stations
+    stationsData = await recallStation();
+
+    myCache.set("airport", stationsData, 18000);
+
+  }
+
+  return stationsData;
+
+}
+
+
+
+var recallStation = async function() {
 
   // To retrieve the actual status from today until tomorrow
   const today = new Date()
@@ -79,7 +103,7 @@ var retrieveAllAirStations = async function(context) {
   tomorrow.setUTCHours(0, 0, 0, 0);
 
   // Retrieve the results
-  var output = await execute(yesterday.toISOString(), tomorrow.toISOString());
+  var output = await execute(today.toISOString(), tomorrow.toISOString());
 
   var stationsData = myCache.get("airstations");
 
@@ -117,9 +141,12 @@ var retrieveAllAirStations = async function(context) {
 
 var retrieveAirStation = async function({
   idAirStation,
-  since,
-  until
+  startDate,
+  endDate
 }, context) {
+
+  var since = startDate;
+  var until = endDate;
 
   if (!Date.parse(since) || !Date.parse(until)) {
 

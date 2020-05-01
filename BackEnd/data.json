@@ -1,0 +1,1703 @@
+[
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T23:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '11.43', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T22:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '12.82', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T21:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '13.97', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T20:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '17.9', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T19:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '20.88', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T18:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '16.07', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T17:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '15.92', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T16:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '11.95', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T15:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '12.84', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T14:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '11.71', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T13:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '12.32', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T12:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '11.67', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T11:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '12.11', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T10:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '19.86', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T09:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '44.01', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T08:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '132.82', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T07:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '166.65', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T06:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '89.2', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T05:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '31.81', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T04:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '16.78', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T03:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '17.26', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T02:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '16.73', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T01:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '17.22', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/26'
+    },
+    fecha: Literal {
+      value: '2020-04-29T00:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '29.53', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T23:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '13.52', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T22:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '16.33', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T21:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '13.73', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T20:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '24.43', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T19:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '15.44', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T18:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '14.51', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T17:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '16.63', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T16:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '15.1', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T15:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '19.13', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T14:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '16.21', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T13:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '14.82', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T12:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '14.87', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T11:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '17.78', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T10:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '15.46', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T09:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '27.08', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T08:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '68.22', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T07:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '55.76', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T06:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '62.55', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T05:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '38.67', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T04:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '17.11', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T03:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '11.52', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T02:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '11.82', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T01:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '23.58', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/29'
+    },
+    fecha: Literal {
+      value: '2020-04-29T00:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '29.68', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T23:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '9.05', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T22:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '10.81', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T21:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '10.78', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T20:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '11.2', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T19:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '9.7', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T18:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '10.63', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T17:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '10.24', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T16:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '8.29', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T15:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '8.24', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T14:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '9.63', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T13:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '9.89', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T12:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '8.47', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T11:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '9.68', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T10:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '11.74', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T09:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '17.62', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T08:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '27.27', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T07:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '23.94', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T06:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '19.36', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T05:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '16.57', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T04:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '15.05', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T03:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '11.93', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T02:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '10.27', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T01:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '11.04', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/36'
+    },
+    fecha: Literal {
+      value: '2020-04-29T00:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '11.19', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T23:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '13.99', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T22:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '15.38', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T21:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '14.66', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T20:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '18.05', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T19:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '14.69', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T18:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '15.79', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T17:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '15.75', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T16:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '14.15', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T15:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '13.2', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T14:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '14.75', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T13:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '13.78', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T12:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '12.55', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T11:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '14.41', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T10:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '20.66', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T09:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '34.89', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T08:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '74.61', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T07:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '68.4', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T06:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '30.53', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T05:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '25.99', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T04:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '18.59', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T03:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '16.47', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T02:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '18.75', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T01:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '19.0', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/37'
+    },
+    fecha: Literal {
+      value: '2020-04-29T00:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '18.68', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/39'
+    },
+    fecha: Literal {
+      value: '2020-04-29T23:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '27.11', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/39'
+    },
+    fecha: Literal {
+      value: '2020-04-29T22:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '29.97', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/39'
+    },
+    fecha: Literal {
+      value: '2020-04-29T21:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '29.31', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  {
+    magnitud: NamedNode {
+      value: 'http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno'
+    },
+    estacion: NamedNode {
+      value: 'http://www.zaragoza.es/api/recurso/medio-ambiente/calidad-aire/estacion/39'
+    },
+    fecha: Literal {
+      value: '2020-04-29T20:00:00',
+      datatype: [NamedNode],
+      language: ''
+    },
+    valor: Literal { value: '32.14', datatype: [NamedNode], language: '' },
+    verif: NamedNode {
+      value: 'http://vocab.linkeddata.es/datosabiertos/kos/medio-ambiente/calidad-aire/estado-observacion/no-verificado'
+    }
+  },
+  ... 896 more items
+]

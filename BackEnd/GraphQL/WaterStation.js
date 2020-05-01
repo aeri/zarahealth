@@ -32,6 +32,7 @@ var retrieveWaterStation = function ({ startDate, endDate, idWaterStation }, con
                     }
                 }
 
+
                 if (json.geometry) {
                     json.geometry.x = json.geometry.coordinates[0];
                     json.geometry.y = json.geometry.coordinates[1];
@@ -62,8 +63,8 @@ var retrieveAllWaterStations = function (context) {
                 }
                 json.result[i].results = [json.result[i].lastResult];
             }
-            
-            
+
+
             return json.result;
     });
 }
