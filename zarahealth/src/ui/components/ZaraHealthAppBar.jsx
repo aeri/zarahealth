@@ -7,6 +7,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import CloudOutlinedIcon from "@material-ui/icons/CloudOutlined";
 
 import { makeStyles } from "@material-ui/core/styles";
+import zgzh from "../common/zgzh.svg";
+import zaraHealthTheme from "../theme";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,12 +17,13 @@ const useStyles = makeStyles((theme) => ({
   appBar : {
     //margin: 0,
     zIndex: theme.zIndex.drawer + 1,
+    backgroundColor: zaraHealthTheme.palette.primary.main,
   },
   menuButton: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up("sm")]: {
       display: "none",
-    },    
+    },
   },
   title: {
     flexGrow: 1,
@@ -41,11 +44,12 @@ function ZaraHealthAppBar(props) {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" className={classes.title}>
-          ZaraHealth
-        </Typography>
-        <Typography variant="h6">23º</Typography>
-        <CloudOutlinedIcon />
+        <div className={classes.title}>
+          <img src={zgzh} alt="ZGZh Logo" height={23}/>
+        </div>
+        <Typography variant="h6">
+          23º</Typography>
+        <CloudOutlinedIcon color="secondary"/>
       </Toolbar>
     </AppBar>
   );
