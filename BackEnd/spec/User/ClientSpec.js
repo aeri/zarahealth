@@ -213,4 +213,145 @@ describe("Client", function () {
 
     });
 
+    it("should be able to retrieve a specific pollen measure", function (done) {
+        const graphQLClient = new GraphQLClient(endpoint, {
+            headers: {
+                authorization: `Bearer ${client_token}`,
+            },
+        })
+
+        const query = `
+            query retrievePollenMeasure($startDate: String, $endDate: String, $idPollenMeasure: String!) {
+                retrievePollenMeasure(idPollenMeasure: $idPollenMeasure, startDate: $startDate, endDate: $endDate) {
+                    id
+                    title
+                    description
+                    reino
+                    familia
+                    image
+                    observation{
+                        publicationDate
+                        value
+                    }
+                }
+            }`;
+
+        const variables = {
+            idPollenMeasure: "Quercus",
+            startDate: "2019-08-29T00:00:00",
+            endDate: "2020-09-05T00:00:00"
+        };
+
+        graphQLClient.request(query, variables).then(function (res) {
+            expect(res.retrievePollenMeasure.id).toBe("Quercus");
+            done();
+        });
+
+    });
+
+    it("should be able to retrieve a all pollen measures", function (done) {
+        const graphQLClient = new GraphQLClient(endpoint, {
+            headers: {
+                authorization: `Bearer ${client_token}`,
+            },
+        })
+
+        const query = `
+            query retrieveAllPollenMeasures {
+              retrieveAllPollenMeasures {
+                id
+                title
+                image
+                observation{
+                    publicationDate
+                    value
+                }
+              }
+            }`;
+
+        const obj = {
+            id: 'Urticaceae',
+            title: 'Urticaceas',
+            image: 'https://www.zaragoza.es/cont/paginas/servicios/polen/img/Urticaceae.jpg'
+        }
+
+        graphQLClient.request(query).then(function (res) {
+            expect(res.retrieveAllPollenMeasures).toContain(jasmine.objectContaining(obj));
+            done();
+        });
+
+    });
+
+    it("should be able to retrieve a specific water station", function (done) {
+        const graphQLClient = new GraphQLClient(endpoint, {
+            headers: {
+                authorization: `Bearer ${client_token}`,
+            },
+        })
+
+        const query = `
+            query retrieveWaterStation ($startDate: String!, $endDate: String!){
+              retrieveWaterStation(idWaterStation: 1, startDate: $startDate, endDate: $endDate) {
+                id
+                title
+                geometry {
+                    x
+                    y
+                }
+                results {
+                    result
+                    creationDate
+                }
+              }
+            }`;
+
+        const variables = {
+            startDate: "2011-02-07T00:00:00",
+            endDate: "2013-05-06T00:00:00"
+        };
+
+        graphQLClient.request(query, variables).then(function (res) {
+            expect(res.retrieveWaterStation.id).toBe(1);
+            done();
+        });
+
+    });
+
+    it("should be able to retrieve a all water stations", function (done) {
+        const graphQLClient = new GraphQLClient(endpoint, {
+            headers: {
+                authorization: `Bearer ${client_token}`,
+            },
+        })
+
+        const query = `
+            query retrieveAllWaterStations {
+              retrieveAllWaterStations {
+                id
+                title
+                geometry {
+                    x
+                    y
+                }
+                results {
+                    id
+                    result
+                    creationDate
+                }
+              }
+            }`;
+
+        const obj = {
+            id: 11,
+            title: 'Red de Villamayor',
+            geometry: null
+        }
+
+        graphQLClient.request(query).then(function (res) {
+            expect(res.retrieveAllWaterStations).toContain(jasmine.objectContaining(obj));
+            done();
+        });
+
+    });
+
 });
