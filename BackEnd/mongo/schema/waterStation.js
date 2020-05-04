@@ -1,5 +1,3 @@
-var airThreshold = require('./airThreshold.js');
-
 module.exports = {
     id: {
         type: Number,
@@ -12,9 +10,5 @@ module.exports = {
     address: {
         type: String,
         required: true
-    },
-    thresholds: {
-        type: [airThreshold],
-        required: false
     }
 };

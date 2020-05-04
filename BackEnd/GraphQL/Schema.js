@@ -68,6 +68,36 @@ var schema = buildSchema(`
             csvDownloadEnabled: Boolean!,
         ): User
 
+        "A mutation to update the attribute preferredAirStation of the User"
+        updateUserAirStation(
+            "Attribute idAirStation"
+            idAirStation: Int!,
+        ): User
+
+        "A mutation to update the attribute preferredWaterStation of the User"
+        updateUserWaterStation(
+            "Attribute idWaterStation"
+            idWaterStation: Int!,
+        ): User
+
+        "A mutation to update the attribute pollenThreshold of the User"
+        updateUserPollenThreshold(
+            "Attribute idPollenMeasure"
+            idPollenMeasure: String!,
+            "Threshold value for the pollen"
+            pollenValue: String!
+        ): User
+
+        "A mutation to update the attribute pollenThreshold of the User"
+        updateUserAirThreshold(
+            "Attribute idAirStation"
+            idAirStation: Int!,
+            "Type of contaminant for the air"
+            airContaminant: Contaminant!,
+            "Threshold value for the air value"
+            airValue: Float!
+        ): User
+
     },
     "A type that describes the user."
     type User {
@@ -81,7 +111,14 @@ var schema = buildSchema(`
         isAdmin: Boolean!,
         "The attribute that says if the user wants to view de csv or not"
         csvDownloadEnabled: Boolean!,
-        image: Image!
+        "The attribute that contains the profile picture"
+        image: Image,
+        "The attribute that contains the prefered air station"
+        preferredAirStation: UserAirStation,
+        "The attribute that contains the prefered water station"
+        preferredWaterStation: WaterStation
+        "The attribute that contains the pollen measure"
+        pollenThresholds: [PollenThreshold]   
     }
     "A type that describes the image."
     type Image {
@@ -145,6 +182,24 @@ var schema = buildSchema(`
       "Value of measurement in micrograms per cubic meter (µg/m3)"
       value: Float!
     }
+    "A type that describes the components of an air station for a user"
+    type UserAirStation {
+        "Unique air station identifier"
+        id: Int!,
+        "Name of the air station"
+        title: String!,
+        "Address of the air station"
+        address: String!,
+        "Thresholds for the air station"
+        thresholds: [AirStationThresholds]
+    }
+    "A type that describes the components of an air station threshold"
+    type AirStationThresholds {
+      "Chemical substance measured in the environment"
+      contaminant: Contaminant!,
+      "Value of measurement in micrograms per cubic meter (µg/m3)"
+      value: Float!
+    }
     type PollenMeasure {
         "Pollen substance measured in the environment"
         id: String!,
@@ -167,17 +222,33 @@ var schema = buildSchema(`
         "The value for the pollen measure"
         value: String!,
     }
+    type PollenThreshold {
+        "Pollen substance measured in the environment"
+        id: String!,
+        "The value for the pollen measure"
+        value: String!
+    }
     type Weather{
-      "Current temperature in degrees Celsius"
-      temp: Float!,
-      "Current humidity level in %"
-      humidity: Int,
-      "Current pressure level in hPa"
-      pressure: Int,
-      "Weather condition within the group"
-      description: String,
-      "Weather condition code (https://openweathermap.org/weather-conditions)"
-      weathercode: Int!
+        "Current temperature in degrees Celsius"
+        temp: Float!,
+        "Current humidity level in %"
+        humidity: Int,
+        "Current pressure level in hPa"
+        pressure: Int,
+        "Weather condition within the group"
+        description: String,
+        "Weather condition code (https://openweathermap.org/weather-conditions)"
+        weathercode: Int!
+    }
+    enum Contaminant {
+        NOx
+        SO2
+        NO2
+        CO
+        O3
+        PM10
+        PM2_5
+        SH2
     }
 
     scalar Upload

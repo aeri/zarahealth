@@ -6,7 +6,7 @@ module.exports = {
     comments: [{ body: String, date: Date }],
     date: { type: Date, default: Date.now },
     hidden: Boolean,
-    pictures: [image]
+    pictures: [image],
     meta: {
       likes: Number,
       dislikes:  Number

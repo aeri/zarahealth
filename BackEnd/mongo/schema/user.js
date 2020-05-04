@@ -1,5 +1,7 @@
 var image = require('./image.js');
 var airStation = require('./airStation.js');
+var waterStation = require('./waterStation.js');
+var pollenMeasure = require('./pollenMeasure.js');
 
 module.exports = {
     username: {
@@ -36,7 +38,18 @@ module.exports = {
         required: false
     },
     preferredAirStation: {
-      type: airStation,
-      required: false
+        type: airStation,
+        required: false
+    },
+    preferredWaterStation: {
+        type: waterStation,
+        required: false
+    },
+    pollenThresholds: {
+        type: [pollenMeasure],
+        required: false
+    },
+    airThresholds: {
+        type: []
     }
 };
