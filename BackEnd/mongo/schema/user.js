@@ -1,4 +1,5 @@
 var image = require('./image.js');
+var airStation = require('./airStation.js');
 
 module.exports = {
     username: {
@@ -33,5 +34,9 @@ module.exports = {
     image: {
         type: image,
         required: false
+    },
+    preferredAirStation: {
+      type: airStation,
+      required: false
     }
 };

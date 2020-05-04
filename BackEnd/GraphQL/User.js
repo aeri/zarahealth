@@ -1,6 +1,8 @@
 var UserModel = require('../mongo/model/user.js');
 var ImageModel = require('../mongo/model/image.js');
+var airStationModel = require('../mongo/model/airStation.js');
 var logger = require('../logger.js');
+var AirAux = require('./AirAux');
 
 const {
   GraphQLError
@@ -188,6 +190,40 @@ var uploadUserImage = async function(image, context) {
     mimetype,
     encoding
   };
+
+
+}
+
+var updateUserAirStation = async function(idAirStation, context) {
+
+  var usernamePetition = context.response.locals.user;
+
+  //Requires User authentication
+  authentication(usernamePetition);
+
+  var stationsData = await AirAux.retrieveStations();
+
+  var arina = _.where(stationsData, {
+    id: idAirStation
+  });
+
+  if (arina === undefined || arina.length == 0) {
+    throw new GraphQLError(`The AirStation ${idAirStation} not found`, null, null, null, null, {
+      extensions: {
+        code: "NOT_FOUND",
+      }
+    })
+  }
+
+  else{
+    var airModel = new airStationModel({
+      id: arina[0].id,
+      title: arina[0].title,
+      address: arina[0].address
+    });
+
+
+  }
 
 
 }

@@ -72,18 +72,18 @@ var j = schedule.scheduleJob('*/20 * * * *', function() {
 
 var retrieveAllAirStations = async function(context) {
 
-  var stationsData = myCache.get("airport");
+  var airport = myCache.get("airport");
 
-  if (stationsData == undefined) {
+  if (airport == undefined) {
 
     // Retrieving information about the air stations
-    stationsData = await recallStation();
+    airport = await recallStation();
 
-    myCache.set("airport", stationsData, 18000);
+    myCache.set("airport", airport, 18000);
 
   }
 
-  return stationsData;
+  return airport;
 
 }
 
@@ -105,16 +105,8 @@ var recallStation = async function() {
   // Retrieve the results
   var output = await execute(today.toISOString(), tomorrow.toISOString());
 
-  var stationsData = myCache.get("airstations");
-
-  if (stationsData == undefined) {
-
-    // Retrieving information about the air stations
-    var stationsData = await AirAux.retrieveStations();
-
-    myCache.set("airstations", stationsData, 864000);
-
-  }
+  // Retrieving information about the air stations
+  var stationsData = await AirAux.retrieveStations();
 
   var keys = Object.keys(output)
 
@@ -160,16 +152,11 @@ var retrieveAirStation = async function({
 
   var output = await execute(since, until);
 
-  var stationsData = myCache.get("airstations");
+  // Retrieving information about the air stations
+  var stationsData = await AirAux.retrieveStations();
 
-  if (stationsData == undefined) {
 
-    // Retrieving information about the air stations
-    var stationsData = await AirAux.retrieveStations();
 
-    myCache.set("airstations", stationsData, 864000);
-
-  }
 
   // Fetch the object about the "idAirStation" station
   var arina = _.where(stationsData, {
