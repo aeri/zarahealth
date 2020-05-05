@@ -1,11 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
+
+import { ApolloProvider } from "@apollo/react-hooks";
+
+import apolloClient from "./core/apollo/apolloClient";
 import ZaraHealth from "./ZaraHealth.jsx";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ZaraHealth />
+    <ApolloProvider client={apolloClient}>
+      <ZaraHealth />
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

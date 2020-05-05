@@ -4,15 +4,15 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { GoogleLogin } from "react-google-login";
 import { Divider, Container } from "@material-ui/core";
+
+import { SignInForm } from "./SignInForm";
+import { SignUpForm } from "./SignUpForm";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -32,8 +32,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-
 
 function LoginDialog(props) {
   const [isLoginActive, setLoginActive] = React.useState(true);
@@ -108,121 +106,6 @@ function DialogFooter(props) {
           </Link>
         </Grid>
       </Grid>
-    </Container>
-  );
-}
-
-function SignInForm() {
-  const classes = useStyles();
-  return (
-    <Container component="main" maxWidth="xs">
-      <form className={classes.form} noValidate>
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Dirección de correo"
-          name="email"
-          autoComplete="email"
-          autoFocus
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Contraseña"
-          type="password"
-          id="password"
-          autoComplete="current-password"
-        />
-        <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
-          label="Recuérdame"
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-        >
-          {"Iniciar sesión"}
-        </Button>
-      </form>
-    </Container>
-  );
-}
-
-function SignUpForm() {
-  const classes = useStyles();
-
-  return (
-    <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
-        <form className={classes.form} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="Nombre"
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Apelldios"
-                name="lastName"
-                autoComplete="lname"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email"
-                name="email"
-                autoComplete="email"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Contraseña"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Crear cuenta
-          </Button>
-        </form>
-      </div>
     </Container>
   );
 }

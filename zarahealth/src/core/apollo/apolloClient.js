@@ -1,27 +1,26 @@
 import { ApolloClient } from "apollo-client";
-import { createHttpLink } from "apollo-link-http";
-import { setContext } from 'apollo-link-context';
+import { ApolloLink } from "apollo-link";
 import { InMemoryCache } from "apollo-cache-inmemory";
+import { persistCache } from 'apollo-cache-persist';
 
-const ZARAHEALTH_BASE_URL = "https://zgz.herokuapp.com/graphql";
-const httpLink = createHttpLink({
-  uri: ZARAHEALTH_BASE_URL,
-});
+import tokenRefreshLink from "./links/tokenRefreshLink";
+import authLink from "./links/authLink";
+import errorLink from "./links/errorLink";
+import httpLink from "./links/httpLink";
 
-const authLink = setContext((_, { headers }) => {
-  const access_token = localStorage.getItem("access_token");
-  
-  return {
-    headers: {
-      ...headers,
-      authorization: access_token ? `Bearer ${access_token}` : "",
-    },
-  };
+const link = ApolloLink.from([tokenRefreshLink, authLink, errorLink, httpLink]);
+
+const cache = new InMemoryCache();
+
+persistCache({
+  cache,
+  storage: window.localStorage,
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  link: link,
+  cache: cache,
+  resolvers: []
 });
 
 export default client;

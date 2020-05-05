@@ -7,8 +7,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import CloudOutlinedIcon from "@material-ui/icons/CloudOutlined";
 
 import { makeStyles } from "@material-ui/core/styles";
-import zgzh from "../common/zgzh.svg";
-import zaraHealthTheme from "../theme";
+import zgzh from "../../shared/zgzh.svg";
+import zaraHealthTheme from "../../theme";
 
 const useStyles = makeStyles((theme) => ({
   root: {

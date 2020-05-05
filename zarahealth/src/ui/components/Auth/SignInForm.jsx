@@ -1,0 +1,135 @@
+import React from "react";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import { Container, CircularProgress } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { useForm } from "react-hook-form";
+
+import { handleUserAuthentication } from "../../../core/services/tokenService";
+
+import gql from "graphql-tag";
+import { ApolloConsumer } from "@apollo/react-components";
+import { useLazyQuery } from "@apollo/react-hooks";
+
+const GET_USER = gql`
+  query retrieveUser {
+    retrieveUser {
+      name
+      username
+      email
+    }
+  }
+`;
+
+export const useStyles = makeStyles((theme) => ({
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    width: "100%",
+    margin: theme.spacing(3, 0, 2),
+  },
+  progress: {
+    display: "flex",
+    justifyContent: "center",
+    margin: theme.spacing(3),
+  }
+}));
+
+export function SignInForm() {
+  const classes = useStyles();
+  const { handleSubmit, register, errors } = useForm();
+
+  const [retrieveUser, { loading, data, error }] = useLazyQuery(GET_USER);
+
+  if (loading) {
+    return (
+      <Container component="main" maxWidth="xs">
+        <div className={classes.progress}>
+          <CircularProgress />
+        </div>
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container component="main" maxWidth="xs">
+        Ha ocurrido un error: {JSON.stringify(error)}
+      </Container>
+    );
+  }
+
+  if (data) {
+    return (
+      <Container component="main" maxWidth="xs">
+        <ApolloConsumer>
+          {(client) => {
+            client.writeData({ data: { currentUser: data.retrieveUser } });
+            return <div>Login completo: {JSON.stringify(data)} </div>;
+          }}
+        </ApolloConsumer>
+      </Container>
+    );
+  }
+
+  return (
+    <Container component="main" maxWidth="xs">
+      <form
+        className={classes.form}
+        noValidate
+        onSubmit={handleSubmit((data) => {
+          localStorage.removeItem("apollo-cache-persist");
+          handleUserAuthentication(data.username, data.password).then(() => {
+            retrieveUser();
+          });
+        })}
+      >
+        <TextField
+          error={errors.username}
+          inputRef={register({ required: true })}
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="username"
+          label="Nombre de usuario"
+          name="username"
+          autoComplete="username"
+          autoFocus
+          helperText={errors.username && "El campo es obligatorio"}
+        />
+        <TextField
+          error={errors.password}
+          inputRef={register({ required: true })}
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          name="password"
+          label="Contraseña"
+          type="password"
+          id="password"
+          autoComplete="current-password"
+          helperText={errors.password && "El campo es obligatorio"}
+        />
+        <FormControlLabel
+          control={<Checkbox value="remember" color="primary" />}
+          label="Recuérdame"
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+        >
+          {"Iniciar sesión"}
+        </Button>
+      </form>
+    </Container>
+  );
+}
