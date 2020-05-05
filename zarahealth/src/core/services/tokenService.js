@@ -43,6 +43,7 @@ export function refreshAccessToken() {
 }
 
 export async function handleResponse(response) {
+  console.log(response)
   response = await response.json();
   if (response.access_token !== undefined) {
     let expires_at = new Date();
@@ -90,7 +91,7 @@ export async function handleUserAuthentication(username, password) {
 }
 
 export async function handleGoogleAuthentication(token) {
-  const response = await fetch(GOOGLE_OAUTH_SERVER_URI, {
+  const options = {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -99,7 +100,9 @@ export async function handleGoogleAuthentication(token) {
     body: new URLSearchParams({
       access_token: token,
     }),
-  });
+  }
+  console.log('REQUEST: ' + JSON.stringify(options))
+  const response = await fetch(GOOGLE_OAUTH_SERVER_URI, options);
   await handleResponse(response);
 }
 

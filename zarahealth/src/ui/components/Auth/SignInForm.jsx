@@ -6,9 +6,14 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { Container, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useForm } from "react-hook-form";
+import config from "../../../core/misc/config";
 
-import { handleUserAuthentication } from "../../../core/services/tokenService";
+import {
+  handleUserAuthentication,
+  handleGoogleAuthentication,
+} from "../../../core/services/tokenService";
 
+import { GoogleLogin } from "react-google-login";
 import gql from "graphql-tag";
 import { ApolloConsumer } from "@apollo/react-components";
 import { useLazyQuery } from "@apollo/react-hooks";
@@ -36,8 +41,20 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     margin: theme.spacing(3),
-  }
+  },
+  googleSignIn: {
+    width: "100%",
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: "#4c8bf5",
+    "&:hover": {
+      backgroundColor: "#0f64f2",
+    },
+  },
 }));
+
+const handleGoogleError = (response) => {
+  console.log('[GOOGLE AUTH ERROR]: ' + response);
+};
 
 export function SignInForm() {
   const classes = useStyles();
@@ -130,6 +147,30 @@ export function SignInForm() {
           {"Iniciar sesión"}
         </Button>
       </form>
+      <GoogleLogin
+        clientId={config.google.client_id}
+        render={(renderProps) => (
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            onClick={renderProps.onClick}
+            disabled={renderProps.disabled}
+            color="primary"
+            className={classes.googleSignIn}
+          >
+            {"Iniciar sesión con Google"}
+          </Button>
+        )}
+        onSuccess={(response) => {
+          localStorage.removeItem("apollo-cache-persist");
+          handleGoogleAuthentication(response.accessToken).then(() => {
+            retrieveUser();
+          });
+        }}
+        onFailure={handleGoogleError}
+        cookiePolicy={"single_host_origin"}
+      />
     </Container>
   );
 }

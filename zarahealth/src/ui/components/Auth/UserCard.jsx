@@ -23,7 +23,6 @@ function UserCard(props) {
   return (
     <Query query={GET_CURRENT_USER}>
       {({ data }) => {
-        console.log('Data en UserCard: ' + data)
         if (data === undefined || data.currentUser === null) {
           return (
             <div
