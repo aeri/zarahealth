@@ -20,7 +20,15 @@ persistCache({
 const client = new ApolloClient({
   link: link,
   cache: cache,
-  resolvers: []
+  resolvers: [],
+  defaultOptions: {
+    watchQuery: {
+      fetchPolicy: 'cache-and-network',
+    },
+    query: {
+      fetchPolicy: 'cache-and-network',
+    },
+  }
 });
 
 export default client;

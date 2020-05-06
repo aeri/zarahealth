@@ -12,6 +12,8 @@ import {useLocation} from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import MapboxGLMap from "../components/StationsData/MapStations.jsx";
 import InfoStations from "../components/StationsData/InfoStations";
+import AirInfoStation from "../components/StationsData/Air/AirInfoStation";
+import AirStatisticsStation from "../components/StationsData/Air/AirStatisticsStation";
 import StatisticsStations from "../components/StationsData/StatisticsStations";
 
 
@@ -59,6 +61,8 @@ function StationsDataView() {
                     <CssBaseline/>
                     <Switch>
                         <Route exact path="*/map" component={MapboxGLMap}/>
+                        <Route path="/air/info" component={AirInfoStation}/>
+                        <Route path="/air/stats" component={AirStatisticsStation}/>
                         <Route path="*/info" component={InfoStations}/>
                         <Route path="*/stats" component={StatisticsStations}/>
                     </Switch>
