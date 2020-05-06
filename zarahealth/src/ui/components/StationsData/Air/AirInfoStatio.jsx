@@ -4,7 +4,7 @@ import MuiExpansionPanel from "@material-ui/core/ExpansionPanel";
 import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
-import zaraHealthTheme from "../../theme";
+import zaraHealthTheme from "../../../theme";
 import ApartmentIcon from "@material-ui/icons/Apartment";
 import Grid from "@material-ui/core/Grid";
 import WifiIcon from "@material-ui/icons/Wifi";
@@ -128,11 +128,6 @@ export default function InfoSatations() {
           message: "Alto",
           status: 1,
         },
-        {
-          elementName: "NO2",
-          message: "Alto",
-          status: 1,
-        },        
         {
           elementName: "NO2",
           message: "Alto",
