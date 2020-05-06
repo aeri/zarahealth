@@ -144,7 +144,7 @@ var schema = buildSchema(`
         "Name of the water station"
         title: String!,
         "Address of the water station"
-        address: String!,
+        address: String,
         "Location of the water station"
         geometry: Point,
         "Results of the water station"

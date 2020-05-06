@@ -48,8 +48,5 @@ module.exports = {
     pollenThresholds: {
         type: [pollenMeasure],
         required: false
-    },
-    airThresholds: {
-        type: []
     }
 };
