@@ -181,5 +181,6 @@ var retrieveAirStation = async function({
 
 module.exports = {
   retrieveAllAirStations: retrieveAllAirStations,
-  retrieveAirStation: retrieveAirStation
+  retrieveAirStation: retrieveAirStation,
+  recallStation: recallStation
 };
