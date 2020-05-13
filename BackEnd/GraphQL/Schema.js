@@ -8,6 +8,7 @@ var schema = buildSchema(`
            "Unique User identifier to be retrieved"
            username: String
          ): User
+
          "A query to retrieve the WaterStation specified along with the measurements recorded for the specified time interval (startDate - endDate)"
          retrieveWaterStation(
            "Beginning of the period of time to be observed"
@@ -17,8 +18,10 @@ var schema = buildSchema(`
            "Unique Water identifier to be retrieved"
            idWaterStation: Int!
          ): WaterStation
+
          "A query to retrieve all WaterStations in the network along with all the daily measurements recorded"
          retrieveAllWaterStations: [WaterStation]
+
          "A query to retrieve the AirStation specified along with the measurements recorded for the specified time interval (endDate - startDate)"
          retrieveAirStation(
            "Unique air station identifier to be retrieved"
@@ -28,10 +31,13 @@ var schema = buildSchema(`
            "End of the period of time to be observed"
            endDate: String!,
          ): AirStation
+
          "A query to retrieve all AirStations in the network along with all the daily measurements recorded"
          retrieveAllAirStations: [AirStation]
+
          "A query to reatrieve information about the actual weather in Zaragoza"
          retrieveWeather: Weather
+
          "A query to retrieve the PollenMeasure specified along with the measurements recorded for the specified time interval (startDate - endDate)"
          retrievePollenMeasure(
            "Beginning of the period of time to be observed"
@@ -41,8 +47,17 @@ var schema = buildSchema(`
            "Unique Water identifier to be retrieved"
            idPollenMeasure: String!,
          ): PollenMeasure
+
          "A query to retrieve all PollenMeasures in the network along with all the daily measurements recorded"
         retrieveAllPollenMeasures: [PollenMeasure]
+
+        "A query to retrieve all feeds"
+        retrieveFeeds(
+          "Current page number"
+          page: Int!
+          "Results per page (100 maximum)"
+          limit: Int!
+        ): [Feed]
     },
     type Mutation {
         "A mutation to register an User"
@@ -98,6 +113,29 @@ var schema = buildSchema(`
             airValue: Float!
         ): User
 
+        "A mutation to create a Feed"
+        submitFeed(
+            title: String!,
+            body: String!,
+            pictures: [Upload]
+        ): Feed
+
+        "A mutation to change a user's opinion about a feed"
+        toggleFeedOpinion(
+            "Unique id of the feed"
+            id: String!,
+            "Opinion of the user"
+            status: Opinion!,
+        ): Feed
+
+        "A mutation to change a user's opinion about a feed"
+        submitComment(
+            "Unique id of the feed"
+            id: String!,
+            "Body of the comment"
+            body: String!,
+        ): Feed
+
     },
     "A type that describes the user."
     type User {
@@ -118,7 +156,7 @@ var schema = buildSchema(`
         "The attribute that contains the prefered water station"
         preferredWaterStation: WaterStation
         "The attribute that contains the pollen measure"
-        pollenThresholds: [PollenThreshold]   
+        pollenThresholds: [PollenThreshold]
     }
     "A type that describes the image."
     type Image {
@@ -240,6 +278,24 @@ var schema = buildSchema(`
         "Weather condition code (https://openweathermap.org/weather-conditions)"
         weathercode: Int!
     }
+    type Feed{
+      id: String!
+      title:  String!
+      author: String!
+      body:   String!
+      comments: [Comment]
+      "Date in UNIX milliseconds"
+      date: String!
+      pictures: [Image]
+      likes: Int!
+      dislikes:  Int!
+      status: Opinion
+    }
+    type Comment{
+      author: String,
+      body: String,
+      date: String
+    }
     enum Contaminant {
         NOx
         SO2
@@ -249,6 +305,10 @@ var schema = buildSchema(`
         PM10
         PM2_5
         SH2
+    }
+    enum Opinion{
+      LIKE
+      DISLIKE
     }
 
     scalar Upload
