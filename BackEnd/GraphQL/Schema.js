@@ -369,11 +369,6 @@ var schema = buildSchema(`
         ENABLED
         BANNED
     }
-    enum SettingKind{
-        WATER
-        AIR
-        POLLEN
-    }
 
     scalar Upload
 `);

@@ -4,8 +4,9 @@ const {
   MongoMemoryServer
 } = require('mongodb-memory-server');
 var clientModel = require('../../mongo/model/client'),
-  tokenModel = require('../../mongo/model/token'),
-  userModel = require('../../mongo/model/user');
+    tokenModel = require('../../mongo/model/token'),
+    userModel = require('../../mongo/model/user'),
+    settingModel = require('../../mongo/model/settings');
 var querystring = require('querystring');
 var db = require('../../db.js');
 const {
@@ -66,6 +67,12 @@ function loadExampleData() {
     redirectUris: []
   });
 
+    var settings = new settingModel({
+        _id: '5ebd8a20934189c057ef873c',
+        air: true,
+        water: true,
+        pollen: true
+    })
 
   client1.save(function(err, client) {
 
@@ -80,6 +87,15 @@ function loadExampleData() {
       return console.error(err);
     }
   });
+
+    settings.save(function (err, client) {
+
+        if (err) {
+            return console.error(err);
+        }
+    });
+
+    
 };
 
 // May require additional time for downloading MongoDB binaries
@@ -287,9 +303,12 @@ describe("Client", function() {
       endDate: "2020-09-05T00:00:00"
     };
 
-    graphQLClient.request(query, variables).then(function(res) {
+    graphQLClient.request(query, variables).then(function (res) {
       expect(res.retrievePollenMeasure.id).toBe("Quercus");
       done();
+    })
+    .catch((err) => {
+        console.log(err.response.errors);
     });
 
   });
@@ -362,7 +381,7 @@ describe("Client", function() {
 
   });
 
-  it("should be able to retrieve a all water stations", function(done) {
+  it("should be able to retrieve all water stations", function(done) {
     const graphQLClient = new GraphQLClient(endpoint, {
       headers: {
         authorization: `Bearer ${client_token}`,
