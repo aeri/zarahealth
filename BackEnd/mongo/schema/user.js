@@ -48,5 +48,10 @@ module.exports = {
     pollenThresholds: {
         type: [pollenMeasure],
         required: false
+    },
+    status: {
+        type: String,
+        required: true,
+        default: "ENABLED"
     }
 };

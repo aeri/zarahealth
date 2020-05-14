@@ -5,6 +5,8 @@ var pollenMeasureFunctions = require('./PollenMeasure');
 var airStationFunctions = require('./AirStation.js');
 var weatherFunctions = require('./Weather.js');
 var feedFunctions = require('./Feed.js');
+var adminFunctions = require('./Admin.js');
+var settingsFunctions = require('./Settings.js');
 
 var root = {
     retrieveUser: userFunctions.retrieveUser,
@@ -27,7 +29,16 @@ var root = {
     submitFeed: feedFunctions.submitFeed,
     retrieveFeeds: feedFunctions.retrieveFeeds,
     toggleFeedOpinion: feedFunctions.toggleFeedOpinion,
-    submitComment: feedFunctions.submitComment
+    submitComment: feedFunctions.submitComment,
+    uploadFeedImages: feedFunctions.uploadFeedImages,
+
+    retrieveUsers: adminFunctions.retrieveUsers,
+    updateUserStatus: adminFunctions.updateUserStatus,
+
+    retrieveSettings: settingsFunctions.retrieveSettings,
+    updateWaterStatus: settingsFunctions.updateWaterStatus,
+    updateAirStatus: settingsFunctions.updateAirStatus,
+    updatePollenStatus: settingsFunctions.updatePollenStatus
 };
 
 module.exports = root;

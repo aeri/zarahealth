@@ -58,6 +58,17 @@ var schema = buildSchema(`
           "Results per page (100 maximum)"
           limit: Int!
         ): [Feed]
+
+        "A query to retrieve all users"
+        retrieveUsers(
+          "Current page number"
+          page: Int!
+          "Results per page (100 maximum)"
+          limit: Int!
+        ): [User]
+
+        "A query to retrieve all settings"
+        retrieveSettings: [Settings]
     },
     type Mutation {
         "A mutation to register an User"
@@ -136,6 +147,42 @@ var schema = buildSchema(`
             body: String!,
         ): Feed
 
+        uploadFeedImages(
+            pictures: [Upload!]!
+        ): [Image]
+
+        "A mutation to change the user's status"
+        updateUserStatus(
+            "Unique User identifier to be retrieved"
+            username: String!,
+            "The status of the user account"
+            status: UserStatus!
+        ): User
+
+        "A mutation to change the settings water status"
+        updateWaterStatus(
+            "The id of the configuration"
+            id: String!,
+            "The status of the user account"
+            waterStatus: Boolean!
+        ): Settings
+
+        "A mutation to change the settings air status"
+        updateAirStatus(
+            "The id of the configuration"
+            id: String!,
+            "The status of the user account"
+            airStatus: Boolean!
+        ): Settings
+
+    "A mutation to change the settings pollen status"
+        updatePollenStatus(
+            "The id of the configuration"
+            id: String!,
+            "The status of the user account"
+            pollenStatus: Boolean!
+        ): Settings
+
     },
     "A type that describes the user."
     type User {
@@ -156,7 +203,9 @@ var schema = buildSchema(`
         "The attribute that contains the prefered water station"
         preferredWaterStation: WaterStation
         "The attribute that contains the pollen measure"
-        pollenThresholds: [PollenThreshold]
+        pollenThresholds: [PollenThreshold],
+        "The attribute that says the status of the user"
+        status: UserStatus
     }
     "A type that describes the image."
     type Image {
@@ -278,7 +327,7 @@ var schema = buildSchema(`
         "Weather condition code (https://openweathermap.org/weather-conditions)"
         weathercode: Int!
     }
-    type Feed{
+    type Feed {
       id: String!
       title:  String!
       author: String!
@@ -296,6 +345,12 @@ var schema = buildSchema(`
       body: String,
       date: String
     }
+    type Settings {
+        id: String!,
+        water: Boolean!,
+        pollen: Boolean!,
+        air: Boolean!
+    }
     enum Contaminant {
         NOx
         SO2
@@ -307,8 +362,17 @@ var schema = buildSchema(`
         SH2
     }
     enum Opinion{
-      LIKE
-      DISLIKE
+        LIKE
+        DISLIKE
+    }
+    enum UserStatus{
+        ENABLED
+        BANNED
+    }
+    enum SettingKind{
+        WATER
+        AIR
+        POLLEN
     }
 
     scalar Upload

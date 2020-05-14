@@ -155,7 +155,7 @@ var toggleFeedOpinion = async function({
 }
 
 
-submitComment = async function({
+var submitComment = async function({
   id,
   body
 }, context) {
@@ -191,9 +191,25 @@ submitComment = async function({
 
 }
 
+var uploadFeedImages = async function (upload, context) {
+    let { filename, mimetype, encoding, createReadStream } = await upload;
+    console.log(filename);
+    let stream = createReadStream();
+
+    var chunks = []
+    var result = await new Promise((resolve, reject) => {
+        stream.on('data', chunk => chunks.push(chunk))
+        stream.on('error', reject)
+        stream.on('end', () => resolve(Buffer.concat(chunks)))
+    })
+
+    return { filename, mimetype, encoding };
+}
+
 module.exports = {
-  submitFeed: submitFeed,
-  retrieveFeeds: retrieveFeeds,
-  toggleFeedOpinion: toggleFeedOpinion,
-  submitComment: submitComment
+    submitFeed: submitFeed,
+    retrieveFeeds: retrieveFeeds,
+    toggleFeedOpinion: toggleFeedOpinion,
+    submitComment: submitComment,
+    uploadFeedImages: uploadFeedImages
 };

@@ -4,6 +4,9 @@ var airStationModel = require('../mongo/model/airStation.js');
 var waterStationModel = require('../mongo/model/waterStation.js');
 var pollenMeasureModel = require('../mongo/model/pollenMeasure.js');
 var airThresholdModel = require('../mongo/model/airThreshold.js');
+var airFunction = require('./AirStation.js');
+var waterFunction = require('./WaterStation.js');
+var pollenFunction = require('./PollenMeasure.js');
 var logger = require('../logger.js');
 var AirAux = require('./AirAux');
 var _ = require('underscore');
@@ -201,30 +204,31 @@ var uploadUserImage = async function(image, context) {
 
 var updateUserAirStation = async function ({ idAirStation }, context) {
 
-  var usernamePetition = context.response.locals.user;
+    await airFunction.isAirAvailable();
+    var usernamePetition = context.response.locals.user;
 
-  //Requires User authentication
-  authentication(usernamePetition);
+    //Requires User authentication
+    authentication(usernamePetition);
 
-  var stationsData = await AirAux.retrieveStations();
+    var stationsData = await AirAux.retrieveStations();
     
-  var arina = _.where(stationsData, {
+    var arina = _.where(stationsData, {
     id: idAirStation
-  });
+    });
 
-  if (arina === undefined || arina.length == 0) {
-      throw new GraphQLError(`The AirStation ${idAirStation} was not found`, null, null, null, null, {
-          extensions: {
-              code: "NOT_FOUND",
-          }
-      });
-  }
+    if (arina === undefined || arina.length == 0) {
+        throw new GraphQLError(`The AirStation ${idAirStation} was not found`, null, null, null, null, {
+            extensions: {
+                code: "NOT_FOUND",
+            }
+        });
+    }
 
-  else{
+    else{
     var airModel = new airStationModel({
-      id: arina[0].id,
-      title: arina[0].title,
-      address: arina[0].address
+        id: arina[0].id,
+        title: arina[0].title,
+        address: arina[0].address
     });
 
     return new Promise((resolve, reject) => {
@@ -251,12 +255,14 @@ var updateUserAirStation = async function ({ idAirStation }, context) {
     });
 
 
-  }
+    }
 
 
 }
 
-var updateUserWaterStation = function ({ idWaterStation }, context) {
+var updateUserWaterStation = async function ({ idWaterStation }, context) {
+
+    await waterFunction.isWaterAvailable();
     var usernamePetition = context.response.locals.user;
 
     //Requires User authentication
@@ -317,6 +323,8 @@ var updateUserWaterStation = function ({ idWaterStation }, context) {
 }
 
 var updateUserPollenThreshold = async function ({ idPollenMeasure, pollenValue }, context) {
+
+    await pollenFunction.isPollenAvailable();
     var usernamePetition = context.response.locals.user;
 
     //Requires User authentication
@@ -386,6 +394,7 @@ var updateUserPollenThreshold = async function ({ idPollenMeasure, pollenValue }
 
 var updateUserAirThreshold = async function ({ idAirStation, airContaminant, airValue }, context) {
 
+    await airFunction.isAirAvailable();
     var usernamePetition = context.response.locals.user;
 
     //Requires User authentication
