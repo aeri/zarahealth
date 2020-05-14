@@ -431,7 +431,7 @@ var updateUserAirThreshold = async function ({ idAirStation, airContaminant, air
             { $push: { "preferredAirStation.thresholds": airModel } }, {
                 new: true
             })
-            .then((doc) => {
+            .then((doc) => {       
                 resolve(doc);
             })
             .catch((err) => {

@@ -4,6 +4,7 @@ const {
 const mongoosePaginate = require('mongoose-paginate-v2')
 var FeedModel = require('../mongo/model/feed.js');
 var ImageModel = require('../mongo/model/image.js');
+var logger = require('../logger.js');
 
 //Function to authenticate user
 function authentication(username) {
@@ -45,8 +46,11 @@ var submitFeed = function({
   });
 
   feed.save(function(err, doc) {
-    if (err) return console.error(err);
-    console.log("Feed inserted succussfully!");
+      if (err) {
+         logger.error(err);
+        return console.error(err);
+      }
+    logger.info("Feed inserted successfully!");
   });
 
   feed.likes = 0,
@@ -94,34 +98,58 @@ var toggleFeedOpinion = async function({
   status
 }, context) {
 
-  var usernamePetition = context.response.locals.user;
+    var usernamePetition = context.response.locals.user;
 
-  //User authentication
-  authentication(usernamePetition);
+    //User authentication
+    authentication(usernamePetition);
 
-  var metaId;
-  if (status == "LIKE"){
-    metaId = `meta.likes`;
-  }
-  else {
-    metaId = `meta.dislikes`;
-  }
+    var filter = {
+        _id: id
+    };
 
-  console.log(metaId)
+    var update = {
+        $pull: { 'meta.likes' : usernamePetition }
+    };
 
-  const filter = {
-    _id: id
-  };
-  const update = {
-    $push: { metaId : usernamePetition }
-  };
+    await FeedModel.findOneAndUpdate(filter, update);
 
-  // `doc` is the document _after_ `update` was applied because of
-  // `new: true`
-  let doc = await FeedModel.findOneAndUpdate(filter, update, {
-    new: true
-  });
+    update = {
+        $pull: { 'meta.dislikes': usernamePetition }
+    };
 
+    await FeedModel.findOneAndUpdate(filter, update);
+
+    if (status == "LIKE") {
+        update = {
+            $push: { 'meta.likes': usernamePetition }
+        };
+    }
+    else {
+        update = {
+            $push: { 'meta.dislikes': usernamePetition }
+        };
+    }
+
+    
+    
+    return new Promise((resolve, reject) => {
+        FeedModel.findOneAndUpdate(filter, update, {
+            new: true
+        }).then((doc) => {
+            doc.likes = doc.meta.likes.length;
+            doc.dislikes = doc.meta.dislikes.length;
+            doc.status = decodeStatus(doc.meta, usernamePetition);
+            resolve(doc);
+        })
+        .catch((err) => {
+            logger.error(err);
+            reject(new GraphQLError(`Can not update this field.`, null, null, null, null, {
+                extensions: {
+                    code: "UPDATE_FAILED",
+                }
+            }));
+        });
+    });
 
 
 }
@@ -160,9 +188,6 @@ submitComment = async function({
   doc.status = decodeStatus(doc.meta, usernamePetition);
 
   return doc;
-
-
-
 
 }
 
