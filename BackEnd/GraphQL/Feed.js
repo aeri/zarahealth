@@ -28,30 +28,61 @@ function decodeStatus(meta, user) {
 
 }
 
-var submitFeed = function({
+var submitFeed = async function({
   title,
   body,
   pictures
 }, context) {
 
-  var usernamePetition = context.response.locals.user;
+    var usernamePetition = context.response.locals.user;
 
-  //User authentication
-  authentication(usernamePetition);
+    //User authentication
+    authentication(usernamePetition);
 
-  var feed = new FeedModel({
-    title: title,
-    author: usernamePetition,
-    body: body
-  });
+    await pictures;
 
-  feed.save(function(err, doc) {
-      if (err) {
-         logger.error(err);
+    console.log(pictures);
+    console.log(title);
+    console.log(body);
+
+    var images = []
+
+    for (var i = 0; i < pictures.length; i++) {
+        const { filename, mimetype, encoding, createReadStream } = await pictures[i];
+        let stream = createReadStream();
+
+        var chunks = []
+        var result = await new Promise((resolve, reject) => {
+            stream.on('data', chunk => chunks.push(chunk))
+            stream.on('error', reject)
+            stream.on('end', () => resolve(Buffer.concat(chunks)))
+        });
+
+        var imageSave = new ImageModel({
+            data: result,
+            filename: filename,
+            mimetype: mimetype
+        });
+
+        images.push(imageSave);
+    }
+
+    var feed = new FeedModel({
+        title: title,
+        author: usernamePetition,
+        body: body,
+        pictures: images        
+    });
+
+    feed.save(function(err, doc) {
+        if (err) {
+            logger.error(err);
         return console.error(err);
-      }
+        }
     logger.info("Feed inserted successfully!");
-  });
+    });
+
+    
 
   feed.likes = 0,
   feed.dislikes = 0;
@@ -191,25 +222,9 @@ var submitComment = async function({
 
 }
 
-var uploadFeedImages = async function (upload, context) {
-    let { filename, mimetype, encoding, createReadStream } = await upload;
-    console.log(filename);
-    let stream = createReadStream();
-
-    var chunks = []
-    var result = await new Promise((resolve, reject) => {
-        stream.on('data', chunk => chunks.push(chunk))
-        stream.on('error', reject)
-        stream.on('end', () => resolve(Buffer.concat(chunks)))
-    })
-
-    return { filename, mimetype, encoding };
-}
-
 module.exports = {
     submitFeed: submitFeed,
     retrieveFeeds: retrieveFeeds,
     toggleFeedOpinion: toggleFeedOpinion,
-    submitComment: submitComment,
-    uploadFeedImages: uploadFeedImages
+    submitComment: submitComment
 };

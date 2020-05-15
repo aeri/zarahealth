@@ -30,7 +30,6 @@ var root = {
     retrieveFeeds: feedFunctions.retrieveFeeds,
     toggleFeedOpinion: feedFunctions.toggleFeedOpinion,
     submitComment: feedFunctions.submitComment,
-    uploadFeedImages: feedFunctions.uploadFeedImages,
 
     retrieveUsers: adminFunctions.retrieveUsers,
     updateUserStatus: adminFunctions.updateUserStatus,

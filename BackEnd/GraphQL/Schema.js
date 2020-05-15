@@ -1,7 +1,9 @@
-var { buildSchema } = require('graphql');
 
-// GraphQL schema
-var schema = buildSchema(`
+const { makeExecutableSchema } = require('graphql-tools')
+const { GraphQLUpload } = require('graphql-upload')
+
+const schema = makeExecutableSchema({
+    typeDefs: /* GraphQL */ `
     type Query {
          "A query to retrieve an existing User"
          retrieveUser(
@@ -128,7 +130,7 @@ var schema = buildSchema(`
         submitFeed(
             title: String!,
             body: String!,
-            pictures: [Upload]
+            pictures: [Upload!]!
         ): Feed
 
         "A mutation to change a user's opinion about a feed"
@@ -146,10 +148,6 @@ var schema = buildSchema(`
             "Body of the comment"
             body: String!,
         ): Feed
-
-        uploadFeedImages(
-            pictures: [Upload!]!
-        ): [Image]
 
         "A mutation to change the user's status"
         updateUserStatus(
@@ -371,6 +369,11 @@ var schema = buildSchema(`
     }
 
     scalar Upload
-`);
+`,
+    resolvers: {
+        Upload: GraphQLUpload
+    }
+})
+
 
 module.exports = schema;
