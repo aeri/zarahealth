@@ -1,13 +1,16 @@
-var { buildSchema } = require('graphql');
 
-// GraphQL schema
-var schema = buildSchema(`
+const { makeExecutableSchema } = require('graphql-tools')
+const { GraphQLUpload } = require('graphql-upload')
+
+const schema = makeExecutableSchema({
+    typeDefs: /* GraphQL */ `
     type Query {
          "A query to retrieve an existing User"
          retrieveUser(
            "Unique User identifier to be retrieved"
            username: String
          ): User
+
          "A query to retrieve the WaterStation specified along with the measurements recorded for the specified time interval (startDate - endDate)"
          retrieveWaterStation(
            "Beginning of the period of time to be observed"
@@ -17,8 +20,10 @@ var schema = buildSchema(`
            "Unique Water identifier to be retrieved"
            idWaterStation: Int!
          ): WaterStation
+
          "A query to retrieve all WaterStations in the network along with all the daily measurements recorded"
          retrieveAllWaterStations: [WaterStation]
+
          "A query to retrieve the AirStation specified along with the measurements recorded for the specified time interval (endDate - startDate)"
          retrieveAirStation(
            "Unique air station identifier to be retrieved"
@@ -28,10 +33,13 @@ var schema = buildSchema(`
            "End of the period of time to be observed"
            endDate: String!,
          ): AirStation
+
          "A query to retrieve all AirStations in the network along with all the daily measurements recorded"
          retrieveAllAirStations: [AirStation]
+
          "A query to reatrieve information about the actual weather in Zaragoza"
          retrieveWeather: Weather
+
          "A query to retrieve the PollenMeasure specified along with the measurements recorded for the specified time interval (startDate - endDate)"
          retrievePollenMeasure(
            "Beginning of the period of time to be observed"
@@ -41,8 +49,28 @@ var schema = buildSchema(`
            "Unique Water identifier to be retrieved"
            idPollenMeasure: String!,
          ): PollenMeasure
+
          "A query to retrieve all PollenMeasures in the network along with all the daily measurements recorded"
         retrieveAllPollenMeasures: [PollenMeasure]
+
+        "A query to retrieve all feeds"
+        retrieveFeeds(
+          "Current page number"
+          page: Int!
+          "Results per page (100 maximum)"
+          limit: Int!
+        ): [Feed]
+
+        "A query to retrieve all users"
+        retrieveUsers(
+          "Current page number"
+          page: Int!
+          "Results per page (100 maximum)"
+          limit: Int!
+        ): [User]
+
+        "A query to retrieve all settings"
+        retrieveSettings: [Settings]
     },
     type Mutation {
         "A mutation to register an User"
@@ -57,8 +85,9 @@ var schema = buildSchema(`
         password: String!
         ): User
 
-        "A mutation to upload an Image"
+        "A mutation to upload the user profile picture"
         uploadUserImage(
+        "Picture upload in a multipart upload request"
         image: Upload
         ): Image
 
@@ -67,6 +96,94 @@ var schema = buildSchema(`
             "Attribute csvDownloadEnabled"
             csvDownloadEnabled: Boolean!,
         ): User
+
+        "A mutation to update the attribute preferredAirStation of the User"
+        updateUserAirStation(
+            "Attribute idAirStation"
+            idAirStation: Int!,
+        ): User
+
+        "A mutation to update the attribute preferredWaterStation of the User"
+        updateUserWaterStation(
+            "Attribute idWaterStation"
+            idWaterStation: Int!,
+        ): User
+
+        "A mutation to update the attribute pollenThreshold of the User"
+        updateUserPollenThreshold(
+            "Attribute idPollenMeasure"
+            idPollenMeasure: String!,
+            "Threshold value for the pollen"
+            pollenValue: String!
+        ): User
+
+        "A mutation to update the attribute pollenThreshold of the User"
+        updateUserAirThreshold(
+            "Attribute idAirStation"
+            idAirStation: Int!,
+            "Type of contaminant for the air"
+            airContaminant: Contaminant!,
+            "Threshold value for the air value"
+            airValue: Float!
+        ): User
+
+        "A mutation to create a Feed"
+        submitFeed(
+            "Title of the feeed"
+            title: String!,
+            "Body text of the feed"
+            body: String!,
+            "Pictures upload of the feed in a multipart upload request"
+            pictures: [Upload!]
+        ): Feed
+
+        "A mutation to change a user's opinion about a feed"
+        toggleFeedOpinion(
+            "Unique id of the feed"
+            id: String!,
+            "Opinion of the user"
+            status: Opinion!,
+        ): Feed
+
+        "A mutation to change a user's opinion about a feed"
+        submitComment(
+            "Unique identifier of the feed"
+            id: String!,
+            "Body of the comment"
+            body: String!,
+        ): Feed
+
+        "A mutation to change the user's status"
+        updateUserStatus(
+            "Unique User identifier to be retrieved"
+            username: String!,
+            "The status of the user account"
+            status: UserStatus!
+        ): User
+
+        "A mutation to change the settings water status"
+        updateWaterStatus(
+            "The id of the configuration"
+            id: String!,
+            "The status of the user account"
+            waterStatus: Boolean!
+        ): Settings
+
+        "A mutation to change the settings air status"
+        updateAirStatus(
+            "The id of the configuration"
+            id: String!,
+            "The status of the user account"
+            airStatus: Boolean!
+        ): Settings
+
+    "A mutation to change the settings pollen status"
+        updatePollenStatus(
+            "The id of the configuration"
+            id: String!,
+            "The status of the user account"
+            pollenStatus: Boolean!
+        ): Settings
 
     },
     "A type that describes the user."
@@ -81,7 +198,16 @@ var schema = buildSchema(`
         isAdmin: Boolean!,
         "The attribute that says if the user wants to view de csv or not"
         csvDownloadEnabled: Boolean!,
-        image: Image!
+        "The attribute that contains the profile picture"
+        image: Image,
+        "The attribute that contains the prefered air station"
+        preferredAirStation: UserAirStation,
+        "The attribute that contains the prefered water station"
+        preferredWaterStation: WaterStation
+        "The attribute that contains the pollen measure"
+        pollenThresholds: [PollenThreshold],
+        "The attribute that says the status of the user"
+        status: UserStatus
     }
     "A type that describes the image."
     type Image {
@@ -101,18 +227,20 @@ var schema = buildSchema(`
       "Longitude"
       y: Float!
     }
+    "A type thath describes a water station"
     type WaterStation {
         "Unique water station identifier"
         id: Int!,
         "Name of the water station"
         title: String!,
         "Address of the water station"
-        address: String!,
+        address: String,
         "Location of the water station"
         geometry: Point,
         "Results of the water station"
         results: [WaterRecord]!
     }
+    "A type that describes a water record"
     type WaterRecord {
         "Id of the bulletin"
         id: String!,
@@ -137,7 +265,7 @@ var schema = buildSchema(`
     "A type that describes the components of an air record"
     type AirRecord {
       "Chemical substance measured in the environment"
-      contaminant: String!,
+      contaminant: Contaminant!,
       "Identifier of the station where the measurement was taken"
       station: Int!,
       "Date and time of measurement (ISO 8601)"
@@ -145,6 +273,25 @@ var schema = buildSchema(`
       "Value of measurement in micrograms per cubic meter (µg/m3)"
       value: Float!
     }
+    "A type that describes the components of an air station for a user"
+    type UserAirStation {
+        "Unique air station identifier"
+        id: Int!,
+        "Name of the air station"
+        title: String!,
+        "Address of the air station"
+        address: String!,
+        "Thresholds for the air station"
+        thresholds: [AirStationThresholds]
+    }
+    "A type that describes the components of an air station threshold"
+    type AirStationThresholds {
+      "Chemical substance measured in the environment"
+      contaminant: Contaminant!,
+      "Value of measurement in micrograms per cubic meter (µg/m3)"
+      value: Float!
+    }
+    "A type thath describes a pollen measure"
     type PollenMeasure {
         "Pollen substance measured in the environment"
         id: String!,
@@ -161,26 +308,109 @@ var schema = buildSchema(`
         "Observations for the pollen measure"
         observation: [PollenRecord]!
     }
+    "A type that describes a pollen record"
     type PollenRecord {
         "Date and time of measurement (ISO 8601)"
         publicationDate: String!,
         "The value for the pollen measure"
         value: String!,
     }
+    "A type that describes a pollen boundary"
+    type PollenThreshold {
+        "Pollen substance measured in the environment"
+        id: String!,
+        "The value for the pollen measure"
+        value: String!
+    }
+    "A type that describes the weather status"
     type Weather{
-      "Current temperature in degrees Celsius"
-      temp: Float!,
-      "Current humidity level in %"
-      humidity: Int,
-      "Current pressure level in hPa"
-      pressure: Int,
-      "Weather condition within the group"
-      description: String,
-      "Weather condition code (https://openweathermap.org/weather-conditions)"
-      weathercode: Int!
+        "Current temperature in degrees Celsius"
+        temp: Float!,
+        "Current humidity level in %"
+        humidity: Int,
+        "Current pressure level in hPa"
+        pressure: Int,
+        "Weather condition within the group"
+        description: String,
+        "Weather condition code (https://openweathermap.org/weather-conditions)"
+        weathercode: Int!
+    }
+    "A type that describes a feed commited by an user"
+    type Feed {
+      "Unique feed identifier"
+      id: String!
+      "Title of the feed"
+      title:  String!
+      "The username that commited the feed"
+      author: String!
+      "Body text of feed"
+      body:   String!
+      "Comments commited on this feed"
+      comments: [Comment]
+      "Date when feed was commited in UNIX milliseconds"
+      date: String!
+      "Pictures of the feed"
+      pictures: [Image]
+      "Number of users that liked the feed"
+      likes: Int!
+      "Number of users that does not liked the feed"
+      dislikes:  Int!
+      "Opinion about the feed from the user making the request"
+      status: Opinion
+    }
+    "A type that describes a comment commited by an user in a feed"
+    type Comment{
+      "The username that commited the comment"
+      author: String,
+      "Body text of the comment"
+      body: String,
+      "Date when comment was published in UNIX milliseconds"
+      date: String
+    }
+    "A type that describes the system status settings"
+    type Settings {
+        "Unique identifier of the setting"
+        id: String!,
+        "True if water is enabled to retrieve"
+        water: Boolean!,
+        "True if pollen is enabled to retrieve"
+        pollen: Boolean!,
+        "True if air data is enabled to retrieve"
+        air: Boolean!
+    }
+    enum Contaminant {
+        "Nitrogen oxides"
+        NOx
+        "Sulfur dioxide"
+        SO2
+        "Nitrogen dioxide"
+        NO2
+        "Carbon monoxide"
+        CO
+        "Ozone"
+        O3
+        "Particulate matter 10"
+        PM10
+        "Particulate matter 2.5"
+        PM2_5
+        "Hydrogen sulfide"
+        SH2
+    }
+    enum Opinion{
+        LIKE
+        DISLIKE
+    }
+    enum UserStatus{
+        ENABLED
+        BANNED
     }
 
     scalar Upload
-`);
+`,
+    resolvers: {
+        Upload: GraphQLUpload
+    }
+})
+
 
 module.exports = schema;

@@ -1,10 +1,32 @@
+var settingsModel = require('../mongo/model/settings.js');
 const fetch = require('node-fetch');
 const {
     GraphQLError
 } = require('graphql')
 
-var retrieveWaterStation = function ({ startDate, endDate, idWaterStation }, context) {
+//Function to check if water data is availabe
+function isWaterAvailable() {
+    
+    return settingsModel.findOne({
+        _id: '5ebd8a20934189c057ef873c'
+    })
+    .then(function (settings) {
+        if (!settings.water) {
+            throw new GraphQLError(`The Data Water is not available at the moment`, null, null, null, null, {
+                extensions: {
+                    code: "NOT_FOUND",
+                }
+            });
+        }
+        
+    });
+
+    
+}
+
+var retrieveWaterStation = async function ({ startDate, endDate, idWaterStation }, context) {
     const url = `https://www.zaragoza.es/sede/servicio/calidad-agua/${idWaterStation}.json?srsname=wgs84`;
+    await isWaterAvailable();
 
     return fetch(url)
         .then(res => res.json())
@@ -50,7 +72,8 @@ var retrieveWaterStation = function ({ startDate, endDate, idWaterStation }, con
 
 }
 
-var retrieveAllWaterStations = function (context) {
+var retrieveAllWaterStations = async function (context) {
+    await isWaterAvailable();
     const url = `https://www.zaragoza.es/sede/servicio/calidad-agua.json?srsname=wgs84`;
     return fetch(url)
         .then(res => res.json())
@@ -70,5 +93,6 @@ var retrieveAllWaterStations = function (context) {
 
 module.exports = {
     retrieveWaterStation: retrieveWaterStation,
-    retrieveAllWaterStations: retrieveAllWaterStations
+    retrieveAllWaterStations: retrieveAllWaterStations,
+    isWaterAvailable: isWaterAvailable
 };

@@ -1,10 +1,33 @@
 const fetch = require('node-fetch');
+var settingsModel = require('../mongo/model/settings.js');
 const {
     GraphQLError
 } = require('graphql')
 
-var retrievePollenMeasure = function ({ startDate, endDate, idPollenMeasure }, context) {
+//Function to check if pollen is availabe
+function isPollenAvailable() {
+
+    return settingsModel.findOne({
+        _id: '5ebd8a20934189c057ef873c'
+    })
+    .then(function (settings) {
+        if (!settings.pollen) {
+            throw new GraphQLError(`The Data Pollen is not available at the moment`, null, null, null, null, {
+                extensions: {
+                    code: "NOT_FOUND",
+                }
+            });
+        }
+
+    });
+
+
+}
+
+var retrievePollenMeasure = async function ({ startDate, endDate, idPollenMeasure }, context) {
     const url = `https://www.zaragoza.es/sede/servicio/informacion-polen/${idPollenMeasure}.json`;
+
+    await isPollenAvailable();
 
     return fetch(url)
         .then(res => res.json())
@@ -46,8 +69,11 @@ var retrievePollenMeasure = function ({ startDate, endDate, idPollenMeasure }, c
 
 }
 
-var retrieveAllPollenMeasures = function (context) {
+var retrieveAllPollenMeasures = async function (context) {
     const url = `https://www.zaragoza.es/sede/servicio/informacion-polen.json`;
+
+    await isPollenAvailable();
+
     return fetch(url)
         .then(res => res.json())
         .then(json => {
@@ -57,5 +83,6 @@ var retrieveAllPollenMeasures = function (context) {
 
 module.exports = {
     retrievePollenMeasure: retrievePollenMeasure,
-    retrieveAllPollenMeasures: retrieveAllPollenMeasures
+    retrieveAllPollenMeasures: retrieveAllPollenMeasures,
+    isPollenAvailable: isPollenAvailable
 };

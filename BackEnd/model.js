@@ -90,11 +90,12 @@ var getUser = function (username, password, callback) {
 		username: username,
 		password: password
 	}).lean().exec((function(callback, err, user) {
-
         if (!user) {
             logger.error(`User ${username} not found`);
-		}
-
+        }
+        else if (user.status == "BANNED") {
+            user = null;
+        }
 		callback(err, user);
 	}).bind(null, callback));
 };

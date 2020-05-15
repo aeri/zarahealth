@@ -1,3 +1,5 @@
+const NodeCache = require("node-cache");
+const myCache = new NodeCache();
 var gas = {
   "http://es.dbpedia.org/resource/%C3%93xidos_de_nitr%C3%B3geno": "NOx",
   "http://es.dbpedia.org/resource/Di%C3%B3xido_de_azufre": "SO2",
@@ -53,6 +55,11 @@ var searchGas = async function(pollutant) {
 
 var retrieveStations = async function() {
 
+
+  var data = myCache.get("airstations");
+
+  if (data == undefined) {
+
   const SparqlClient = require('sparql-http-client')
   const ParsingClient = require('sparql-http-client/ParsingClient')
 
@@ -88,7 +95,7 @@ var retrieveStations = async function() {
   const bindings = await client.query.select(query);
 
   // Mapping the result to a new cleaned JSON
-  var data = bindings.map(result => ({
+  data = bindings.map(result => ({
     id: getStation(result.uri.value),
     title: result.label.value,
     address: result.address.value,
@@ -98,7 +105,9 @@ var retrieveStations = async function() {
     }
   }))
 
+  myCache.set("airstations", data, 864000);
 
+}
 
   return data;
 

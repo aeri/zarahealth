@@ -1,7 +1,10 @@
+const mongoosePaginate = require('mongoose-paginate-v2');
 var mongoose = require('mongoose'),
-	modelName = 'user',
-	schemaDefinition = require('../schema/' + modelName),
-	schemaInstance = mongoose.Schema(schemaDefinition),
+    modelName = 'user',
+    schemaDefinition = require('../schema/' + modelName),
+    schemaInstance = mongoose.Schema(schemaDefinition);
+
+    schemaInstance.plugin(mongoosePaginate),
 	modelInstance = mongoose.model(modelName, schemaInstance);
 
 module.exports = modelInstance;
