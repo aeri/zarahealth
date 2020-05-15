@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="./styles/graphdoc.css" />
-    <title>__EnumValue</title>
+    <title>Feed</title>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet"><link type="text/css" rel="stylesheet" href="./assets/code.css" /><script src="./assets/line-link.js"></script><link type="text/css" rel="stylesheet" href="./assets/require-by.css" />
 </head>
 <body class="slds-scrollable--y">
@@ -120,7 +120,7 @@
                             Comment
                         </a>
                     </li>
-                    <li  title="Feed">
+                    <li class="slds-is-active" title="Feed">
                         <a href="feed.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                             Feed
                         </a>
@@ -185,7 +185,7 @@
                             __Directive
                         </a>
                     </li>
-                    <li class="slds-is-active" title="__EnumValue">
+                    <li  title="__EnumValue">
                         <a href="enumvalue.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                             __EnumValue
                         </a>
@@ -246,8 +246,8 @@
               </div>
               <div class="container">
                   <p class="slds-text-title--caps slds-text-color--weak">OBJECT</p>
-                  <h1 class="slds-text-heading--large">__EnumValue</h1>
-                  <div class="slds-text-body--regular"><p>One possible value for a given Enum. Enum values are unique values, not a placeholder for a string or numeric value. However an Enum value is returned in a JSON response as a string.</p>
+                  <h1 class="slds-text-heading--large">Feed</h1>
+                  <div class="slds-text-body--regular"><p>A type that describes a feed commited by an user</p>
 </div>
               </div>
           </section>
@@ -259,7 +259,7 @@
                       </a>
                       GraphQL Schema definition
                   </h2>
-                  <code class="highlight"><table class="code"><tbody><tr class="row"><td id="L1" class="td-index">1</td><td id="LC1" class="td-code"><span class="keyword operator ts">type</span> <span class="identifier">__EnumValue</span> {</td></tr><tr class="row"><td id="L2" class="td-index">2</td><td id="LC2" class="td-code"></td></tr><tr class="row"><td id="L3" class="td-index">3</td><td id="LC3" class="td-code"><span class="tab"><span class="meta">name</span>: <a class="support type" href="string.doc.html">String</a>! </span></td></tr><tr class="row"><td id="L4" class="td-index">4</td><td id="LC4" class="td-code"></td></tr><tr class="row"><td id="L5" class="td-index">5</td><td id="LC5" class="td-code"><span class="tab"><span class="meta">description</span>: <a class="support type" href="string.doc.html">String</a> </span></td></tr><tr class="row"><td id="L6" class="td-index">6</td><td id="LC6" class="td-code"></td></tr><tr class="row"><td id="L7" class="td-index">7</td><td id="LC7" class="td-code"><span class="tab"><span class="meta">isDeprecated</span>: <a class="support type" href="boolean.doc.html">Boolean</a>! </span></td></tr><tr class="row"><td id="L8" class="td-index">8</td><td id="LC8" class="td-code"></td></tr><tr class="row"><td id="L9" class="td-index">9</td><td id="LC9" class="td-code"><span class="tab"><span class="meta">deprecationReason</span>: <a class="support type" href="string.doc.html">String</a> </span></td></tr><tr class="row"><td id="L10" class="td-index">10</td><td id="LC10" class="td-code"></td></tr><tr class="row"><td id="L11" class="td-index">11</td><td id="LC11" class="td-code">}</td></tr></tbody></table></code>
+                  <code class="highlight"><table class="code"><tbody><tr class="row"><td id="L1" class="td-index">1</td><td id="LC1" class="td-code"><span class="keyword operator ts">type</span> <span class="identifier">Feed</span> {</td></tr><tr class="row"><td id="L2" class="td-index">2</td><td id="LC2" class="td-code"></td></tr><tr class="row"><td id="L3" class="td-index">3</td><td id="LC3" class="td-code"><span class="tab"><span class="comment line">#   Unique feed identifier</span></span></td></tr><tr class="row"><td id="L4" class="td-index">4</td><td id="LC4" class="td-code"><span class="tab"><span class="meta">id</span>: <a class="support type" href="string.doc.html">String</a>! </span></td></tr><tr class="row"><td id="L5" class="td-index">5</td><td id="LC5" class="td-code"></td></tr><tr class="row"><td id="L6" class="td-index">6</td><td id="LC6" class="td-code"><span class="tab"><span class="comment line">#   Title of the feed</span></span></td></tr><tr class="row"><td id="L7" class="td-index">7</td><td id="LC7" class="td-code"><span class="tab"><span class="meta">title</span>: <a class="support type" href="string.doc.html">String</a>! </span></td></tr><tr class="row"><td id="L8" class="td-index">8</td><td id="LC8" class="td-code"></td></tr><tr class="row"><td id="L9" class="td-index">9</td><td id="LC9" class="td-code"><span class="tab"><span class="comment line">#   The username that commited the feed</span></span></td></tr><tr class="row"><td id="L10" class="td-index">10</td><td id="LC10" class="td-code"><span class="tab"><span class="meta">author</span>: <a class="support type" href="string.doc.html">String</a>! </span></td></tr><tr class="row"><td id="L11" class="td-index">11</td><td id="LC11" class="td-code"></td></tr><tr class="row"><td id="L12" class="td-index">12</td><td id="LC12" class="td-code"><span class="tab"><span class="comment line">#   Body text of feed</span></span></td></tr><tr class="row"><td id="L13" class="td-index">13</td><td id="LC13" class="td-code"><span class="tab"><span class="meta">body</span>: <a class="support type" href="string.doc.html">String</a>! </span></td></tr><tr class="row"><td id="L14" class="td-index">14</td><td id="LC14" class="td-code"></td></tr><tr class="row"><td id="L15" class="td-index">15</td><td id="LC15" class="td-code"><span class="tab"><span class="comment line">#   Comments commited on this feed</span></span></td></tr><tr class="row"><td id="L16" class="td-index">16</td><td id="LC16" class="td-code"><span class="tab"><span class="meta">comments</span>: [<a class="support type" href="comment.doc.html">Comment</a>] </span></td></tr><tr class="row"><td id="L17" class="td-index">17</td><td id="LC17" class="td-code"></td></tr><tr class="row"><td id="L18" class="td-index">18</td><td id="LC18" class="td-code"><span class="tab"><span class="comment line">#   Date when feed was commited in UNIX milliseconds</span></span></td></tr><tr class="row"><td id="L19" class="td-index">19</td><td id="LC19" class="td-code"><span class="tab"><span class="meta">date</span>: <a class="support type" href="string.doc.html">String</a>! </span></td></tr><tr class="row"><td id="L20" class="td-index">20</td><td id="LC20" class="td-code"></td></tr><tr class="row"><td id="L21" class="td-index">21</td><td id="LC21" class="td-code"><span class="tab"><span class="comment line">#   Pictures of the feed</span></span></td></tr><tr class="row"><td id="L22" class="td-index">22</td><td id="LC22" class="td-code"><span class="tab"><span class="meta">pictures</span>: [<a class="support type" href="image.doc.html">Image</a>] </span></td></tr><tr class="row"><td id="L23" class="td-index">23</td><td id="LC23" class="td-code"></td></tr><tr class="row"><td id="L24" class="td-index">24</td><td id="LC24" class="td-code"><span class="tab"><span class="comment line">#   Number of users that liked the feed</span></span></td></tr><tr class="row"><td id="L25" class="td-index">25</td><td id="LC25" class="td-code"><span class="tab"><span class="meta">likes</span>: <a class="support type" href="int.doc.html">Int</a>! </span></td></tr><tr class="row"><td id="L26" class="td-index">26</td><td id="LC26" class="td-code"></td></tr><tr class="row"><td id="L27" class="td-index">27</td><td id="LC27" class="td-code"><span class="tab"><span class="comment line">#   Number of users that does not liked the feed</span></span></td></tr><tr class="row"><td id="L28" class="td-index">28</td><td id="LC28" class="td-code"><span class="tab"><span class="meta">dislikes</span>: <a class="support type" href="int.doc.html">Int</a>! </span></td></tr><tr class="row"><td id="L29" class="td-index">29</td><td id="LC29" class="td-code"></td></tr><tr class="row"><td id="L30" class="td-index">30</td><td id="LC30" class="td-code"><span class="tab"><span class="comment line">#   Opinion about the feed from the user making the request</span></span></td></tr><tr class="row"><td id="L31" class="td-index">31</td><td id="LC31" class="td-code"><span class="tab"><span class="meta">status</span>: <a class="support type" href="opinion.doc.html">Opinion</a> </span></td></tr><tr class="row"><td id="L32" class="td-index">32</td><td id="LC32" class="td-code"></td></tr><tr class="row"><td id="L33" class="td-index">33</td><td id="LC33" class="td-code">}</td></tr></tbody></table></code>
               </div>
           </section>
           <section>
@@ -270,11 +270,7 @@
                       </a>
                       Required by
                   </h2>
-                  <ul class="require-by"><li><a href="type.spec.html" title="__Type - The fundamental unit of any GraphQL Schema is the type. There are many kinds of types in GraphQL as represented by the `__TypeKind` enum.
-
-Depending on the kind of a type, certain fields describe information about that type. Scalar types provide no information beyond a name and description, while Enum types provide their values. Object and Interface types provide the fields they describe. Abstract types, Union and Interface, provide the Object types possible at runtime. List and NonNull types compose other types.">__Type<em>The fundamental unit of any GraphQL Schema is the type. There are many kinds of types in GraphQL as represented by the `__TypeKind` enum.
-
-Depending on the kind of a type, certain fields describe information about that type. Scalar types provide no information beyond a name and description, while Enum types provide their values. Object and Interface types provide the fields they describe. Abstract types, Union and Interface, provide the Object types possible at runtime. List and NonNull types compose other types.</em></a><li></ul>
+                  <ul class="require-by"><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em></em></a><li><li><a href="query.doc.html" title="Query - ">Query<em></em></a><li></ul>
               </div>
           </section>
           <footer>

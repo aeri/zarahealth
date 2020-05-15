@@ -85,8 +85,9 @@ const schema = makeExecutableSchema({
         password: String!
         ): User
 
-        "A mutation to upload an Image"
+        "A mutation to upload the user profile picture"
         uploadUserImage(
+        "Picture upload in a multipart upload request"
         image: Upload
         ): Image
 
@@ -128,9 +129,12 @@ const schema = makeExecutableSchema({
 
         "A mutation to create a Feed"
         submitFeed(
+            "Title of the feeed"
             title: String!,
+            "Body text of the feed"
             body: String!,
-            pictures: [Upload!]!
+            "Pictures upload of the feed in a multipart upload request"
+            pictures: [Upload!]
         ): Feed
 
         "A mutation to change a user's opinion about a feed"
@@ -143,7 +147,7 @@ const schema = makeExecutableSchema({
 
         "A mutation to change a user's opinion about a feed"
         submitComment(
-            "Unique id of the feed"
+            "Unique identifier of the feed"
             id: String!,
             "Body of the comment"
             body: String!,
@@ -223,6 +227,7 @@ const schema = makeExecutableSchema({
       "Longitude"
       y: Float!
     }
+    "A type thath describes a water station"
     type WaterStation {
         "Unique water station identifier"
         id: Int!,
@@ -235,6 +240,7 @@ const schema = makeExecutableSchema({
         "Results of the water station"
         results: [WaterRecord]!
     }
+    "A type that describes a water record"
     type WaterRecord {
         "Id of the bulletin"
         id: String!,
@@ -259,7 +265,7 @@ const schema = makeExecutableSchema({
     "A type that describes the components of an air record"
     type AirRecord {
       "Chemical substance measured in the environment"
-      contaminant: String!,
+      contaminant: Contaminant!,
       "Identifier of the station where the measurement was taken"
       station: Int!,
       "Date and time of measurement (ISO 8601)"
@@ -285,6 +291,7 @@ const schema = makeExecutableSchema({
       "Value of measurement in micrograms per cubic meter (µg/m3)"
       value: Float!
     }
+    "A type thath describes a pollen measure"
     type PollenMeasure {
         "Pollen substance measured in the environment"
         id: String!,
@@ -301,18 +308,21 @@ const schema = makeExecutableSchema({
         "Observations for the pollen measure"
         observation: [PollenRecord]!
     }
+    "A type that describes a pollen record"
     type PollenRecord {
         "Date and time of measurement (ISO 8601)"
         publicationDate: String!,
         "The value for the pollen measure"
         value: String!,
     }
+    "A type that describes a pollen boundary"
     type PollenThreshold {
         "Pollen substance measured in the environment"
         id: String!,
         "The value for the pollen measure"
         value: String!
     }
+    "A type that describes the weather status"
     type Weather{
         "Current temperature in degrees Celsius"
         temp: Float!,
@@ -325,38 +335,65 @@ const schema = makeExecutableSchema({
         "Weather condition code (https://openweathermap.org/weather-conditions)"
         weathercode: Int!
     }
+    "A type that describes a feed commited by an user"
     type Feed {
+      "Unique feed identifier"
       id: String!
+      "Title of the feed"
       title:  String!
+      "The username that commited the feed"
       author: String!
+      "Body text of feed"
       body:   String!
+      "Comments commited on this feed"
       comments: [Comment]
-      "Date in UNIX milliseconds"
+      "Date when feed was commited in UNIX milliseconds"
       date: String!
+      "Pictures of the feed"
       pictures: [Image]
+      "Number of users that liked the feed"
       likes: Int!
+      "Number of users that does not liked the feed"
       dislikes:  Int!
+      "Opinion about the feed from the user making the request"
       status: Opinion
     }
+    "A type that describes a comment commited by an user in a feed"
     type Comment{
+      "The username that commited the comment"
       author: String,
+      "Body text of the comment"
       body: String,
+      "Date when comment was published in UNIX milliseconds"
       date: String
     }
+    "A type that describes the system status settings"
     type Settings {
+        "Unique identifier of the setting"
         id: String!,
+        "True if water is enabled to retrieve"
         water: Boolean!,
+        "True if pollen is enabled to retrieve"
         pollen: Boolean!,
+        "True if air data is enabled to retrieve"
         air: Boolean!
     }
     enum Contaminant {
+        "Nitrogen oxides"
         NOx
+        "Sulfur dioxide"
         SO2
+        "Nitrogen dioxide"
         NO2
+        "Carbon monoxide"
         CO
+        "Ozone"
         O3
+        "Particulate matter 10"
         PM10
+        "Particulate matter 2.5"
         PM2_5
+        "Hydrogen sulfide"
         SH2
     }
     enum Opinion{

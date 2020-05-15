@@ -23,7 +23,7 @@ var sampleAir = [{
   "title": "Test",
   "address": "CPS",
   "records": [{
-    "contaminant": "10",
+    "contaminant": "O3",
     "value": 42.83,
     "station": 26,
     "date": "2020-05-08T18:00:00",
@@ -95,7 +95,7 @@ function loadExampleData() {
         }
     });
 
-    
+
 };
 
 // May require additional time for downloading MongoDB binaries

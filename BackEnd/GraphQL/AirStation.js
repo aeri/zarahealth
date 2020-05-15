@@ -81,7 +81,7 @@ function isAirAvailable() {
         if (!settings.air) {
             throw new GraphQLError(`The Data Air is not available at the moment`, null, null, null, null, {
                 extensions: {
-                    code: "NOT_FOUND",
+                    code: "UNAVAILABLE",
                 }
             });
         }
