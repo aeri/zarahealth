@@ -41,31 +41,29 @@ var submitFeed = async function({
 
     await pictures;
 
-    console.log(pictures);
-    console.log(title);
-    console.log(body);
-
     var images = []
 
-    for (var i = 0; i < pictures.length; i++) {
-        const { filename, mimetype, encoding, createReadStream } = await pictures[i];
-        let stream = createReadStream();
+    if (pictures) {
+        for (var i = 0; i < pictures.length; i++) {
+            const { filename, mimetype, encoding, createReadStream } = await pictures[i];
+            let stream = createReadStream();
 
-        var chunks = []
-        var result = await new Promise((resolve, reject) => {
-            stream.on('data', chunk => chunks.push(chunk))
-            stream.on('error', reject)
-            stream.on('end', () => resolve(Buffer.concat(chunks)))
-        });
+            var chunks = []
+            var result = await new Promise((resolve, reject) => {
+                stream.on('data', chunk => chunks.push(chunk))
+                stream.on('error', reject)
+                stream.on('end', () => resolve(Buffer.concat(chunks)))
+            });
 
-        var imageSave = new ImageModel({
-            data: result,
-            filename: filename,
-            mimetype: mimetype
-        });
+            var imageSave = new ImageModel({
+                data: result,
+                filename: filename,
+                mimetype: mimetype
+            });
 
-        images.push(imageSave);
-    }
+            images.push(imageSave);
+        }
+    } 
 
     var feed = new FeedModel({
         title: title,
