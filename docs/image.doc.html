@@ -100,6 +100,11 @@
             <div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
                 <h4 class="slds-text-title--caps slds-p-around--medium">Objects</h4>
                 <ul>
+                    <li  title="Activity">
+                        <a href="activity.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            Activity
+                        </a>
+                    </li>
                     <li  title="AirRecord">
                         <a href="airrecord.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                             AirRecord
@@ -128,6 +133,11 @@
                     <li class="slds-is-active" title="Image">
                         <a href="image.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                             Image
+                        </a>
+                    </li>
+                    <li  title="Metrics">
+                        <a href="metrics.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            Metrics
                         </a>
                     </li>
                     <li  title="Point">
@@ -259,7 +269,7 @@
                       </a>
                       GraphQL Schema definition
                   </h2>
-                  <code class="highlight"><table class="code"><tbody><tr class="row"><td id="L1" class="td-index">1</td><td id="LC1" class="td-code"><span class="keyword operator ts">type</span> <span class="identifier">Image</span> {</td></tr><tr class="row"><td id="L2" class="td-index">2</td><td id="LC2" class="td-code"></td></tr><tr class="row"><td id="L3" class="td-index">3</td><td id="LC3" class="td-code"><span class="tab"><span class="comment line">#   The image's base 64 data</span></span></td></tr><tr class="row"><td id="L4" class="td-index">4</td><td id="LC4" class="td-code"><span class="tab"><span class="meta">data</span>: <a class="support type" href="string.doc.html">String</a> </span></td></tr><tr class="row"><td id="L5" class="td-index">5</td><td id="LC5" class="td-code"></td></tr><tr class="row"><td id="L6" class="td-index">6</td><td id="LC6" class="td-code"><span class="tab"><span class="comment line">#   The image's filename</span></span></td></tr><tr class="row"><td id="L7" class="td-index">7</td><td id="LC7" class="td-code"><span class="tab"><span class="meta">filename</span>: <a class="support type" href="string.doc.html">String</a> </span></td></tr><tr class="row"><td id="L8" class="td-index">8</td><td id="LC8" class="td-code"></td></tr><tr class="row"><td id="L9" class="td-index">9</td><td id="LC9" class="td-code"><span class="tab"><span class="comment line">#   The image's mimetype</span></span></td></tr><tr class="row"><td id="L10" class="td-index">10</td><td id="LC10" class="td-code"><span class="tab"><span class="meta">mimetype</span>: <a class="support type" href="string.doc.html">String</a> </span></td></tr><tr class="row"><td id="L11" class="td-index">11</td><td id="LC11" class="td-code"></td></tr><tr class="row"><td id="L12" class="td-index">12</td><td id="LC12" class="td-code"><span class="tab"><span class="comment line">#   The image's encoding</span></span></td></tr><tr class="row"><td id="L13" class="td-index">13</td><td id="LC13" class="td-code"><span class="tab"><span class="meta">encoding</span>: <a class="support type" href="string.doc.html">String</a> </span></td></tr><tr class="row"><td id="L14" class="td-index">14</td><td id="LC14" class="td-code"></td></tr><tr class="row"><td id="L15" class="td-index">15</td><td id="LC15" class="td-code">}</td></tr></tbody></table></code>
+                  <code class="highlight"><table class="code"><tbody><tr class="row"><td id="L1" class="td-index">1</td><td id="LC1" class="td-code"><span class="keyword operator ts">type</span> <span class="identifier">Image</span> {</td></tr><tr class="row"><td id="L2" class="td-index">2</td><td id="LC2" class="td-code"></td></tr><tr class="row"><td id="L3" class="td-index">3</td><td id="LC3" class="td-code"><span class="tab"><span class="comment line">#   The image's base 64 data</span></span></td></tr><tr class="row"><td id="L4" class="td-index">4</td><td id="LC4" class="td-code"><span class="tab"><span class="meta">base64</span>: <a class="support type" href="string.doc.html">String</a> </span></td></tr><tr class="row"><td id="L5" class="td-index">5</td><td id="LC5" class="td-code"></td></tr><tr class="row"><td id="L6" class="td-index">6</td><td id="LC6" class="td-code"><span class="tab"><span class="comment line">#   The image's filename</span></span></td></tr><tr class="row"><td id="L7" class="td-index">7</td><td id="LC7" class="td-code"><span class="tab"><span class="meta">filename</span>: <a class="support type" href="string.doc.html">String</a> </span></td></tr><tr class="row"><td id="L8" class="td-index">8</td><td id="LC8" class="td-code"></td></tr><tr class="row"><td id="L9" class="td-index">9</td><td id="LC9" class="td-code"><span class="tab"><span class="comment line">#   The image's mimetype</span></span></td></tr><tr class="row"><td id="L10" class="td-index">10</td><td id="LC10" class="td-code"><span class="tab"><span class="meta">mimetype</span>: <a class="support type" href="string.doc.html">String</a> </span></td></tr><tr class="row"><td id="L11" class="td-index">11</td><td id="LC11" class="td-code"></td></tr><tr class="row"><td id="L12" class="td-index">12</td><td id="LC12" class="td-code"><span class="tab"><span class="comment line">#   The image's encoding</span></span></td></tr><tr class="row"><td id="L13" class="td-index">13</td><td id="LC13" class="td-code"><span class="tab"><span class="meta">encoding</span>: <a class="support type" href="string.doc.html">String</a> </span></td></tr><tr class="row"><td id="L14" class="td-index">14</td><td id="LC14" class="td-code"></td></tr><tr class="row"><td id="L15" class="td-index">15</td><td id="LC15" class="td-code">}</td></tr></tbody></table></code>
               </div>
           </section>
           <section>
