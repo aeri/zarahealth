@@ -9,6 +9,7 @@ const {
 const NodeCache = require("node-cache");
 const myCache = new NodeCache();
 var schedule = require('node-schedule');
+var tracker = require('../tracker.js');
 
 const endpointUrl = 'http://datos.zaragoza.es/sparql';
 
@@ -90,9 +91,11 @@ function isAirAvailable() {
 
 }
 
-var retrieveAllAirStations = async function (context) {
+var retrieveAllAirStations = async function ({}, context) {
 
     await isAirAvailable();
+
+    tracker.track("retrieveAllAirStations", context);
 
     var airport = myCache.get("airport");
 
@@ -159,6 +162,8 @@ var retrieveAirStation = async function({
 }, context) {
 
     await isAirAvailable();
+
+    tracker.track("retrieveAirStation", context);
 
     var since = startDate;
     var until = endDate;

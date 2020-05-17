@@ -61,7 +61,7 @@ const schema = makeExecutableSchema({
           limit: Int!
         ): [Feed]
 
-        "A query to retrieve all users"
+        "A query to retrieve all users (Admin only)"
         retrieveUsers(
           "Current page number"
           page: Int!
@@ -69,8 +69,11 @@ const schema = makeExecutableSchema({
           limit: Int!
         ): [User]
 
-        "A query to retrieve all settings"
+        "A query to retrieve all settings (Admin only)"
         retrieveSettings: [Settings]
+
+        "A query to retrieve API metrics (Admin only)"
+        retrieveMetrics: Metrics
     },
     type Mutation {
         "A mutation to register an User"
@@ -153,7 +156,7 @@ const schema = makeExecutableSchema({
             body: String!,
         ): Feed
 
-        "A mutation to change the user's status"
+        "A mutation to ban or unban an user (Admin only)"
         updateUserStatus(
             "Unique User identifier to be retrieved"
             username: String!,
@@ -212,7 +215,7 @@ const schema = makeExecutableSchema({
     "A type that describes the image."
     type Image {
         "The image's base 64 data"
-        data: String
+        base64: String
         "The image's filename"
         filename: String,
         "The image's mimetype"
@@ -378,6 +381,24 @@ const schema = makeExecutableSchema({
         "True if air data is enabled to retrieve"
         air: Boolean!
     }
+    "A type that describes the data metrics of the system"
+    type Metrics{
+      "Total number of users registered in the system"
+      users: Int!,
+      "Total number of users whose token has not expired"
+      activeUsers: Int!,
+      "Total number of feeds registered in the system"
+      feeds: Int!,
+      "List of activities tracked"
+      activities: [Activity]
+    }
+    "A type that describes a summary of user activities"
+    type Activity{
+      "Name of the activity tracked"
+      type: String!,
+      "Number of access to the activity"
+      count: Int!
+    }
     enum Contaminant {
         "Nitrogen oxides"
         NOx
@@ -401,7 +422,9 @@ const schema = makeExecutableSchema({
         DISLIKE
     }
     enum UserStatus{
+        "The user is enabled to retrieve access_tokens"
         ENABLED
+        "The user is banned to retrieve access_tokens"
         BANNED
     }
 

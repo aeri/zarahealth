@@ -11,6 +11,7 @@ var logger = require('../logger.js');
 var AirAux = require('./AirAux');
 var _ = require('underscore');
 const fetch = require('node-fetch');
+var tracker = require('../tracker.js');
 
 const {
   GraphQLError
@@ -39,6 +40,8 @@ var retrieveUser = function({
 
   //User authentication
   authentication(usernamePetition);
+
+  tracker.track("retrieveUser", context);
 
   return UserModel.findOne({
     username: usernamePetition
@@ -80,6 +83,9 @@ var createUser = function({
   email,
   password
 }, context) {
+
+  tracker.track("createUser", context);
+
   // Hashing the password
   const hash = new SHA3(512);
   hash.update(password);
@@ -154,7 +160,7 @@ var uploadUserImage = async function(image, context) {
     mimetype,
     encoding,
     createReadStream
-  } = await image.image.file;
+  } = await image;
   const stream = createReadStream();
 
   const chunks = []
@@ -211,7 +217,7 @@ var updateUserAirStation = async function ({ idAirStation }, context) {
     authentication(usernamePetition);
 
     var stationsData = await AirAux.retrieveStations();
-    
+
     var arina = _.where(stationsData, {
     id: idAirStation
     });
@@ -440,7 +446,7 @@ var updateUserAirThreshold = async function ({ idAirStation, airContaminant, air
             { $push: { "preferredAirStation.thresholds": airModel } }, {
                 new: true
             })
-            .then((doc) => {       
+            .then((doc) => {
                 resolve(doc);
             })
             .catch((err) => {

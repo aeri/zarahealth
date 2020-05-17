@@ -53,5 +53,9 @@ module.exports = {
         type: String,
         required: true,
         default: "ENABLED"
+    },
+    created:{
+        type: Date,
+        default: Date.now
     }
 };
