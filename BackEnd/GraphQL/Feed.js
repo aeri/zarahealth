@@ -188,7 +188,6 @@ var toggleFeedOpinion = async function ({
             doc.likes = doc.meta.likes.length;
             doc.dislikes = doc.meta.dislikes.length;
             doc.status = decodeStatus(doc.meta, usernamePetition);
-            console.log(doc);
             resolve(doc);
         })
             .catch((err) => {
@@ -242,7 +241,6 @@ var submitComment = async function ({
     doc.dislikes = doc.meta.dislikes.length,
     doc.status = decodeStatus(doc.meta, usernamePetition);
     
-    console.log(doc);
     return doc;
 
 }

@@ -376,7 +376,6 @@ var updateUserPollenThreshold = async function ({ idPollenMeasure, pollenValue }
                             new: true
                         })
                         .then((doc) => {
-                            console.log(doc);
                             resolve(doc);
                         })
                         .catch((err) => {
