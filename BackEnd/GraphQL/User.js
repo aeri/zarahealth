@@ -133,8 +133,8 @@ var updateCsvDownloadEnabled = function({
       }, {
         new: true
       })
-      .then((doc) => {
-        resolve(doc);
+        .then((doc) => {  
+            resolve(doc);
       })
       .catch((err) => {
         logger.error(err);
@@ -160,7 +160,8 @@ var uploadUserImage = async function(image, context) {
     mimetype,
     encoding,
     createReadStream
-  } = await image;
+   } = await image.image;
+    console.log(image);
   const stream = createReadStream();
 
   const chunks = []
