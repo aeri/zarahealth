@@ -44,7 +44,7 @@ function DataSummary() {
             <Box m={1}>
                 <Button variant="contained" size="large"
                         classes={{root: classes.button}} style={{backgroundColor: statusColors[polen.status]}}
-                        onClick={() => history.replace("/pollen/map")}>
+                        onClick={() => history.replace("/pollen/info")}>
                     <Grid container spacing={0} direction="row"
                           justify="center"
                           alignItems="center">
@@ -67,7 +67,7 @@ function DataSummary() {
             <Box m={1}>
                 <Button variant="contained" size="large"
                         classes={{root: classes.button}} style={{backgroundColor: statusColors[agua.status]}}
-                        onClick={() => history.replace("/water/map")}>
+                        onClick={() => history.replace("/water/info")}>
                     <Grid container spacing={0} direction="row"
                           justify="center"
                           alignItems="center">
@@ -89,7 +89,7 @@ function DataSummary() {
             <Box m={1}>
                 <Button variant="contained" size="large"
                         classes={{root: classes.button}} style={{backgroundColor: statusColors[aire.status]}}
-                        onClick={() => history.replace("/air/map")}>
+                        onClick={() => history.replace("/air/info")}>
                     <Grid container spacing={0} direction="row"
                           justify="center"
                           alignItems="center">

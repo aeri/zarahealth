@@ -107,8 +107,8 @@ function ZaraHealthDrawer(props) {
             <ListItem
               button
               key="Polen"
-              onClick={() => history.replace("/pollen/map")}
-              selected={location.pathname === "/pollen/map"}
+              onClick={() => history.replace("/pollen/info")}
+              selected={location.pathname === "/pollen/info"}
             >
               <ListItemIcon>
                 <LocalFloristIcon />
@@ -118,8 +118,8 @@ function ZaraHealthDrawer(props) {
             <ListItem
               button
               key="Agua"
-              onClick={() => history.replace("/water/map")}
-              selected={location.pathname === "/water/map"}
+              onClick={() => history.replace("/water/info")}
+              selected={location.pathname === "/water/info"}
             >
               <ListItemIcon>
                 <OpacityIcon />
@@ -129,8 +129,8 @@ function ZaraHealthDrawer(props) {
             <ListItem
               button
               key="Aire"
-              onClick={() => history.replace("/air/map")}
-              selected={location.pathname === "/air/map"}
+              onClick={() => history.replace("/air/info")}
+              selected={location.pathname === "/air/info"}
             >
               <ListItemIcon>
                 <CloudIcon />
