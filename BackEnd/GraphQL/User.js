@@ -133,7 +133,7 @@ var updateCsvDownloadEnabled = function({
       }, {
         new: true
       })
-        .then((doc) => {  
+        .then((doc) => {
             resolve(doc);
       })
       .catch((err) => {
@@ -462,6 +462,42 @@ var updateUserAirThreshold = async function ({ idAirStation, airContaminant, air
 
 }
 
+var updateUser = function(data, context) {
+
+  var usernamePetition = context.response.locals.user;
+
+  //Requires User authentication
+  authentication(usernamePetition);
+
+  tracker.track("updateUser", context);
+  // Selecting only NOT NULL elements
+  var clean = _.pick( data, _.identity);
+
+  if (clean.password) {
+    // Hashing the password
+    const hash = new SHA3(512);
+    hash.update(clean.password);
+    clean.password = hash.digest('hex');
+  }
+
+  const filter = {
+    username: usernamePetition,
+    social: 'None'
+  };
+  const update = clean;
+
+  // `doc` is the document _before_ `update` was applied
+  return UserModel.findOneAndUpdate(filter, update, {
+    new: true
+  }).orFail(() => new GraphQLError(`This operation is not enabled for Google users`
+    , null, null, null, null, {
+    extensions: {
+      code: "BAD_REQUEST",
+    }
+  }));
+
+  }
+
 module.exports = {
     retrieveUser: retrieveUser,
     createUser: createUser,
@@ -470,5 +506,6 @@ module.exports = {
     updateUserAirStation: updateUserAirStation,
     updateUserWaterStation: updateUserWaterStation,
     updateUserPollenThreshold: updateUserPollenThreshold,
-    updateUserAirThreshold: updateUserAirThreshold
+    updateUserAirThreshold: updateUserAirThreshold,
+    updateUser: updateUser
 };

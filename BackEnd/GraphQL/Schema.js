@@ -88,6 +88,16 @@ const schema = makeExecutableSchema({
         password: String!
         ): User
 
+        "A mutation to update User data (Only internal user)"
+        updateUser(
+        "The new name of the User"
+        name: String
+        "The new password of the User"
+        password: String
+        "The new email of the User"
+        email: String
+        ): User
+
         "A mutation to upload the user profile picture"
         uploadUserImage(
         "Picture upload in a multipart upload request"
