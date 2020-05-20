@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="./styles/graphdoc.css" />
-    <title>Contaminant</title>
+    <title>Metrics</title>
     <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet"><link type="text/css" rel="stylesheet" href="./assets/code.css" /><script src="./assets/line-link.js"></script><link type="text/css" rel="stylesheet" href="./assets/require-by.css" />
 </head>
 <body class="slds-scrollable--y">
@@ -70,7 +70,7 @@
             <div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
                 <h4 class="slds-text-title--caps slds-p-around--medium">Enums</h4>
                 <ul>
-                    <li class="slds-is-active" title="Contaminant">
+                    <li  title="Contaminant">
                         <a href="contaminant.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                             Contaminant
                         </a>
@@ -135,7 +135,7 @@
                             Image
                         </a>
                     </li>
-                    <li  title="Metrics">
+                    <li class="slds-is-active" title="Metrics">
                         <a href="metrics.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                             Metrics
                         </a>
@@ -255,9 +255,10 @@
                   </div>
               </div>
               <div class="container">
-                  <p class="slds-text-title--caps slds-text-color--weak">ENUM</p>
-                  <h1 class="slds-text-heading--large">Contaminant</h1>
-                  <div class="slds-text-body--regular"></div>
+                  <p class="slds-text-title--caps slds-text-color--weak">OBJECT</p>
+                  <h1 class="slds-text-heading--large">Metrics</h1>
+                  <div class="slds-text-body--regular"><p>A type that describes the data metrics of the system</p>
+</div>
               </div>
           </section>
           <section>
@@ -268,7 +269,7 @@
                       </a>
                       GraphQL Schema definition
                   </h2>
-                  <code class="highlight"><table class="code"><tbody><tr class="row"><td id="L1" class="td-index">1</td><td id="LC1" class="td-code"><span class="keyword operator ts">enum</span> <span class="identifier">Contaminant</span> {</td></tr><tr class="row"><td id="L2" class="td-index">2</td><td id="LC2" class="td-code"><span class="tab"></span></td></tr><tr class="row"><td id="L3" class="td-index">3</td><td id="LC3" class="td-code"><span class="tab"><span class="comment line">#   Nitrogen oxides</span></span></td></tr><tr class="row"><td id="L4" class="td-index">4</td><td id="LC4" class="td-code"><span class="tab"><span class="meta">NOx</span></span></td></tr><tr class="row"><td id="L5" class="td-index">5</td><td id="LC5" class="td-code"><span class="tab"></span></td></tr><tr class="row"><td id="L6" class="td-index">6</td><td id="LC6" class="td-code"><span class="tab"><span class="comment line">#   Sulfur dioxide</span></span></td></tr><tr class="row"><td id="L7" class="td-index">7</td><td id="LC7" class="td-code"><span class="tab"><span class="meta">SO2</span></span></td></tr><tr class="row"><td id="L8" class="td-index">8</td><td id="LC8" class="td-code"><span class="tab"></span></td></tr><tr class="row"><td id="L9" class="td-index">9</td><td id="LC9" class="td-code"><span class="tab"><span class="comment line">#   Nitrogen dioxide</span></span></td></tr><tr class="row"><td id="L10" class="td-index">10</td><td id="LC10" class="td-code"><span class="tab"><span class="meta">NO2</span></span></td></tr><tr class="row"><td id="L11" class="td-index">11</td><td id="LC11" class="td-code"><span class="tab"></span></td></tr><tr class="row"><td id="L12" class="td-index">12</td><td id="LC12" class="td-code"><span class="tab"><span class="comment line">#   Carbon monoxide</span></span></td></tr><tr class="row"><td id="L13" class="td-index">13</td><td id="LC13" class="td-code"><span class="tab"><span class="meta">CO</span></span></td></tr><tr class="row"><td id="L14" class="td-index">14</td><td id="LC14" class="td-code"><span class="tab"></span></td></tr><tr class="row"><td id="L15" class="td-index">15</td><td id="LC15" class="td-code"><span class="tab"><span class="comment line">#   Ozone</span></span></td></tr><tr class="row"><td id="L16" class="td-index">16</td><td id="LC16" class="td-code"><span class="tab"><span class="meta">O3</span></span></td></tr><tr class="row"><td id="L17" class="td-index">17</td><td id="LC17" class="td-code"><span class="tab"></span></td></tr><tr class="row"><td id="L18" class="td-index">18</td><td id="LC18" class="td-code"><span class="tab"><span class="comment line">#   Particulate matter 10</span></span></td></tr><tr class="row"><td id="L19" class="td-index">19</td><td id="LC19" class="td-code"><span class="tab"><span class="meta">PM10</span></span></td></tr><tr class="row"><td id="L20" class="td-index">20</td><td id="LC20" class="td-code"><span class="tab"></span></td></tr><tr class="row"><td id="L21" class="td-index">21</td><td id="LC21" class="td-code"><span class="tab"><span class="comment line">#   Particulate matter 2.5</span></span></td></tr><tr class="row"><td id="L22" class="td-index">22</td><td id="LC22" class="td-code"><span class="tab"><span class="meta">PM2_5</span></span></td></tr><tr class="row"><td id="L23" class="td-index">23</td><td id="LC23" class="td-code"><span class="tab"></span></td></tr><tr class="row"><td id="L24" class="td-index">24</td><td id="LC24" class="td-code"><span class="tab"><span class="comment line">#   Hydrogen sulfide</span></span></td></tr><tr class="row"><td id="L25" class="td-index">25</td><td id="LC25" class="td-code"><span class="tab"><span class="meta">SH2</span></span></td></tr><tr class="row"><td id="L26" class="td-index">26</td><td id="LC26" class="td-code">}</td></tr></tbody></table></code>
+                  <code class="highlight"><table class="code"><tbody><tr class="row"><td id="L1" class="td-index">1</td><td id="LC1" class="td-code"><span class="keyword operator ts">type</span> <span class="identifier">Metrics</span> {</td></tr><tr class="row"><td id="L2" class="td-index">2</td><td id="LC2" class="td-code"></td></tr><tr class="row"><td id="L3" class="td-index">3</td><td id="LC3" class="td-code"><span class="tab"><span class="comment line">#   Total number of users registered in the system</span></span></td></tr><tr class="row"><td id="L4" class="td-index">4</td><td id="LC4" class="td-code"><span class="tab"><span class="meta">users</span>: <a class="support type" href="int.doc.html">Int</a>! </span></td></tr><tr class="row"><td id="L5" class="td-index">5</td><td id="LC5" class="td-code"></td></tr><tr class="row"><td id="L6" class="td-index">6</td><td id="LC6" class="td-code"><span class="tab"><span class="comment line">#   Total number of users whose token has not expired</span></span></td></tr><tr class="row"><td id="L7" class="td-index">7</td><td id="LC7" class="td-code"><span class="tab"><span class="meta">activeUsers</span>: <a class="support type" href="int.doc.html">Int</a>! </span></td></tr><tr class="row"><td id="L8" class="td-index">8</td><td id="LC8" class="td-code"></td></tr><tr class="row"><td id="L9" class="td-index">9</td><td id="LC9" class="td-code"><span class="tab"><span class="comment line">#   Total number of feeds registered in the system</span></span></td></tr><tr class="row"><td id="L10" class="td-index">10</td><td id="LC10" class="td-code"><span class="tab"><span class="meta">feeds</span>: <a class="support type" href="int.doc.html">Int</a>! </span></td></tr><tr class="row"><td id="L11" class="td-index">11</td><td id="LC11" class="td-code"></td></tr><tr class="row"><td id="L12" class="td-index">12</td><td id="LC12" class="td-code"><span class="tab"><span class="comment line">#   List of activities tracked</span></span></td></tr><tr class="row"><td id="L13" class="td-index">13</td><td id="LC13" class="td-code"><span class="tab"><span class="meta">activities</span>: [<a class="support type" href="activity.doc.html">Activity</a>] </span></td></tr><tr class="row"><td id="L14" class="td-index">14</td><td id="LC14" class="td-code"></td></tr><tr class="row"><td id="L15" class="td-index">15</td><td id="LC15" class="td-code">}</td></tr></tbody></table></code>
               </div>
           </section>
           <section>
@@ -279,7 +280,7 @@
                       </a>
                       Required by
                   </h2>
-                  <ul class="require-by"><li><a href="airrecord.doc.html" title="AirRecord - A type that describes the components of an air record">AirRecord<em>A type that describes the components of an air record</em></a><li><li><a href="airstationthresholds.doc.html" title="AirStationThresholds - A type that describes the components of an air station threshold">AirStationThresholds<em>A type that describes the components of an air station threshold</em></a><li><li><a href="mutation.doc.html" title="Mutation - ">Mutation<em></em></a><li></ul>
+                  <ul class="require-by"><li><a href="query.doc.html" title="Query - ">Query<em></em></a><li></ul>
               </div>
           </section>
           <footer>

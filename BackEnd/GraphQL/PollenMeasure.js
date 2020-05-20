@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 var settingsModel = require('../mongo/model/settings.js');
+var tracker = require('../tracker.js');
 const {
     GraphQLError
 } = require('graphql')
@@ -14,7 +15,7 @@ function isPollenAvailable() {
         if (!settings.pollen) {
             throw new GraphQLError(`The Data Pollen is not available at the moment`, null, null, null, null, {
                 extensions: {
-                    code: "NOT_FOUND",
+                    code: "UNAVAILABLE",
                 }
             });
         }
@@ -28,6 +29,8 @@ var retrievePollenMeasure = async function ({ startDate, endDate, idPollenMeasur
     const url = `https://www.zaragoza.es/sede/servicio/informacion-polen/${idPollenMeasure}.json`;
 
     await isPollenAvailable();
+
+    tracker.track("retrievePollenMeasure", context);
 
     return fetch(url)
         .then(res => res.json())
@@ -69,10 +72,12 @@ var retrievePollenMeasure = async function ({ startDate, endDate, idPollenMeasur
 
 }
 
-var retrieveAllPollenMeasures = async function (context) {
+var retrieveAllPollenMeasures = async function ({}, context) {
     const url = `https://www.zaragoza.es/sede/servicio/informacion-polen.json`;
 
     await isPollenAvailable();
+
+    tracker.track("retrieveAllPollenMeasures", context);
 
     return fetch(url)
         .then(res => res.json())
