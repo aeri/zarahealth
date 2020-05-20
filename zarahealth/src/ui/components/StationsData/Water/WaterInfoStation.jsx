@@ -11,10 +11,9 @@ import WifiIcon from "@material-ui/icons/Wifi";
 import WaterCard from "./WaterCard";
 import {Box} from "@material-ui/core";
 import List from "@material-ui/core/List";
-
 import {Query} from "@apollo/react-components";
 import gql from "graphql-tag";
-import PollenCard from "../Pollen/PollenCard";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const GET_WATER_STATION = gql`
   {
@@ -71,6 +70,10 @@ const ExpansionPanelDetails = withStyles((theme) => ({
     },
 }))(MuiExpansionPanelDetails);
 
+const styles = {
+    marginBottom: 70
+};
+
 export default function WaterInfoStation() {
     const [expanded, setExpanded] = React.useState("panel0");
 
@@ -104,14 +107,23 @@ export default function WaterInfoStation() {
   }
 
     return (
+        <div style={styles}>
         <Query query={GET_WATER_STATION}>
             {({data, loading, error}) => {
                 if (loading) {
-                    return <h1>Loading...</h1>;
+                    return(
+                        <div style={{ position: "absolute",
+                            top: "15%",
+                            left: "45%",
+                            width: "100%",
+                        }}>
+                            <CircularProgress color="secondary"/>
+                        </div>
+                    );
                 }
 
                 if (error) {
-                    return <h1>Error: {JSON.stringify(error)}</h1>;
+                    return <h2 style={{color:"white"}}>Error: {JSON.stringify(error)}</h2>;
                 }
                 if (data) {
                     let stations = data.retrieveAllWaterStations.sort((a, b) => a.title.localeCompare(b.title))
@@ -220,5 +232,6 @@ export default function WaterInfoStation() {
                 }
             }}
         </Query>
+        </div>
     );
 }
