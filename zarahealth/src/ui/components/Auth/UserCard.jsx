@@ -46,6 +46,7 @@ function UserCard(props) {
             </div>
           );
         } else {
+          props.handleClose();
           return (
             <CardHeader
               avatar={

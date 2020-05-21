@@ -74,6 +74,7 @@ function ZaraHealthDrawer(props) {
           <Divider />
           <UserCard
             handleClickOpen={handleClickOpen}
+            handleClose={handleClose}
             mobileOpen={props.mobileOpen}
             handleDrawerToggle={props.handleDrawerToggle}
           />

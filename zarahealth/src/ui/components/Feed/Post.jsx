@@ -12,6 +12,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import { DateTime } from 'luxon';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,9 +41,9 @@ export default function Post({post}) {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
-    };
+    // const handleExpandClick = () => {
+    //     setExpanded(!expanded);
+    // };
 
     return (
         <Card className={classes.root}>
@@ -57,12 +58,12 @@ export default function Post({post}) {
                         <MoreVertIcon />
                     </IconButton>
                 }
-                title={post.name}
-                subheader={post.date}
+                title={post.author}
+                subheader={DateTime.fromMillis(post.date * 1).toFormat("dd/LL/yyyy HH:mm")}
             />
             <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    {post.message}
+                    {post.body}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>

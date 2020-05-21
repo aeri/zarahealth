@@ -136,7 +136,7 @@ export default function AirStatisticsStations() {
                 }
 
                 timestamps = timestamps.map((timestamp) =>
-                  DateTime.fromISO(timestamp).toFormat("HH:ss")
+                  DateTime.fromISO(timestamp).toFormat("HH:mm")
                 );
 
                 const lastUpdate = station.records.reduce(function (
