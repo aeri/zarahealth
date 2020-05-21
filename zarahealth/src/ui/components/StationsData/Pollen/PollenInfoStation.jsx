@@ -3,11 +3,8 @@ import {withStyles} from "@material-ui/core/styles";
 import MuiExpansionPanel from "@material-ui/core/ExpansionPanel";
 import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import Typography from "@material-ui/core/Typography";
 import zaraHealthTheme from "../../../theme";
-import ApartmentIcon from "@material-ui/icons/Apartment";
 import Grid from "@material-ui/core/Grid";
-import WifiIcon from "@material-ui/icons/Wifi";
 import PollenCard from "./PollenCard";
 import {Box, CircularProgress} from "@material-ui/core";
 import List from "@material-ui/core/List";
@@ -75,6 +72,10 @@ const ExpansionPanelDetails = withStyles((theme) => ({
     },
 }))(MuiExpansionPanelDetails);
 
+const styles = {
+    marginBottom: 70
+};
+
 export default function PollenInfoSatation() {
     const [expanded, setExpanded] = React.useState("panel0");
 
@@ -97,15 +98,23 @@ export default function PollenInfoSatation() {
 
     return (
         <Box m={2}>
-        <div>
+            <div style={styles}>
             <Query query={GET_POLLEN_STATION}>
                 {({data, loading, error}) => {
                     if (loading) {
-                        return <h1>Loading...</h1>;
+                        return(
+                            <div style={{ position: "absolute",
+                                top: "15%",
+                                left: "45%",
+                                width: "100%",
+                            }}>
+                                <CircularProgress color="secondary"/>
+                            </div>
+                        );
                     }
 
                     if (error) {
-                        return <h1>Error: {JSON.stringify(error)}</h1>;
+                        return <h2 style={{color:"white"}}>Error: {JSON.stringify(error)}</h2>;
                     }
                     if (data) {
                         return (

@@ -13,6 +13,7 @@ import {Box} from "@material-ui/core";
 import List from "@material-ui/core/List";
 import {Query} from "@apollo/react-components";
 import gql from "graphql-tag";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const GET_ALL_POLLEN_STATIONS = gql`
   {
@@ -84,6 +85,10 @@ const ExpansionPanelDetails = withStyles((theme) => ({
     },
 }))(MuiExpansionPanelDetails);
 
+const styles = {
+    marginBottom: 70
+};
+
 export default function PollenStatisticsStations() {
     const [expanded, setExpanded] = React.useState("panel0");
 
@@ -92,14 +97,23 @@ export default function PollenStatisticsStations() {
     };
 
     return (
+        <div style={styles}>
         <Query query={GET_ALL_POLLEN_STATIONS}>
             {({data, loading, error}) => {
                 if (loading) {
-                    return <h1>Loading...</h1>;
+                    return(
+                        <div style={{ position: "absolute",
+                            top: "15%",
+                            left: "45%",
+                            width: "100%",
+                        }}>
+                            <CircularProgress color="secondary"/>
+                        </div>
+                    );
                 }
 
                 if (error) {
-                    return <h1>Error: {JSON.stringify(error)}</h1>;
+                    return <h2 style={{color:"white"}}>Error: {JSON.stringify(error)}</h2>;
                 }
 
                 if (data) {
@@ -191,11 +205,19 @@ export default function PollenStatisticsStations() {
                                                    }}>
                                                 {({data, loading, error}) => {
                                                     if (loading) {
-                                                        return <h1>Loading...</h1>;
+                                                        return(
+                                                            <div style={{ position: "relative",
+                                                                top: "15%",
+                                                                left: "45%",
+                                                                width: "100%",
+                                                            }}>
+                                                                <CircularProgress color="secondary"/>
+                                                            </div>
+                                                        );
                                                     }
 
                                                     if (error) {
-                                                        return <h1>Error: {JSON.stringify(error)}</h1>;
+                                                        return <h2 style={{color:"white"}}>Error: {JSON.stringify(error)}</h2>;
                                                     }
 
                                                     if (data) {
@@ -210,7 +232,7 @@ export default function PollenStatisticsStations() {
                                                         results = results.filter(result => result.value != "nulo");
 
                                                         if (results.length === 0) {
-                                                            return (<h1>No hay datos</h1>);
+                                                            return (<h2 style={{color:"white"}}>No hay datos</h2>);
                                                         } else {
                                                             function getPollenStatus(status) {
                                                                 switch (status) {
@@ -325,5 +347,6 @@ export default function PollenStatisticsStations() {
                 }
             }}
         </Query>
+        </div>
     );
 }
