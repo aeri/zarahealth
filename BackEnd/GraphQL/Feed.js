@@ -172,7 +172,7 @@ var toggleFeedOpinion = async function ({
                 'meta.likes': usernamePetition
             }
         };
-    } else {
+    } else if(status == "DISLIKE"){
         update = {
             $push: {
                 'meta.dislikes': usernamePetition

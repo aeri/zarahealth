@@ -145,7 +145,7 @@ const schema = makeExecutableSchema({
             "Unique id of the feed"
             id: String!,
             "Opinion of the user"
-            status: Opinion!,
+            status: Opinion,
         ): Feed
 
         "A mutation to change a user's opinion about a feed"

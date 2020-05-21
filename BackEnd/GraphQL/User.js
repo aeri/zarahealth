@@ -160,8 +160,8 @@ var uploadUserImage = async function(image, context) {
     mimetype,
     encoding,
     createReadStream
-   } = await image.image;
-    console.log(image);
+    } = await image.image;
+
   const stream = createReadStream();
 
   const chunks = []
