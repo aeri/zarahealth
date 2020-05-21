@@ -36,6 +36,12 @@ app.oauth = new OAuth2Server({
     allowBearerTokensInQueryString: true
 });
 
+app.get('/', function(req, res) {
+  res.status(418)
+  return res.send(`ZaraHealth API over Node.js ${process.version}`)
+
+});
+
 app.post('/oauth/token', obtainToken);
 app.all('/oauth/google/token', google.authGoogle, obtainToken);
 app.delete('/oauth/token', cancelToken);

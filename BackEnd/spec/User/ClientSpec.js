@@ -823,6 +823,44 @@ describe("Client", function () {
 
     });
 
+
+    it("should be able to update its data", function (done) {
+        const graphQLClient = new GraphQLClient(endpoint, {
+            headers: {
+                authorization: `Bearer ${user_token}`,
+            },
+        })
+
+        const query = `
+        mutation ($name: String, $password: String, $email: String){
+          updateUser(name:$name, password: $password, email: $email){
+            name
+            username
+            email
+          }
+        }
+`;
+
+        const variables = {
+      	"name": "Mitsuku",
+      	"email": "localia"
+        };
+
+        const expected = {
+        "name": "Mitsuku",
+        "username": "test",
+        "email": "localia"
+    }
+
+        graphQLClient.request(query, variables).then(function (res) {
+            expect(res.updateUser).toEqual(expected);
+            done();
+        });
+
+    });
+
+
+
     it("should not be able to retrieve metrics", function (done) {
         const graphQLClient = new GraphQLClient(endpoint, {
             headers: {
