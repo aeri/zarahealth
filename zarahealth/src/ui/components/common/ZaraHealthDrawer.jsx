@@ -18,9 +18,21 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import LoginDialog from "../Auth/LoginDialog";
 import history from "../../../core/misc/history";
 import { useLocation } from "react-router-dom";
+import { Query } from "@apollo/react-components";
 import UserCard from "../Auth/UserCard";
+import gql from "graphql-tag";
 
 const drawerWidth = 280;
+
+const GET_CURRENT_USER = gql`
+  {
+    currentUser @client {
+      username
+      name
+      email
+    }
+  }
+`;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,15 +78,16 @@ function ZaraHealthDrawer(props) {
     setLoginDialogOpen(false);
   };
 
-  const drawerContent = (
+  const buildDrawerContent = (isAuthenticated, currentUser) => (
     <div>
       <div className={classes.toolbar} />
       <div className={classes.sidebar}>
         <div className="top-nav">
           <Divider />
           <UserCard
+            currentUser={currentUser}
+            isAuthenticated={isAuthenticated}
             handleClickOpen={handleClickOpen}
-            handleClose={handleClose}
             mobileOpen={props.mobileOpen}
             handleDrawerToggle={props.handleDrawerToggle}
           />
@@ -91,17 +104,19 @@ function ZaraHealthDrawer(props) {
               </ListItemIcon>
               <ListItemText primary="Dashboard" />
             </ListItem>
-            <ListItem
-              button
-              key="Feed"
-              onClick={() => history.replace("/feed")}
-              selected={location.pathname === "/feed"}
-            >
-              <ListItemIcon>
-                <RssFeedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Feed" />
-            </ListItem>
+            {isAuthenticated && (
+              <ListItem
+                button
+                key="Feed"
+                onClick={() => history.replace("/feed")}
+                selected={location.pathname === "/feed"}
+              >
+                <ListItemIcon>
+                  <RssFeedIcon />
+                </ListItemIcon>
+                <ListItemText primary="Feed" />
+              </ListItem>
+            )}
           </List>
           <Divider />
           <List>
@@ -141,7 +156,7 @@ function ZaraHealthDrawer(props) {
           </List>
           <Divider />
           <List>
-            <ListItem
+            {isAuthenticated && <ListItem
               button
               key="Ajustes"
               onClick={() => history.replace("/settings")}
@@ -151,7 +166,7 @@ function ZaraHealthDrawer(props) {
                 <SettingsIcon />
               </ListItemIcon>
               <ListItemText primary="Ajustes" />
-            </ListItem>
+            </ListItem>}
           </List>
         </div>
         <div className="bottom-nav">
@@ -171,38 +186,51 @@ function ZaraHealthDrawer(props) {
   );
 
   return (
-    <div className={classes.root}>
-      <nav className={classes.drawer}>
-        <LoginDialog open={isLoginDialogOpen} handleClose={handleClose} />
-        <Hidden smUp implementation="css">
-          <Drawer
-            variant="temporary"
-            anchor={theme.direction === "rtl" ? "right" : "left"}
-            open={props.mobileOpen}
-            onClose={props.handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-          >
-            {drawerContent}
-          </Drawer>
-        </Hidden>
-        <Hidden xsDown implementation="css">
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            variant="permanent"
-            open
-          >
-            {drawerContent}
-          </Drawer>
-        </Hidden>
-      </nav>
-    </div>
+    <Query query={GET_CURRENT_USER}>
+      {({ data }) => {
+        let isAuthenticated = !(
+          data === undefined || data.currentUser === null
+        );
+        let currentUser = isAuthenticated ? data.currentUser : undefined;
+        if (isLoginDialogOpen && isAuthenticated) {
+          handleClose();
+        }
+        return (
+          <div className={classes.root}>
+            <nav className={classes.drawer}>
+              <LoginDialog open={isLoginDialogOpen} handleClose={handleClose} />
+              <Hidden smUp implementation="css">
+                <Drawer
+                  variant="temporary"
+                  anchor={theme.direction === "rtl" ? "right" : "left"}
+                  open={props.mobileOpen}
+                  onClose={props.handleDrawerToggle}
+                  classes={{
+                    paper: classes.drawerPaper,
+                  }}
+                  ModalProps={{
+                    keepMounted: true, // Better open performance on mobile.
+                  }}
+                >
+                  {buildDrawerContent(isAuthenticated, currentUser)}
+                </Drawer>
+              </Hidden>
+              <Hidden xsDown implementation="css">
+                <Drawer
+                  classes={{
+                    paper: classes.drawerPaper,
+                  }}
+                  variant="permanent"
+                  open
+                >
+                  {buildDrawerContent(isAuthenticated, currentUser)}
+                </Drawer>
+              </Hidden>
+            </nav>
+          </div>
+        );
+      }}
+    </Query>
   );
 }
 

@@ -6,16 +6,29 @@ import {
   CircularProgress,
   Grid,
 } from "@material-ui/core";
+import FloatingActionButton from "@material-ui/core/Fab";
+import EditIcon from "@material-ui/icons/Edit";
 import Post from "../components/Feed/Post";
 import { makeStyles } from "@material-ui/core/styles";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-//import InfiniteScroll from "react-infinite-scroller";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: "100%",
+  },
+  fab: {
+    margin: 0,
+    top: "auto",
+    right: 20,
+    bottom: 20,
+    left: "auto",
+    position: "fixed",
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
+    fill: "white",
   },
 }));
 
@@ -27,6 +40,14 @@ const FEED_QUERY = gql`
       author
       body
       date
+      likes
+      dislikes
+      status
+      comments {
+        author
+        body
+        date
+      }
     }
   }
 `;
@@ -42,7 +63,7 @@ function FeedView() {
   const { data, loading, error, fetchMore } = useQuery(FEED_QUERY, {
     variables: {
       page: 1,
-      limit: 20,
+      limit: 10,
     },
     fetchPolicy: "cache-and-network",
   });
@@ -50,12 +71,14 @@ function FeedView() {
   useEffect(() => {
     const fetchPage = (page) => {
       if (!isFetching) {
-        console.log("PAGE: " + page);
         setIsFetching(true);
         fetchMore({
           variables: { page: page },
           updateQuery: (prev, { fetchMoreResult }) => {
-            if (!fetchMoreResult || fetchMoreResult.retrieveFeeds.length === 0) {
+            if (
+              !fetchMoreResult ||
+              fetchMoreResult.retrieveFeeds.length === 0
+            ) {
               setHasMoreData(false);
               return prev;
             }
@@ -141,28 +164,17 @@ function FeedView() {
           )}
         </List>
       </div>
+      <FloatingActionButton
+        onClick={() => console.log("Click en publicar!")}
+        color="secondary"
+        variant="extended"
+        className={classes.fab}
+      >
+        <EditIcon className={classes.extendedIcon} />
+        <h4 style={{color: 'white'}}>Publicar</h4>
+      </FloatingActionButton>
     </Box>
   );
 }
 
 export default FeedView;
-
-// {/* <InfiniteScroll
-//   pageStart={2}
-//   loadMore={fetchPage}
-//   hasMore={hasMoreData}
-//   loader={
-//     <Grid
-//       container
-//       spacing={0}
-//       direction="column"
-//       alignItems="center"
-//       justify="center"
-//       style={{ minHeight: "20vh" }}
-//     >
-//       <Grid item xs={3}>
-//         <CircularProgress color="secondary" />
-//       </Grid>
-//     </Grid>
-//   }
-// ></InfiniteScroll> */}
