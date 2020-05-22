@@ -32,7 +32,7 @@ const ADD_COMMENT = gql`
 const GET_CURRENT_USER = gql`
   {
     currentUser @client {
-      name
+      username
     }
   }
 `;
@@ -58,10 +58,10 @@ export default function NewComment(props) {
             <CardHeader
               avatar={
                 <Avatar aria-label="recipe" className={classes.avatar}>
-                  {data.currentUser.name.charAt(0)}
+                  {data.currentUser.username.charAt(0)}
                 </Avatar>
               }
-              title={data.currentUser.name}
+              title={data.currentUser.username}
             />
             <CardContent>
               <Mutation mutation={ADD_COMMENT}>
@@ -89,6 +89,7 @@ export default function NewComment(props) {
                             required
                             fullWidth
                             id="comment"
+                            multiline
                             label="Nuevo comentario"
                             name="comment"
                             autoFocus

@@ -12,6 +12,7 @@ import Post from "../components/Feed/Post";
 import { makeStyles } from "@material-ui/core/styles";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import NewPostDialog from "../components/Feed/NewPost";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,7 +35,8 @@ const useStyles = makeStyles((theme) => ({
 
 const FEED_QUERY = gql`
   query RetrieveFeeds($page: Int!, $limit: Int!) {
-    retrieveFeeds(page: $page, limit: $limit) {
+    retrieveFeeds(page: $page, limit: $limit)
+      @connection(key: "feed", filter: []) {
       id
       title
       author
@@ -55,6 +57,7 @@ const FEED_QUERY = gql`
 function FeedView() {
   const classes = useStyles();
 
+  const [showNewPostDialog, setShowNewPostDialog] = useState(false);
   const [hasMoreData, setHasMoreData] = useState(true);
   const [isFetching, setIsFetching] = useState(false);
 
@@ -134,6 +137,10 @@ function FeedView() {
 
   return (
     <Box m={1}>
+      <NewPostDialog
+        open={showNewPostDialog}
+        handleClose={() => setShowNewPostDialog(false)}
+      />
       <Typography color="white" style={{ paddingTop: 0, paddingLeft: 0 }}>
         <Box fontWeight="fontWeightMedium" m={1} fontSize={45} color="white">
           Feed
@@ -165,13 +172,13 @@ function FeedView() {
         </List>
       </div>
       <FloatingActionButton
-        onClick={() => console.log("Click en publicar!")}
+        onClick={() => setShowNewPostDialog(true)}
         color="secondary"
         variant="extended"
         className={classes.fab}
       >
         <EditIcon className={classes.extendedIcon} />
-        <h4 style={{color: 'white'}}>Publicar</h4>
+        <h4 style={{ color: "white" }}>Publicar</h4>
       </FloatingActionButton>
     </Box>
   );

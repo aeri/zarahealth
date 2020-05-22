@@ -133,10 +133,6 @@ export function SignInForm() {
           autoComplete="current-password"
           helperText={errors.password && "El campo es obligatorio"}
         />
-        <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
-          label="Recuérdame"
-        />
         <Button
           type="submit"
           fullWidth

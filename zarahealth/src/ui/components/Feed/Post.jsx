@@ -15,7 +15,7 @@ import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import { DateTime } from "luxon";
 import Comment from "./Comment";
 import NewComment from "./NewComment";
-import { Box } from "@material-ui/core";
+import { Box, Divider } from "@material-ui/core";
 import gql from "graphql-tag";
 import { Mutation } from "@apollo/react-components";
 
@@ -115,6 +115,11 @@ export default function Post({ post }) {
             <Box m={1}>
               <NewComment postId={post.id} />
             </Box>
+            {post.comments.length > 0 && (
+              <Box m={2}>
+                <Divider />
+              </Box>
+            )}
             {post.comments.map((comment, _) => (
               <Box m={1}>
                 <Comment comment={comment} />
