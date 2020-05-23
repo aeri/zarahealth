@@ -9,6 +9,7 @@ var path = require('path');
 var model = require('./model.js');
 var db = require('./db.js');
 var logger = require('./logger.js');
+var retriever = require('./retriever.js');
 var google = require('./Google/Google.js');
 var cors = require('cors')
 var app = express();
@@ -41,6 +42,8 @@ app.get('/', function(req, res) {
   return res.send(`ZaraHealth API over Node.js ${process.version}`)
 
 });
+
+app.get('/file/picture', retriever.pictures );
 
 app.post('/oauth/token', obtainToken);
 app.all('/oauth/google/token', google.authGoogle, obtainToken);

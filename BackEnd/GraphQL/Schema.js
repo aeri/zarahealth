@@ -224,8 +224,8 @@ const schema = makeExecutableSchema({
     }
     "A type that describes the image."
     type Image {
-        "The image's base 64 data"
-        data: String
+        "Unique identifier of a picture"
+        _id: String
         "The image's filename"
         filename: String,
         "The image's mimetype"
