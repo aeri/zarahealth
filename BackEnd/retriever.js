@@ -25,6 +25,10 @@ async function pictures(req, res) {
           res.end("NOT_FOUND")
           execute = false;
         }
+        else if (!ret.image){
+          res.redirect("https://i.ibb.co/G5VNNXd/default-user.jpg")
+          execute = false;
+        }
         else{
           var pthg = ret.image;
         }
