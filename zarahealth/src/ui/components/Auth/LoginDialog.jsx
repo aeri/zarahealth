@@ -11,7 +11,6 @@ import { Divider, Container } from "@material-ui/core";
 import { SignInForm } from "./SignInForm";
 import { SignUpForm } from "./SignUpForm";
 
-
 function LoginDialog(props) {
   const [isLoginActive, setLoginActive] = React.useState(true);
 
@@ -42,19 +41,11 @@ function LoginDialog(props) {
   );
 }
 
-
-
 function DialogFooter(props) {
   return (
     <Container component="main" maxWidth="xs">
       <Divider />
-
       <Grid container>
-        {props.isLoginActive ? (
-          <Grid item xs>
-            <Link variant="body2">{"¿Contraseña olvidada?"}</Link>
-          </Grid>
-        ) : null}
         <Grid item>
           <Link onClick={props.toggleLoginRegister} variant="body2">
             {props.isLoginActive
