@@ -43,32 +43,26 @@ const ExpansionPanelDetails = withStyles((theme) => ({
 const ExpansionPanelActions = withStyles((theme) => ({
     root: {
         backgroundColor: zaraHealthTheme.palette.primary.main,
-        padding: theme.spacing(0),
+        padding: theme.spacing(1),
+        paddingBottom: 15,
         paddingRight: 20
     },
 }))(MuiExpansionPanelActions);
 
 const GET_CURRENT_USER = gql`
- query currentUser {
+  {
     currentUser @client {
-      username
-      name
-      email
+      csvDownloadEnabled
     }
   }
 `;
 
-
-const UPDATE_USER = gql`
-  mutation UpdateUser(
-    $name: String!
-    $password: String!
-    $email: String!
+const UPDATE_CSV = gql`
+  mutation UpdateCsvDownloadEnabled(
+    $csvDownloadEnabled:  Boolean!
   ) {
-    updateUser(
-      name: $name
-      password: $password
-      email: $email
+    updateCsvDownloadEnabled(
+      csvDownloadEnabled: $csvDownloadEnabled
     ) {
       name
       username
@@ -78,15 +72,9 @@ const UPDATE_USER = gql`
   }
 `;
 
-function UserData() {
+function UserDownload() {
     const classes = useStyles();
     const {loading, data, error} = useQuery(GET_CURRENT_USER);
-    const [passError, setPassError] = React.useState(false);
-
-    const [candidateName, setCandidateName] = React.useState("");
-    const [candidatePassword, setCandidatePassword] = React.useState("");
-    const [candidatePassword2, setCandidatePassword2] = React.useState("");
-    const [candidateEmail, setCandidateEmail] = React.useState("");
     const [enableCSV, setEnableCSV] = React.useState(false);
 
 
@@ -96,16 +84,15 @@ function UserData() {
         }
 
         if ((data !== undefined && data.currentUser !== null)) {
-            setCandidateName(data.currentUser.name)
-            setCandidateEmail(data.currentUser.email)
+            setEnableCSV(data.currentUser.csvDownloadEnabled)
         }
 
     }, [data, error, loading]);
 
     return (
         <div>
-            <Mutation mutation={UPDATE_USER}>
-                {(updateUser, {data, loading}) => {
+            <Mutation mutation={UPDATE_CSV}>
+                {(updateCsvDownloadEnabled, {data, loading}) => {
                     if (loading) {
                         return <div style={{ position: "relative",
                             top: "15%",
@@ -120,7 +107,7 @@ function UserData() {
                         return (
                             <ApolloConsumer>
                                 {(client) => {
-                                    client.writeData({data: {currentUser: data.updateUser}});
+                                    client.writeData({data: {currentUser: data.updateCsvDownloadEnabled}});
                                     return (
                                         <div>
                                             <ExpansionPanelDetails>
@@ -165,17 +152,11 @@ function UserData() {
 
                     const handleSubmit = (e) => {
                         e.preventDefault()
-                        if (candidatePassword !== candidatePassword2) {
-                            setPassError(true)
-                        } else {
-                            updateUser({
-                                variables: {
-                                    name: candidateName,
-                                    password: candidatePassword,
-                                    email: candidateEmail
-                                }
-                            });
-                        }
+                        updateCsvDownloadEnabled({
+                            variables: {
+                                csvDownloadEnabled: enableCSV,
+                            }
+                        });
                     }
 
                     return (
@@ -198,7 +179,7 @@ function UserData() {
                                                         <Grid item xs={12}>
                                                             <Typography color="primary">
                                                                 <Box fontWeight="fontWeightRegular" m={1} fontSize={27}>
-                                                                    Datos personales
+                                                                    Descarga
                                                                 </Box>
                                                             </Typography>
                                                         </Grid>
@@ -207,55 +188,44 @@ function UserData() {
                                                           style={{paddingLeft: 40}}>
                                                         <Grid item xs={12}>
                                                             <div>
-                                                                <Grid container alignItems="center"
-                                                                      style={{paddingBottom: 45}}>
+                                                                <Grid container spacing={2} alignItems="center"
+                                                                      style={{paddingBottom: 15}}>
                                                                     <Grid item>
-                                                                        <FormGroup column style={{width: 300}}>
+                                                                        <FormGroup column>
+                                                                            <FormControlLabel
+                                                                                control={<Switch checked={enableCSV}
+                                                                                                 onChange={(event) => {
+                                                                                                     setEnableCSV(!enableCSV);
+                                                                                                 }}
+                                                                                                 name="checkedA"/>}
+                                                                                label="Habilitar descarga CSV"
+                                                                            />
                                                                             <FormControl margin={'dense'}>
-                                                                                <TextField id="standard-basic" required
-                                                                                           label="Nombre"
-                                                                                           value={candidateName}
-                                                                                           onChange={(event) => {
-                                                                                               setCandidateName(event.target.value);
-                                                                                           }}/>
-                                                                            </FormControl>
-                                                                            <FormControl margin={'dense'}>
-                                                                                <TextField id="standard-basic" required
-                                                                                           label="Email"
-                                                                                           value={candidateEmail}
-                                                                                           onChange={(event) => {
-                                                                                               setCandidateEmail(event.target.value);
-                                                                                           }}/>
-                                                                            </FormControl>
+                                                                                <Grid container spacing={0}
+                                                                                      direction="row"
+                                                                                      justify="center"
+                                                                                      alignItems="center">
+                                                                                    <Grid item xs={1}>
+                                                                                        <GetAppIcon style={{
+                                                                                            fontSize: 30,
+                                                                                            verticalAlign: "middle",
+                                                                                        }}/>
+                                                                                    </Grid>
+                                                                                    <Grid item xs={11} justify="center"
+                                                                                          alignItems="center">
+                                                                                        <Typography
+                                                                                            style={{
+                                                                                                fontSize: 16,
+                                                                                                paddingLeft: 25
+                                                                                            }}
+                                                                                            color="primary">
+                                                                                            Descargar datos de cuenta
+                                                                                        </Typography>
+                                                                                    </Grid>
+                                                                                </Grid>
 
-                                                                            <FormControl margin={'dense'}>
-                                                                                <TextField id="standard-basic"
-                                                                                           label="Contraseña nueva"
-                                                                                           value={candidatePassword}
-                                                                                           type="password"
-                                                                                           onChange={(event) => {
-                                                                                               setCandidatePassword(event.target.value);
-                                                                                           }}/>
+
                                                                             </FormControl>
-                                                                            <FormControl margin={'dense'}>
-                                                                                <TextField id="standard-basic"
-                                                                                           label="Repetir contraseña"
-                                                                                           value={candidatePassword2}
-                                                                                           type="password"
-                                                                                           onChange={(event) => {
-                                                                                               setCandidatePassword2(event.target.value);
-                                                                                           }}/>
-                                                                            </FormControl>
-                                                                            {
-                                                                                passError?
-                                                                                    <Typography color="secondary">
-                                                                                        <Box fontWeight="fontWeightRegular" m={1} fontSize={17} >
-                                                                                            Las contraseñas no coinciden
-                                                                                        </Box>
-                                                                                    </Typography>
-                                                                                    :
-                                                                                    <div></div>
-                                                                            }
                                                                         </FormGroup>
                                                                     </Grid>
                                                                 </Grid>
@@ -282,6 +252,6 @@ function UserData() {
     );
 }
 
-export default UserData;
+export default UserDownload;
 
 

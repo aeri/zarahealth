@@ -29,6 +29,7 @@ const CREATE_USER = gql`
       name
       username
       email
+      csvDownloadEnabled
     }
   }
 `;
