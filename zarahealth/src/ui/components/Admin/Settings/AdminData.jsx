@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {Box, CircularProgress, Container, Typography, withStyles} from "@material-ui/core";
+import {Box, CircularProgress, Typography, withStyles} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Paper from '@material-ui/core/Paper';
 import {makeStyles} from '@material-ui/core/styles';
@@ -11,13 +11,10 @@ import {useQuery} from "@apollo/react-hooks";
 import Button from "@material-ui/core/Button";
 import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails/ExpansionPanelDetails";
 import MuiExpansionPanelActions from "@material-ui/core/ExpansionPanelActions/ExpansionPanelActions";
-import zaraHealthTheme from "../../theme";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
-import GetAppIcon from "@material-ui/icons/GetApp";
-import {Controller, useForm} from "react-hook-form";
+import zaraHealthTheme from "../../../theme";
+
 import {ApolloConsumer, Mutation} from "@apollo/react-components";
-import {handleUserAuthentication} from "../../../core/services/tokenService";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,6 +41,7 @@ const ExpansionPanelActions = withStyles((theme) => ({
     root: {
         backgroundColor: zaraHealthTheme.palette.primary.main,
         padding: theme.spacing(0),
+        paddingBottom: 15,
         paddingRight: 20
     },
 }))(MuiExpansionPanelActions);
@@ -78,7 +76,7 @@ const UPDATE_USER = gql`
   }
 `;
 
-function UserData() {
+function AdminData() {
     const classes = useStyles();
     const {loading, data, error} = useQuery(GET_CURRENT_USER);
     const [passError, setPassError] = React.useState(false);
@@ -87,10 +85,13 @@ function UserData() {
     const [candidatePassword, setCandidatePassword] = React.useState("");
     const [candidatePassword2, setCandidatePassword2] = React.useState("");
     const [candidateEmail, setCandidateEmail] = React.useState("");
-    const [enableCSV, setEnableCSV] = React.useState(false);
 
 
     useEffect(() => {
+        if (loading || error) {
+
+        }
+
         if ((data !== undefined && data.currentUser !== null)) {
             setCandidateName(data.currentUser.name)
             setCandidateEmail(data.currentUser.email)
@@ -278,6 +279,6 @@ function UserData() {
     );
 }
 
-export default UserData;
+export default AdminData;
 
 

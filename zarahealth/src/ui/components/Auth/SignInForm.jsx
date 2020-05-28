@@ -25,6 +25,7 @@ const GET_USER = gql`
       username
       email
       csvDownloadEnabled
+      isAdmin
     }
   }
 `;

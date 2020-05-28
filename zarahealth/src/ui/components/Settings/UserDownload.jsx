@@ -79,10 +79,6 @@ function UserDownload() {
 
 
     useEffect(() => {
-        if (loading || error) {
-
-        }
-
         if ((data !== undefined && data.currentUser !== null)) {
             setEnableCSV(data.currentUser.csvDownloadEnabled)
         }

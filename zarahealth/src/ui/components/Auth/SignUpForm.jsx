@@ -30,6 +30,7 @@ const CREATE_USER = gql`
       username
       email
       csvDownloadEnabled
+      isAdmin
     }
   }
 `;
