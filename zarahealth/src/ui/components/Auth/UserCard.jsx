@@ -34,10 +34,21 @@ function UserCard(props) {
     return (
       <CardHeader
         avatar={
-          <Avatar
-            aria-label="avatar"
-            src="https://avatars1.githubusercontent.com/u/3115756?s=460&u=f2730d80135af68a86e4e68b5e3b3e7849bb3471&v=4"
-          />
+          props.currentUser.image !== undefined ? (
+            <Avatar
+              aria-label="avatar"
+              src={
+                "data:" +
+                props.currentUser.image.mimetype +
+                ";base64," +
+                props.currentUser.image.data
+              }
+            />
+          ) : (
+            <Avatar aria-label="avatar">
+              {props.currentUser.name.charAt(0)}
+            </Avatar>
+          )
         }
         title={
           props.currentUser.name.length > 15

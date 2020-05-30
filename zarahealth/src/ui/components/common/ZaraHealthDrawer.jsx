@@ -30,6 +30,12 @@ const GET_CURRENT_USER = gql`
       username
       name
       email
+      image {
+        data
+        filename
+        mimetype
+        encoding
+      }
     }
   }
 `;
