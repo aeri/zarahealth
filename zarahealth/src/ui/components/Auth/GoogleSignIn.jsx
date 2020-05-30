@@ -17,7 +17,8 @@ const GET_USER = gql`
       name
       username
       email
-      }
+      csvDownloadEnabled
+    }
   }
 `;
 

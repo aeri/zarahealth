@@ -16,6 +16,7 @@ import { DateTime } from "luxon";
 import { Query } from "@apollo/react-components";
 import gql from "graphql-tag";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import DownloadButton from "../DownloadButton";
 
 const GET_AIR_STATION = gql`
   {
@@ -245,7 +246,7 @@ export default function AirStatisticsStations() {
                             spacing={1}
                             direction="column"
                             justify="center"
-                            alignItems="center"
+                            alignItems="flex-end"
                           >
                             <Line
                               data={{
@@ -282,6 +283,11 @@ export default function AirStatisticsStations() {
                                   ],
                                 },
                               }}
+                            />
+                            <DownloadButton
+                              kind="air"
+                              title={station.title}
+                              data={station.records}
                             />
                           </Grid>
                         </List>
