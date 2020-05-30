@@ -27,7 +27,7 @@ const GET_USER = gql`
         filename
         mimetype
         encoding
-      }    }
+      }
       csvDownloadEnabled
       isAdmin
     }
