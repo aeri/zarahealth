@@ -11,12 +11,13 @@ import OpacityIcon from '@material-ui/icons/Opacity';
 import CloudQueueIcon from '@material-ui/icons/CloudQueue';
 import LocalFloristIcon from '@material-ui/icons/LocalFlorist';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import Button from '@material-ui/core/Button';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import FavStation from "../components/Settings/FavSatation";
-import AlertThresholds from "../components/Settings/AlertThresholds";
+import AirFavStation from "../components/Settings/Air/AirFavStation";
+import AirAlertThresholds from "../components/Settings/Air/AirAlertThresholds";
+import WaterFavStation from "../components/Settings/Water/WaterFavStation";
+import PollenAlertThresholds from "../components/Settings/Pollen/PollenAlertThresholds";
 import UserData from "../components/Settings/UserData";
-import Download from "../components/Settings/Download";
+import UserDownload from "../components/Settings/UserDownload";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -68,12 +69,12 @@ const ExpansionPanelDetails = withStyles((theme) => ({
 }))(MuiExpansionPanelDetails);
 
 const ExpansionPanelActions = withStyles((theme) => ({
-  root: {
-    backgroundColor: zaraHealthTheme.palette.primary.main,
-    padding: theme.spacing(1),
-    paddingBottom: 15,
-    paddingRight: 20
-  },
+    root: {
+        backgroundColor: zaraHealthTheme.palette.primary.main,
+        padding: theme.spacing(1),
+        paddingBottom: 15,
+        paddingRight: 20
+    },
 }))(MuiExpansionPanelActions);
 
 
@@ -111,32 +112,7 @@ function SettingsView() {
                         </Grid>
                     </Grid>
                 </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    <Grid container spacing={1} direction="column"
-                          justify="center"
-                          alignItems="center">
-                        <Grid container spacing={1} direction="row"
-                              justify="center"
-                              alignItems="center">
-                            <Grid item xs={12}>
-                              <FavStation/>
-                            </Grid>
-                        </Grid>
-                      <Grid container spacing={1} direction="row"
-                            justify="center"
-                            alignItems="center">
-                        <Grid item xs={12}>
-                          <AlertThresholds/>
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                </ExpansionPanelDetails>
-              <ExpansionPanelActions>
-                <Button size="medium" style={{color: "white"}}>Cancelar</Button>
-                <Button size="medium" color="secondary">
-                  Guardar
-                </Button>
-              </ExpansionPanelActions>
+                <PollenAlertThresholds/>
             </ExpansionPanel>
 
             <ExpansionPanel square expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
@@ -156,32 +132,7 @@ function SettingsView() {
                         </Grid>
                     </Grid>
                 </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <Grid container spacing={1} direction="column"
-                      justify="center"
-                      alignItems="center">
-                  <Grid container spacing={1} direction="row"
-                        justify="center"
-                        alignItems="center">
-                    <Grid item xs={12}>
-                      <FavStation/>
-                    </Grid>
-                  </Grid>
-                  <Grid container spacing={1} direction="row"
-                        justify="center"
-                        alignItems="center">
-                    <Grid item xs={12}>
-                      <AlertThresholds/>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </ExpansionPanelDetails>
-              <ExpansionPanelActions>
-                <Button size="medium" style={{color: "white"}}>Cancelar</Button>
-                <Button size="medium" color="secondary">
-                  Guardar
-                </Button>
-              </ExpansionPanelActions>
+                <WaterFavStation/>
             </ExpansionPanel>
 
             <ExpansionPanel square expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
@@ -201,32 +152,8 @@ function SettingsView() {
                         </Grid>
                     </Grid>
                 </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <Grid container spacing={1} direction="column"
-                      justify="center"
-                      alignItems="center">
-                  <Grid container spacing={1} direction="row"
-                        justify="center"
-                        alignItems="center">
-                    <Grid item xs={12}>
-                      <FavStation/>
-                    </Grid>
-                  </Grid>
-                  <Grid container spacing={1} direction="row"
-                        justify="center"
-                        alignItems="center">
-                    <Grid item xs={12}>
-                      <AlertThresholds/>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </ExpansionPanelDetails>
-              <ExpansionPanelActions>
-                <Button size="medium" style={{color: "white"}}>Cancelar</Button>
-                <Button size="medium" color="secondary">
-                  Guardar
-                </Button>
-              </ExpansionPanelActions>
+                <AirFavStation/>
+                <AirAlertThresholds/>
             </ExpansionPanel>
 
             <ExpansionPanel square expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
@@ -246,32 +173,8 @@ function SettingsView() {
                         </Grid>
                     </Grid>
                 </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <Grid container spacing={1} direction="column"
-                      justify="center"
-                      alignItems="center">
-                  <Grid container spacing={1} direction="row"
-                        justify="center"
-                        alignItems="center">
-                    <Grid item xs={12}>
-                      <UserData/>
-                    </Grid>
-                  </Grid>
-                  <Grid container spacing={1} direction="row"
-                        justify="center"
-                        alignItems="center">
-                    <Grid item xs={12}>
-                      <Download/>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </ExpansionPanelDetails>
-              <ExpansionPanelActions>
-                <Button size="medium" style={{color: "white"}}>Cancelar</Button>
-                <Button size="medium" color="secondary">
-                  Guardar
-                </Button>
-              </ExpansionPanelActions>
+                <UserData/>
+                <UserDownload/>
             </ExpansionPanel>
         </div>
     );

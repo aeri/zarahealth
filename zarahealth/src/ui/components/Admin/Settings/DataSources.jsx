@@ -1,23 +1,18 @@
 import React, {useEffect} from "react";
-import {Box, CircularProgress, Container, Typography, withStyles} from "@material-ui/core";
+import {Box, CircularProgress, Typography, withStyles} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import Paper from '@material-ui/core/Paper';
 import {makeStyles} from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import FormGroup from "@material-ui/core/FormGroup/FormGroup";
-import FormControl from '@material-ui/core/FormControl';
 import gql from "graphql-tag";
 import {useQuery} from "@apollo/react-hooks";
 import Button from "@material-ui/core/Button";
 import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails/ExpansionPanelDetails";
 import MuiExpansionPanelActions from "@material-ui/core/ExpansionPanelActions/ExpansionPanelActions";
-import zaraHealthTheme from "../../theme";
+import zaraHealthTheme from "../../../theme";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
-import GetAppIcon from "@material-ui/icons/GetApp";
-import {Controller, useForm} from "react-hook-form";
 import {ApolloConsumer, Mutation} from "@apollo/react-components";
-import {handleUserAuthentication} from "../../../core/services/tokenService";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,65 +38,79 @@ const ExpansionPanelDetails = withStyles((theme) => ({
 const ExpansionPanelActions = withStyles((theme) => ({
     root: {
         backgroundColor: zaraHealthTheme.palette.primary.main,
-        padding: theme.spacing(0),
+        padding: theme.spacing(1),
+        paddingBottom: 15,
         paddingRight: 20
     },
 }))(MuiExpansionPanelActions);
 
-const GET_CURRENT_USER = gql`
- query currentUser {
-    currentUser @client {
-      username
-      name
-      email
+
+const GET_SETTINGS = gql`
+  {
+    retrieveSettings {
+      id
+      water
+      pollen
+      air
     }
   }
 `;
 
-
-const UPDATE_USER = gql`
-  mutation UpdateUser(
-    $name: String!
-    $password: String!
-    $email: String!
+const UPDATE_STATUS = gql`
+  mutation UpdateSatatus(
+    $id:  String!
+    $airStatus:  Boolean!
+    $waterStatus:  Boolean!
+    $pollenStatus:  Boolean!
   ) {
-    updateUser(
-      name: $name
-      password: $password
-      email: $email
+    updateAirStatus(
+      id: $id
+      airStatus: $airStatus
     ) {
-      name
-      username
-      email
-      csvDownloadEnabled
+      id
+    }
+    updateWaterStatus(
+      id: $id
+      waterStatus: $waterStatus
+    ) {
+      id
+    }
+    updatePollenStatus(
+      id: $id
+      pollenStatus: $pollenStatus
+    ) {
+      id
     }
   }
 `;
 
-function UserData() {
+function DataSources() {
     const classes = useStyles();
-    const {loading, data, error} = useQuery(GET_CURRENT_USER);
-    const [passError, setPassError] = React.useState(false);
-
-    const [candidateName, setCandidateName] = React.useState("");
-    const [candidatePassword, setCandidatePassword] = React.useState("");
-    const [candidatePassword2, setCandidatePassword2] = React.useState("");
-    const [candidateEmail, setCandidateEmail] = React.useState("");
-    const [enableCSV, setEnableCSV] = React.useState(false);
+    const {loading, data, error} = useQuery(GET_SETTINGS);
+    const [settingsId, setSettingsId] = React.useState(false);
+    const [enableAir, setEnableAir] = React.useState(false);
+    const [enableWater, setEnableWater] = React.useState(false);
+    const [enablePollen, setEnablePollen] = React.useState(false);
 
 
     useEffect(() => {
-        if ((data !== undefined && data.currentUser !== null)) {
-            setCandidateName(data.currentUser.name)
-            setCandidateEmail(data.currentUser.email)
+        if (loading || error) {
+
+        }
+
+        if ((data !== undefined && data.retrieveSettings !== null)) {
+            setSettingsId(data.retrieveSettings[0].id)
+            setEnableAir(data.retrieveSettings[0].air)
+            setEnableWater(data.retrieveSettings[0].water)
+            setEnablePollen(data.retrieveSettings[0].pollen)
         }
 
     }, [data, error, loading]);
 
     return (
         <div>
-            <Mutation mutation={UPDATE_USER}>
-                {(updateUser, {data, loading}) => {
+            <Mutation mutation={UPDATE_STATUS}>
+                {(updateSatatus, {data, loading}) => {
                     if (loading) {
                         return <div style={{ position: "relative",
                             top: "15%",
@@ -115,8 +124,7 @@ function UserData() {
                     if (data !== undefined) {
                         return (
                             <ApolloConsumer>
-                                {(client) => {
-                                    client.writeData({data: {currentUser: data.updateUser}});
+                                {() => {
                                     return (
                                         <div>
                                             <ExpansionPanelDetails>
@@ -161,17 +169,14 @@ function UserData() {
 
                     const handleSubmit = (e) => {
                         e.preventDefault()
-                        if (candidatePassword !== candidatePassword2) {
-                            setPassError(true)
-                        } else {
-                            updateUser({
-                                variables: {
-                                    name: candidateName,
-                                    password: candidatePassword,
-                                    email: candidateEmail
-                                }
-                            });
-                        }
+                        updateSatatus({
+                            variables: {
+                                id:  settingsId,
+                                airStatus:  enableAir,
+                                waterStatus:  enableWater,
+                                pollenStatus:  enablePollen
+                            }
+                        });
                     }
 
                     return (
@@ -194,7 +199,7 @@ function UserData() {
                                                         <Grid item xs={12}>
                                                             <Typography color="primary">
                                                                 <Box fontWeight="fontWeightRegular" m={1} fontSize={27}>
-                                                                    Datos personales
+                                                                    Descarga
                                                                 </Box>
                                                             </Typography>
                                                         </Grid>
@@ -203,55 +208,34 @@ function UserData() {
                                                           style={{paddingLeft: 40}}>
                                                         <Grid item xs={12}>
                                                             <div>
-                                                                <Grid container alignItems="center"
-                                                                      style={{paddingBottom: 45}}>
+                                                                <Grid container spacing={2} alignItems="center"
+                                                                      style={{paddingBottom: 15}}>
                                                                     <Grid item>
-                                                                        <FormGroup column style={{width: 300}}>
-                                                                            <FormControl margin={'dense'}>
-                                                                                <TextField id="standard-basic" required
-                                                                                           label="Nombre"
-                                                                                           value={candidateName}
-                                                                                           onChange={(event) => {
-                                                                                               setCandidateName(event.target.value);
-                                                                                           }}/>
-                                                                            </FormControl>
-                                                                            <FormControl margin={'dense'}>
-                                                                                <TextField id="standard-basic" required
-                                                                                           label="Email"
-                                                                                           value={candidateEmail}
-                                                                                           onChange={(event) => {
-                                                                                               setCandidateEmail(event.target.value);
-                                                                                           }}/>
-                                                                            </FormControl>
-
-                                                                            <FormControl margin={'dense'}>
-                                                                                <TextField id="standard-basic"
-                                                                                           label="Contraseña nueva"
-                                                                                           value={candidatePassword}
-                                                                                           type="password"
-                                                                                           onChange={(event) => {
-                                                                                               setCandidatePassword(event.target.value);
-                                                                                           }}/>
-                                                                            </FormControl>
-                                                                            <FormControl margin={'dense'}>
-                                                                                <TextField id="standard-basic"
-                                                                                           label="Repetir contraseña"
-                                                                                           value={candidatePassword2}
-                                                                                           type="password"
-                                                                                           onChange={(event) => {
-                                                                                               setCandidatePassword2(event.target.value);
-                                                                                           }}/>
-                                                                            </FormControl>
-                                                                            {
-                                                                                passError?
-                                                                                    <Typography color="secondary">
-                                                                                        <Box fontWeight="fontWeightRegular" m={1} fontSize={17} >
-                                                                                            Las contraseñas no coinciden
-                                                                                        </Box>
-                                                                                    </Typography>
-                                                                                    :
-                                                                                    <div></div>
-                                                                            }
+                                                                        <FormGroup column>
+                                                                            <FormControlLabel
+                                                                                control={<Switch checked={enableAir}
+                                                                                                 onChange={(event) => {
+                                                                                                     setEnableAir(!enableAir);
+                                                                                                 }}
+                                                                                                 name="checkedA"/>}
+                                                                                label="Aire"
+                                                                            />
+                                                                            <FormControlLabel
+                                                                                control={<Switch checked={enableWater}
+                                                                                                 onChange={(event) => {
+                                                                                                     setEnableWater(!enableWater);
+                                                                                                 }}
+                                                                                                 name="checkedA"/>}
+                                                                                label="Agua"
+                                                                            />
+                                                                            <FormControlLabel
+                                                                                control={<Switch checked={enablePollen}
+                                                                                                 onChange={(event) => {
+                                                                                                     setEnablePollen(!enablePollen);
+                                                                                                 }}
+                                                                                                 name="checkedA"/>}
+                                                                                label="Polen"
+                                                                            />
                                                                         </FormGroup>
                                                                     </Grid>
                                                                 </Grid>
@@ -278,6 +262,6 @@ function UserData() {
     );
 }
 
-export default UserData;
+export default DataSources;
 
 

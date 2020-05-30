@@ -1,8 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import { Container, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useForm } from "react-hook-form";
@@ -30,6 +28,9 @@ const GET_USER = gql`
         mimetype
         encoding
       }    }
+      csvDownloadEnabled
+      isAdmin
+    }
   }
 `;
 

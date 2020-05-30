@@ -11,6 +11,7 @@ import FeedView from "./ui/views/FeedView";
 import SettingsView from "./ui/views/SettingsView";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import StationsDataView from "./ui/views/StationsDataView";
+import AdminView from "./ui/views/AdminView";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,6 +54,7 @@ function ZaraHealth() {
                 <Route path="/pollen" component={StationsDataView} />
                 <Route path="/water" component={StationsDataView} />
                 <Route path="/air" component={StationsDataView} />
+                <Route path="/admin" component={AdminView} />
                 <Redirect from="*" to="/" />
               </Switch>
             </Box>
