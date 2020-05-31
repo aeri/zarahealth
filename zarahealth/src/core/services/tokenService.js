@@ -35,20 +35,18 @@ export function refreshAccessToken() {
   if (auth === null) {
     return refreshAppToken();
   }
-  if (auth.refreshToken === undefined) {
+  if (auth.refresh_token === undefined) {
     return refreshAppToken();
   } else {
-    return refreshUserToken(auth.refreshToken);
+    return refreshUserToken(auth.refresh_token);
   }
 }
 
 export async function handleResponse(response) {
-  console.log(response)
   response = await response.json();
   if (response.access_token !== undefined) {
     let expires_at = new Date();
     expires_at.setSeconds(expires_at.getSeconds() + response.expires_in);
-
     const auth = {
       ...response,
       expires_at: expires_at,
@@ -100,8 +98,7 @@ export async function handleGoogleAuthentication(token) {
     body: new URLSearchParams({
       access_token: token,
     }),
-  }
-  console.log('REQUEST: ' + JSON.stringify(options))
+  };
   const response = await fetch(GOOGLE_OAUTH_SERVER_URI, options);
   await handleResponse(response);
 }
