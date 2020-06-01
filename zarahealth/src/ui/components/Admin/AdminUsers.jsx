@@ -49,8 +49,6 @@ function AdminUsers() {
     const [hasMoreData, setHasMoreData] = useState(true);
     const [isFetching, setIsFetching] = useState(false);
 
-    console.log(isFetching);
-
     const { data, loading, error, fetchMore } = useQuery(GET_USERS, {
         variables: {
             page: 1,
