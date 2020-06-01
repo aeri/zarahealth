@@ -130,10 +130,8 @@ function WaterFavStation() {
                         return <h2 style={{color: "white"}}>Error: {JSON.stringify(error)}</h2>;
                     }
                     if ((data !== undefined && data.retrieveUser !== null)) {
-                        if (preferredWaterStation === -1) {
-                            if (data.retrieveUser.preferredWaterStation !== null) {
-                                setPreferredWaterStation(data.retrieveUser.preferredWaterStation.id)
-                            }
+                        if (preferredWaterStation === -1 && data.retrieveUser.preferredWaterStation !== null && data.retrieveUser.preferredWaterStation !== undefined) {
+                            setPreferredWaterStation(data.retrieveUser.preferredWaterStation.id)
                         }
                         return (
                             <Mutation mutation={UPDATE_WATER_STATION}>

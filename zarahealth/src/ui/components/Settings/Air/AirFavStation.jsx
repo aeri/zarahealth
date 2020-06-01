@@ -127,7 +127,7 @@ function AirFavStation() {
                         return <h2 style={{color: "white"}}>Error: {JSON.stringify(error)}</h2>;
                     }
                     if ((data !== undefined && data.retrieveUser !== null)) {
-                        if (preferredAirStation === -1) {
+                        if (preferredAirStation === -1 && data.retrieveUser.preferredAirStation !== null && data.retrieveUser.preferredAirStation !== undefined) {
                             if (data.retrieveUser.preferredAirStation !== null) {
                                 setPreferredAirStation(data.retrieveUser.preferredAirStation.id)
                             }

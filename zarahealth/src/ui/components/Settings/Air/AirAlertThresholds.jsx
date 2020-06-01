@@ -140,7 +140,8 @@ function AirAlertThresholds() {
                         return <h2 style={{color: "white"}}>Error: {JSON.stringify(error)}</h2>;
                     }
                     if ((data !== undefined && data.retrieveUser !== null)) {
-                        if (airFavStation === undefined) {
+                        console.log('LLEGA')
+                        if (airFavStation === undefined && data.retrieveUser.preferredAirStation !== null && data.retrieveUser.preferredAirStation !== undefined) {
                             setAirFavStation(data.retrieveUser.preferredAirStation.id)
                             var airThresholdstemp = {}
                             for (const threshold of data.retrieveUser.preferredAirStation.thresholds) {
@@ -149,181 +150,233 @@ function AirAlertThresholds() {
                             setAirThresholds(airThresholdstemp)
                         }
 
-                        return (
-                            <Mutation mutation={UPDATE_AIR}>
-                                {(updateUserAirThreshold, {data, loading}) => {
-                                    if (loading) {
-                                        return <div style={{
-                                            position: "relative",
-                                            top: "15%",
-                                            left: "45%",
-                                            width: "100%",
-                                        }}>
-                                            <CircularProgress color="secondary"/>
-                                        </div>
-                                    }
+                        if (airFavStation === undefined) {
+                            return (
+                                    <ExpansionPanelDetails>
+                                        <Grid container spacing={1} direction="column"
+                                              justify="center"
+                                              alignItems="center">
+                                            <Grid container spacing={1} direction="row"
+                                                  justify="center"
+                                                  alignItems="center">
+                                                <Grid item xs={12}>
+                                                    <div className={classes.paper}>
+                                                        <Paper elevation={3}>
+                                                            <Grid container direction="column"
+                                                                  justify="flex-start"
+                                                                  style={{paddingLeft: 20, paddingTop: 10}}>
+                                                                <Grid item xs={12}>
+                                                                    <Typography color="primary">
+                                                                        <Box fontWeight="fontWeightRegular"
+                                                                             m={1} fontSize={27}>
+                                                                            Umbrales de alerta
+                                                                        </Box>
+                                                                    </Typography>
+                                                                </Grid>
+                                                            </Grid>
+                                                            <Grid container direction="column"
+                                                                  justify="flex-start"
+                                                                  style={{paddingLeft: 20, paddingBottom: 20}}>
+                                                                <Grid item xs={12}>
+                                                                    <Typography color="primary">
+                                                                        <Box fontWeight="fontWeightRegular"
+                                                                             m={1} fontSize={20}>
+                                                                            Debes seleccionar antes tu estación preferida
+                                                                        </Box>
+                                                                    </Typography>
+                                                                </Grid>
+                                                            </Grid>
+                                                        </Paper>
+                                                    </div>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </ExpansionPanelDetails>
+                            );
 
-                                    if (data !== undefined) {
-                                        return (
-                                            <ApolloConsumer>
-                                                {() => {
-                                                    return (
-                                                        <div>
-                                                            <ExpansionPanelDetails>
-                                                                <Grid container spacing={1} direction="column"
-                                                                      justify="center"
-                                                                      alignItems="center">
-                                                                    <Grid container spacing={1} direction="row"
+                        } else {
+                            return (
+                                <Mutation mutation={UPDATE_AIR}>
+                                    {(updateUserAirThreshold, {data, loading}) => {
+                                        if (loading) {
+                                            return <div style={{
+                                                position: "relative",
+                                                top: "15%",
+                                                left: "45%",
+                                                width: "100%",
+                                            }}>
+                                                <CircularProgress color="secondary"/>
+                                            </div>
+                                        }
+
+                                        if (data !== undefined) {
+                                            return (
+                                                <ApolloConsumer>
+                                                    {() => {
+                                                        return (
+                                                            <div>
+                                                                <ExpansionPanelDetails>
+                                                                    <Grid container spacing={1} direction="column"
                                                                           justify="center"
                                                                           alignItems="center">
-                                                                        <Grid item xs={12}>
-                                                                            <div className={classes.paper}>
-                                                                                <Paper elevation={3}>
-                                                                                    <Grid container direction="column"
-                                                                                          justify="flex-start"
-                                                                                          style={{
-                                                                                              paddingLeft: 20,
-                                                                                              paddingTop: 10,
-                                                                                              paddingBottom: 10
-                                                                                          }}>
-                                                                                        <Grid item xs={12}>
-                                                                                            <Typography color="primary">
-                                                                                                <Box
-                                                                                                    fontWeight="fontWeightRegular"
-                                                                                                    m={1} fontSize={23}>
-                                                                                                    Datos actualizados
-                                                                                                    correctamente
-                                                                                                </Box>
-                                                                                            </Typography>
+                                                                        <Grid container spacing={1} direction="row"
+                                                                              justify="center"
+                                                                              alignItems="center">
+                                                                            <Grid item xs={12}>
+                                                                                <div className={classes.paper}>
+                                                                                    <Paper elevation={3}>
+                                                                                        <Grid container
+                                                                                              direction="column"
+                                                                                              justify="flex-start"
+                                                                                              style={{
+                                                                                                  paddingLeft: 20,
+                                                                                                  paddingTop: 10,
+                                                                                                  paddingBottom: 10
+                                                                                              }}>
+                                                                                            <Grid item xs={12}>
+                                                                                                <Typography
+                                                                                                    color="primary">
+                                                                                                    <Box
+                                                                                                        fontWeight="fontWeightRegular"
+                                                                                                        m={1}
+                                                                                                        fontSize={23}>
+                                                                                                        Datos
+                                                                                                        actualizados
+                                                                                                        correctamente
+                                                                                                    </Box>
+                                                                                                </Typography>
+                                                                                            </Grid>
                                                                                         </Grid>
-                                                                                    </Grid>
-                                                                                </Paper>
-                                                                            </div>
+                                                                                    </Paper>
+                                                                                </div>
+                                                                            </Grid>
                                                                         </Grid>
                                                                     </Grid>
-                                                                </Grid>
-                                                            </ExpansionPanelDetails>
-                                                            <ExpansionPanelActions>
-                                                                <Button size="medium" color="secondary"
-                                                                        onClick={() => window.location.reload()}>
-                                                                    Aceptar
-                                                                </Button>
-                                                            </ExpansionPanelActions>
-                                                        </div>
-                                                    );
-                                                }}
-                                            </ApolloConsumer>
-                                        );
-                                    }
+                                                                </ExpansionPanelDetails>
+                                                                <ExpansionPanelActions>
+                                                                    <Button size="medium" color="secondary"
+                                                                            onClick={() => window.location.reload()}>
+                                                                        Aceptar
+                                                                    </Button>
+                                                                </ExpansionPanelActions>
+                                                            </div>
+                                                        );
+                                                    }}
+                                                </ApolloConsumer>
+                                            );
+                                        }
 
-                                    const handleSubmit = (e) => {
-                                        Object.keys(airThresholds).forEach(function (key) {
-                                            updateUserAirThreshold({
-                                                variables: {
-                                                    idAirStation: airFavStation,
-                                                    airContaminant: key,
-                                                    airValue: airThresholds[key]
-                                                }
+                                        const handleSubmit = (e) => {
+                                            Object.keys(airThresholds).forEach(function (key) {
+                                                updateUserAirThreshold({
+                                                    variables: {
+                                                        idAirStation: airFavStation,
+                                                        airContaminant: key,
+                                                        airValue: airThresholds[key]
+                                                    }
+                                                });
                                             });
-                                        });
-                                    }
+                                        }
 
 
-                                    return (
-                                        <form
-                                            noValidate
-                                            onSubmit={handleSubmit}
-                                        >
-                                            <ExpansionPanelDetails>
-                                                <Grid container spacing={1} direction="column"
-                                                      justify="center"
-                                                      alignItems="center">
-                                                    <Grid container spacing={1} direction="row"
+                                        return (
+                                            <form
+                                                noValidate
+                                                onSubmit={handleSubmit}
+                                            >
+                                                <ExpansionPanelDetails>
+                                                    <Grid container spacing={1} direction="column"
                                                           justify="center"
                                                           alignItems="center">
-                                                        <Grid item xs={12}>
-                                                            <div className={classes.paper}>
-                                                                <Paper elevation={3}>
-                                                                    <Grid container direction="column"
-                                                                          justify="flex-start"
-                                                                          style={{paddingLeft: 20, paddingTop: 10}}>
-                                                                        <Grid item xs={12}>
-                                                                            <Typography color="primary">
-                                                                                <Box fontWeight="fontWeightRegular"
-                                                                                     m={1} fontSize={27}>
-                                                                                    Umbrales de alerta
-                                                                                </Box>
-                                                                            </Typography>
+                                                        <Grid container spacing={1} direction="row"
+                                                              justify="center"
+                                                              alignItems="center">
+                                                            <Grid item xs={12}>
+                                                                <div className={classes.paper}>
+                                                                    <Paper elevation={3}>
+                                                                        <Grid container direction="column"
+                                                                              justify="flex-start"
+                                                                              style={{paddingLeft: 20, paddingTop: 10}}>
+                                                                            <Grid item xs={12}>
+                                                                                <Typography color="primary">
+                                                                                    <Box fontWeight="fontWeightRegular"
+                                                                                         m={1} fontSize={27}>
+                                                                                        Umbrales de alerta
+                                                                                    </Box>
+                                                                                </Typography>
+                                                                            </Grid>
                                                                         </Grid>
-                                                                    </Grid>
-                                                                    <List dense component="div" role="list"
-                                                                          className={classes.list}>
-                                                                        {contaminants.map((measure) => {
-                                                                            return (
-                                                                                <Grid container direction="column"
-                                                                                      justify="flex-start"
-                                                                                      style={{paddingLeft: 30}}>
-                                                                                    <Grid item xs={12}>
-                                                                                        <div className={classes.slider}>
-                                                                                            <Typography
-                                                                                                id="input-slider"
-                                                                                                gutterBottom>
-                                                                                                {measure}
-                                                                                            </Typography>
-                                                                                            <Grid container spacing={2}
-                                                                                                  alignItems="center">
-                                                                                                <Grid item xs>
-                                                                                                    <Slider
-                                                                                                        value={airThresholds[measure] || ''}
-                                                                                                        onChange={(event, newValue) => {
-                                                                                                            var airThresholdstemp = {...airThresholds}
-                                                                                                            airThresholdstemp[measure] = newValue
-                                                                                                            setAirThresholds(airThresholdstemp)
-                                                                                                        }}
-                                                                                                    />
+                                                                        <List dense component="div" role="list"
+                                                                              className={classes.list}>
+                                                                            {contaminants.map((measure) => {
+                                                                                return (
+                                                                                    <Grid container direction="column"
+                                                                                          justify="flex-start"
+                                                                                          style={{paddingLeft: 30}}>
+                                                                                        <Grid item xs={12}>
+                                                                                            <div
+                                                                                                className={classes.slider}>
+                                                                                                <Typography
+                                                                                                    id="input-slider"
+                                                                                                    gutterBottom>
+                                                                                                    {measure}
+                                                                                                </Typography>
+                                                                                                <Grid container
+                                                                                                      spacing={2}
+                                                                                                      alignItems="center">
+                                                                                                    <Grid item xs>
+                                                                                                        <Slider
+                                                                                                            value={airThresholds[measure] || ''}
+                                                                                                            onChange={(event, newValue) => {
+                                                                                                                var airThresholdstemp = {...airThresholds}
+                                                                                                                airThresholdstemp[measure] = newValue
+                                                                                                                setAirThresholds(airThresholdstemp)
+                                                                                                            }}
+                                                                                                        />
+                                                                                                    </Grid>
+                                                                                                    <Grid item>
+                                                                                                        <Input
+                                                                                                            className={classes.input}
+                                                                                                            value={airThresholds[measure] || '0'}
+                                                                                                            margin="dense"
+                                                                                                            onChange={(event) => {
+                                                                                                                var airThresholdstemp = {...airThresholds}
+                                                                                                                airThresholdstemp[measure] = event.target.value
+                                                                                                                setAirThresholds(airThresholdstemp)
+                                                                                                            }}
+                                                                                                            inputProps={{
+                                                                                                                step: 1,
+                                                                                                                min: 0,
+                                                                                                                max: 100,
+                                                                                                            }}
+                                                                                                        />
+                                                                                                    </Grid>
                                                                                                 </Grid>
-                                                                                                <Grid item>
-                                                                                                    <Input
-                                                                                                        className={classes.input}
-                                                                                                        value={airThresholds[measure] || '0'}
-                                                                                                        margin="dense"
-                                                                                                        onChange={(event) => {
-                                                                                                            var airThresholdstemp = {...airThresholds}
-                                                                                                            airThresholdstemp[measure] = event.target.value
-                                                                                                            setAirThresholds(airThresholdstemp)
-                                                                                                        }}
-                                                                                                        inputProps={{
-                                                                                                            step: 1,
-                                                                                                            min: 0,
-                                                                                                            max: 100,
-                                                                                                        }}
-                                                                                                    />
-                                                                                                </Grid>
-                                                                                            </Grid>
-                                                                                        </div>
+                                                                                            </div>
+                                                                                        </Grid>
                                                                                     </Grid>
-                                                                                </Grid>
-                                                                            )
-                                                                        })}
-                                                                    </List>
-                                                                </Paper>
-                                                            </div>
+                                                                                )
+                                                                            })}
+                                                                        </List>
+                                                                    </Paper>
+                                                                </div>
+                                                            </Grid>
                                                         </Grid>
                                                     </Grid>
-                                                </Grid>
-                                            </ExpansionPanelDetails>
-                                            <ExpansionPanelActions>
-                                                <Button size="medium" style={{color: "white"}}
-                                                        onClick={() => window.location.reload()}>Cancelar</Button>
-                                                <Button size="medium" color="secondary" type="submit">
-                                                    Guardar
-                                                </Button>
-                                            </ExpansionPanelActions>
-                                        </form>
-                                    );
-                                }}
-                            </Mutation>
-                        );
+                                                </ExpansionPanelDetails>
+                                                <ExpansionPanelActions>
+                                                    <Button size="medium" style={{color: "white"}}
+                                                            onClick={() => window.location.reload()}>Cancelar</Button>
+                                                    <Button size="medium" color="secondary" type="submit">
+                                                        Guardar
+                                                    </Button>
+                                                </ExpansionPanelActions>
+                                            </form>
+                                        );
+                                    }}
+                                </Mutation>
+                            );
+                        }
                     }
                 }
                 }

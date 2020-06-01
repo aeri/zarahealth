@@ -138,15 +138,12 @@ function PollenAlertThresholds() {
                         return <h2 style={{color: "white"}}>Error: {JSON.stringify(error)}</h2>;
                     }
                     if ((data !== undefined && data.retrieveUser !== null)) {
-
-                        if (!loaded) {
-                            if (data.retrieveUser.pollenThresholds !== undefined) {
-                                var pollenThresholdstemp = {}
-                                for (const threshold of data.retrieveUser.pollenThresholds) {
-                                    pollenThresholdstemp[threshold.id] = threshold.value;
-                                }
-                                setPollenThresholds(pollenThresholdstemp)
+                        if (!loaded && data.retrieveUser.pollenThresholds !== undefined && data.retrieveUser.pollenThresholds !== null) {
+                            var pollenThresholdstemp = {}
+                            for (const threshold of data.retrieveUser.pollenThresholds) {
+                                pollenThresholdstemp[threshold.id] = threshold.value;
                             }
+                            setPollenThresholds(pollenThresholdstemp)
                             setLoaded(true)
                         }
 
