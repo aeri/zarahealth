@@ -6,6 +6,7 @@ Complete Web App to recover environmental information from the city of Zaragoza 
 
 * [OAuth Authentication](https://zgz.docs.apiary.io/)
 * [GraphQL Documentation](https://aeri.github.io/NIVERSO/)
+* [Image Retriever Documentation](./IMAGE_RETRIEVER_API_DOC.md)
 
 
 ### API Status
