@@ -1,0 +1,41 @@
+name: Build and deploy frontend to Firebase Hosting
+
+on:
+  push:
+    branches: [ Front-end ]
+  pull_request:
+    branches: [ Front-end ]
+
+jobs:
+  build:
+    name: Build web artifact
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12'
+    - run: npm install
+    - run: npm run build
+    - name: Upload web release as artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: public
+        path: build
+  
+  deploy:
+    name: Deploy to Firebase
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/download-artifact@v1
+      with:
+        name: public
+        path: firebase/public
+    - name: Deploy to Firebase
+      uses: w9jds/firebase-action@master
+      with:
+        args: deploy --only hosting
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
