@@ -101,6 +101,7 @@ function AirFavStation() {
     }
   }, [data, error, loading]);
 
+<<<<<<< HEAD
   return (
     <div>
       <Query
@@ -137,6 +138,35 @@ function AirFavStation() {
                 );
               }
             }
+=======
+    return (
+        <div>
+            <Query query={GET_INFO_USER} variables={{
+                username: username,
+            }}>
+                {({data, loading, error}) => {
+                    if (loading) {
+                        return (
+                            <div style={{
+                                position: "absolute",
+                                top: "15%",
+                                left: "45%",
+                                width: "100%",
+                            }}>
+                                <CircularProgress color="secondary"/>
+                            </div>
+                        );
+                    }
+                    if (error) {
+                        return <h2 style={{color: "white"}}>Error: {JSON.stringify(error)}</h2>;
+                    }
+                    if ((data !== undefined && data.retrieveUser !== null)) {
+                        if (preferredAirStation === -1 && data.retrieveUser.preferredAirStation !== null && data.retrieveUser.preferredAirStation !== undefined) {
+                            if (data.retrieveUser.preferredAirStation !== null) {
+                                setPreferredAirStation(data.retrieveUser.preferredAirStation.id)
+                            }
+                        }
+>>>>>>> a8618aeb3583941ed1f092a7815d32eab3795a3b
 
             return (
               <Mutation mutation={UPDATE_AIR_STATION}>
