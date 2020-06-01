@@ -17,10 +17,12 @@ import { Query } from "@apollo/react-components";
 import gql from "graphql-tag";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import DownloadButton from "../DownloadButton";
+import DateFilterButton from "../DateFilterButton";
 
 const GET_AIR_STATION = gql`
   {
     retrieveAllAirStations {
+      id
       title
       records {
         contaminant
@@ -29,6 +31,21 @@ const GET_AIR_STATION = gql`
       }
     }
   }
+`;
+
+const FETCH_AIR_STATION_DATA = gql`
+  
+  query GetAirData($idAirStation: Int!, $startDate: String!, $endDate: String!) {
+    retrieveAirStation(idAirStation: $idAirStation, startDate: $startDate, endDate: $endDate) {
+      id
+      records {
+        contaminant
+        date
+        value
+      }
+    }
+  }
+  
 `;
 
 const ExpansionPanel = withStyles({
@@ -284,11 +301,25 @@ export default function AirStatisticsStations() {
                                 },
                               }}
                             />
-                            <DownloadButton
-                              kind="air"
-                              title={station.title}
-                              data={station.records}
-                            />
+                            <Grid
+                              container
+                              spacing={1}
+                              direction="row"
+                              justify="center"
+                              alignItems="flex-end"
+                            >
+                              <DownloadButton
+                                kind="air"
+                                title={station.title}
+                                data={station.records}
+                              />
+                              <DateFilterButton
+                                name={"la estación " + station.title}
+                                query={FETCH_AIR_STATION_DATA}
+                                idFieldName={"idAirStation"}
+                                id={station.id}
+                              />
+                            </Grid>
                           </Grid>
                         </List>
                       </ExpansionPanelDetails>
