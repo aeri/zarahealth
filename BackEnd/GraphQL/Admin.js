@@ -132,7 +132,7 @@ var retrieveMetrics = async function ({ }, context) {
         return count;
     })
 
-    activities = await ActivityModel.find({}, function (err, count) {
+    activities = await ActivityModel.find({}, 'action', function (err, count) {
         return count;
     })
 
