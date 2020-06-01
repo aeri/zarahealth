@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+- 12.16.1
+script:
+  - npm test
+deploy:
+  app: zgz
+  provider: heroku
+  skip_cleanup: true
+  api_key:
+    secure: UHBA8pzclF4aDqXF8Ec8OAB8JQhF0WAjFZNW9MNBPe+juu9Vm/2FdCc3XSFeinAufWu5I56Db9H0soW/cUt21kcFB+OqziK+VQGzTpNnMvkB3OG972FZXoUWiWtiprHEtBc4lvTg2sVyVX95FAk3vElX+eqL5+3I3w+G2k/W9ait1iiVFB1YmBzBxEByQf623mtFR5BgazNW9+ybzW62qhR2dZ/wXDYpxVkWJACN6C5of8egen2sjeJixRs2AtiblxCokJP/MNWSewP9pS+wvy5+qjNvj6VzRD7nUmQ8A9Ial7sEUCI98pS5L2+TWTkODQWax32BGtkM2XhuRP+ellFr+9Pw7HeN+ns3tOhnr9sQrA6It/+DZGkMvfv3T3mz1l4h3UJCkbcAdeCTzLjI0kHvwRFIkkdA5239rKHPALjSECJCj6J0Gl8uMu9RDCgY+BvG2Lsmfkl9eQ8ep8db5exfDuVY0++qEX1VclbnvME1v0tyW/pRRPd5zf+oPa3HtGpnDCDCLoMw4tXNmNGH32Zh878JsnP4j3uHsKAQ9p/0ViX/62voC6Lem4KT7pJOY4VsFgm7hxLVWj+rcNWfOOouwBEOiCWIpuXRDPLJ7e3C4YSY7LMlkylBKo0dkIlwniFtXkzDHffqimiBosPgvIcyeaPTmXh+PobPVzDRrB4=
+  on:
+    all_branches: true
+before_install:
+  - cd BackEnd
+  - openssl aes-256-cbc -K $encrypted_7f5be34d66f0_key -iv $encrypted_7f5be34d66f0_iv -in Secret.js.enc -out Secret.js -d
+install:
+  - npm install
+
