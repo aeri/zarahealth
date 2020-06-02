@@ -140,6 +140,7 @@ function AirAlertThresholds() {
                         return <h2 style={{color: "white"}}>Error: {JSON.stringify(error)}</h2>;
                     }
                     if ((data !== undefined && data.retrieveUser !== null)) {
+                        console.log('LLEGA')
                         if (airFavStation === undefined && data.retrieveUser.preferredAirStation !== null && data.retrieveUser.preferredAirStation !== undefined) {
                             setAirFavStation(data.retrieveUser.preferredAirStation.id)
                             var airThresholdstemp = {}
@@ -151,46 +152,46 @@ function AirAlertThresholds() {
 
                         if (airFavStation === undefined) {
                             return (
-                                    <ExpansionPanelDetails>
-                                        <Grid container spacing={1} direction="column"
+                                <ExpansionPanelDetails>
+                                    <Grid container spacing={1} direction="column"
+                                          justify="center"
+                                          alignItems="center">
+                                        <Grid container spacing={1} direction="row"
                                               justify="center"
                                               alignItems="center">
-                                            <Grid container spacing={1} direction="row"
-                                                  justify="center"
-                                                  alignItems="center">
-                                                <Grid item xs={12}>
-                                                    <div className={classes.paper}>
-                                                        <Paper elevation={3}>
-                                                            <Grid container direction="column"
-                                                                  justify="flex-start"
-                                                                  style={{paddingLeft: 20, paddingTop: 10}}>
-                                                                <Grid item xs={12}>
-                                                                    <Typography color="primary">
-                                                                        <Box fontWeight="fontWeightRegular"
-                                                                             m={1} fontSize={27}>
-                                                                            Umbrales de alerta
-                                                                        </Box>
-                                                                    </Typography>
-                                                                </Grid>
+                                            <Grid item xs={12}>
+                                                <div className={classes.paper}>
+                                                    <Paper elevation={3}>
+                                                        <Grid container direction="column"
+                                                              justify="flex-start"
+                                                              style={{paddingLeft: 20, paddingTop: 10}}>
+                                                            <Grid item xs={12}>
+                                                                <Typography color="primary">
+                                                                    <Box fontWeight="fontWeightRegular"
+                                                                         m={1} fontSize={27}>
+                                                                        Umbrales de alerta
+                                                                    </Box>
+                                                                </Typography>
                                                             </Grid>
-                                                            <Grid container direction="column"
-                                                                  justify="flex-start"
-                                                                  style={{paddingLeft: 20, paddingBottom: 20}}>
-                                                                <Grid item xs={12}>
-                                                                    <Typography color="primary">
-                                                                        <Box fontWeight="fontWeightRegular"
-                                                                             m={1} fontSize={20}>
-                                                                            Debes seleccionar antes tu estación preferida
-                                                                        </Box>
-                                                                    </Typography>
-                                                                </Grid>
+                                                        </Grid>
+                                                        <Grid container direction="column"
+                                                              justify="flex-start"
+                                                              style={{paddingLeft: 20, paddingBottom: 20}}>
+                                                            <Grid item xs={12}>
+                                                                <Typography color="primary">
+                                                                    <Box fontWeight="fontWeightRegular"
+                                                                         m={1} fontSize={20}>
+                                                                        Debes seleccionar antes tu estación preferida
+                                                                    </Box>
+                                                                </Typography>
                                                             </Grid>
-                                                        </Paper>
-                                                    </div>
-                                                </Grid>
+                                                        </Grid>
+                                                    </Paper>
+                                                </div>
                                             </Grid>
                                         </Grid>
-                                    </ExpansionPanelDetails>
+                                    </Grid>
+                                </ExpansionPanelDetails>
                             );
 
                         } else {

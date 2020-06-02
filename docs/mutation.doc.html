@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="./styles/graphdoc.css" />
+    <title>Mutation</title>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet"><link type="text/css" rel="stylesheet" href="./assets/code.css" /><script src="./assets/line-link.js"></script><link type="text/css" rel="stylesheet" href="./assets/require-by.css" />
+</head>
+<body class="slds-scrollable--y">
+    <nav class="slds-grid slds-grid--vertical slds-col--rule-right">
+        <header class="slds-p-around--medium slds-col slds-shrik slds-grow-none">
+            <button class="slds-button slds-button--icon slds-float--right js-toggle-navigation less-than-medium">
+                <i class="material-icons">close</i>
+            </button>
+                <h3 class="slds-text-heading--medium"><a href="./">GraphQL Schema</a></h3>
+            <div class="slds-p-top--small">
+                <input id="type-search" type="text" placeholder="Search a type" autofocus="" class="slds-input" />
+            </div>
+        </header>
+        <div id="navication-scroll" class="slds-scrollable--y slds-col slds-grow">
+            <div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+                <h4 class="slds-text-title--caps slds-p-around--medium">Schema</h4>
+                <ul>
+                    <li  title="Query">
+                        <a href="query.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            Query
+                        </a>
+                    </li>
+                    <li class="slds-is-active" title="Mutation">
+                        <a href="mutation.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            Mutation
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+                <h4 class="slds-text-title--caps slds-p-around--medium">Scalars</h4>
+                <ul>
+                    <li  title="Boolean">
+                        <a href="boolean.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            Boolean
+                        </a>
+                    </li>
+                    <li  title="Float">
+                        <a href="float.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            Float
+                        </a>
+                    </li>
+                    <li  title="Int">
+                        <a href="int.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            Int
+                        </a>
+                    </li>
+                    <li  title="String">
+                        <a href="string.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            String
+                        </a>
+                    </li>
+                    <li  title="Upload">
+                        <a href="upload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            Upload
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+                <h4 class="slds-text-title--caps slds-p-around--medium">Enums</h4>
+                <ul>
+                    <li  title="Contaminant">
+                        <a href="contaminant.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            Contaminant
+                        </a>
+                    </li>
+                    <li  title="Opinion">
+                        <a href="opinion.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            Opinion
+                        </a>
+                    </li>
+                    <li  title="UserStatus">
+                        <a href="userstatus.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            UserStatus
+                        </a>
+                    </li>
+                    <li  title="__DirectiveLocation">
+                        <a href="directivelocation.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            __DirectiveLocation
+                        </a>
+                    </li>
+                    <li  title="__TypeKind">
+                        <a href="typekind.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            __TypeKind
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+                <h4 class="slds-text-title--caps slds-p-around--medium">Objects</h4>
+                <ul>
+                    <li  title="Activity">
+                        <a href="activity.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            Activity
+                        </a>
+                    </li>
+                    <li  title="AirRecord">
+                        <a href="airrecord.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            AirRecord
+                        </a>
+                    </li>
+                    <li  title="AirStation">
+                        <a href="airstation.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            AirStation
+                        </a>
+                    </li>
+                    <li  title="AirStationThresholds">
+                        <a href="airstationthresholds.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            AirStationThresholds
+                        </a>
+                    </li>
+                    <li  title="Comment">
+                        <a href="comment.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            Comment
+                        </a>
+                    </li>
+                    <li  title="Feed">
+                        <a href="feed.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            Feed
+                        </a>
+                    </li>
+                    <li  title="Image">
+                        <a href="image.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            Image
+                        </a>
+                    </li>
+                    <li  title="Metrics">
+                        <a href="metrics.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            Metrics
+                        </a>
+                    </li>
+                    <li  title="Point">
+                        <a href="point.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            Point
+                        </a>
+                    </li>
+                    <li  title="PollenMeasure">
+                        <a href="pollenmeasure.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            PollenMeasure
+                        </a>
+                    </li>
+                    <li  title="PollenRecord">
+                        <a href="pollenrecord.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            PollenRecord
+                        </a>
+                    </li>
+                    <li  title="PollenThreshold">
+                        <a href="pollenthreshold.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            PollenThreshold
+                        </a>
+                    </li>
+                    <li  title="Settings">
+                        <a href="settings.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            Settings
+                        </a>
+                    </li>
+                    <li  title="User">
+                        <a href="user.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            User
+                        </a>
+                    </li>
+                    <li  title="UserAirStation">
+                        <a href="userairstation.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            UserAirStation
+                        </a>
+                    </li>
+                    <li  title="WaterRecord">
+                        <a href="waterrecord.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            WaterRecord
+                        </a>
+                    </li>
+                    <li  title="WaterStation">
+                        <a href="waterstation.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            WaterStation
+                        </a>
+                    </li>
+                    <li  title="Weather">
+                        <a href="weather.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            Weather
+                        </a>
+                    </li>
+                    <li  title="__Directive">
+                        <a href="directive.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            __Directive
+                        </a>
+                    </li>
+                    <li  title="__EnumValue">
+                        <a href="enumvalue.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            __EnumValue
+                        </a>
+                    </li>
+                    <li  title="__Field">
+                        <a href="field.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            __Field
+                        </a>
+                    </li>
+                    <li  title="__InputValue">
+                        <a href="inputvalue.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            __InputValue
+                        </a>
+                    </li>
+                    <li  title="__Schema">
+                        <a href="schema.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            __Schema
+                        </a>
+                    </li>
+                    <li  title="__Type">
+                        <a href="type.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            __Type
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+                <h4 class="slds-text-title--caps slds-p-around--medium">Directives</h4>
+                <ul>
+                    <li  title="deprecated">
+                        <a href="deprecated.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            deprecated
+                        </a>
+                    </li>
+                    <li  title="include">
+                        <a href="include.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            include
+                        </a>
+                    </li>
+                    <li  title="skip">
+                        <a href="skip.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                            skip
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main><section class="title slds-theme--inverse">
+              <div class="container slds-grid">
+                  <div>
+                  <button class="slds-button js-toggle-navigation less-than-medium">
+                      <i class="material-icons slds-button__icon slds-button__icon--left">menu</i>
+                      <span class="slds-text-title--caps">Types</span>
+                  </button>
+                  </div>
+                  </div>
+              </div>
+              <div class="container">
+                  <p class="slds-text-title--caps slds-text-color--weak">OBJECT</p>
+                  <h1 class="slds-text-heading--large">Mutation</h1>
+                  <div class="slds-text-body--regular"></div>
+              </div>
+          </section>
+          <section>
+              <div class="container">
+                  <h2 id="graphql-schema-definition" class="graphdoc-section__title slds-text-heading--medium slds-m-top--small">
+                      <a href="#graphql-schema-definition">
+                          <i class="material-icons">link</i>
+                      </a>
+                      GraphQL Schema definition
+                  </h2>
+                  <code class="highlight"><table class="code"><tbody><tr class="row"><td id="L1" class="td-index">1</td><td id="LC1" class="td-code"><span class="keyword operator ts">type</span> <span class="identifier">Mutation</span> {</td></tr><tr class="row"><td id="L2" class="td-index">2</td><td id="LC2" class="td-code"></td></tr><tr class="row"><td id="L3" class="td-index">3</td><td id="LC3" class="td-code"><span class="tab"><span class="comment line">#   A mutation to register an User</span></span></td></tr><tr class="row"><td id="L4" class="td-index">4</td><td id="LC4" class="td-code"><span class="tab"><span class="comment line"># </span></span></td></tr><tr class="row"><td id="L5" class="td-index">5</td><td id="LC5" class="td-code"><span class="tab"><span class="comment line"># Arguments</span></span></td></tr><tr class="row"><td id="L6" class="td-index">6</td><td id="LC6" class="td-code"><span class="tab"><span class="comment line">#   <strong>username</strong>: Unique User identifier</span></span></td></tr><tr class="row"><td id="L7" class="td-index">7</td><td id="LC7" class="td-code"><span class="tab"><span class="comment line">#   <strong>name</strong>: User's full name</span></span></td></tr><tr class="row"><td id="L8" class="td-index">8</td><td id="LC8" class="td-code"><span class="tab"><span class="comment line">#   <strong>email</strong>: Unique User's e-mail</span></span></td></tr><tr class="row"><td id="L9" class="td-index">9</td><td id="LC9" class="td-code"><span class="tab"><span class="comment line">#   <strong>password</strong>: User password</span></span></td></tr><tr class="row"><td id="L10" class="td-index">10</td><td id="LC10" class="td-code"><span class="tab"><span class="meta">createUser</span>(</span></td></tr><tr class="row"><td id="L11" class="td-index">11</td><td id="LC11" class="td-code"><span class="tab"><span class="tab"><span class="meta">username</span>: <a class="support type" href="string.doc.html">String</a>!,</span></span></td></tr><tr class="row"><td id="L12" class="td-index">12</td><td id="LC12" class="td-code"><span class="tab"><span class="tab"><span class="meta">name</span>: <a class="support type" href="string.doc.html">String</a>!,</span></span></td></tr><tr class="row"><td id="L13" class="td-index">13</td><td id="LC13" class="td-code"><span class="tab"><span class="tab"><span class="meta">email</span>: <a class="support type" href="string.doc.html">String</a>!,</span></span></td></tr><tr class="row"><td id="L14" class="td-index">14</td><td id="LC14" class="td-code"><span class="tab"><span class="tab"><span class="meta">password</span>: <a class="support type" href="string.doc.html">String</a>!</span></span></td></tr><tr class="row"><td id="L15" class="td-index">15</td><td id="LC15" class="td-code"><span class="tab">): <a class="support type" href="user.doc.html">User</a> </span></td></tr><tr class="row"><td id="L16" class="td-index">16</td><td id="LC16" class="td-code"></td></tr><tr class="row"><td id="L17" class="td-index">17</td><td id="LC17" class="td-code"><span class="tab"><span class="comment line">#   A mutation to update User data (Only internal user)</span></span></td></tr><tr class="row"><td id="L18" class="td-index">18</td><td id="LC18" class="td-code"><span class="tab"><span class="comment line"># </span></span></td></tr><tr class="row"><td id="L19" class="td-index">19</td><td id="LC19" class="td-code"><span class="tab"><span class="comment line"># Arguments</span></span></td></tr><tr class="row"><td id="L20" class="td-index">20</td><td id="LC20" class="td-code"><span class="tab"><span class="comment line">#   <strong>name</strong>: The new name of the User</span></span></td></tr><tr class="row"><td id="L21" class="td-index">21</td><td id="LC21" class="td-code"><span class="tab"><span class="comment line">#   <strong>password</strong>: The new password of the User</span></span></td></tr><tr class="row"><td id="L22" class="td-index">22</td><td id="LC22" class="td-code"><span class="tab"><span class="comment line">#   <strong>email</strong>: The new email of the User</span></span></td></tr><tr class="row"><td id="L23" class="td-index">23</td><td id="LC23" class="td-code"><span class="tab"><span class="meta">updateUser</span>(<span class="meta">name</span>: <a class="support type" href="string.doc.html">String</a>, <span class="meta">password</span>: <a class="support type" href="string.doc.html">String</a>, <span class="meta">email</span>: <a class="support type" href="string.doc.html">String</a>): <a class="support type" href="user.doc.html">User</a> </span></td></tr><tr class="row"><td id="L24" class="td-index">24</td><td id="LC24" class="td-code"></td></tr><tr class="row"><td id="L25" class="td-index">25</td><td id="LC25" class="td-code"><span class="tab"><span class="comment line">#   A mutation to upload the user profile picture</span></span></td></tr><tr class="row"><td id="L26" class="td-index">26</td><td id="LC26" class="td-code"><span class="tab"><span class="comment line"># </span></span></td></tr><tr class="row"><td id="L27" class="td-index">27</td><td id="LC27" class="td-code"><span class="tab"><span class="comment line"># Arguments</span></span></td></tr><tr class="row"><td id="L28" class="td-index">28</td><td id="LC28" class="td-code"><span class="tab"><span class="comment line">#   <strong>image</strong>: Picture upload in a multipart upload request</span></span></td></tr><tr class="row"><td id="L29" class="td-index">29</td><td id="LC29" class="td-code"><span class="tab"><span class="meta">uploadUserImage</span>(<span class="meta">image</span>: <a class="support type" href="upload.doc.html">Upload</a>): <a class="support type" href="image.doc.html">Image</a> </span></td></tr><tr class="row"><td id="L30" class="td-index">30</td><td id="LC30" class="td-code"></td></tr><tr class="row"><td id="L31" class="td-index">31</td><td id="LC31" class="td-code"><span class="tab"><span class="comment line">#   A mutation to update the attribute csvDownloadEnabled of the User</span></span></td></tr><tr class="row"><td id="L32" class="td-index">32</td><td id="LC32" class="td-code"><span class="tab"><span class="comment line"># </span></span></td></tr><tr class="row"><td id="L33" class="td-index">33</td><td id="LC33" class="td-code"><span class="tab"><span class="comment line"># Arguments</span></span></td></tr><tr class="row"><td id="L34" class="td-index">34</td><td id="LC34" class="td-code"><span class="tab"><span class="comment line">#   <strong>csvDownloadEnabled</strong>: Attribute csvDownloadEnabled</span></span></td></tr><tr class="row"><td id="L35" class="td-index">35</td><td id="LC35" class="td-code"><span class="tab"><span class="meta">updateCsvDownloadEnabled</span>(<span class="meta">csvDownloadEnabled</span>: <a class="support type" href="boolean.doc.html">Boolean</a>!): <a class="support type" href="user.doc.html">User</a> </span></td></tr><tr class="row"><td id="L36" class="td-index">36</td><td id="LC36" class="td-code"></td></tr><tr class="row"><td id="L37" class="td-index">37</td><td id="LC37" class="td-code"><span class="tab"><span class="comment line">#   A mutation to update the attribute preferredAirStation of the User</span></span></td></tr><tr class="row"><td id="L38" class="td-index">38</td><td id="LC38" class="td-code"><span class="tab"><span class="comment line"># </span></span></td></tr><tr class="row"><td id="L39" class="td-index">39</td><td id="LC39" class="td-code"><span class="tab"><span class="comment line"># Arguments</span></span></td></tr><tr class="row"><td id="L40" class="td-index">40</td><td id="LC40" class="td-code"><span class="tab"><span class="comment line">#   <strong>idAirStation</strong>: Attribute idAirStation</span></span></td></tr><tr class="row"><td id="L41" class="td-index">41</td><td id="LC41" class="td-code"><span class="tab"><span class="meta">updateUserAirStation</span>(<span class="meta">idAirStation</span>: <a class="support type" href="int.doc.html">Int</a>!): <a class="support type" href="user.doc.html">User</a> </span></td></tr><tr class="row"><td id="L42" class="td-index">42</td><td id="LC42" class="td-code"></td></tr><tr class="row"><td id="L43" class="td-index">43</td><td id="LC43" class="td-code"><span class="tab"><span class="comment line">#   A mutation to update the attribute preferredWaterStation of the User</span></span></td></tr><tr class="row"><td id="L44" class="td-index">44</td><td id="LC44" class="td-code"><span class="tab"><span class="comment line"># </span></span></td></tr><tr class="row"><td id="L45" class="td-index">45</td><td id="LC45" class="td-code"><span class="tab"><span class="comment line"># Arguments</span></span></td></tr><tr class="row"><td id="L46" class="td-index">46</td><td id="LC46" class="td-code"><span class="tab"><span class="comment line">#   <strong>idWaterStation</strong>: Attribute idWaterStation</span></span></td></tr><tr class="row"><td id="L47" class="td-index">47</td><td id="LC47" class="td-code"><span class="tab"><span class="meta">updateUserWaterStation</span>(<span class="meta">idWaterStation</span>: <a class="support type" href="int.doc.html">Int</a>!): <a class="support type" href="user.doc.html">User</a> </span></td></tr><tr class="row"><td id="L48" class="td-index">48</td><td id="LC48" class="td-code"></td></tr><tr class="row"><td id="L49" class="td-index">49</td><td id="LC49" class="td-code"><span class="tab"><span class="comment line">#   A mutation to update the attribute pollenThreshold of the User</span></span></td></tr><tr class="row"><td id="L50" class="td-index">50</td><td id="LC50" class="td-code"><span class="tab"><span class="comment line"># </span></span></td></tr><tr class="row"><td id="L51" class="td-index">51</td><td id="LC51" class="td-code"><span class="tab"><span class="comment line"># Arguments</span></span></td></tr><tr class="row"><td id="L52" class="td-index">52</td><td id="LC52" class="td-code"><span class="tab"><span class="comment line">#   <strong>idPollenMeasure</strong>: Attribute idPollenMeasure</span></span></td></tr><tr class="row"><td id="L53" class="td-index">53</td><td id="LC53" class="td-code"><span class="tab"><span class="comment line">#   <strong>pollenValue</strong>: Threshold value for the pollen</span></span></td></tr><tr class="row"><td id="L54" class="td-index">54</td><td id="LC54" class="td-code"><span class="tab"><span class="meta">updateUserPollenThreshold</span>(</span></td></tr><tr class="row"><td id="L55" class="td-index">55</td><td id="LC55" class="td-code"><span class="tab"><span class="tab"><span class="meta">idPollenMeasure</span>: <a class="support type" href="string.doc.html">String</a>!,</span></span></td></tr><tr class="row"><td id="L56" class="td-index">56</td><td id="LC56" class="td-code"><span class="tab"><span class="tab"><span class="meta">pollenValue</span>: <a class="support type" href="string.doc.html">String</a>!</span></span></td></tr><tr class="row"><td id="L57" class="td-index">57</td><td id="LC57" class="td-code"><span class="tab">): <a class="support type" href="user.doc.html">User</a> </span></td></tr><tr class="row"><td id="L58" class="td-index">58</td><td id="LC58" class="td-code"></td></tr><tr class="row"><td id="L59" class="td-index">59</td><td id="LC59" class="td-code"><span class="tab"><span class="comment line">#   A mutation to update the attribute pollenThreshold of the User</span></span></td></tr><tr class="row"><td id="L60" class="td-index">60</td><td id="LC60" class="td-code"><span class="tab"><span class="comment line"># </span></span></td></tr><tr class="row"><td id="L61" class="td-index">61</td><td id="LC61" class="td-code"><span class="tab"><span class="comment line"># Arguments</span></span></td></tr><tr class="row"><td id="L62" class="td-index">62</td><td id="LC62" class="td-code"><span class="tab"><span class="comment line">#   <strong>idAirStation</strong>: Attribute idAirStation</span></span></td></tr><tr class="row"><td id="L63" class="td-index">63</td><td id="LC63" class="td-code"><span class="tab"><span class="comment line">#   <strong>airContaminant</strong>: Type of contaminant for the air</span></span></td></tr><tr class="row"><td id="L64" class="td-index">64</td><td id="LC64" class="td-code"><span class="tab"><span class="comment line">#   <strong>airValue</strong>: Threshold value for the air value</span></span></td></tr><tr class="row"><td id="L65" class="td-index">65</td><td id="LC65" class="td-code"><span class="tab"><span class="meta">updateUserAirThreshold</span>(</span></td></tr><tr class="row"><td id="L66" class="td-index">66</td><td id="LC66" class="td-code"><span class="tab"><span class="tab"><span class="meta">idAirStation</span>: <a class="support type" href="int.doc.html">Int</a>!,</span></span></td></tr><tr class="row"><td id="L67" class="td-index">67</td><td id="LC67" class="td-code"><span class="tab"><span class="tab"><span class="meta">airContaminant</span>: <a class="support type" href="contaminant.doc.html">Contaminant</a>!,</span></span></td></tr><tr class="row"><td id="L68" class="td-index">68</td><td id="LC68" class="td-code"><span class="tab"><span class="tab"><span class="meta">airValue</span>: <a class="support type" href="float.doc.html">Float</a>!</span></span></td></tr><tr class="row"><td id="L69" class="td-index">69</td><td id="LC69" class="td-code"><span class="tab">): <a class="support type" href="user.doc.html">User</a> </span></td></tr><tr class="row"><td id="L70" class="td-index">70</td><td id="LC70" class="td-code"></td></tr><tr class="row"><td id="L71" class="td-index">71</td><td id="LC71" class="td-code"><span class="tab"><span class="comment line">#   A mutation to create a Feed</span></span></td></tr><tr class="row"><td id="L72" class="td-index">72</td><td id="LC72" class="td-code"><span class="tab"><span class="comment line"># </span></span></td></tr><tr class="row"><td id="L73" class="td-index">73</td><td id="LC73" class="td-code"><span class="tab"><span class="comment line"># Arguments</span></span></td></tr><tr class="row"><td id="L74" class="td-index">74</td><td id="LC74" class="td-code"><span class="tab"><span class="comment line">#   <strong>title</strong>: Title of the feeed</span></span></td></tr><tr class="row"><td id="L75" class="td-index">75</td><td id="LC75" class="td-code"><span class="tab"><span class="comment line">#   <strong>body</strong>: Body text of the feed</span></span></td></tr><tr class="row"><td id="L76" class="td-index">76</td><td id="LC76" class="td-code"><span class="tab"><span class="comment line">#   <strong>pictures</strong>: Pictures upload of the feed in a multipart upload </span></span></td></tr><tr class="row"><td id="L77" class="td-index">77</td><td id="LC77" class="td-code"><span class="tab"><span class="comment line">#   request</span></span></td></tr><tr class="row"><td id="L78" class="td-index">78</td><td id="LC78" class="td-code"><span class="tab"><span class="meta">submitFeed</span>(<span class="meta">title</span>: <a class="support type" href="string.doc.html">String</a>!, <span class="meta">body</span>: <a class="support type" href="string.doc.html">String</a>!, <span class="meta">pictures</span>: [<a class="support type" href="upload.doc.html">Upload</a>!]): <a class="support type" href="feed.doc.html">Feed</a> </span></td></tr><tr class="row"><td id="L79" class="td-index">79</td><td id="LC79" class="td-code"></td></tr><tr class="row"><td id="L80" class="td-index">80</td><td id="LC80" class="td-code"><span class="tab"><span class="comment line">#   A mutation to change a user's opinion about a feed</span></span></td></tr><tr class="row"><td id="L81" class="td-index">81</td><td id="LC81" class="td-code"><span class="tab"><span class="comment line"># </span></span></td></tr><tr class="row"><td id="L82" class="td-index">82</td><td id="LC82" class="td-code"><span class="tab"><span class="comment line"># Arguments</span></span></td></tr><tr class="row"><td id="L83" class="td-index">83</td><td id="LC83" class="td-code"><span class="tab"><span class="comment line">#   <strong>id</strong>: Unique id of the feed</span></span></td></tr><tr class="row"><td id="L84" class="td-index">84</td><td id="LC84" class="td-code"><span class="tab"><span class="comment line">#   <strong>status</strong>: Opinion of the user</span></span></td></tr><tr class="row"><td id="L85" class="td-index">85</td><td id="LC85" class="td-code"><span class="tab"><span class="meta">toggleFeedOpinion</span>(<span class="meta">id</span>: <a class="support type" href="string.doc.html">String</a>!, <span class="meta">status</span>: <a class="support type" href="opinion.doc.html">Opinion</a>!): <a class="support type" href="feed.doc.html">Feed</a> </span></td></tr><tr class="row"><td id="L86" class="td-index">86</td><td id="LC86" class="td-code"></td></tr><tr class="row"><td id="L87" class="td-index">87</td><td id="LC87" class="td-code"><span class="tab"><span class="comment line">#   A mutation to change a user's opinion about a feed</span></span></td></tr><tr class="row"><td id="L88" class="td-index">88</td><td id="LC88" class="td-code"><span class="tab"><span class="comment line"># </span></span></td></tr><tr class="row"><td id="L89" class="td-index">89</td><td id="LC89" class="td-code"><span class="tab"><span class="comment line"># Arguments</span></span></td></tr><tr class="row"><td id="L90" class="td-index">90</td><td id="LC90" class="td-code"><span class="tab"><span class="comment line">#   <strong>id</strong>: Unique identifier of the feed</span></span></td></tr><tr class="row"><td id="L91" class="td-index">91</td><td id="LC91" class="td-code"><span class="tab"><span class="comment line">#   <strong>body</strong>: Body of the comment</span></span></td></tr><tr class="row"><td id="L92" class="td-index">92</td><td id="LC92" class="td-code"><span class="tab"><span class="meta">submitComment</span>(<span class="meta">id</span>: <a class="support type" href="string.doc.html">String</a>!, <span class="meta">body</span>: <a class="support type" href="string.doc.html">String</a>!): <a class="support type" href="feed.doc.html">Feed</a> </span></td></tr><tr class="row"><td id="L93" class="td-index">93</td><td id="LC93" class="td-code"></td></tr><tr class="row"><td id="L94" class="td-index">94</td><td id="LC94" class="td-code"><span class="tab"><span class="comment line">#   A mutation to ban or unban an user (Admin only)</span></span></td></tr><tr class="row"><td id="L95" class="td-index">95</td><td id="LC95" class="td-code"><span class="tab"><span class="comment line"># </span></span></td></tr><tr class="row"><td id="L96" class="td-index">96</td><td id="LC96" class="td-code"><span class="tab"><span class="comment line"># Arguments</span></span></td></tr><tr class="row"><td id="L97" class="td-index">97</td><td id="LC97" class="td-code"><span class="tab"><span class="comment line">#   <strong>username</strong>: Unique User identifier to be retrieved</span></span></td></tr><tr class="row"><td id="L98" class="td-index">98</td><td id="LC98" class="td-code"><span class="tab"><span class="comment line">#   <strong>status</strong>: The status of the user account</span></span></td></tr><tr class="row"><td id="L99" class="td-index">99</td><td id="LC99" class="td-code"><span class="tab"><span class="meta">updateUserStatus</span>(<span class="meta">username</span>: <a class="support type" href="string.doc.html">String</a>!, <span class="meta">status</span>: <a class="support type" href="userstatus.doc.html">UserStatus</a>!): <a class="support type" href="user.doc.html">User</a> </span></td></tr><tr class="row"><td id="L100" class="td-index">100</td><td id="LC100" class="td-code"></td></tr><tr class="row"><td id="L101" class="td-index">101</td><td id="LC101" class="td-code"><span class="tab"><span class="comment line">#   A mutation to change the settings water status</span></span></td></tr><tr class="row"><td id="L102" class="td-index">102</td><td id="LC102" class="td-code"><span class="tab"><span class="comment line"># </span></span></td></tr><tr class="row"><td id="L103" class="td-index">103</td><td id="LC103" class="td-code"><span class="tab"><span class="comment line"># Arguments</span></span></td></tr><tr class="row"><td id="L104" class="td-index">104</td><td id="LC104" class="td-code"><span class="tab"><span class="comment line">#   <strong>id</strong>: The id of the configuration</span></span></td></tr><tr class="row"><td id="L105" class="td-index">105</td><td id="LC105" class="td-code"><span class="tab"><span class="comment line">#   <strong>waterStatus</strong>: The status of the user account</span></span></td></tr><tr class="row"><td id="L106" class="td-index">106</td><td id="LC106" class="td-code"><span class="tab"><span class="meta">updateWaterStatus</span>(<span class="meta">id</span>: <a class="support type" href="string.doc.html">String</a>!, <span class="meta">waterStatus</span>: <a class="support type" href="boolean.doc.html">Boolean</a>!): <a class="support type" href="settings.doc.html">Settings</a> </span></td></tr><tr class="row"><td id="L107" class="td-index">107</td><td id="LC107" class="td-code"></td></tr><tr class="row"><td id="L108" class="td-index">108</td><td id="LC108" class="td-code"><span class="tab"><span class="comment line">#   A mutation to change the settings air status</span></span></td></tr><tr class="row"><td id="L109" class="td-index">109</td><td id="LC109" class="td-code"><span class="tab"><span class="comment line"># </span></span></td></tr><tr class="row"><td id="L110" class="td-index">110</td><td id="LC110" class="td-code"><span class="tab"><span class="comment line"># Arguments</span></span></td></tr><tr class="row"><td id="L111" class="td-index">111</td><td id="LC111" class="td-code"><span class="tab"><span class="comment line">#   <strong>id</strong>: The id of the configuration</span></span></td></tr><tr class="row"><td id="L112" class="td-index">112</td><td id="LC112" class="td-code"><span class="tab"><span class="comment line">#   <strong>airStatus</strong>: The status of the user account</span></span></td></tr><tr class="row"><td id="L113" class="td-index">113</td><td id="LC113" class="td-code"><span class="tab"><span class="meta">updateAirStatus</span>(<span class="meta">id</span>: <a class="support type" href="string.doc.html">String</a>!, <span class="meta">airStatus</span>: <a class="support type" href="boolean.doc.html">Boolean</a>!): <a class="support type" href="settings.doc.html">Settings</a> </span></td></tr><tr class="row"><td id="L114" class="td-index">114</td><td id="LC114" class="td-code"></td></tr><tr class="row"><td id="L115" class="td-index">115</td><td id="LC115" class="td-code"><span class="tab"><span class="comment line">#   A mutation to change the settings pollen status</span></span></td></tr><tr class="row"><td id="L116" class="td-index">116</td><td id="LC116" class="td-code"><span class="tab"><span class="comment line"># </span></span></td></tr><tr class="row"><td id="L117" class="td-index">117</td><td id="LC117" class="td-code"><span class="tab"><span class="comment line"># Arguments</span></span></td></tr><tr class="row"><td id="L118" class="td-index">118</td><td id="LC118" class="td-code"><span class="tab"><span class="comment line">#   <strong>id</strong>: The id of the configuration</span></span></td></tr><tr class="row"><td id="L119" class="td-index">119</td><td id="LC119" class="td-code"><span class="tab"><span class="comment line">#   <strong>pollenStatus</strong>: The status of the user account</span></span></td></tr><tr class="row"><td id="L120" class="td-index">120</td><td id="LC120" class="td-code"><span class="tab"><span class="meta">updatePollenStatus</span>(<span class="meta">id</span>: <a class="support type" href="string.doc.html">String</a>!, <span class="meta">pollenStatus</span>: <a class="support type" href="boolean.doc.html">Boolean</a>!): <a class="support type" href="settings.doc.html">Settings</a> </span></td></tr><tr class="row"><td id="L121" class="td-index">121</td><td id="LC121" class="td-code"></td></tr><tr class="row"><td id="L122" class="td-index">122</td><td id="LC122" class="td-code">}</td></tr></tbody></table></code>
+              </div>
+          </section>
+          <section>
+              <div class="container">
+                  <h2 id="required-by" class="graphdoc-section__title slds-text-heading--medium slds-m-top--small">
+                      <a href="#required-by">
+                          <i class="material-icons">link</i>
+                      </a>
+                      Required by
+                  </h2>
+                  <div class="require-by anyone">This element is not required by anyone</div>
+              </div>
+          </section>
+          <footer>
+          <div class="container slds-p-around--large">
+              <p class="slds-text-align--right slds-text-title--caps">
+                  Generated with <a href="https://github.com/CodeSignal/graphqldoc#readme" target="_blank">graphqldoc 2.5.2</a>
+              </p>
+          </div>
+          </footer>
+</main>
+    <script src="./scripts/focus-active.js"></script>
+    <script src="./scripts/filter-types.js"></script>
+    <script src="./scripts/toggle-navigation.js"></script>
+</body>
