@@ -9,7 +9,7 @@ var lodash = require('lodash')
 async function pictures(req, res) {
   var type = req.query.type; // $_GET["type"]
   var id = req.query.id; // $_GET["id"]
-  var username = req.query.username; // $_GET["id"]
+  var username = req.query.username; // $_GET["username"]
   var execute = true;
 
   if (ObjectId.isValid(id) || username ) {
