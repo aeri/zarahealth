@@ -12,6 +12,9 @@ var logger = require('./logger.js');
 var retriever = require('./retriever.js');
 var google = require('./Google/Google.js');
 var cors = require('cors')
+var admin = require("firebase-admin");
+var secret = require('./Secret.js');
+
 var app = express();
 
 const { graphqlUploadExpress } = require('graphql-upload')
@@ -29,6 +32,13 @@ app.use(cors());
 
 //Conexion con la bbdd
 db.connect();
+
+admin.initializeApp({
+  credential: admin.credential.cert(secret.firebase),
+  databaseURL: "https://zarahealth.firebaseio.com"
+});
+
+
 
 //Uso de oauth
 app.oauth = new OAuth2Server({
@@ -127,3 +137,4 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
+module.exports.admin = admin;
