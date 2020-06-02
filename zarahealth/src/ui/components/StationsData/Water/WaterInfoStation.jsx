@@ -123,7 +123,7 @@ export default function WaterInfoStation() {
                 }
 
                 if (error) {
-                    return <h2 style={{color:"white"}}>Error: {JSON.stringify(error)}</h2>;
+                    return <h2 style={{color:"white"}}>The Water Data is not available at this moment</h2>;
                 }
                 if (data) {
                     let stations = data.retrieveAllWaterStations.sort((a, b) => a.title.localeCompare(b.title))
