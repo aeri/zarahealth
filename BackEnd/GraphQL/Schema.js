@@ -61,6 +61,12 @@ const schema = makeExecutableSchema({
           limit: Int!
         ): [Feed]
 
+        "A query to retrieve the broadcast alerts by descendent time"
+        retrieveAlerts(
+          "Number of alerts to be retrieved (100 maximum)"
+          limit: Int!
+        ): [Alert]
+
         "A query to retrieve all users (Admin only)"
         retrieveUsers(
           "Current page number"
@@ -197,6 +203,22 @@ const schema = makeExecutableSchema({
             "The status of the user account"
             pollenStatus: Boolean!
         ): Settings
+
+  "A mutation to suscribe a client token"
+      suscribeClient(
+          "The client token to suscribe"
+          token: String!,
+      ): Boolean
+
+    "A mutation to send a broadcast alert (Admin only)"
+        sendAlert(
+          "Title of the alert"
+          title: String!,
+          "Body text of the alert"
+          body: String!,
+          "Warning level of the alert"
+          level: Level
+        ): Alert
 
     },
     "A type that describes the user."
@@ -409,6 +431,25 @@ const schema = makeExecutableSchema({
       "Number of access to the activity"
       count: Int!
     }
+
+    "A type that describes a broadcast alert"
+    type Alert{
+      "Title of the alert"
+      title: String!,
+      "Body text of the alert"
+      body: String!,
+      "DateTime of the alert"
+      date: String!,
+      "Warning level of the alert"
+      level: Level
+    }
+
+    enum Level{
+      NOTICE
+      WARNING
+      ALERT
+    }
+
     enum Contaminant {
         "Nitrogen oxides"
         NOx

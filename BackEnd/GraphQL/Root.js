@@ -19,6 +19,8 @@ var root = {
     updateUserPollenThreshold: userFunctions.updateUserPollenThreshold,
     updateUserAirThreshold: userFunctions.updateUserAirThreshold,
     updateUser: userFunctions.updateUser,
+    retrieveAlerts: userFunctions.retrieveAlerts,
+    suscribeClient: userFunctions.suscribeClient,
     // Zaragoza external API functions
     retrieveWaterStation: waterStationFunctions.retrieveWaterStation,
     retrieveAllWaterStations: waterStationFunctions.retrieveAllWaterStations,
@@ -36,6 +38,7 @@ var root = {
     retrieveUsers: adminFunctions.retrieveUsers,
     updateUserStatus: adminFunctions.updateUserStatus,
     retrieveMetrics: adminFunctions.retrieveMetrics,
+    sendAlert: adminFunctions.sendAlert,
     // System settings functions
     retrieveSettings: settingsFunctions.retrieveSettings,
     updateWaterStatus: settingsFunctions.updateWaterStatus,
