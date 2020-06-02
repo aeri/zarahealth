@@ -3,7 +3,6 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import gql from "graphql-tag";
 import {useQuery} from "@apollo/react-hooks";
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 const styles = {
     width: "100%",
@@ -11,28 +10,26 @@ const styles = {
     position: "absolute"
 };
 
-const GET_AIR_STATION = gql`
+const GET_WATER_STATION = gql`
   {
-    retrieveAllAirStations {
+    retrieveAllWaterStations {
       title
       geometry{
         x
         y
       }
-      records {
-        contaminant
-        date
-        value
+      results {
+        result
       }
     }
   }
 `;
 
 
-const AirStationsMap = () => {
+const WaterStationsMap = () => {
     const [map, setMap] = useState(null);
     const mapContainer = useRef(null);
-    const {loading, data, error} = useQuery(GET_AIR_STATION);
+    const {loading, data, error} = useQuery(GET_WATER_STATION);
 
     useEffect(() => {
         mapboxgl.accessToken =
@@ -44,11 +41,11 @@ const AirStationsMap = () => {
                     container: mapContainer.current,
                     style: "mapbox://styles/javiermixture/ck7t9nmo415o51iobc79zmu8b", // stylesheet location
                     center: [-0.87734, 41.6560593],
-                    zoom: 13
+                    zoom: 11
                 });
                 var popup = new mapboxgl.Popup({ closeOnClick: false })
                     .setLngLat([-0.87734, 41.6560593])
-                    .setHTML('<h2>The Air Data is not available at this moment</h2>')
+                    .setHTML('<h2>The Water Data is not available at this moment</h2>')
                     .addTo(map);
 
                 map.on("load", () => {
@@ -59,43 +56,30 @@ const AirStationsMap = () => {
             if (!map) initializeMap({setMap, mapContainer});
         }
 
+
         if (data && !error) {
-            let stations = data.retrieveAllAirStations.sort((a, b) => a.title.localeCompare(b.title))
+            let stations = data.retrieveAllWaterStations.sort((a, b) => a.title.localeCompare(b.title))
 
             let points = []
             stations.map((station, index) => {
-                let recordsToDisplay = {};
-                for (let record of station.records) {
-                    let currentRecord = recordsToDisplay[record.contaminant];
-                    if (currentRecord === undefined) {
-                        recordsToDisplay[record.contaminant] = record;
-                    } else {
-                        if (
-                            Date.parse(record.date) > Date.parse(currentRecord.date)
-                        ) {
-                            recordsToDisplay[record.contaminant] = record;
-                        }
-                    }
-                }
-
-                recordsToDisplay = Object.values(recordsToDisplay);
 
                 let recordsHTML = '<ul>';
 
-                for (let record of recordsToDisplay) {
-                    recordsHTML = recordsHTML + "<li>" + record.contaminant + ': ' + record.value + "</li>";
+                for (let result of station.results) {
+                    recordsHTML = recordsHTML + "<li>" + result.result +  "</li>";
                 }
 
                 recordsHTML = recordsHTML + '</ul>';
-                if (station.geometry != null) {
+
+                if(station.geometry != null) {
                     points.push(
                         {
                             'type': 'Feature',
                             'geometry': {
                                 'type': 'Point',
                                 'coordinates': [
-                                    station.geometry.y,
-                                    station.geometry.x
+                                    station.geometry.x,
+                                    station.geometry.y
                                 ]
                             },
                             'properties': {
@@ -113,9 +97,8 @@ const AirStationsMap = () => {
                     container: mapContainer.current,
                     style: "mapbox://styles/javiermixture/ck7t9nmo415o51iobc79zmu8b",
                     center: [-0.87734, 41.6560593],
-                    zoom: 13
+                    zoom: 11
                 });
-
                 map.on("load", () => {
                     setMap(map);
                     map.resize();
@@ -169,4 +152,4 @@ const AirStationsMap = () => {
 }
 
 
-export default AirStationsMap;
+export default WaterStationsMap;

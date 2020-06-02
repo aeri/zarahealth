@@ -336,4 +336,3 @@ function PollenAlertThresholds() {
 
 export default PollenAlertThresholds;
 
-

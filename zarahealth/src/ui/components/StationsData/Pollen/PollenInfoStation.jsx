@@ -114,7 +114,7 @@ export default function PollenInfoSatation() {
                     }
 
                     if (error) {
-                        return <h2 style={{color:"white"}}>Error: {JSON.stringify(error)}</h2>;
+                        return <h2 style={{color:"white"}}>The Pollen Data is not available at this moment</h2>;
                     }
                     if (data) {
                         return (
