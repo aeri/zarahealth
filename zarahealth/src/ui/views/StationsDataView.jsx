@@ -17,6 +17,7 @@ import PollenInfoStation from "../components/StationsData/Pollen/PollenInfoStati
 import PollenStatisticsStation from "../components/StationsData/Pollen/PollenStatisticsStation";
 import WaterInfoStation from "../components/StationsData/Water/WaterInfoStation";
 import WaterStatisticsStation from "../components/StationsData/Water/WaterStatisticsStation";
+import WaterStationsMap from "../components/StationsData/Water/WaterStationsMap";
 
 
 const useStyles = makeStyles({
@@ -77,6 +78,7 @@ function StationsDataView() {
                             <Route path="/air/stats" component={AirStatisticsStation}/>
                             <Route path="/pollen/info" component={PollenInfoStation}/>
                             <Route path="/pollen/stats" component={PollenStatisticsStation}/>
+                            <Route path="/water/map" component={WaterStationsMap}/>
                             <Route path="/water/info" component={WaterInfoStation}/>
                             <Route path="/water/stats" component={WaterStatisticsStation}/>
                         </Switch>
@@ -86,7 +88,7 @@ function StationsDataView() {
 
             <div className={classes.bottom}>
                 <BottomNavigation value={value} onChange={handleChange} className={classes.barBack}>
-                    {parentPath === '/air' ?
+                    {parentPath === '/air' || parentPath === '/water' ?
                         <BottomNavigationAction className={classes.bar} label="Mapa" value="/map" icon={<MapIcon/>}
                                                 onClick={() => history.replace(parentPath + "/map")}/>
                         : null}
