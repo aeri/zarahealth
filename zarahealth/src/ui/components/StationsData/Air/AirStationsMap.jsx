@@ -3,6 +3,7 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import gql from "graphql-tag";
 import {useQuery} from "@apollo/react-hooks";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const styles = {
     width: "100%",
@@ -37,14 +38,19 @@ const AirStationsMap = () => {
         mapboxgl.accessToken =
             "pk.eyJ1IjoiamF2aWVybWl4dHVyZSIsImEiOiJjazk0a2ExenAwMXUzM2xueDZzdjA0MmhhIn0.WzvN6ta6Zux2obpUYz_yFw";
 
-        if (loading || error) {
+        if (error) {
             const initializeMap = ({setMap, mapContainer}) => {
                 const map = new mapboxgl.Map({
                     container: mapContainer.current,
                     style: "mapbox://styles/javiermixture/ck7t9nmo415o51iobc79zmu8b", // stylesheet location
                     center: [-0.87734, 41.6560593],
-                    zoom: 11
+                    zoom: 13
                 });
+                var popup = new mapboxgl.Popup({ closeOnClick: false })
+                    .setLngLat([-0.87734, 41.6560593])
+                    .setHTML('<h2>The Air Data is not available at this moment</h2>')
+                    .addTo(map);
+
                 map.on("load", () => {
                     setMap(map);
                     map.resize();
@@ -53,8 +59,7 @@ const AirStationsMap = () => {
             if (!map) initializeMap({setMap, mapContainer});
         }
 
-
-        if (data) {
+        if (data && !error) {
             let stations = data.retrieveAllAirStations.sort((a, b) => a.title.localeCompare(b.title))
 
             let points = []
@@ -78,28 +83,29 @@ const AirStationsMap = () => {
                 let recordsHTML = '<ul>';
 
                 for (let record of recordsToDisplay) {
-                    recordsHTML = recordsHTML + "<li>" + record.contaminant + ': '+ record.value + "</li>";
+                    recordsHTML = recordsHTML + "<li>" + record.contaminant + ': ' + record.value + "</li>";
                 }
 
                 recordsHTML = recordsHTML + '</ul>';
-
-                points.push(
-                    {
-                        'type': 'Feature',
-                        'geometry': {
-                            'type': 'Point',
-                            'coordinates': [
-                                station.geometry.y,
-                                station.geometry.x
-                            ]
-                        },
-                        'properties': {
-                            'title': station.title,
-                            'description': recordsHTML,
-                            'icon': 'campsite'
+                if (station.geometry != null) {
+                    points.push(
+                        {
+                            'type': 'Feature',
+                            'geometry': {
+                                'type': 'Point',
+                                'coordinates': [
+                                    station.geometry.y,
+                                    station.geometry.x
+                                ]
+                            },
+                            'properties': {
+                                'title': station.title,
+                                'description': recordsHTML,
+                                'icon': 'campsite'
+                            }
                         }
-                    }
-                )
+                    )
+                }
             })
 
             const initializeMap = ({setMap, mapContainer}) => {
@@ -109,6 +115,7 @@ const AirStationsMap = () => {
                     center: [-0.87734, 41.6560593],
                     zoom: 13
                 });
+
                 map.on("load", () => {
                     setMap(map);
                     map.resize();
