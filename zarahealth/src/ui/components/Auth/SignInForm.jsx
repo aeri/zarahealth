@@ -22,6 +22,9 @@ const GET_USER = gql`
       name
       username
       email
+      image {
+        _id
+      }
       csvDownloadEnabled
       isAdmin
     }

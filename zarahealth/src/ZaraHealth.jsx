@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
@@ -12,6 +12,11 @@ import SettingsView from "./ui/views/SettingsView";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import StationsDataView from "./ui/views/StationsDataView";
 import AdminView from "./ui/views/AdminView";
+import {
+  registerFCMToken,
+  registerFCMTokenRefreshCallback,
+  initializeFirebase,
+} from "./core/services/fcm";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,6 +39,11 @@ function ZaraHealth() {
     setMobileOpen(!mobileOpen);
   };
 
+  useEffect(() => {
+    initializeFirebase();
+    registerFCMToken();
+    registerFCMTokenRefreshCallback();
+  }, []);
 
   return (
     <Router history={history}>
