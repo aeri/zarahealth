@@ -8,7 +8,7 @@ import history from "../../../core/misc/history";
 import { ApolloConsumer } from "@apollo/react-components";
 
 function UserCard(props) {
-  console.log(JSON.stringify(props.currentUser))
+  console.log(JSON.stringify(props.currentUser));
   if (!props.isAuthenticated) {
     return (
       <div
@@ -35,21 +35,13 @@ function UserCard(props) {
     return (
       <CardHeader
         avatar={
-          props.currentUser.image !== undefined ? (
-            <Avatar
-              aria-label="avatar"
-              src={
-                "data:" +
-                props.currentUser.image.mimetype +
-                ";base64," +
-                props.currentUser.image.data
-              }
-            />
-          ) : (
-            <Avatar aria-label="avatar">
-              {props.currentUser.name.charAt(0)}
-            </Avatar>
-          )
+          <Avatar
+            aria-label="avatar"
+            src={
+              "https://zgz.herokuapp.com/file/picture?type=username&username=" +
+              props.currentUser.username
+            }
+          />
         }
         title={
           props.currentUser.name.length > 15

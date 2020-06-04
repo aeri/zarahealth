@@ -47,9 +47,13 @@ export default function Post({ post }) {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            {post.author.charAt(0)}
-          </Avatar>
+          <Avatar
+            aria-label="avatar"
+            src={
+              "https://zgz.herokuapp.com/file/picture?type=username&username=" +
+              post.author
+            }
+          />
         }
         title={post.author}
         subheader={DateTime.fromMillis(post.date * 1).toFormat(

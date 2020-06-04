@@ -12,7 +12,6 @@ import gql from "graphql-tag";
 import { ApolloConsumer } from "@apollo/react-components";
 import { Mutation } from "@apollo/react-components";
 
-
 const CREATE_USER = gql`
   mutation CreateUser(
     $username: String!
@@ -27,6 +26,9 @@ const CREATE_USER = gql`
       password: $password
     ) {
       name
+      image {
+        _id
+      }
       username
       email
       csvDownloadEnabled
@@ -54,7 +56,6 @@ export function SignUpForm() {
   const [candidateUsername, setCandidateUsername] = React.useState("");
   const [candidatePassword, setCandidatePassword] = React.useState("");
 
-
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
@@ -69,12 +70,14 @@ export function SignUpForm() {
                 <ApolloConsumer>
                   {(client) => {
                     client.clearStore();
-                    localStorage.removeItem('apollo-cache-persist');
+                    localStorage.removeItem("apollo-cache-persist");
                     handleUserAuthentication(
                       candidateUsername,
                       candidatePassword
                     ).then(() => {
-                      client.writeData({ data: { currentUser: data.createUser } });
+                      client.writeData({
+                        data: { currentUser: data.createUser },
+                      });
                     });
                     return (
                       <Grid container spacing={2}>

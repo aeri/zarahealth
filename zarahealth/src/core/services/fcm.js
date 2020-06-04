@@ -38,7 +38,7 @@ export function registerFCMToken() {
           .getToken()
           .then((currentToken) => {
             if (currentToken) {
-            //   console.log("Registriando token de FCM: ", currentToken);
+              //   console.log("Registriando token de FCM: ", currentToken);
               sendTokenToServer(currentToken);
             } else {
               console.log("No se ha obtenido el token de FCM");
@@ -67,7 +67,7 @@ export function registerFCMTokenRefreshCallback() {
       messaging
         .getToken()
         .then((refreshedToken) => {
-        //   console.log("Refrescando token de FCM");
+          //   console.log("Refrescando token de FCM");
           sendTokenToServer(refreshedToken);
         })
         .catch((err) => {

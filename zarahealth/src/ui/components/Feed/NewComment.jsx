@@ -41,9 +41,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
   },
-  avatar: {
-    backgroundColor: red[500],
-  },
 }));
 
 export default function NewComment(props) {
@@ -57,9 +54,13 @@ export default function NewComment(props) {
           <Card className={classes.root}>
             <CardHeader
               avatar={
-                <Avatar aria-label="recipe" className={classes.avatar}>
-                  {data.currentUser.username.charAt(0)}
-                </Avatar>
+                <Avatar
+                  aria-label="avatar"
+                  src={
+                    "https://zgz.herokuapp.com/file/picture?type=username&username=" +
+                    data.currentUser.username
+                  }
+                />
               }
               title={data.currentUser.username}
             />
