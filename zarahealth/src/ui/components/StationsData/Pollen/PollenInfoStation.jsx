@@ -136,14 +136,17 @@ export default function PollenInfoSatation() {
                                     >
                                         {data.retrieveAllPollenMeasures.map((element, index) => {
                                             return (
+                                                element.observation[0].value !== "nulo"?
                                                 <Grid item xs={6}>
                                                     <PollenCard
                                                         backgroundColor={getPollenStatusColor(element.observation[0].value)}
                                                         elementName={element.title}
-                                                        message={element.observation[0].value == "nulo" ? "no info" : element.observation[0].value}
+                                                        message={element.observation[0].value === "nulo" ? "no info" : element.observation[0].value}
                                                         lastUpdate={element.observation[0].publicationDate}
                                                     />
                                                 </Grid>
+                                                    :
+                                                    <div></div>
                                             );
                                         })}
                                     </Grid>
