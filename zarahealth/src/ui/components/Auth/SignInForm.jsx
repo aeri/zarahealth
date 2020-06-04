@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import { Container, CircularProgress } from "@material-ui/core";
+import {Container, CircularProgress, Box, Typography} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useForm } from "react-hook-form";
 import config from "../../../core/misc/config";
@@ -15,6 +15,8 @@ import { GoogleLogin } from "react-google-login";
 import gql from "graphql-tag";
 import { ApolloConsumer } from "@apollo/react-components";
 import { useLazyQuery } from "@apollo/react-hooks";
+import Grid from "@material-ui/core/Grid";
+import DialogContentText from "@material-ui/core/DialogContentText";
 
 const GET_USER = gql`
   query retrieveUser {
@@ -77,9 +79,13 @@ export function SignInForm() {
 
   if (error) {
     return (
-      <Container component="main" maxWidth="xs">
-        Ha ocurrido un error: {JSON.stringify(error)}
-      </Container>
+        <DialogContentText  align={"center"}>
+          <Typography component="div">
+            <Box fontWeight="fontWeightMedium" m={4} fontSize={18} color="black">
+              No se ha podido iniciar sesión
+            </Box>
+          </Typography>
+        </DialogContentText>
     );
   }
 
