@@ -66,13 +66,13 @@ function AdminUsers() {
                     updateQuery: (prev, { fetchMoreResult }) => {
                         if (
                             !fetchMoreResult ||
-                            fetchMoreResult.retrieveFeeds.length === 0
+                            fetchMoreResult.retrieveUsers.length === 0
                         ) {
                             setHasMoreData(false);
                             return prev;
                         }
                         return Object.assign({}, prev, {
-                            retrieveFeeds: [
+                            retrieveUsers: [
                                 ...prev.retrieveUsers,
                                 ...fetchMoreResult.retrieveUsers,
                             ],
