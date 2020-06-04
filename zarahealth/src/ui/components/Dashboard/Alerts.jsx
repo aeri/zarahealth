@@ -35,35 +35,42 @@ function Alerts() {
 
     return (
         <div className={classes.root}>
-            <List>
-                {alerts.map((alert) => {
-                    return (
-                        <Box m={1}>
-                            <Button variant="contained" size="large"
-                                    classes={{root: classes.button}}>
-                                <Grid container spacing={0} direction="row"
-                                      justify="center"
-                                      alignItems="center">
-                                    <Grid item xs={2}>
-                                        <WarningIcon color="secondary" className={classes.largeIcon}
-                                                     style={{fontSize: 60, verticalAlign: "middle",}}/>
-                                    </Grid>
-                                    <Grid item xs={10}>
-                                        <Typography component="div">
-                                            <Box fontWeight="fontWeightMedium" m={1} fontSize={20} color="#2f3542">
-                                                {alert.message}
-                                            </Box>
-                                            <Box fontWeight="fontWeightRegular" m={1} color="#2f3542">
-                                                {alert.station}
-                                            </Box>
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                            </Button>
-                        </Box>
-                    )
-                })}
-            </List>
+
+                <List>
+                    <Grid container spacing={1}>
+                    {alerts.map((alert) => {
+                        return (
+                            <Grid item xs={12} lg={6}>
+                                <Box m={1}>
+                                    <Button variant="contained" size="large"
+                                            classes={{root: classes.button}}>
+                                        <Grid container spacing={0} direction="row"
+                                              justify="center"
+                                              alignItems="center">
+                                            <Grid item xs={2}>
+                                                <WarningIcon color="secondary" className={classes.largeIcon}
+                                                             style={{fontSize: 60, verticalAlign: "middle",}}/>
+                                            </Grid>
+                                            <Grid item xs={10}>
+                                                <Typography component="div">
+                                                    <Box fontWeight="fontWeightMedium" m={1} fontSize={20}
+                                                         color="#2f3542">
+                                                        {alert.message}
+                                                    </Box>
+                                                    <Box fontWeight="fontWeightRegular" m={1} color="#2f3542">
+                                                        {alert.station}
+                                                    </Box>
+                                                </Typography>
+                                            </Grid>
+                                        </Grid>
+                                    </Button>
+                                </Box>
+                            </Grid>
+                        )
+                    })}
+                    </Grid>
+                </List>
+
         </div>
     );
 }
