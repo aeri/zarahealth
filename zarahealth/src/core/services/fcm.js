@@ -51,7 +51,7 @@ export function registerFCMToken() {
 
       messaging.onMessage((payload) => {
         console.log("Message received. ", payload);
-        alert(payload);
+        alert(payload.notification.title + '\n' + payload.notification.body);
       });
     });
 

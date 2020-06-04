@@ -92,12 +92,12 @@ export default function User({ user }) {
                 <CardHeader
                   avatar={
                     <Avatar
-                    aria-label="avatar"
-                    src={
-                      "https://zgz.herokuapp.com/file/picture?type=username&username=" +
-                      user.username
-                    }
-                  />
+                      aria-label="avatar"
+                      src={
+                        "https://zgz.herokuapp.com/file/picture?type=username&username=" +
+                        user.username
+                      }
+                    />
                   }
                   action={
                     user.status === "ENABLED" ? (

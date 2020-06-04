@@ -15,7 +15,7 @@ import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import { DateTime } from "luxon";
 import Comment from "./Comment";
 import NewComment from "./NewComment";
-import { Box, Divider } from "@material-ui/core";
+import { Box, Divider, CardMedia } from "@material-ui/core";
 import gql from "graphql-tag";
 import { Mutation } from "@apollo/react-components";
 
@@ -64,6 +64,16 @@ export default function Post({ post }) {
         <Typography variant="body2" color="textSecondary" component="p">
           {post.body}
         </Typography>
+        {post.pictures[0] !== undefined ? (
+          <CardMedia
+            style={{ height: 0, paddingTop: "56.25%", margin: "10px" }}
+            image={
+              "https://zgz.herokuapp.com/file/picture?type=feed&id=" +
+              post.pictures[0]._id
+            }
+            title={post.title}
+          />
+        ) : null}
       </CardContent>
       <CardActions disableSpacing>
         <Mutation

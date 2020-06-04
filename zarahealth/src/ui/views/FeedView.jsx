@@ -50,6 +50,9 @@ const FEED_QUERY = gql`
         body
         date
       }
+      pictures {
+        _id
+      }
     }
   }
 `;
@@ -60,7 +63,6 @@ function FeedView() {
   const [showNewPostDialog, setShowNewPostDialog] = useState(false);
   const [hasMoreData, setHasMoreData] = useState(true);
   const [isFetching, setIsFetching] = useState(false);
-
 
   const { data, loading, error, fetchMore } = useQuery(FEED_QUERY, {
     variables: {

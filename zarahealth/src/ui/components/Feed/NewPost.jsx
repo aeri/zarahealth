@@ -2,7 +2,6 @@ import React from "react";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import ImageUploader from "react-images-upload";
 import { useForm } from "react-hook-form";
 import gql from "graphql-tag";
 import { TextField, Button, makeStyles } from "@material-ui/core";
@@ -25,13 +24,16 @@ const FEED_QUERY = gql`
         body
         date
       }
+      pictures {
+        _id
+      }
     }
   }
 `;
 
 const ADD_POST = gql`
-  mutation SubmitFeed($title: String!, $body: String!) {
-    submitFeed(title: $title, body: $body) {
+  mutation SubmitFeed($title: String!, $body: String!, $pictures: [Upload!]) {
+    submitFeed(title: $title, body: $body, pictures: $pictures) {
       id
       title
       author
@@ -44,6 +46,9 @@ const ADD_POST = gql`
         author
         body
         date
+      }
+      pictures {
+        _id
       }
     }
   }
@@ -63,12 +68,20 @@ const useStyles = makeStyles((theme) => ({
 function NewPostDialog(props) {
   const classes = useStyles();
 
-  const [pictures, setPictures] = React.useState([]);
-  const onDrop = (picture) => {
-    setPictures([...pictures, picture]);
+  const { handleSubmit, register, errors } = useForm();
+  const [fileToUpload, setFileToUpload] = React.useState([]);
+
+  const handleChange = ({
+    target: {
+      validity,
+      files: [file],
+    },
+  }) => {
+    if (validity.valid) {
+      setFileToUpload([file]);
+    }
   };
 
-  const { handleSubmit, register, errors } = useForm();
   const [addPost] = useMutation(ADD_POST, {
     update(cache, { data: { submitFeed } }) {
       const { retrieveFeeds } = cache.readQuery({ query: FEED_QUERY });
@@ -98,7 +111,7 @@ function NewPostDialog(props) {
                 variables: {
                   title: data.title,
                   body: data.body,
-                  pictures: [],
+                  pictures: fileToUpload,
                 },
               });
             })}
@@ -131,13 +144,11 @@ function NewPostDialog(props) {
               autoFocus
               helperText={errors.body && "No has escrito nada"}
             />
-            <ImageUploader
-              {...props}
-              withIcon={true}
-              onChange={onDrop}
-              imgExtension={[".jpg", ".gif", ".png", ".gif"]}
-              buttonText={"Seleccionar imágenes"}
-              maxFileSize={5242880}
+            <input
+              type="file"
+              name="file"
+              ref={register}
+              onChange={handleChange}
             />
             <Button
               type="submit"
