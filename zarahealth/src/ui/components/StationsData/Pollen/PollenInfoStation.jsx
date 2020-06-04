@@ -31,47 +31,6 @@ const GET_POLLEN_STATION = gql`
 `;
 
 
-const ExpansionPanel = withStyles({
-    root: {
-        border: zaraHealthTheme.palette.primary.main,
-        boxShadow: "none",
-        "&:not(:last-child)": {
-            borderBottom: 0,
-        },
-        "&:before": {
-            display: "none",
-        },
-        "&$expanded": {
-            margin: "auto",
-        },
-    },
-    expanded: {},
-})(MuiExpansionPanel);
-
-const ExpansionPanelSummary = withStyles({
-    root: {
-        backgroundColor: "white",
-        borderBottom: "1px solid rgba(0, 0, 0, .125)",
-        marginBottom: -1,
-        minHeight: 70,
-        "&$expanded": {
-            minHeight: 70,
-        },
-    },
-    content: {
-        "&$expanded": {
-            margin: "12px 0",
-        },
-    },
-    expanded: {},
-})(MuiExpansionPanelSummary);
-
-const ExpansionPanelDetails = withStyles((theme) => ({
-    root: {
-        backgroundColor: zaraHealthTheme.palette.primary.main,
-        padding: theme.spacing(2),
-    },
-}))(MuiExpansionPanelDetails);
 
 const styles = {
     marginBottom: 70

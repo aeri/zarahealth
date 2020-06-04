@@ -18,6 +18,7 @@ import WaterFavStation from "../components/Settings/Water/WaterFavStation";
 import PollenAlertThresholds from "../components/Settings/Pollen/PollenAlertThresholds";
 import UserData from "../components/Settings/UserData";
 import UserDownload from "../components/Settings/UserDownload";
+import UserImage from "../components/Settings/UserImage";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -174,6 +175,7 @@ function SettingsView() {
                     </Grid>
                 </ExpansionPanelSummary>
                 <UserData/>
+                <UserImage/>
                 <UserDownload/>
             </ExpansionPanel>
         </div>
