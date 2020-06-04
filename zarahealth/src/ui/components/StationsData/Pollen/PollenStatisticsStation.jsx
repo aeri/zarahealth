@@ -15,6 +15,7 @@ import { Query } from "@apollo/react-components";
 import gql from "graphql-tag";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import DownloadButton from "../DownloadButton";
+import ErrorMessage from "../../common/ErrorMessage";
 
 const GET_ALL_POLLEN_STATIONS = gql`
   {
@@ -122,9 +123,7 @@ export default function PollenStatisticsStations() {
           }
 
           if (error) {
-            return (
-              <h2 style={{ color: "white" }}>The Pollen Data is not available at this moment</h2>
-            );
+            return <ErrorMessage message={'Datos no disponibles'}/>
           }
 
           if (data) {

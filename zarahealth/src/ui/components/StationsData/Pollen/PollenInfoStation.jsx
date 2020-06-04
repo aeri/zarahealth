@@ -11,6 +11,7 @@ import List from "@material-ui/core/List";
 
 import {Query} from "@apollo/react-components";
 import gql from "graphql-tag";
+import ErrorMessage from "../../common/ErrorMessage";
 
 const GET_POLLEN_STATION = gql`
   {
@@ -114,7 +115,7 @@ export default function PollenInfoSatation() {
                     }
 
                     if (error) {
-                        return <h2 style={{color:"white"}}>The Pollen Data is not available at this moment</h2>;
+                        return <ErrorMessage message={'Datos no disponibles'}/>
                     }
                     if (data) {
                         return (

@@ -1,5 +1,5 @@
 import React from "react";
-import {withStyles} from "@material-ui/core/styles";
+import {makeStyles, withStyles} from "@material-ui/core/styles";
 import MuiExpansionPanel from "@material-ui/core/ExpansionPanel";
 import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
@@ -12,9 +12,12 @@ import ElementCard from "../ElementCard";
 import {Box} from "@material-ui/core";
 import List from "@material-ui/core/List";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import ErrorMessage from "../../common/ErrorMessage";
+
 
 import {Query} from "@apollo/react-components";
 import gql from "graphql-tag";
+
 
 const GET_AIR_STATION = gql`
   {
@@ -76,12 +79,15 @@ const styles = {
     marginBottom: 70
 };
 
+
+
 export default function AirInfoStations() {
     const [expanded, setExpanded] = React.useState("panel0");
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
     };
     const statusColors = ["white", "#33d9b2", "#ffda79", "#ff6c65"];
+
 
     return (
         <div style={styles}>
@@ -100,9 +106,8 @@ export default function AirInfoStations() {
                     }
 
                     if (error) {
-                        return <h2 style={{color:"white"}}>The Air Data is not available at this moment</h2>;
+                        return <ErrorMessage message={'Datos no disponibles'}/>
                     }
-
                     if (data) {
                         let stations = data.retrieveAllAirStations.sort((a, b) => a.title.localeCompare(b.title))
                         return (
