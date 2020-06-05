@@ -8,7 +8,6 @@ import history from "../../../core/misc/history";
 import { ApolloConsumer } from "@apollo/react-components";
 
 function UserCard(props) {
-  console.log(JSON.stringify(props.currentUser));
   if (!props.isAuthenticated) {
     return (
       <div

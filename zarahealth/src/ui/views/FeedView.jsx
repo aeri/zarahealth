@@ -87,6 +87,11 @@ function FeedView() {
               setHasMoreData(false);
               return prev;
             }
+
+            if (fetchMoreResult.retrieveFeeds.length < 10) {
+              setHasMoreData(false);
+            }
+
             return Object.assign({}, prev, {
               retrieveFeeds: [
                 ...prev.retrieveFeeds,
@@ -114,7 +119,7 @@ function FeedView() {
   }, [data, fetchMore, isFetching, hasMoreData]);
 
   if (error) {
-    return <ErrorMessage message={'Datos no disponibles'}/>
+    return <ErrorMessage message={"Datos no disponibles"} />;
   }
 
   if (

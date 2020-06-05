@@ -14,12 +14,33 @@ import config from "../../core/misc/config";
 const GET_USER = gql`
   query retrieveUser {
     retrieveUser {
-      name
       username
+      name
       email
-      csvDownloadEnabled
+      isAdmin
       image {
         _id
+        filename
+        mimetype
+        encoding
+      }
+      preferredAirStation {
+        id
+        title
+        address
+        thresholds {
+          contaminant
+          value
+        }
+      }
+      preferredWaterStation {
+        id
+        title
+        address
+      }
+      pollenThresholds {
+        id
+        value
       }
       csvDownloadEnabled
       isAdmin

@@ -21,14 +21,35 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 const GET_USER = gql`
   query retrieveUser {
     retrieveUser {
-      name
       username
+      name
       email
+      isAdmin
       image {
         _id
+        filename
+        mimetype
+        encoding
       }
-      csvDownloadEnabled
-      isAdmin
+      preferredAirStation {
+        id
+        title
+        address
+        thresholds {
+          contaminant
+          value
+        }
+      }
+      preferredWaterStation {
+        id
+        title
+        address
+      }
+      pollenThresholds {
+        id
+        value
+      }
+      status
     }
   }
 `;
@@ -90,12 +111,13 @@ export function SignInForm() {
   }
 
   if (data) {
+    console.log(JSON.stringify(data));
     return (
       <Container component="main" maxWidth="xs">
         <ApolloConsumer>
           {(client) => {
             client.writeData({ data: { currentUser: data.retrieveUser } });
-            return <div>Login completo: {JSON.stringify(data)} </div>;
+            return null;
           }}
         </ApolloConsumer>
       </Container>
