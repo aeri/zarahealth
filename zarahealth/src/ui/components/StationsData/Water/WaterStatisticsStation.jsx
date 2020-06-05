@@ -127,16 +127,22 @@ export default function WaterStatisticsStations() {
           }
 
           if (data) {
+            function datediff(first, second) {
+              return Math.round((second - first) / (1000 * 60 * 60 * 24));
+            }
             let stations = data.retrieveAllWaterStations.sort((a, b) =>
               a.title.localeCompare(b.title)
+            );
+            stations = stations.filter(
+              (station) =>
+                datediff(
+                  new Date(station.results[0].creationDate),
+                  new Date()
+                ) <= 365
             );
             return (
               <List>
                 {stations.map((station, index) => {
-                  function datediff(first, second) {
-                    return Math.round((second - first) / (1000 * 60 * 60 * 24));
-                  }
-
                   var startDate = new Date();
                   var endDate = new Date();
                   startDate.setFullYear(endDate.getFullYear() - 2);
