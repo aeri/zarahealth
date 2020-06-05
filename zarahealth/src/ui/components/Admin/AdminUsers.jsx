@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {
-    List,
-    Box,
-    Typography,
-    CircularProgress,
-    Grid,
+  List,
+  Box,
+  Typography,
+  CircularProgress,
+  Grid,
 } from "@material-ui/core";
 import User from "./Users/User";
 import { makeStyles } from "@material-ui/core/styles";
@@ -12,22 +12,22 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-        width: "100%",
-    },
-    fab: {
-        margin: 0,
-        top: "auto",
-        right: 20,
-        bottom: 20,
-        left: "auto",
-        position: "fixed",
-    },
-    extendedIcon: {
-        marginRight: theme.spacing(1),
-        fill: "white",
-    },
+  root: {
+    flexGrow: 1,
+    width: "100%",
+  },
+  fab: {
+    margin: 0,
+    top: "auto",
+    right: 20,
+    bottom: 20,
+    left: "auto",
+    position: "fixed",
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
+    fill: "white",
+  },
 }));
 
 const GET_USERS = gql`
@@ -41,122 +41,125 @@ const GET_USERS = gql`
   }
 `;
 const styles = {
-    marginBottom: 70
+  marginBottom: 70,
 };
 
 function AdminUsers() {
-    const classes = useStyles();
-    const [hasMoreData, setHasMoreData] = useState(true);
-    const [isFetching, setIsFetching] = useState(false);
+  const classes = useStyles();
+  const [hasMoreData, setHasMoreData] = useState(true);
+  const [isFetching, setIsFetching] = useState(false);
 
-    const { data, loading, error, fetchMore } = useQuery(GET_USERS, {
-        variables: {
-            page: 1,
-            limit: 10,
-        },
-        fetchPolicy: "cache-and-network",
-    });
+  const { data, loading, error, fetchMore } = useQuery(GET_USERS, {
+    variables: {
+      page: 1,
+      limit: 10,
+    },
+    fetchPolicy: "cache-and-network",
+  });
 
-    useEffect(() => {
-        const fetchPage = (page) => {
-            if (!isFetching) {
-                setIsFetching(true);
-                fetchMore({
-                    variables: { page: page },
-                    updateQuery: (prev, { fetchMoreResult }) => {
-                        if (
-                            !fetchMoreResult ||
-                            fetchMoreResult.retrieveUsers.length === 0
-                        ) {
-                            setHasMoreData(false);
-                            return prev;
-                        }
-                        return Object.assign({}, prev, {
-                            retrieveUsers: [
-                                ...prev.retrieveUsers,
-                                ...fetchMoreResult.retrieveUsers,
-                            ],
-                        });
-                    },
-                }).then((_) => setIsFetching(false));
-            }
-        };
-
-        const isScrolling = () => {
+  useEffect(() => {
+    const fetchPage = (page) => {
+      if (!isFetching) {
+        setIsFetching(true);
+        fetchMore({
+          variables: { page: page },
+          updateQuery: (prev, { fetchMoreResult }) => {
             if (
-                window.innerHeight + document.documentElement.scrollTop !==
-                document.documentElement.offsetHeight
+              !fetchMoreResult ||
+              fetchMoreResult.retrieveUsers.length === 0
             ) {
-                return;
+              setHasMoreData(false);
+              return prev;
             }
-            if (data && hasMoreData) {
-                fetchPage(Math.floor(data.retrieveUsers.length / 7) + 1);
+            if (fetchMoreResult.retrieveFeeds.length < 10) {
+              setHasMoreData(false);
             }
-        };
-        window.addEventListener("scroll", isScrolling);
-        return () => window.removeEventListener("scroll", isScrolling);
-    }, [data, fetchMore, isFetching, hasMoreData]);
+            return Object.assign({}, prev, {
+              retrieveUsers: [
+                ...prev.retrieveUsers,
+                ...fetchMoreResult.retrieveUsers,
+              ],
+            });
+          },
+        }).then((_) => setIsFetching(false));
+      }
+    };
 
-    if (error) {
-        return <h1>{JSON.stringify(error)}</h1>;
-    }
+    const isScrolling = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop !==
+        document.documentElement.offsetHeight
+      ) {
+        return;
+      }
+      if (data && hasMoreData) {
+        fetchPage(Math.floor(data.retrieveUsers.length / 7) + 1);
+      }
+    };
+    window.addEventListener("scroll", isScrolling);
+    return () => window.removeEventListener("scroll", isScrolling);
+  }, [data, fetchMore, isFetching, hasMoreData]);
 
-    if (
-        loading &&
-        (data === undefined || (data !== undefined && data.length === 0))
-    ) {
-        return (
-            <Grid
+  if (error) {
+    return <h1>{JSON.stringify(error)}</h1>;
+  }
+
+  if (
+    loading &&
+    (data === undefined || (data !== undefined && data.length === 0))
+  ) {
+    return (
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: "100vh" }}
+      >
+        <Grid item xs={3}>
+          <CircularProgress color="secondary" />
+        </Grid>
+      </Grid>
+    );
+  }
+
+  return (
+    <div style={styles}>
+      <Box m={1}>
+        <Typography color="white" style={{ paddingTop: 0, paddingLeft: 0 }}>
+          <Box fontWeight="fontWeightMedium" m={1} fontSize={45} color="white">
+            Usuarios
+          </Box>
+        </Typography>
+        <div className={classes.root}>
+          <List>
+            {data.retrieveUsers.map((user, index) => {
+              return (
+                <Box m={1}>
+                  <User user={user} />
+                </Box>
+              );
+            })}
+            {hasMoreData && (
+              <Grid
                 container
                 spacing={0}
                 direction="column"
                 alignItems="center"
                 justify="center"
-                style={{ minHeight: "100vh" }}
-            >
+                style={{ minHeight: "20vh" }}
+              >
                 <Grid item xs={3}>
-                    <CircularProgress color="secondary" />
+                  {isFetching && <CircularProgress color="secondary" />}
                 </Grid>
-            </Grid>
-        );
-    }
-
-    return (
-        <div style={styles}>
-        <Box m={1}>
-            <Typography color="white" style={{ paddingTop: 0, paddingLeft: 0 }}>
-                <Box fontWeight="fontWeightMedium" m={1} fontSize={45} color="white">
-                    Usuarios
-                </Box>
-            </Typography>
-            <div className={classes.root}>
-                <List>
-                    {data.retrieveUsers.map((user, index) => {
-                        return (
-                            <Box m={1}>
-                                <User user={user} />
-                            </Box>
-                        );
-                    })}
-                    {hasMoreData && (
-                        <Grid
-                            container
-                            spacing={0}
-                            direction="column"
-                            alignItems="center"
-                            justify="center"
-                            style={{ minHeight: "20vh" }}
-                        >
-                            <Grid item xs={3}>
-                                {isFetching && <CircularProgress color="secondary" />}
-                            </Grid>
-                        </Grid>
-                    )}
-                </List>
-            </div>
-        </Box>
+              </Grid>
+            )}
+          </List>
         </div>
-    );
+      </Box>
+    </div>
+  );
 }
 
 export default AdminUsers;
