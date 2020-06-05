@@ -42,8 +42,6 @@ const GET_USER = gql`
         id
         value
       }
-      csvDownloadEnabled
-      isAdmin
     }
   }
 `;
