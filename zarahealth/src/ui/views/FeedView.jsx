@@ -13,6 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import NewPostDialog from "../components/Feed/NewPost";
+import ErrorMessage from "../components/common/ErrorMessage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -113,7 +114,7 @@ function FeedView() {
   }, [data, fetchMore, isFetching, hasMoreData]);
 
   if (error) {
-    return <h1>{JSON.stringify(error)}</h1>;
+    return <ErrorMessage message={'Datos no disponibles'}/>
   }
 
   if (

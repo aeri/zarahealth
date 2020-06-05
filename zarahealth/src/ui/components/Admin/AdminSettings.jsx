@@ -9,6 +9,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import StorageIcon from '@material-ui/icons/Storage';
 import AdminData from "./Settings/AdminData";
+import AdminImage from "./Settings/AdminImage";
 import DataSources from "./Settings/DataSources";
 
 
@@ -93,6 +94,7 @@ function AdminSettings() {
                     </Grid>
                 </ExpansionPanelSummary>
                 <AdminData/>
+                <AdminImage/>
             </ExpansionPanel>
 
             <ExpansionPanel square expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
