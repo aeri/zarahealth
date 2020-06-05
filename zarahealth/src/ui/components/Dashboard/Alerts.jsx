@@ -45,7 +45,7 @@ function Alerts() {
                 limit: 5,
             }}>
                 {({data, loading, error}) => {
-                    if (loading) {
+                    if (loading || data === undefined || (data !== undefined && data.length === 0)) {
                         return (
                             <div style={{
                                 position: "relative",
@@ -87,19 +87,19 @@ function Alerts() {
                                                                 {
                                                                     alert.level === 'NOTICE' ?
                                                                         <InfoIcon color="secondary"
-                                                                                     className={classes.largeIcon}
-                                                                                     style={{
-                                                                                         fontSize: 60,
-                                                                                         verticalAlign: "middle",
-                                                                                     }}/>
+                                                                                  className={classes.largeIcon}
+                                                                                  style={{
+                                                                                      fontSize: 60,
+                                                                                      verticalAlign: "middle",
+                                                                                  }}/>
 
                                                                         : alert.level === 'WARNING' ?
                                                                         <NewReleasesIcon color="secondary"
-                                                                                     className={classes.largeIcon}
-                                                                                     style={{
-                                                                                         fontSize: 60,
-                                                                                         verticalAlign: "middle",
-                                                                                     }}/>
+                                                                                         className={classes.largeIcon}
+                                                                                         style={{
+                                                                                             fontSize: 60,
+                                                                                             verticalAlign: "middle",
+                                                                                         }}/>
 
                                                                         : <WarningIcon color="secondary"
                                                                                        className={classes.largeIcon}

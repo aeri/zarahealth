@@ -21,6 +21,8 @@ const GET_USER = gql`
       image {
         _id
       }
+      csvDownloadEnabled
+      isAdmin
     }
   }
 `;
