@@ -6,7 +6,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import WarningIcon from '@material-ui/icons/Warning';
 import List from "@material-ui/core/List";
 import gql from "graphql-tag";
-import ErrorMessage from "../common/ErrorMessage";
+import ErrorMessageDash from "../common/ErrorMessageDash";
 import {Query} from "@apollo/react-components";
 import {DateTime} from "luxon";
 import InfoIcon from '@material-ui/icons/Info';
@@ -59,7 +59,15 @@ function Alerts() {
                     }
 
                     if (error) {
-                        return <ErrorMessage message={'Avisos no disponibles'}/>
+                        return <div style={{
+                            position: "relative",
+                            top: "15%",
+                            left: "25%",
+                            width: "100%",
+                        }}>
+                            <ErrorMessageDash message={'Avisos no disponibles'}/>
+                        </div>
+
                     }
 
                     if (data) {
