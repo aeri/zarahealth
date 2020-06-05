@@ -25,15 +25,35 @@ const CREATE_USER = gql`
       email: $email
       password: $password
     ) {
+      username
       name
+      email
+      isAdmin
       image {
         _id
+        filename
+        mimetype
+        encoding
       }
-      username
-      email
-      csvDownloadEnabled
-      isAdmin
-      image
+      preferredAirStation {
+        id
+        title
+        address
+        thresholds {
+          contaminant
+          value
+        }
+      }
+      preferredWaterStation {
+        id
+        title
+        address
+      }
+      pollenThresholds {
+        id
+        value
+      }
+      status
     }
   }
 `;
