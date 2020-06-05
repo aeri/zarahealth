@@ -28,6 +28,7 @@ const CREATE_USER = gql`
       username
       name
       email
+      csvDownloadEnabled
       isAdmin
       image {
         _id

@@ -61,6 +61,7 @@ function DateFilterButton(props) {
                   [props.idFieldName]: props.id,
                 },
               });
+              setDialogOpen(false);
             }}
             fullWidth
             variant="contained"

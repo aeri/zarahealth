@@ -41,6 +41,7 @@ const GET_POLLEN_STATION = gql`
       endDate: $endDate
       idPollenMeasure: $idPollenMeasure
     ) {
+      id
       title
       observation {
         publicationDate
@@ -123,7 +124,7 @@ export default function PollenStatisticsStations() {
           }
 
           if (error) {
-            return <ErrorMessage message={'Datos no disponibles'}/>
+            return <ErrorMessage message={"Datos no disponibles"} />;
           }
 
           if (data) {
@@ -198,14 +199,15 @@ export default function PollenStatisticsStations() {
                                     fontSize={10}
                                     color="#2f3542"
                                   >
-                                    {"hace " +
-                                      datediff(
-                                        new Date(
-                                          station.observation[0].publicationDate
-                                        ),
-                                        new Date()
-                                      ) +
-                                      " días"}
+                                    {station.observation[0] !== undefined &&
+                                      "hace " +
+                                        datediff(
+                                          new Date(
+                                            station.observation[0].publicationDate
+                                          ),
+                                          new Date()
+                                        ) +
+                                        " días"}
                                   </Box>
                                 </Typography>
                               </Grid>

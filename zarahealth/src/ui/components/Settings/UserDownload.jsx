@@ -53,7 +53,36 @@ const ExpansionPanelActions = withStyles((theme) => ({
 const GET_CURRENT_USER = gql`
   {
     currentUser @client {
+      username
+      name
+      email
+      isAdmin
       csvDownloadEnabled
+      image {
+        _id
+        filename
+        mimetype
+        encoding
+      }
+      preferredAirStation {
+        id
+        title
+        address
+        thresholds {
+          contaminant
+          value
+        }
+      }
+      preferredWaterStation {
+        id
+        title
+        address
+      }
+      pollenThresholds {
+        id
+        value
+      }
+      status
     }
   }
 `;

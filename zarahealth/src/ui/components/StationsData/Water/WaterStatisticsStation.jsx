@@ -123,7 +123,7 @@ export default function WaterStatisticsStations() {
           }
 
           if (error) {
-            return <ErrorMessage message={'Datos no disponibles'}/>
+            return <ErrorMessage message={"Datos no disponibles"} />;
           }
 
           if (data) {
@@ -359,11 +359,19 @@ export default function WaterStatisticsStations() {
                                         },
                                       }}
                                     />
-                                    <DownloadButton
+                                    <Grid
+                                      container
+                                      spacing={1}
+                                      direction="row"
+                                      justify="flex-end"
+                                      alignItems="flex-end"
+                                    >
+                                      <DownloadButton
                                         kind="agua"
                                         title={station.title}
                                         data={station.results}
                                       />
+                                    </Grid>
                                   </Grid>
                                 </List>
                               );

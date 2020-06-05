@@ -304,7 +304,7 @@ export default function AirStatisticsStations() {
                               container
                               spacing={1}
                               direction="row"
-                              justify="center"
+                              justify="flex-end"
                               alignItems="flex-end"
                             >
                               <DownloadButton
