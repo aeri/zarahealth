@@ -123,11 +123,90 @@ var getStation = function(uri) {
 
   return Number(uri.substring(uri.lastIndexOf('/') + 1));
 
+}
+
+
+var getStatus = function (polx, val){
+
+  var pol = convertGas(polx);
+
+  switch (pol) {
+  case "PM10":
+    if (val <= 35){
+      return "LOW"
+    }
+    else if ( val > 35 && val <= 50 ){
+      return "MEDIUM"
+    }
+    else{
+      return "HIGH"
+    }
+    break;
+  case "NO2":
+    if (val <= 100){
+      return "LOW"
+    }
+    else if ( val > 100 && val <= 200 ){
+      return "MEDIUM"
+    }
+    else{
+      return "HIGH"
+    }
+    break;
+  case "O3":
+    if (val <= 120){
+      return "LOW"
+    }
+    else if ( val > 120 && val <= 180 ){
+      return "MEDIUM"
+    }
+    else{
+      return "HIGH"
+    }
+    break;
+  case "SO2":
+    if (val <= 200){
+      return "LOW"
+    }
+    else if ( val > 200 && val <= 350 ){
+      return "MEDIUM"
+    }
+    else{
+      return "HIGH"
+    }
+    break;
+  case "SH2":
+    if (val <= 50){
+      return "LOW"
+    }
+    else if ( val > 50 && val <= 100 ){
+      return "MEDIUM"
+    }
+    else{
+      return "HIGH"
+    }
+    break;
+  case "CO":
+    if (val <= 5){
+      return "LOW"
+    }
+    else if ( val > 5 && val <= 100 ){
+      return "MEDIUM"
+    }
+    else{
+      return "HIGH"
+    }
+    break;
+  default:
+    return "UNDETERMINED"
+    break;
+}
 
 }
 
 module.exports = {
   convertGas: convertGas,
   getStation: getStation,
-  retrieveStations: retrieveStations
+  retrieveStations: retrieveStations,
+  getStatus:getStatus
 };

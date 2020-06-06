@@ -306,7 +306,8 @@ const schema = makeExecutableSchema({
       "Date and time of measurement (ISO 8601)"
       date: String!,
       "Value of measurement in micrograms per cubic meter (µg/m3)"
-      value: Float!
+      value: Float!,
+      status: AirStatus!
     }
     "A type that describes the components of an air station for a user"
     type UserAirStation {
@@ -477,6 +478,12 @@ const schema = makeExecutableSchema({
         ENABLED
         "The user is banned to retrieve access_tokens"
         BANNED
+    }
+    enum AirStatus{
+      LOW
+      MEDIUM
+      HIGH
+      UNDETERMINED
     }
 
     scalar Upload

@@ -49,8 +49,13 @@ async function execute(since, until) {
     contaminant: AirAux.convertGas(result.magnitud.value),
     station: AirAux.getStation(result.estacion.value),
     date: result.fecha.value,
-    value: result.valor.value
+    value: result.valor.value,
+    status: AirAux.getStatus(result.magnitud.value, result.valor.value)
   }))
+
+  // Removing unused NOx metric
+  data =
+  data.filter(function(el){ return el.contaminant != "NOx"; });
 
   // Grouping the result by station
   var output = _.groupBy(data, f => {
