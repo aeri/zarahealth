@@ -61,7 +61,7 @@ async function execute(since, until) {
 
 }
 
-var j = schedule.scheduleJob('*/20 * * * *', function() {
+var j = schedule.scheduleJob('*/40 * * * *', function() {
 
   recallStation().then(function(station) {
 
@@ -75,82 +75,82 @@ var j = schedule.scheduleJob('*/20 * * * *', function() {
 //Function to check if pollen is availabe
 function isAirAvailable() {
 
-    return settingsModel.findOne({
-        _id: '5ebd8a20934189c057ef873c'
+  return settingsModel.findOne({
+      _id: '5ebd8a20934189c057ef873c'
     })
-    .then(function (settings) {
-        if (!settings.air) {
-            throw new GraphQLError(`The Data Air is not available at the moment`, null, null, null, null, {
-                extensions: {
-                    code: "UNAVAILABLE",
-                }
-            });
-        }
+    .then(function(settings) {
+      if (!settings.air) {
+        throw new GraphQLError(`The Data Air is not available at the moment`, null, null, null, null, {
+          extensions: {
+            code: "UNAVAILABLE",
+          }
+        });
+      }
     });
 
 
 }
 
-var retrieveAllAirStations = async function ({}, context) {
+var retrieveAllAirStations = async function({}, context) {
 
-    await isAirAvailable();
+  await isAirAvailable();
 
-    tracker.track("retrieveAllAirStations", context);
+  tracker.track("retrieveAllAirStations", context);
 
-    var airport = myCache.get("airport");
+  var airport = await recallStation();
 
-    if (airport == undefined) {
+  if (airport == undefined) {
 
     // Retrieving information about the air stations
-    airport = await recallStation();
+    airport = myCache.get("airport");
 
+  } else {
     myCache.set("airport", airport, 18000);
+  }
 
-    }
-
-    return airport;
+  return airport;
 
 }
 
 
 
-var recallStation = async function () {
+var recallStation = async function() {
 
-    // To retrieve the actual status from today until tomorrow
-    const today = new Date()
-    const tomorrow = new Date(today)
-    const yesterday = new Date(today)
-    tomorrow.setDate(today.getDate() + 1)
-    yesterday.setDate(today.getDate() - 1)
+  // To retrieve the actual status from today until tomorrow
+  const today = new Date()
+  const tomorrow = new Date(today)
+  const yesterday = new Date(today)
+  tomorrow.setDate(today.getDate() + 1)
+  yesterday.setDate(today.getDate() - 1)
 
-    // Reset the today and tomorrow days
-    yesterday.setUTCHours(22, 0, 0, 0);
-    tomorrow.setUTCHours(0, 0, 0, 0);
+  // Reset the today and tomorrow days
+  yesterday.setUTCHours(22, 0, 0, 0);
+  tomorrow.setUTCHours(0, 0, 0, 0);
 
-    // Retrieve the results
-    var output = await execute(today.toISOString(), tomorrow.toISOString());
+  // Retrieve the results
+  var output = await execute(today.toISOString(), tomorrow.toISOString());
 
-    // Retrieving information about the air stations
-    var stationsData = await AirAux.retrieveStations();
+  // Retrieving information about the air stations
+  var stationsData = await AirAux.retrieveStations();
 
-    var keys = Object.keys(output)
+  var keys = Object.keys(output)
 
 
-    var o = [] // empty Object
-    // For each station in data retrieved
-    keys.forEach(function(key) {
+  var o = [] // empty Object
+  // For each station in data retrieved
+  keys.forEach(function(key) {
     // Fetch the object about the "key" station
     var arina = _.where(stationsData, {
-        id: Number(key)
+      id: Number(key)
     });
     arina[0].records = output[key];
     arina[0].geometry = arina[0].point;
 
     // Adding the processed station to the list
     o.push(arina[0]);
-    })
+  })
 
-    return o;
+  return o;
 }
 
 
@@ -161,55 +161,55 @@ var retrieveAirStation = async function({
   endDate
 }, context) {
 
-    await isAirAvailable();
+  await isAirAvailable();
 
-    tracker.track("retrieveAirStation", context);
+  tracker.track("retrieveAirStation", context);
 
-    var since = startDate;
-    var until = endDate;
+  var since = startDate;
+  var until = endDate;
 
-    if (!Date.parse(since) || !Date.parse(until)) {
+  if (!Date.parse(since) || !Date.parse(until)) {
 
     throw new GraphQLError(`The dates provided are not valid`, null, null, null, null, {
-        extensions: {
+      extensions: {
         code: "BAD_REQUEST",
-        }
+      }
     })
 
-    }
+  }
 
-    var output = await execute(since, until);
+  var output = await execute(since, until);
 
-    // Retrieving information about the air stations
-    var stationsData = await AirAux.retrieveStations();
-
-
+  // Retrieving information about the air stations
+  var stationsData = await AirAux.retrieveStations();
 
 
-    // Fetch the object about the "idAirStation" station
-    var arina = _.where(stationsData, {
+
+
+  // Fetch the object about the "idAirStation" station
+  var arina = _.where(stationsData, {
     id: idAirStation
-    });
+  });
 
-    if (arina === undefined || arina.length == 0) {
+  if (arina === undefined || arina.length == 0) {
     throw new GraphQLError(`The AirStation ${idAirStation} not found`, null, null, null, null, {
-        extensions: {
+      extensions: {
         code: "NOT_FOUND",
-        }
+      }
     })
-    }
+  }
 
-    // Inject in stationsData the pollution records about this station
-    arina[0].records = output[idAirStation];
-    arina[0].geometry = arina[0].point;
+  // Inject in stationsData the pollution records about this station
+  arina[0].records = output[idAirStation];
+  arina[0].geometry = arina[0].point;
 
-    return (arina[0]);
+  return (arina[0]);
 
 }
 
 module.exports = {
-    retrieveAllAirStations: retrieveAllAirStations,
-    retrieveAirStation: retrieveAirStation,
-    recallStation: recallStation,
-    isAirAvailable: isAirAvailable
+  retrieveAllAirStations: retrieveAllAirStations,
+  retrieveAirStation: retrieveAirStation,
+  recallStation: recallStation,
+  isAirAvailable: isAirAvailable
 };

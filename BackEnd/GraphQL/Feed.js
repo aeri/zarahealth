@@ -116,7 +116,8 @@ var retrieveFeeds = async function ({
         limit: limit,
         collation: {
             locale: 'en'
-        }
+        },
+        sort: { date: -1 }
     };
 
     var ret = await FeedModel.paginate({}, options, function (err, result) {
@@ -172,7 +173,7 @@ var toggleFeedOpinion = async function ({
                 'meta.likes': usernamePetition
             }
         };
-    } else {
+    } else if(status == "DISLIKE"){
         update = {
             $push: {
                 'meta.dislikes': usernamePetition
@@ -240,7 +241,7 @@ var submitComment = async function ({
     doc.likes = doc.meta.likes.length,
     doc.dislikes = doc.meta.dislikes.length,
     doc.status = decodeStatus(doc.meta, usernamePetition);
-    
+
     return doc;
 
 }

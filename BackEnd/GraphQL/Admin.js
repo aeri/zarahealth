@@ -8,6 +8,8 @@ var FeedModel = require('../mongo/model/feed.js');
 var TokenModel = require('../mongo/model/token.js');
 var ActivityModel = require('../mongo/model/activity.js');
 var _ = require('underscore');
+var alertModel = require('../mongo/model/broadcast.js');
+var admin = require("firebase-admin");
 
 const {
     GraphQLError
@@ -132,7 +134,7 @@ var retrieveMetrics = async function ({ }, context) {
         return count;
     })
 
-    activities = await ActivityModel.find({}, function (err, count) {
+    activities = await ActivityModel.find({}, 'action', function (err, count) {
         return count;
     })
 
@@ -160,8 +162,52 @@ var retrieveMetrics = async function ({ }, context) {
 
 }
 
+
+
+
+var sendAlert = async function({
+  title,
+  body,
+  level
+}, context) {
+
+  var usernamePetition = context.response.locals.user;
+
+  //User authentication
+  await adminAuthentication(usernamePetition);
+
+  var alert = new alertModel({
+    title: title,
+    body: body,
+    level: level
+  });
+
+  var topic = 'broadcast';
+
+  var message = {
+    notification: {
+      title: title,
+      body: body
+    },
+    topic: topic
+  };
+
+  // Send a message to devices subscribed to the provided topic.
+  admin.messaging().send(message)
+    .then((response) => {
+      // Response is a message ID string.
+      logger.debug('Successfully sent message:', response);
+    })
+    .catch((error) => {
+      logger.error('Error sending message:', error);
+    });
+
+  return alert.save();
+}
+
 module.exports = {
     retrieveUsers: retrieveUsers,
     updateUserStatus: updateUserStatus,
-    retrieveMetrics: retrieveMetrics
+    retrieveMetrics: retrieveMetrics,
+    sendAlert: sendAlert
 };
