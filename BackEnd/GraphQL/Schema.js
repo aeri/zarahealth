@@ -108,7 +108,7 @@ const schema = makeExecutableSchema({
         uploadUserImage(
         "Picture upload in a multipart upload request"
         image: Upload
-        ): Image
+      ): User
 
         "A mutation to update the attribute csvDownloadEnabled of the User"
         updateCsvDownloadEnabled(
