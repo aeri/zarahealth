@@ -15,7 +15,7 @@ import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import { DateTime } from "luxon";
 import Comment from "./Comment";
 import NewComment from "./NewComment";
-import { Box, Divider } from "@material-ui/core";
+import { Box, Divider, CardMedia } from "@material-ui/core";
 import gql from "graphql-tag";
 import { Mutation } from "@apollo/react-components";
 
@@ -47,18 +47,33 @@ export default function Post({ post }) {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            {post.author.charAt(0)}
-          </Avatar>
+          <Avatar
+            aria-label="avatar"
+            src={
+              "https://zgz.herokuapp.com/file/picture?type=username&username=" +
+              post.author
+            }
+          />
         }
-        title={post.author}
-        subheader={DateTime.fromMillis(post.date * 1).toFormat(
-          "dd/LL/yyyy HH:mm"
-        )}
+        title={post.title}
+        subheader={post.author}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {post.body}
+        </Typography>
+        {post.pictures[0] !== undefined ? (
+          <CardMedia
+            style={{ height: 0, paddingTop: "56.25%", margin: "10px" }}
+            image={
+              "https://zgz.herokuapp.com/file/picture?type=feed&id=" +
+              post.pictures[0]._id
+            }
+            title={post.title}
+          />
+        ) : null}
+        <Typography variant="caption" color="textSecondary" component="p" align="right">
+          {DateTime.fromMillis(post.date * 1).toFormat("dd/LL/yyyy HH:mm")}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

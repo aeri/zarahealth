@@ -15,6 +15,7 @@ import { Query } from "@apollo/react-components";
 import gql from "graphql-tag";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import DownloadButton from "../DownloadButton";
+import ErrorMessage from "../../common/ErrorMessage";
 
 const GET_ALL_POLLEN_STATIONS = gql`
   {
@@ -40,6 +41,7 @@ const GET_POLLEN_STATION = gql`
       endDate: $endDate
       idPollenMeasure: $idPollenMeasure
     ) {
+      id
       title
       observation {
         publicationDate
@@ -106,7 +108,7 @@ export default function PollenStatisticsStations() {
     <div style={styles}>
       <Query query={GET_ALL_POLLEN_STATIONS}>
         {({ data, loading, error }) => {
-          if (loading) {
+          if (loading && !data) {
             return (
               <div
                 style={{
@@ -122,12 +124,11 @@ export default function PollenStatisticsStations() {
           }
 
           if (error) {
-            return (
-              <h2 style={{ color: "white" }}>The Pollen Data is not available at this moment</h2>
-            );
+            return <ErrorMessage message={"Datos no disponibles"} />;
           }
 
           if (data) {
+            console.log('LLEGAAA')
             let stations = data.retrieveAllPollenMeasures.sort((a, b) =>
               a.title.localeCompare(b.title)
             );
@@ -199,14 +200,15 @@ export default function PollenStatisticsStations() {
                                     fontSize={10}
                                     color="#2f3542"
                                   >
-                                    {"hace " +
-                                      datediff(
-                                        new Date(
-                                          station.observation[0].publicationDate
-                                        ),
-                                        new Date()
-                                      ) +
-                                      " días"}
+                                    {station.observation[0] !== undefined &&
+                                      "hace " +
+                                        datediff(
+                                          new Date(
+                                            station.observation[0].publicationDate
+                                          ),
+                                          new Date()
+                                        ) +
+                                        " días"}
                                   </Box>
                                 </Typography>
                               </Grid>
@@ -224,7 +226,7 @@ export default function PollenStatisticsStations() {
                           }}
                         >
                           {({ data, loading, error }) => {
-                            if (loading) {
+                            if (loading && !data) {
                               return (
                                 <div
                                   style={{

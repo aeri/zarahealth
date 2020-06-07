@@ -34,21 +34,16 @@ function UserCard(props) {
     return (
       <CardHeader
         avatar={
-          props.currentUser.image !== undefined ? (
-            <Avatar
-              aria-label="avatar"
-              src={
-                "data:" +
-                props.currentUser.image.mimetype +
-                ";base64," +
-                props.currentUser.image.data
-              }
-            />
-          ) : (
-            <Avatar aria-label="avatar">
-              {props.currentUser.name.charAt(0)}
-            </Avatar>
-          )
+          <Avatar
+            aria-label="avatar"
+            src={
+              props.currentUser.image === undefined ||
+              props.currentUser.image === null
+                ? "https://i.ibb.co/G5VNNXd/default-user.jpg"
+                : "https://zgz.herokuapp.com/file/picture?type=user&id=" +
+                  props.currentUser.image._id
+            }
+          />
         }
         title={
           props.currentUser.name.length > 15

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import {
   Box,
   CircularProgress,
+  Container,
   Typography,
   withStyles,
 } from "@material-ui/core";
@@ -11,17 +12,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import FormGroup from "@material-ui/core/FormGroup/FormGroup";
 import FormControl from "@material-ui/core/FormControl";
 import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
 import Button from "@material-ui/core/Button";
 import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails/ExpansionPanelDetails";
 import MuiExpansionPanelActions from "@material-ui/core/ExpansionPanelActions/ExpansionPanelActions";
 import zaraHealthTheme from "../../theme";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
-import GetAppIcon from "@material-ui/icons/GetApp";
 import { ApolloConsumer, Mutation } from "@apollo/react-components";
-import tapOrClick from "react-tap-or-click";
-import downloadJSONFile from "../../../core/services/downloadService";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -44,79 +39,44 @@ const ExpansionPanelDetails = withStyles((theme) => ({
 const ExpansionPanelActions = withStyles((theme) => ({
   root: {
     backgroundColor: zaraHealthTheme.palette.primary.main,
-    padding: theme.spacing(1),
-    paddingBottom: 15,
+    padding: theme.spacing(0),
     paddingRight: 20,
   },
 }))(MuiExpansionPanelActions);
 
-const GET_CURRENT_USER = gql`
-  {
-    currentUser @client {
-      username
-      name
-      email
-      isAdmin
-      csvDownloadEnabled
+const UPDATE_IMAGE = gql`
+  mutation uploadUserImage($image: Upload!) {
+    uploadUserImage(image: $image) {
       image {
         _id
         filename
         mimetype
         encoding
       }
-      preferredAirStation {
-        id
-        title
-        address
-        thresholds {
-          contaminant
-          value
-        }
-      }
-      preferredWaterStation {
-        id
-        title
-        address
-      }
-      pollenThresholds {
-        id
-        value
-      }
-      status
     }
   }
 `;
 
-const UPDATE_CSV = gql`
-  mutation UpdateCsvDownloadEnabled($csvDownloadEnabled: Boolean!) {
-    updateCsvDownloadEnabled(csvDownloadEnabled: $csvDownloadEnabled) {
-      name
-      username
-      email
-      csvDownloadEnabled
-    }
-  }
-`;
-
-function UserDownload() {
+function UserImage() {
   const classes = useStyles();
-  const { loading, data, error } = useQuery(GET_CURRENT_USER);
-  const userData = data;
-  console.log(JSON.stringify(data));
-  console.log(JSON.stringify(loading));
-  console.log(JSON.stringify(error));
-  const [enableCSV, setEnableCSV] = React.useState(false);
 
-  useEffect(() => {
-    if (data !== undefined && data.currentUser !== null) {
-      setEnableCSV(data.currentUser.csvDownloadEnabled);
+  const [fileToUpload, setFileToUpload] = React.useState([]);
+
+  const handleChange = ({
+    target: {
+      validity,
+      files: [file],
+    },
+  }) => {
+    if (validity.valid) {
+      setFileToUpload(file);
     }
-  }, [data, error, loading]);
+  };
 
   return (
     <div>
-      <Mutation mutation={UPDATE_CSV}>
-        {(updateCsvDownloadEnabled, { data, loading }) => {
+      <Mutation mutation={UPDATE_IMAGE}>
+        {(uploadUserImage, { data, loading }) => {
           if (loading) {
             return (
               <div
@@ -137,7 +97,7 @@ function UserDownload() {
               <ApolloConsumer>
                 {(client) => {
                   client.writeData({
-                    data: { currentUser: data.updateCsvDownloadEnabled },
+                    data: { currentUser: data.uploadUserImage },
                   });
                   return (
                     <div>
@@ -205,9 +165,9 @@ function UserDownload() {
 
           const handleSubmit = (e) => {
             e.preventDefault();
-            updateCsvDownloadEnabled({
+            uploadUserImage({
               variables: {
-                csvDownloadEnabled: enableCSV,
+                image: fileToUpload,
               },
             });
           };
@@ -245,7 +205,7 @@ function UserDownload() {
                                   m={1}
                                   fontSize={27}
                                 >
-                                  Descarga
+                                  Imagen de usuario
                                 </Box>
                               </Typography>
                             </Grid>
@@ -260,69 +220,17 @@ function UserDownload() {
                               <div>
                                 <Grid
                                   container
-                                  spacing={2}
                                   alignItems="center"
-                                  style={{ paddingBottom: 15 }}
+                                  style={{ paddingBottom: 45 }}
                                 >
                                   <Grid item>
-                                    <FormGroup column>
-                                      <FormControlLabel
-                                        control={
-                                          <Switch
-                                            checked={enableCSV}
-                                            onChange={(event) => {
-                                              setEnableCSV(!enableCSV);
-                                            }}
-                                            name="checkedA"
-                                          />
-                                        }
-                                        label="Habilitar descarga de datos JSON"
-                                      />
+                                    <FormGroup column style={{ width: 300 }}>
                                       <FormControl margin={"dense"}>
-                                        <div
-                                          {...tapOrClick(() => {
-                                            downloadJSONFile(
-                                              "usuario",
-                                              userData.currentUser.username,
-                                              JSON.stringify(
-                                                userData.currentUser
-                                              )
-                                            );
-                                          })}
-                                        >
-                                          <Grid
-                                            container
-                                            spacing={0}
-                                            direction="row"
-                                            justify="center"
-                                            alignItems="center"
-                                          >
-                                            <Grid item xs={1}>
-                                              <GetAppIcon
-                                                style={{
-                                                  fontSize: 30,
-                                                  verticalAlign: "middle",
-                                                }}
-                                              />
-                                            </Grid>
-                                            <Grid
-                                              item
-                                              xs={11}
-                                              justify="center"
-                                              alignItems="center"
-                                            >
-                                              <Typography
-                                                style={{
-                                                  fontSize: 16,
-                                                  paddingLeft: 25,
-                                                }}
-                                                color="primary"
-                                              >
-                                                Descargar datos de cuenta
-                                              </Typography>
-                                            </Grid>
-                                          </Grid>
-                                        </div>
+                                        <input
+                                          type="file"
+                                          name="file"
+                                          onChange={handleChange}
+                                        />
                                       </FormControl>
                                     </FormGroup>
                                   </Grid>
@@ -356,4 +264,4 @@ function UserDownload() {
   );
 }
 
-export default UserDownload;
+export default UserImage;

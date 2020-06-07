@@ -23,6 +23,7 @@ const GET_AIR_STATION = gql`
         contaminant
         date
         value
+        status
       }
     }
   }
@@ -48,7 +49,7 @@ const AirStationsMap = () => {
                 });
                 var popup = new mapboxgl.Popup({ closeOnClick: false })
                     .setLngLat([-0.87734, 41.6560593])
-                    .setHTML('<h2>The Air Data is not available at this moment</h2>')
+                    .setHTML('<h2>Datos no disponibles</h2>')
                     .addTo(map);
 
                 map.on("load", () => {

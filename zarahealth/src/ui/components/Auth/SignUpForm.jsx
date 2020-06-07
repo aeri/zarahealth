@@ -2,7 +2,12 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import { Container, CircularProgress } from "@material-ui/core";
+import {
+  Container,
+  CircularProgress,
+  Typography,
+  Box,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useForm, Controller } from "react-hook-form";
 
@@ -11,7 +16,7 @@ import { handleUserAuthentication } from "../../../core/services/tokenService";
 import gql from "graphql-tag";
 import { ApolloConsumer } from "@apollo/react-components";
 import { Mutation } from "@apollo/react-components";
-
+import history from "../../../core/misc/history";
 
 const CREATE_USER = gql`
   mutation CreateUser(
@@ -26,11 +31,36 @@ const CREATE_USER = gql`
       email: $email
       password: $password
     ) {
-      name
       username
+      name
       email
       csvDownloadEnabled
       isAdmin
+      image {
+        _id
+        filename
+        mimetype
+        encoding
+      }
+      preferredAirStation {
+        id
+        title
+        address
+        thresholds {
+          contaminant
+          value
+        }
+      }
+      preferredWaterStation {
+        id
+        title
+        address
+      }
+      pollenThresholds {
+        id
+        value
+      }
+      status
     }
   }
 `;
@@ -53,35 +83,46 @@ export function SignUpForm() {
   const [candidateUsername, setCandidateUsername] = React.useState("");
   const [candidatePassword, setCandidatePassword] = React.useState("");
 
-
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
         <Mutation mutation={CREATE_USER}>
-          {(createUser, { data, loading }) => {
+          {(createUser, { data, loading, error }) => {
             if (loading) {
               return <CircularProgress />;
+            }
+
+            if (error) {
+              return (
+                <Typography component="div">
+                  <Box
+                    fontWeight="fontWeightMedium"
+                    m={4}
+                    fontSize={18}
+                    color="black"
+                  >
+                    No se ha podido crear la cuenta, nombre de usuario o email ya en uso
+                  </Box>
+                </Typography>
+              );
             }
 
             if (data !== undefined) {
               return (
                 <ApolloConsumer>
                   {(client) => {
-                    client.clearStore();
-                    localStorage.removeItem('apollo-cache-persist');
+                    //client.clearStore();
+                    //localStorage.removeItem("apollo-cache-persist");
                     handleUserAuthentication(
                       candidateUsername,
                       candidatePassword
                     ).then(() => {
-                      client.writeData({ data: { currentUser: data.createUser } });
+                      client.writeData({
+                        data: { currentUser: data.createUser },
+                      });
+                      history.replace("/");
                     });
-                    return (
-                      <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                          Registro completo
-                        </Grid>
-                      </Grid>
-                    );
+                    return null;
                   }}
                 </ApolloConsumer>
               );

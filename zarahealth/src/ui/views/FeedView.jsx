@@ -13,6 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import NewPostDialog from "../components/Feed/NewPost";
+import ErrorMessage from "../components/common/ErrorMessage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,6 +51,9 @@ const FEED_QUERY = gql`
         body
         date
       }
+      pictures {
+        _id
+      }
     }
   }
 `;
@@ -61,11 +65,10 @@ function FeedView() {
   const [hasMoreData, setHasMoreData] = useState(true);
   const [isFetching, setIsFetching] = useState(false);
 
-
   const { data, loading, error, fetchMore } = useQuery(FEED_QUERY, {
     variables: {
       page: 1,
-      limit: 10,
+      limit: 5,
     },
     fetchPolicy: "cache-and-network",
   });
@@ -84,6 +87,11 @@ function FeedView() {
               setHasMoreData(false);
               return prev;
             }
+
+            if (hasMoreData && fetchMoreResult.retrieveFeeds.length < 5) {
+              setHasMoreData(false);
+            }
+
             return Object.assign({}, prev, {
               retrieveFeeds: [
                 ...prev.retrieveFeeds,
@@ -103,7 +111,7 @@ function FeedView() {
         return;
       }
       if (data && hasMoreData) {
-        fetchPage(Math.floor(data.retrieveFeeds.length / 7) + 1);
+        fetchPage(Math.floor(data.retrieveFeeds.length / 5) + 1);
       }
     };
     window.addEventListener("scroll", isScrolling);
@@ -111,7 +119,7 @@ function FeedView() {
   }, [data, fetchMore, isFetching, hasMoreData]);
 
   if (error) {
-    return <h1>{JSON.stringify(error)}</h1>;
+    return <ErrorMessage message={"Datos no disponibles"} />;
   }
 
   if (
@@ -132,6 +140,10 @@ function FeedView() {
         </Grid>
       </Grid>
     );
+  }
+
+  if (hasMoreData && data.retrieveFeeds.length < 5) {
+    setHasMoreData(false);
   }
 
   return (

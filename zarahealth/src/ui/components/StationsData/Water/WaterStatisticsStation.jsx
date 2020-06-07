@@ -15,6 +15,7 @@ import { Query } from "@apollo/react-components";
 import gql from "graphql-tag";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import DownloadButton from "../DownloadButton";
+import ErrorMessage from "../../common/ErrorMessage";
 
 const GET_ALL_WATER_STATIONS = gql`
   {
@@ -122,22 +123,26 @@ export default function WaterStatisticsStations() {
           }
 
           if (error) {
-            return (
-              <h2 style={{ color: "white" }}>The Water Data is not available at this moment</h2>
-            );
+            return <ErrorMessage message={"Datos no disponibles"} />;
           }
 
           if (data) {
+            function datediff(first, second) {
+              return Math.round((second - first) / (1000 * 60 * 60 * 24));
+            }
             let stations = data.retrieveAllWaterStations.sort((a, b) =>
               a.title.localeCompare(b.title)
+            );
+            stations = stations.filter(
+              (station) =>
+                datediff(
+                  new Date(station.results[0].creationDate),
+                  new Date()
+                ) <= 365
             );
             return (
               <List>
                 {stations.map((station, index) => {
-                  function datediff(first, second) {
-                    return Math.round((second - first) / (1000 * 60 * 60 * 24));
-                  }
-
                   var startDate = new Date();
                   var endDate = new Date();
                   startDate.setFullYear(endDate.getFullYear() - 2);
@@ -360,11 +365,19 @@ export default function WaterStatisticsStations() {
                                         },
                                       }}
                                     />
-                                    <DownloadButton
+                                    <Grid
+                                      container
+                                      spacing={1}
+                                      direction="row"
+                                      justify="flex-end"
+                                      alignItems="flex-end"
+                                    >
+                                      <DownloadButton
                                         kind="agua"
                                         title={station.title}
                                         data={station.results}
                                       />
+                                    </Grid>
                                   </Grid>
                                 </List>
                               );

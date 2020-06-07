@@ -70,10 +70,10 @@ function AdminView() {
                     <MuiThemeProvider theme={zaraHealthTheme}>
                         <CssBaseline/>
                         <Switch>
-                            <Route path="/admin/stats" component={AdminStatistics}/>
-                            <Route path="/admin/users" component={AdminUsers}/>
-                            <Route path="/admin/broadcast" component={AdminBroadcast}/>
-                            <Route path="/admin/settings" component={AdminSettings}/>
+                            <Route path="/settings/home" component={AdminStatistics}/>
+                            <Route path="/settings/users" component={AdminUsers}/>
+                            <Route path="/settings/broadcast" component={AdminBroadcast}/>
+                            <Route path="/settings/settings" component={AdminSettings}/>
                         </Switch>
                     </MuiThemeProvider>
                 </Router>
@@ -81,8 +81,8 @@ function AdminView() {
 
             <div className={classes.bottom}>
                 <BottomNavigation value={value} onChange={handleChange} className={classes.barBack}>
-                    <BottomNavigationAction className={classes.bar} label="Estadísticas" value="/stats" icon={<EqualizerIcon/>}
-                                            onClick={() => history.replace(parentPath + "/stats")}/>
+                    <BottomNavigationAction className={classes.bar} label="Estadísticas" value="/home" icon={<EqualizerIcon/>}
+                                            onClick={() => history.replace(parentPath + "/home")}/>
                     <BottomNavigationAction className={classes.bar} label="Usuarios" value="/users"
                                             icon={<PeopleIcon/>}
                                             onClick={() => history.replace(parentPath + "/users")}/>

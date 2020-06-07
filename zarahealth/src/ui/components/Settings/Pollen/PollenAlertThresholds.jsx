@@ -19,6 +19,8 @@ import zaraHealthTheme from "../../../theme";
 import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails/ExpansionPanelDetails";
 import MuiExpansionPanelActions from "@material-ui/core/ExpansionPanelActions/ExpansionPanelActions";
 import gql from "graphql-tag";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -31,14 +33,14 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     list: {
-        width: 400,
+        width: 600,
         overflow: 'auto',
     },
     slider: {
-        width: 250,
+        paddingBottom: 20,
     },
     input: {
-        width: 42,
+        width: 200,
     },
 }));
 
@@ -260,12 +262,11 @@ function PollenAlertThresholds() {
                                                                     </Grid>
                                                                     <List dense component="div" role="list"
                                                                           className={classes.list}>
-                                                                        {pollenMeasures.map((measure) => {
-                                                                            return (
-                                                                                <Grid container direction="column"
-                                                                                      justify="flex-start"
-                                                                                      style={{paddingLeft: 30}}>
-                                                                                    <Grid item xs={12}>
+                                                                        <Grid container
+                                                                              style={{paddingLeft: 30}}>
+                                                                            {pollenMeasures.map((measure) => {
+                                                                                return (
+                                                                                    <Grid item xs={12} md={6}>
                                                                                         <div className={classes.slider}>
                                                                                             <Typography
                                                                                                 id="input-slider"
@@ -274,39 +275,34 @@ function PollenAlertThresholds() {
                                                                                             </Typography>
                                                                                             <Grid container spacing={2}
                                                                                                   alignItems="center">
-                                                                                                <Grid item xs>
-                                                                                                    <Slider
-                                                                                                        value={pollenThresholds[measure.id] || ''}
-                                                                                                        onChange={(event, newValue) => {
-                                                                                                            var pollenThresholdstemp = {...pollenThresholds}
-                                                                                                            pollenThresholdstemp[measure.id] = newValue
-                                                                                                            setPollenThresholds(pollenThresholdstemp)
-                                                                                                        }}
-                                                                                                    />
-                                                                                                </Grid>
-                                                                                                <Grid item>
-                                                                                                    <Input
+                                                                                                <Grid item xs={12}>
+                                                                                                    <Select
                                                                                                         className={classes.input}
-                                                                                                        value={pollenThresholds[measure.id] || '0'}
-                                                                                                        margin="dense"
+                                                                                                        id="demo-simple-select"
+                                                                                                        value={pollenThresholds[measure.id] || ''}
+                                                                                                        required
                                                                                                         onChange={(event) => {
                                                                                                             var pollenThresholdstemp = {...pollenThresholds}
                                                                                                             pollenThresholdstemp[measure.id] = event.target.value
                                                                                                             setPollenThresholds(pollenThresholdstemp)
                                                                                                         }}
-                                                                                                        inputProps={{
-                                                                                                            step: 1,
-                                                                                                            min: 0,
-                                                                                                            max: 100,
-                                                                                                        }}
-                                                                                                    />
+                                                                                                    >
+                                                                                                        <MenuItem
+                                                                                                            value={"BAJO"}>Bajo</MenuItem>
+                                                                                                        <MenuItem
+                                                                                                            value={"MODERADO"}>Moderado</MenuItem>
+                                                                                                        <MenuItem
+                                                                                                            value={"ALTO"}>Alto</MenuItem>
+                                                                                                    </Select>
+
                                                                                                 </Grid>
                                                                                             </Grid>
                                                                                         </div>
                                                                                     </Grid>
-                                                                                </Grid>
-                                                                            )
-                                                                        })}
+
+                                                                                )
+                                                                            })}
+                                                                        </Grid>
                                                                     </List>
                                                                 </Paper>
                                                             </div>

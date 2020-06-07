@@ -4,11 +4,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { useForm } from "react-hook-form";
 import gql from "graphql-tag";
-import {
-  TextField,
-  Button,
-  makeStyles,
-} from "@material-ui/core";
+import { TextField, Button, makeStyles } from "@material-ui/core";
 import { useMutation } from "@apollo/react-hooks";
 
 const FEED_QUERY = gql`
@@ -28,13 +24,16 @@ const FEED_QUERY = gql`
         body
         date
       }
+      pictures {
+        _id
+      }
     }
   }
 `;
 
 const ADD_POST = gql`
-  mutation SubmitFeed($title: String!, $body: String!) {
-    submitFeed(title: $title, body: $body) {
+  mutation SubmitFeed($title: String!, $body: String!, $pictures: [Upload!]) {
+    submitFeed(title: $title, body: $body, pictures: $pictures) {
       id
       title
       author
@@ -47,6 +46,9 @@ const ADD_POST = gql`
         author
         body
         date
+      }
+      pictures {
+        _id
       }
     }
   }
@@ -65,7 +67,21 @@ const useStyles = makeStyles((theme) => ({
 
 function NewPostDialog(props) {
   const classes = useStyles();
+
   const { handleSubmit, register, errors } = useForm();
+  const [fileToUpload, setFileToUpload] = React.useState([]);
+
+  const handleChange = ({
+    target: {
+      validity,
+      files: [file],
+    },
+  }) => {
+    if (validity.valid) {
+      setFileToUpload([file]);
+    }
+  };
+
   const [addPost] = useMutation(ADD_POST, {
     update(cache, { data: { submitFeed } }) {
       const { retrieveFeeds } = cache.readQuery({ query: FEED_QUERY });
@@ -73,7 +89,6 @@ function NewPostDialog(props) {
         query: FEED_QUERY,
         data: { retrieveFeeds: [submitFeed, ...retrieveFeeds] },
       });
-      props.handleClose();
     },
   });
 
@@ -91,13 +106,15 @@ function NewPostDialog(props) {
             className={classes.form}
             noValidate
             onSubmit={handleSubmit((data) => {
+              props.handleClose();
               addPost({
                 variables: {
                   title: data.title,
                   body: data.body,
-                  pictures: [],
+                  pictures: fileToUpload,
                 },
               });
+              setFileToUpload(null);
             })}
           >
             <TextField
@@ -127,6 +144,12 @@ function NewPostDialog(props) {
               name="body"
               autoFocus
               helperText={errors.body && "No has escrito nada"}
+            />
+            <input
+              type="file"
+              name="file"
+              ref={register}
+              onChange={handleChange}
             />
             <Button
               type="submit"

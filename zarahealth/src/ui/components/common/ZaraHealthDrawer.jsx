@@ -31,6 +31,9 @@ const GET_CURRENT_USER = gql`
       name
       email
       isAdmin
+      image {
+        _id
+      }
     }
   }
 `;
@@ -157,7 +160,7 @@ function ZaraHealthDrawer(props) {
           </List>
           <Divider />
           <List>
-            {isAuthenticated && isAdmin && (
+            {/* {isAuthenticated && isAdmin && (
               <ListItem
                 button
                 key="Administrador"
@@ -169,13 +172,13 @@ function ZaraHealthDrawer(props) {
                 </ListItemIcon>
                 <ListItemText primary="Administrador" />
               </ListItem>
-            )}
-            {isAuthenticated && !isAdmin && (
+            )} */}
+            {isAuthenticated && (
               <ListItem
                 button
                 key="Ajustes"
-                onClick={() => history.replace("/settings")}
-                selected={location.pathname === "/settings"}
+                onClick={() => history.replace("/settings/home")}
+                selected={location.pathname === "/settings/home"}
               >
                 <ListItemIcon>
                   <SettingsIcon />

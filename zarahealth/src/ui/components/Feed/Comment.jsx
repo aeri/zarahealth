@@ -24,9 +24,13 @@ export default function Comment({ comment }) {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-              {comment.author.charAt(0)}
-          </Avatar>
+          <Avatar
+            aria-label="avatar"
+            src={
+              "https://zgz.herokuapp.com/file/picture?type=username&username=" +
+              comment.author
+            }
+          />
         }
         title={comment.author}
         subheader={DateTime.fromMillis(comment.date * 1).toFormat(

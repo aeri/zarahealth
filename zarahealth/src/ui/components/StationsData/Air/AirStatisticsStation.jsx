@@ -18,6 +18,7 @@ import gql from "graphql-tag";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import DownloadButton from "../DownloadButton";
 import DateFilterButton from "../DateFilterButton";
+import ErrorMessage from "../../common/ErrorMessage";
 
 const GET_AIR_STATION = gql`
   {
@@ -28,15 +29,23 @@ const GET_AIR_STATION = gql`
         contaminant
         date
         value
+        status
       }
     }
   }
 `;
 
 const FETCH_AIR_STATION_DATA = gql`
-  
-  query GetAirData($idAirStation: Int!, $startDate: String!, $endDate: String!) {
-    retrieveAirStation(idAirStation: $idAirStation, startDate: $startDate, endDate: $endDate) {
+  query GetAirData(
+    $idAirStation: Int!
+    $startDate: String!
+    $endDate: String!
+  ) {
+    retrieveAirStation(
+      idAirStation: $idAirStation
+      startDate: $startDate
+      endDate: $endDate
+    ) {
       id
       records {
         contaminant
@@ -45,7 +54,6 @@ const FETCH_AIR_STATION_DATA = gql`
       }
     }
   }
-  
 `;
 
 const ExpansionPanel = withStyles({
@@ -121,9 +129,7 @@ export default function AirStatisticsStations() {
           }
 
           if (error) {
-            return (
-              <h2 style={{ color: "white" }}>The Air Data is not available at this moment</h2>
-            );
+            return <ErrorMessage message={"Datos no disponibles"} />;
           }
 
           if (data) {
@@ -185,8 +191,10 @@ export default function AirStatisticsStations() {
                       : current;
                   });
 
-                  const diffInMinutes = Math.round(
-                    (new Date() - Date.parse(lastUpdate.date)) / 60000
+                  const diffInMinutes = Math.abs(
+                    Math.round(
+                      (new Date() - Date.parse(lastUpdate.date)) / 60000
+                    )
                   );
 
                   return (
@@ -305,7 +313,7 @@ export default function AirStatisticsStations() {
                               container
                               spacing={1}
                               direction="row"
-                              justify="center"
+                              justify="flex-end"
                               alignItems="flex-end"
                             >
                               <DownloadButton
