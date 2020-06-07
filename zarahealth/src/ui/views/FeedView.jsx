@@ -88,7 +88,7 @@ function FeedView() {
               return prev;
             }
 
-            if (fetchMoreResult.retrieveFeeds.length < 10) {
+            if (hasMoreData && fetchMoreResult.retrieveFeeds.length < 10) {
               setHasMoreData(false);
             }
 
@@ -140,6 +140,10 @@ function FeedView() {
         </Grid>
       </Grid>
     );
+  }
+
+  if (hasMoreData && data.retrieveFeeds.length < 10) {
+    setHasMoreData(false);
   }
 
   return (
