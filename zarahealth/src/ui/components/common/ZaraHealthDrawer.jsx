@@ -174,8 +174,8 @@ function ZaraHealthDrawer(props) {
               <ListItem
                 button
                 key="Ajustes"
-                onClick={() => history.replace("/settings")}
-                selected={location.pathname === "/settings"}
+                onClick={() => history.replace("/settings/home")}
+                selected={location.pathname === "/settings/home"}
               >
                 <ListItemIcon>
                   <SettingsIcon />
