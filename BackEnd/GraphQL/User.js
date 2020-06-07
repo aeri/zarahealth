@@ -179,7 +179,7 @@ var uploadUserImage = async function(image, context) {
     mimetype: mimetype
   });
 
-  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     UserModel.findOneAndUpdate({
         username: usernamePetition
       }, {
@@ -201,13 +201,6 @@ var uploadUserImage = async function(image, context) {
         }));
       });
   });
-
-  return {
-    filename,
-    mimetype,
-    encoding
-  };
-
 
 }
 

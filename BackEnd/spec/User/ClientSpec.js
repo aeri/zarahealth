@@ -27,6 +27,7 @@ var sampleAir = [{
         "value": 42.83,
         "station": 26,
         "date": "2020-05-08T18:00:00",
+        "status": "LOW"
     }]
 }]
 
@@ -436,7 +437,8 @@ describe("Client", function () {
               contaminant,
               date,
               value,
-              station
+              station,
+              status
             }
           }
         }`;
