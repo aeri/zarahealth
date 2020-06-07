@@ -108,7 +108,7 @@ export default function PollenStatisticsStations() {
     <div style={styles}>
       <Query query={GET_ALL_POLLEN_STATIONS}>
         {({ data, loading, error }) => {
-          if (loading) {
+          if (loading && !data) {
             return (
               <div
                 style={{
@@ -128,6 +128,7 @@ export default function PollenStatisticsStations() {
           }
 
           if (data) {
+            console.log('LLEGAAA')
             let stations = data.retrieveAllPollenMeasures.sort((a, b) =>
               a.title.localeCompare(b.title)
             );
@@ -225,7 +226,7 @@ export default function PollenStatisticsStations() {
                           }}
                         >
                           {({ data, loading, error }) => {
-                            if (loading) {
+                            if (loading && !data) {
                               return (
                                 <div
                                   style={{
