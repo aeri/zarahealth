@@ -157,7 +157,7 @@ function ZaraHealthDrawer(props) {
           </List>
           <Divider />
           <List>
-            {isAuthenticated && isAdmin && (
+            {/* {isAuthenticated && isAdmin && (
               <ListItem
                 button
                 key="Administrador"
@@ -169,8 +169,8 @@ function ZaraHealthDrawer(props) {
                 </ListItemIcon>
                 <ListItemText primary="Administrador" />
               </ListItem>
-            )}
-            {isAuthenticated && !isAdmin && (
+            )} */}
+            {isAuthenticated && (
               <ListItem
                 button
                 key="Ajustes"

@@ -8,7 +8,6 @@ import List from "@material-ui/core/List";
 import gql from "graphql-tag";
 import { Query } from "@apollo/react-components";
 import { getAlerts } from "../../../core/services/personalAlertService";
-import ErrorMessageDash from "../common/ErrorMessageDash";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,7 +68,7 @@ function PersonalAlerts() {
   return (
     <div className={classes.root}>
       <Query query={GET_DATA}>
-        {({ data, loading }) => {
+        {({ data, loading , error}) => {
           if (loading) {
             return (
               <div
@@ -83,6 +82,10 @@ function PersonalAlerts() {
                 <CircularProgress color="secondary" />
               </div>
             );
+          }
+          
+          if(error) {
+            return null;
           }
 
           if (data) {

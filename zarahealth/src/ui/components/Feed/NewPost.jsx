@@ -89,7 +89,6 @@ function NewPostDialog(props) {
         query: FEED_QUERY,
         data: { retrieveFeeds: [submitFeed, ...retrieveFeeds] },
       });
-      props.handleClose();
     },
   });
 
@@ -107,6 +106,7 @@ function NewPostDialog(props) {
             className={classes.form}
             noValidate
             onSubmit={handleSubmit((data) => {
+              props.handleClose();
               addPost({
                 variables: {
                   title: data.title,
@@ -114,6 +114,7 @@ function NewPostDialog(props) {
                   pictures: fileToUpload,
                 },
               });
+              setFileToUpload(null);
             })}
           >
             <TextField
