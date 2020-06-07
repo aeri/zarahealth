@@ -35,7 +35,7 @@ function PollenCard({backgroundColor, elementName, message, lastUpdate}) {
         <Grid container direction="column" justify="center" alignItems="center">
           <Grid item xs={12}>
             <Typography color="primary">
-              <Box fontWeight="fontWeightRegular" m={1} fontSize={30}>
+              <Box fontWeight="fontWeightRegular" m={1} fontSize={23}>
                 {elementName}
               </Box>
             </Typography>
