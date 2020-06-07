@@ -47,9 +47,11 @@ const ExpansionPanelActions = withStyles((theme) => ({
 const UPDATE_IMAGE = gql`
   mutation uploadUserImage($image: Upload!) {
     uploadUserImage(image: $image) {
-      username
       image {
         _id
+        filename
+        mimetype
+        encoding
       }
     }
   }
@@ -94,7 +96,9 @@ function UserImage() {
             return (
               <ApolloConsumer>
                 {(client) => {
-                  client.writeData();
+                  client.writeData({
+                    data: { currentUser: data.uploadUserImage },
+                  });
                   return (
                     <div>
                       <ExpansionPanelDetails>

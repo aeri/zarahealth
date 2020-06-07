@@ -112,7 +112,7 @@ export function SignUpForm() {
                 <ApolloConsumer>
                   {(client) => {
                     client.clearStore();
-                    localStorage.removeItem("apollo-cache-persist");
+                    //localStorage.removeItem("apollo-cache-persist");
                     handleUserAuthentication(
                       candidateUsername,
                       candidatePassword

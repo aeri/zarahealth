@@ -31,17 +31,17 @@ function UserCard(props) {
       </div>
     );
   } else {
-    console.log(JSON.stringify(props.currentUser));
+    console.log("DATA EN USERCARD: " + JSON.stringify(props.currentUser));
     return (
       <CardHeader
         avatar={
           <Avatar
             aria-label="avatar"
             src={
-              props.image
-                ? "https://zgz.herokuapp.com/file/picture?type=user&id=" +
+              props.currentUser.image === undefined || props.currentUser.image === null
+                ? "https://i.ibb.co/G5VNNXd/default-user.jpg"
+                : "https://zgz.herokuapp.com/file/picture?type=user&id=" +
                   props.currentUser.image._id
-                : "https://i.ibb.co/G5VNNXd/default-user.jpg"
             }
           />
         }
