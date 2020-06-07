@@ -329,7 +329,7 @@ function AirAlertThresholds() {
                                                                                                             value={airThresholds[measure] || ''}
                                                                                                             onChange={(event, newValue) => {
                                                                                                                 var airThresholdstemp = {...airThresholds}
-                                                                                                                airThresholdstemp[measure] = newValue
+                                                                                                                airThresholdstemp[measure] = parseFloat(newValue)
                                                                                                                 setAirThresholds(airThresholdstemp)
                                                                                                             }}
                                                                                                         />
@@ -337,11 +337,11 @@ function AirAlertThresholds() {
                                                                                                     <Grid item>
                                                                                                         <Input
                                                                                                             className={classes.input}
-                                                                                                            value={airThresholds[measure] || '0'}
+                                                                                                            value={airThresholds[measure] || ''}
                                                                                                             margin="dense"
                                                                                                             onChange={(event) => {
                                                                                                                 var airThresholdstemp = {...airThresholds}
-                                                                                                                airThresholdstemp[measure] = event.target.value
+                                                                                                                airThresholdstemp[measure] = parseFloat(event.target.value)
                                                                                                                 setAirThresholds(airThresholdstemp)
                                                                                                             }}
                                                                                                             inputProps={{
