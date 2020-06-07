@@ -36,9 +36,16 @@ const GET_AIR_STATION = gql`
 `;
 
 const FETCH_AIR_STATION_DATA = gql`
-  
-  query GetAirData($idAirStation: Int!, $startDate: String!, $endDate: String!) {
-    retrieveAirStation(idAirStation: $idAirStation, startDate: $startDate, endDate: $endDate) {
+  query GetAirData(
+    $idAirStation: Int!
+    $startDate: String!
+    $endDate: String!
+  ) {
+    retrieveAirStation(
+      idAirStation: $idAirStation
+      startDate: $startDate
+      endDate: $endDate
+    ) {
       id
       records {
         contaminant
@@ -47,7 +54,6 @@ const FETCH_AIR_STATION_DATA = gql`
       }
     }
   }
-  
 `;
 
 const ExpansionPanel = withStyles({
@@ -123,7 +129,7 @@ export default function AirStatisticsStations() {
           }
 
           if (error) {
-            return <ErrorMessage message={'Datos no disponibles'}/>
+            return <ErrorMessage message={"Datos no disponibles"} />;
           }
 
           if (data) {
@@ -185,8 +191,10 @@ export default function AirStatisticsStations() {
                       : current;
                   });
 
-                  const diffInMinutes = Math.round(
-                    (new Date() - Date.parse(lastUpdate.date)) / 60000
+                  const diffInMinutes = Math.abs(
+                    Math.round(
+                      (new Date() - Date.parse(lastUpdate.date)) / 60000
+                    )
                   );
 
                   return (

@@ -68,7 +68,7 @@ function FeedView() {
   const { data, loading, error, fetchMore } = useQuery(FEED_QUERY, {
     variables: {
       page: 1,
-      limit: 10,
+      limit: 5,
     },
     fetchPolicy: "cache-and-network",
   });
@@ -88,7 +88,7 @@ function FeedView() {
               return prev;
             }
 
-            if (hasMoreData && fetchMoreResult.retrieveFeeds.length < 10) {
+            if (hasMoreData && fetchMoreResult.retrieveFeeds.length < 5) {
               setHasMoreData(false);
             }
 
@@ -111,7 +111,7 @@ function FeedView() {
         return;
       }
       if (data && hasMoreData) {
-        fetchPage(Math.floor(data.retrieveFeeds.length / 7) + 1);
+        fetchPage(Math.floor(data.retrieveFeeds.length / 5) + 1);
       }
     };
     window.addEventListener("scroll", isScrolling);
@@ -142,7 +142,7 @@ function FeedView() {
     );
   }
 
-  if (hasMoreData && data.retrieveFeeds.length < 10) {
+  if (hasMoreData && data.retrieveFeeds.length < 5) {
     setHasMoreData(false);
   }
 

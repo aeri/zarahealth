@@ -138,9 +138,9 @@ export default function AirInfoStations() {
                       : current;
                   });
 
-                  const diffInMinutes = Math.round(
+                  const diffInMinutes = Math.abs(Math.round(
                     (new Date() - Date.parse(lastUpdate.date)) / 60000
-                  );
+                  ));
 
                   return (
                     <ExpansionPanel
