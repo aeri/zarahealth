@@ -71,7 +71,7 @@ function AdminUsers() {
               setHasMoreData(false);
               return prev;
             }
-            if (fetchMoreResult.retrieveFeeds.length < 10) {
+            if (fetchMoreResult.retrieveUsers.length < 10) {
               setHasMoreData(false);
             }
             return Object.assign({}, prev, {
