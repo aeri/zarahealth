@@ -23,6 +23,7 @@ const GET_AIR_STATION = gql`
         contaminant
         date
         value
+        status
       }
     }
   }

@@ -15,7 +15,6 @@ import { GoogleLogin } from "react-google-login";
 import gql from "graphql-tag";
 import { ApolloConsumer } from "@apollo/react-components";
 import { useLazyQuery } from "@apollo/react-hooks";
-import Grid from "@material-ui/core/Grid";
 import DialogContentText from "@material-ui/core/DialogContentText";
 
 const GET_USER = gql`

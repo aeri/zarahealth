@@ -2,7 +2,12 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import { Container, CircularProgress } from "@material-ui/core";
+import {
+  Container,
+  CircularProgress,
+  Typography,
+  Box,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useForm, Controller } from "react-hook-form";
 
@@ -11,6 +16,7 @@ import { handleUserAuthentication } from "../../../core/services/tokenService";
 import gql from "graphql-tag";
 import { ApolloConsumer } from "@apollo/react-components";
 import { Mutation } from "@apollo/react-components";
+import history from "../../../core/misc/history";
 
 const CREATE_USER = gql`
   mutation CreateUser(
@@ -81,9 +87,24 @@ export function SignUpForm() {
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
         <Mutation mutation={CREATE_USER}>
-          {(createUser, { data, loading }) => {
+          {(createUser, { data, loading, error }) => {
             if (loading) {
               return <CircularProgress />;
+            }
+
+            if (error) {
+              return (
+                <Typography component="div">
+                  <Box
+                    fontWeight="fontWeightMedium"
+                    m={4}
+                    fontSize={18}
+                    color="black"
+                  >
+                    No se ha podido crear la cuenta, nombre de usuario o email ya en uso
+                  </Box>
+                </Typography>
+              );
             }
 
             if (data !== undefined) {
@@ -99,14 +120,9 @@ export function SignUpForm() {
                       client.writeData({
                         data: { currentUser: data.createUser },
                       });
+                      history.replace("/");
                     });
-                    return (
-                      <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                          Registro completo
-                        </Grid>
-                      </Grid>
-                    );
+                    return null;
                   }}
                 </ApolloConsumer>
               );
