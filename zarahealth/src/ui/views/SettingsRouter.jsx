@@ -18,7 +18,7 @@ export function SettingsRouter(props) {
     <Query query={IS_ADMIN}>
       {({ data }) => {
         if (data !== undefined && data.currentUser !== undefined) {
-          if (data.cuurentUser.isAdmin) {
+          if (data.currentUser.isAdmin) {
             return <AdminView />;
           } else {
             return <SettingsView />;
