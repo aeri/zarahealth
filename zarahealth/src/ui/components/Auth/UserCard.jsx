@@ -31,14 +31,17 @@ function UserCard(props) {
       </div>
     );
   } else {
+    console.log(JSON.stringify(props.currentUser));
     return (
       <CardHeader
         avatar={
           <Avatar
             aria-label="avatar"
             src={
-              "https://zgz.herokuapp.com/file/picture?type=username&username=" +
-              props.currentUser.username
+              props.image
+                ? "https://zgz.herokuapp.com/file/picture?type=user&id=" +
+                  props.currentUser.image._id
+                : "https://i.ibb.co/G5VNNXd/default-user.jpg"
             }
           />
         }

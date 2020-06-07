@@ -31,6 +31,9 @@ const GET_CURRENT_USER = gql`
       name
       email
       isAdmin
+      image {
+        _id
+      }
     }
   }
 `;

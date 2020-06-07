@@ -55,10 +55,8 @@ export default function Post({ post }) {
             }
           />
         }
-        title={post.author}
-        subheader={DateTime.fromMillis(post.date * 1).toFormat(
-          "dd/LL/yyyy HH:mm"
-        )}
+        title={post.title}
+        subheader={post.author}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
@@ -74,6 +72,9 @@ export default function Post({ post }) {
             title={post.title}
           />
         ) : null}
+        <Typography variant="caption" color="textSecondary" component="p" align="right">
+          {DateTime.fromMillis(post.date * 1).toFormat("dd/LL/yyyy HH:mm")}
+        </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <Mutation
