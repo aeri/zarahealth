@@ -26,7 +26,7 @@ function ElementCard({ backgroundColor, elementName, message, isHigh }) {
         <Grid container direction="column" justify="center" alignItems="center">
           <Grid item xs={12}>
             <Typography color="primary">
-              <Box fontWeight="fontWeightRegular" m={1} fontSize={40}>
+              <Box fontWeight="fontWeightRegular" m={1} fontSize={30}>
                 {elementName}
               </Box>
             </Typography>

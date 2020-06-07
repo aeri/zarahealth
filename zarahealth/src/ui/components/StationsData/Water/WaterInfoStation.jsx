@@ -134,12 +134,12 @@ export default function WaterInfoStation() {
               a.title.localeCompare(b.title)
             );
             stations = stations.filter(
-                (station) =>
-                  datediff(
-                    new Date(station.results[0].creationDate),
-                    new Date()
-                  ) <= 365
-              );
+              (station) =>
+                datediff(
+                  new Date(station.results[0].creationDate),
+                  new Date()
+                ) <= 365
+            );
             return (
               <List>
                 {stations.map((station, index) => {
@@ -238,7 +238,11 @@ export default function WaterInfoStation() {
                                       backgroundColor={getWaterStatusColor(
                                         result.result
                                       )}
-                                      elementName={result.result}
+                                      elementName={
+                                        result.result === "APTA PARA EL CONSUMO"
+                                          ? "Apta para el consumo"
+                                          : "No apta para el consumo"
+                                      }
                                     />
                                   </Grid>
                                 );
