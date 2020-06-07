@@ -70,10 +70,10 @@ function AdminView() {
                     <MuiThemeProvider theme={zaraHealthTheme}>
                         <CssBaseline/>
                         <Switch>
-                            <Route path="/admin/stats" component={AdminStatistics}/>
-                            <Route path="/admin/users" component={AdminUsers}/>
-                            <Route path="/admin/broadcast" component={AdminBroadcast}/>
-                            <Route path="/admin/settings" component={AdminSettings}/>
+                            <Route path="/settings/stats" component={AdminStatistics}/>
+                            <Route path="/settings/users" component={AdminUsers}/>
+                            <Route path="/settings/broadcast" component={AdminBroadcast}/>
+                            <Route path="/settings/settings" component={AdminSettings}/>
                         </Switch>
                     </MuiThemeProvider>
                 </Router>
