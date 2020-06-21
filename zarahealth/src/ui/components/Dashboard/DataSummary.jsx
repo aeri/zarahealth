@@ -54,21 +54,6 @@ const GET_DATA = gql`
 function DataSummary() {
     const classes = useStyles();
     const statusColors = ["white", "#33d9b2", "#ffda79", "#ff6c65"];
-    const fakePolen = {
-        message: "Aceptable",
-        status: 1,
-    };
-    const fakeAgua = {
-        message: "Potable",
-        status: 2,
-    };
-    const fakeAire = {
-        message: "CO2 elevado",
-        status: 3,
-    };
-    const [polen, setPolen] = useState(fakePolen);
-    const [agua, setAgua] = useState(fakeAgua);
-    const [aire, setAire] = useState(fakeAire);
 
 
     return (

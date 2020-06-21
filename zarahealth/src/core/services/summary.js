@@ -20,7 +20,6 @@ export function getSummary(
 
     //Pollen
     let pollenCounter = [0, 0, 0, 0];
-
     for (let record of pollenRecords.map((element) => ({
         ...element.observation[0],
     }))) {
@@ -74,18 +73,12 @@ export function getSummary(
             }
         }
     }*/
-
     if (pollenCounter[3] > 0) {
         polenStatus = {
             message: "Alto",
             status: 3,
         };
     } else if (pollenCounter[2] > 0) {
-        polenStatus = {
-            message: "Moderado",
-            status: 2,
-        };
-    } else if (pollenCounter[1] > 0) {
         polenStatus = {
             message: "Moderado",
             status: 2,
