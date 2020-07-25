@@ -16,6 +16,7 @@ const endpoint = "http://localhost:3000/graphql";
 
 var airport = require('../../GraphQL/AirStation.js');
 var weather = require('../../GraphQL/Weather.js');
+var pollen = require('../../GraphQL/PollenMeasure.js');
 
 
 var sampleAir = [{
@@ -42,6 +43,13 @@ var sampleWeather = {
     "humidity": 59,
     "pressure": 1013,
     "weathercode": 801
+}
+
+var samplePollen = {
+  id: "Quercus",
+  title: "Quercus",
+  image: "https://www.zaragoza.es/cont/paginas/servicios/polen/img/Quercus.jpg",
+  observation:[{"publicationDate":"2020-07-19T00:00:00","value":"nulo"}]
 }
 
 
@@ -127,6 +135,8 @@ beforeAll(async () => {
     spyOn(airport, 'retrieveAirStation').and.returnValue(sampleSpecificAir);
 
     spyOn(weather, 'retrieveWeather').and.returnValue(sampleWeather);
+
+    spyOn(pollen, 'retrievePollenMeasure').and.returnValue(samplePollen);
 
     var server = require('../../app.js');
 

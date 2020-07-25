@@ -64,7 +64,7 @@ var root = require('./GraphQL/Root.js');
 var schema = require('./GraphQL/Schema.js');
 
 //Uso de graphql
-app.use('/graphql', authenticateRequest, graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 3 }), graphqlHTTP((request, response) => ({
+app.use('/graphql', authenticateRequest, graphqlUploadExpress({ maxFileSize: 100000, maxFiles: 1 }), graphqlHTTP((request, response) => ({
     schema: schema,
     rootValue: root,
     graphiql: true,
