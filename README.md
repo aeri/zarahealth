@@ -1,27 +1,33 @@
 
 <p align="center">
-  <img src="https://i.imgur.com/qOdYsih.png">
+    <img src="https://i.imgur.com/qOdYsih.png">
+</p>
+    
+<p align="center">
+  Your city, your environment, your app
+    <br>
+    <a href="https://zarahealth.web.app/">View Demo</a>
+  </p>
 </p>
 
-# Your health, your world, your life, your app
+*Read this in other languages: [English](README.md), [Español](README-es.md).*
 
-This project is a web application, in which the data of the water and air quality in the different stations can be seen in real time, as well as the pollen levels of the city of **Zaragoza**. In order for the user to have the information without having to access the data from each station, a warning system has been designed which, if the administrator of the application detects any unusual parameter, warns all the users of the web application. 
+This project is a web application in which you can see in real time the data of the quality of **water** and **air** in the different stations, as well as the levels of **pollen** of the city of Zaragoza in a clean and structured way. The user can be informed about relevant news of the city, and can also participate in the notification wall to inform or be informed about incidents or news that may affect all citizens. In addition, the user can establish a series of thresholds for pollen and air levels, so that, if any of these levels is exceeded, the user will be alerted by means of one.
 
-In addition, the application allows establishing a series of thresholds for pollen and air levels so that if any of these levels is exceeded, when the user logs in he will be warned if any of the established thresholds have been exceeded.
+The project is completely free and has all the source code released under the GPL 3.0 license for validation and reuse.
 
-All the data have been extracted from the different public API services offered by Zaragoza City Council for each of the types of data provided.
+The data used in the application on water, pollen and air have been extracted from the [open data](https://www.zaragoza.es/sede/portal/datos-abiertos/) initiative provided by Zaragoza City Council.
+
 
 * [Trailer Video](https://www.youtube.com/watch?v=QTxEHSczHiQ) (Spanish)
 * [Presentation Video](https://www.youtube.com/watch?v=EqMceTevnxU) (Spanish)
 
-### [Test yourself](https://zarahealth.web.app/)
-
 ## API Documentation
 
 * [OAuth Authentication](https://zgz.docs.apiary.io/)
-* [GraphQL Documentation](https://aeri.github.io/NIVERSO/)
+* [GraphQL Documentation](https://aeri.github.io/zarahealth/)
 * [Image Retriever Documentation](./IMAGE_RETRIEVER_API_DOC.md)
 
 
-### API Status
-![Travis Status](https://travis-ci.com/aeri/NIVERSO.svg?token=HXhFVyf7TXAQBV4npp5J&branch=master)
+### API build status
+![Travis Status](https://travis-ci.com/aeri/zarahealth.svg?branch=Back-end)
