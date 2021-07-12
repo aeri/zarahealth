@@ -19,7 +19,7 @@
     "apollo-link-http": "^1.5.17",
     "apollo-link-token-refresh": "^0.2.7",
     "apollo-upload-client": "^13.0.0",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "firebase": "^7.14.6",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.3",
