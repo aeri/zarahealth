@@ -7,8 +7,7 @@ deploy:
   app: zgz
   provider: heroku
   skip_cleanup: true
-  api_key:
-    secure: "kp+TT0nJuSwfSLPGJ1pZNivJs+ml31BfqxV68IEvd/tQTMlwVmzF86RhJxeh/xKs/97Bl1wcSpZd/BnuqDyvjlcAU7vff2cnRDYeQQtO99C0FG25H5t6GvCiiycJPEFs/l+K9lSyIKY2tocNZR6J8DTqiq2R1lZVS2GP6N3onv9clyYY5jZvpU8hlbvmZw4llwxqrAd25kq8XaCwjh0iubIdxA8m0Sk25936E4uWE1UQ23fz5F2eZyY0PoABpbj/ilc4H/BUUhhmO+e51Rh5AMesAprcBV47QZY7pSfF2o/9FiVoaFsBR5qtgQpJIgalVVFXYdM5jjwTwGFIGUkGWpKONpP9vBKFhSP5r+NSsr1g+tR/NNlHkapHv+Q3PkUwaA2VYo6pB5CM6/EtH/gWjlXNuym5vByln3q1hMmN9YXKEY7r6mbZ/K5oXzhHcaK71GMMQ1CK1aQ+SL1MPiqGFCL1qmrZg2/wXroBkD0iQh4G3Q4wRiOY4FiQMMNqKmkN43sNF3W/ooRtcAoveJJYonyB1TkufRZLVI8nXX/IlE+5YpA/KfKeF5tgMKVsBBOzm6ryGppcUjoFdDAU6Sk8Ul127ZU+7d+u0V6RGJCC1blSRAleJS0oBwAYSJc/ywou9g4soE1asRwr+k0K5vGta3zCuXu++g8Xy3AxhwYZwX4="
+  api_key: $HEROKU_API_KEY
   on:
     all_branches: true
 before_install:
