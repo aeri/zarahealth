@@ -37,7 +37,7 @@
     "sha3": "^2.1.2",
     "sparql-http-client": "^2.2.2",
     "transform-coordinates": "^0.1.0",
-    "underscore": "^1.10.2",
+    "underscore": "^1.12.1",
     "winston": "^3.2.1"
   },
   "devDependencies": {
