@@ -14,5 +14,6 @@ deploy:
 before_install:
   - cd BackEnd
   - openssl aes-256-cbc -K $encrypted_c533bc14502a_key -iv $encrypted_c533bc14502a_iv -in Secret.js.enc -out Secret.js -d
+  - gem install faraday -v 1.8.0
 install:
   - npm install
