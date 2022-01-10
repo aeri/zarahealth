@@ -9,7 +9,9 @@
   "config": {
     "mongodbMemoryServer": {
       "debug": "0"
-    }
+    },
+  "engines": {
+    "node": "16.x"
   },
   "dependencies": {
     "aes-js": "^3.1.2",
