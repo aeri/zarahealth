@@ -6,6 +6,11 @@
     "start": "nodemon app.js",
     "test": "jasmine spec/User/ClientSpec.js && jasmine spec/User/AdminSpec.js"
   },
+  "config": {
+    "mongodbMemoryServer": {
+      "debug": "1"
+    }
+  },
   "dependencies": {
     "aes-js": "^3.1.2",
     "body-parser": "^1.19.0",
