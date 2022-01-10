@@ -8,7 +8,7 @@
   },
   "config": {
     "mongodbMemoryServer": {
-      "debug": "1"
+      "debug": "0"
     }
   },
   "dependencies": {
