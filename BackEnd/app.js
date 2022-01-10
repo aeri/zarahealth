@@ -4,7 +4,7 @@ var	OAuth2Server = require('oauth2-server');
 var	Request = OAuth2Server.Request;
 var	Response = OAuth2Server.Response;
 var createError = require('http-errors');
-var graphqlHTTP = require('express-graphql');
+const { graphqlHTTP } = require('express-graphql');
 var path = require('path');
 var model = require('./model.js');
 var db = require('./db.js');
@@ -64,7 +64,7 @@ var root = require('./GraphQL/Root.js');
 var schema = require('./GraphQL/Schema.js');
 
 //Uso de graphql
-app.use('/graphql', authenticateRequest, graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 3 }), graphqlHTTP((request, response) => ({
+app.use('/graphql', authenticateRequest, graphqlUploadExpress({ maxFileSize: 100000, maxFiles: 1 }), graphqlHTTP((request, response) => ({
     schema: schema,
     rootValue: root,
     graphiql: true,
