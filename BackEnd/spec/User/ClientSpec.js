@@ -18,6 +18,7 @@ var airport = require('../../GraphQL/AirStation.js');
 var weather = require('../../GraphQL/Weather.js');
 var pollen = require('../../GraphQL/PollenMeasure.js');
 
+//var app=require("../../app.js");
 
 var sampleAir = [{
     "id": 0,
@@ -118,8 +119,9 @@ const opts = {
 }; // remove this option if you use mongoose 5 and above
 
 beforeAll(async () => {
-    mongoServer = new MongoMemoryServer();
-    const mongoUri = await mongoServer.getUri();
+    mongoServer = await MongoMemoryServer.create();
+    const mongoUri = mongoServer.getUri();
+    
     await mongoose.connect(mongoUri, opts, (err, res) => {
         if (err) {
             console.error(err);

@@ -105,8 +105,9 @@ const opts = {
 }; // remove this option if you use mongoose 5 and above
 
 beforeAll(async () => {
-    mongoServer = new MongoMemoryServer();
-    const mongoUri = await mongoServer.getUri();
+    mongoServer = await MongoMemoryServer.create();
+    const mongoUri = mongoServer.getUri();
+    
     await mongoose.connect(mongoUri, opts, (err, res) => {
         if (err) {
             console.error(err);
