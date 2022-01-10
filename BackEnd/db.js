@@ -10,34 +10,21 @@ var mongoUri = secret.mongoUri;
 
 function connect() {
 
-/*
-  const MongoClient = require('mongodb').MongoClient;
-
-  const client = new MongoClient(uri, { useNewUrlParser: true });
-  client.connect(err => {
-    const collection = client.db("test").collection("devices");
-    // perform actions on the collection object
-    client.close();
-  });
-*/
-
 const uri = "";
 
   mongoose.connect(mongoUri, {
 
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
-    ssl: true,
-    checkServerIdentity: false
+    ssl: true
 
   }, function(err, res) {
-    mongoose.set('useFindAndModify', false);
     if (err) {
-      return logger.error(`Error connecting to mongodb.\n`, err);
+      logger.error(`Error connecting to mongodb.\n`, err);
     }
     logger.info(`Connected successfully to mongodb.`);
   });
+  
 }
 
 module.exports = {

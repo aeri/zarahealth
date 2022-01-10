@@ -112,10 +112,8 @@ function loadExampleData() {
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000;
 
 const opts = {
-    useCreateIndex: true,
     useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useFindAndModify: false
+    useNewUrlParser: true
 }; // remove this option if you use mongoose 5 and above
 
 beforeAll(async () => {
@@ -896,10 +894,16 @@ describe("Client", function () {
         }
         `;
 
-        graphQLClient.request(query).catch(function (err) {
+        graphQLClient.request(query)
+        .then(function (res) {
+            expect(res.retrieveMetrics).toBeNull;
+            done();
+        })
+        .catch(function (err) {
             expect(err.response.errors[0].message).toEqual("User test is not and admin");
             done();
         });
+        
 
     });
 

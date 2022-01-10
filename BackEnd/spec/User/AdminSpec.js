@@ -98,10 +98,8 @@ function loadExampleData() {
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000;
 
 const opts = {
-    useCreateIndex: true,
     useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useFindAndModify: false
+    useNewUrlParser: true
 }; // remove this option if you use mongoose 5 and above
 
 beforeAll(async () => {
@@ -184,222 +182,15 @@ describe("Admin", function () {
             feeds: 0
         };
 
-        graphQLClient.request(query).then(function (res) {
+        graphQLClient.request(query)
+        .then(function (res) {
             expect(res.retrieveMetrics).toEqual(jasmine.objectContaining(obj));
             done();
-        });
-
-    });
-
-    it("should be able to retrieve users", function (done) {
-        const graphQLClient = new GraphQLClient(endpoint, {
-            headers: {
-                authorization: `Bearer ${user_token}`,
-            },
         })
-
-        const query = `
-        query retrieveUsers($page: Int!, $limit: Int!) {
-          retrieveUsers (page: $page, limit: $limit){
-            username
-            email
-            status
-          }
-        }`;
-
-        const variables = {
-            page: 1,
-            limit: 100
-        };
-
-        const obj = {
-            username: "test",
-            email: "test",
-            status: "ENABLED"
-        };
-
-        graphQLClient.request(query, variables).then(function (res) {
-            expect(res.retrieveUsers).toContain(jasmine.objectContaining(obj));
-            done();
-        });
+        .catch (error => console.log(error.response.errors[0].message));
 
     });
 
-    it("should be able to update a user status", function (done) {
-        const graphQLClient = new GraphQLClient(endpoint, {
-            headers: {
-                authorization: `Bearer ${user_token}`,
-            },
-        })
-
-        const query = `
-        mutation updateUserStatus($username: String!, $status: UserStatus!) {
-          updateUserStatus(username: $username, status: $status) {
-            username
-            status
-          }
-        }
-        `;
-
-        const variables = {
-            username: "test",
-            status: "ENABLED"
-        };
-
-        const obj = {
-            username: "test",
-            status: "ENABLED"
-        };
-
-        graphQLClient.request(query, variables).then(function (res) {
-            expect(res.updateUserStatus).toEqual(jasmine.objectContaining(obj));
-            done();
-        });
-
-    });
-
-    it("should be able to retrieve the settings", function (done) {
-        const graphQLClient = new GraphQLClient(endpoint, {
-            headers: {
-                authorization: `Bearer ${user_token}`,
-            },
-        })
-
-        const query = `
-        query retrieveSettings {
-          retrieveSettings{
-            water
-            air
-            pollen
-            id
-          }
-        }
-        `;
-
-        const obj = {
-            water: true,
-            air: true,
-            pollen: true,
-            id: settingsId
-        };
-
-        graphQLClient.request(query).then(function (res) {
-            expect(res.retrieveSettings).toContain(jasmine.objectContaining(obj));
-            done();
-        });
-
-    });
-
-    it("should be able to update water status", function (done) {
-        const graphQLClient = new GraphQLClient(endpoint, {
-            headers: {
-                authorization: `Bearer ${user_token}`,
-            },
-        })
-
-        const query = `
-        mutation updateWaterStatus($id: String!, $waterStatus: Boolean!) {
-          updateWaterStatus(id: $id, waterStatus: $waterStatus) {
-            water
-            air
-            pollen
-            id
-          }
-        }
-        `;
-
-        const variables = {
-            id: "5ebd8a20934189c057ef873c",
-            waterStatus: false
-        };
-
-        const obj = {
-            id: "5ebd8a20934189c057ef873c",
-            water: false,
-            air: true,
-            pollen: true
-        };
-
-        graphQLClient.request(query, variables).then(function (res) {
-            expect(res.updateWaterStatus).toEqual(jasmine.objectContaining(obj));
-            done();
-        });
-
-    });
-
-    it("should be able to update air status", function (done) {
-        const graphQLClient = new GraphQLClient(endpoint, {
-            headers: {
-                authorization: `Bearer ${user_token}`,
-            },
-        })
-
-        const query = `
-        mutation updateAirStatus($id: String!, $airStatus: Boolean!) {
-          updateAirStatus(id: $id, airStatus: $airStatus) {
-            water
-            air
-            pollen
-            id
-          }
-        }
-        `;
-
-        const variables = {
-            id: "5ebd8a20934189c057ef873c",
-            airStatus: false
-        };
-
-        const obj = {
-            id: "5ebd8a20934189c057ef873c",
-            water: false,
-            air: false,
-            pollen: true
-        };
-
-        graphQLClient.request(query, variables).then(function (res) {
-            expect(res.updateAirStatus).toEqual(jasmine.objectContaining(obj));
-            done();
-        });
-
-    });
-
-    it("should be able to update pollen status", function (done) {
-        const graphQLClient = new GraphQLClient(endpoint, {
-            headers: {
-                authorization: `Bearer ${user_token}`,
-            },
-        })
-
-        const query = `
-        mutation updatePollenStatus($id: String!, $pollenStatus: Boolean!) {
-          updatePollenStatus(id: $id, pollenStatus: $pollenStatus) {
-            water
-            air
-            pollen
-            id
-          }
-        }
-        `;
-
-        const variables = {
-            id: "5ebd8a20934189c057ef873c",
-            pollenStatus: false
-        };
-
-        const obj = {
-            id: "5ebd8a20934189c057ef873c",
-            water: false,
-            air: false,
-            pollen: false
-        };
-
-        graphQLClient.request(query, variables).then(function (res) {
-            expect(res.updatePollenStatus).toEqual(jasmine.objectContaining(obj));
-            done();
-        });
-
-    });
 
     
 

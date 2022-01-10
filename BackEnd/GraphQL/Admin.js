@@ -117,26 +117,19 @@ var retrieveMetrics = async function ({ }, context) {
     //User authentication
     await adminAuthentication(usernamePetition);
 
-    numUsers = await UserModel.countDocuments({}, function (err, count) {
-        return count;
-    })
+    numUsers = await UserModel.countDocuments();
 
     var actualDate = new Date();
+    
     activeUsers = await TokenModel.countDocuments({
         accessTokenExpiresAt: {
             $gt: actualDate
         }
-    }, function (err, count) {
-        return count;
-    })
+    });
 
-    numFeeds = await FeedModel.countDocuments({}, function (err, count) {
-        return count;
-    })
+    numFeeds = await FeedModel.countDocuments();
 
-    activities = await ActivityModel.find({}, 'action', function (err, count) {
-        return count;
-    })
+    activities = await ActivityModel.find({}, 'action');
 
     var metric = {
         users: numUsers,
