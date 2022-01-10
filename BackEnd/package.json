@@ -9,7 +9,8 @@
   "config": {
     "mongodbMemoryServer": {
       "debug": "0"
-    },
+    }
+  },
   "engines": {
     "node": "16.x"
   },
